@@ -2004,7 +2004,7 @@ textarea:focus {
 @media (max-width: 480px) {
   :root { --table-width: 98%; --table-margin: 10px; }
   body { font-size: 13px; }
-  .welcome-text, .title-text, .category-title { font-size: 1.8rem; }
+  /* Tamaños de texto movidos a secciones específicas de orientación */
   .nav-row { flex-direction: column; gap: 5px; }
   .nav-button { font-size: 0.9rem; padding: 10px 12px; }
   .product-table th, .product-table td { padding: 8px 5px; }
@@ -3081,5 +3081,18 @@ body.order-mode-active #app {
   
   .category-title {
     font-size: var(--mobile-font-small);
+  }
+  
+  /* Tamaños de texto para transiciones en landscape */
+  .welcome-text {
+    font-size: 1.8rem;
+  }
+  
+  .title-text {
+    font-size: 1.8rem;
+  }
+  
+  .category-title {
+    font-size: 1.8rem;
   }
 }
