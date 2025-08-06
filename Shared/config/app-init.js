@@ -617,7 +617,26 @@ const AppInit = {
       if (defaultButton && defaultButton.classList) {
         defaultButton.classList.add('active');
       }
-    };
+    }
+    
+    // Add scroll behavior for hamburger button in mobile portrait
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Only apply scroll behavior on mobile portrait
+      if (window.innerWidth <= 480 && window.innerHeight > window.innerWidth) {
+        if (currentScroll > lastScrollTop && currentScroll > 50) {
+          // Scrolling down - add scrolled class
+          hamburgerBtn.classList.add('scrolled');
+        } else {
+          // Scrolling up - remove scrolled class
+          hamburgerBtn.classList.remove('scrolled');
+        }
+      }
+      
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
   },
   
   /**
