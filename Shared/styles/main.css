@@ -2365,13 +2365,7 @@ textarea:focus {
     max-width: 100%;
   }
   
-  /* Contenedor grid aumentado 27% y centrado */
-  .product-grid {
-    width: 127%;
-    max-width: 127%;
-    margin: 0 auto;
-    transform: translateX(-13.5%);
-  }
+
   
   .category-grid { 
     grid-template-columns: repeat(2, 1fr); 
