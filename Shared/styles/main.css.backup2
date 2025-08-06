@@ -1,0 +1,101 @@
+/* Master Technology Bar - Optimized Stylesheet */
+:root {
+  /* Primary Colors */
+  --primary-color: #f3f6f6;
+  --accent-color: #00f7ff;
+  --background-color: #000;
+  --text-color: #ECE9D8;
+  --price-color: #00f7ff;
+  
+  /* Component Colors */
+  --card-bg: rgba(0,0,0,0.7);
+  --border-color: #00f7ff40;
+  --glow-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+  --glow-shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
+  
+  /* Layout Variables */
+  --transition-time: 0.3s;
+  --table-width: 95%;
+  --table-max-width: 1400px;
+  --table-margin: 20px;
+  
+  /* Legacy support */
+  --primary: #f3f6f6;
+  --accent: #00f7ff;
+  --bg: #000;
+  --text: #ECE9D8;
+  --card: rgba(0,0,0,0.7);
+  --border: #00f7ff40;
+  --transition: 0.3s;
+}
+
+/* Background video styles */
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; color: var(--text); background: var(--background-color); min-height: 100vh; overflow-y: auto; }
+#app { 
+  width: 70%; 
+  min-height: 100vh; 
+  position: relative; 
+  margin: 0 auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; }
+
+/* =================================================================
+   TYPOGRAPHY & BRANDING
+   ================================================================= */
+.welcome-text, .title-text, .category-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-color);
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-text { font-size: 3rem; }
+.title-text, .category-title { font-size: 2.5rem; }
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  max-width: 300px;
+  height: auto;
+  animation: fadeIn 1s ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(0, 247, 255, 0.3));
+  transition: all var(--transition-time) ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 20px rgba(0, 247, 255, 0.6));
+}
+
+/* Logo específico para la página */
+.main-logo {
+  content: url('https://udtlqjmrtbcpdqknwuro.supabase.co/storage/v1/object/public/productos/recursos/logos/Logo5.webp');
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.main-content-screen {
+  padding: 20px;
+  justify-content: flex-start;
+  background-color: transparent;
+}

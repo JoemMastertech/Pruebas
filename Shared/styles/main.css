@@ -1,4 +1,10 @@
-/* Master Technology Bar - Optimized Stylesheet */
+/* ================================================================= 
+   MASTER TECHNOLOGY BAR - OPTIMIZED STYLESHEET
+   ================================================================= */
+
+/* ================================================================= 
+   VARIABLES GLOBALES Y CONFIGURACIÓN BASE
+   ================================================================= */
 :root {
   /* Primary Colors */
   --primary-color: #f3f6f6;
@@ -27,6 +33,53 @@
   --card: rgba(0,0,0,0.7);
   --border: #00f7ff40;
   --transition: 0.3s;
+  
+  /* === VARIABLES MÓVILES ESPECÍFICAS === */
+  --mobile-sidebar-width: 140px;
+  --mobile-padding: 8px;
+  --mobile-gap: 8px;
+  --mobile-font-base: 0.8rem;
+  --mobile-font-small: 0.7rem;
+  --mobile-font-tiny: 0.6rem;
+  --font-size-base: clamp(14px, 2vw, 18px);
+}
+
+/* ================================================================= 
+   RESET Y ELEMENTOS BASE
+   ================================================================= */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body { 
+  font-family: 'Montserrat', sans-serif; 
+  color: var(--text); 
+  background: var(--background-color); 
+  min-height: 100vh; 
+  overflow-y: auto; 
+}
+
+#app { 
+  width: 70%; 
+  min-height: 100vh; 
+  position: relative; 
+  margin: 0 auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.screen { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1; 
 }
 
 /* Background video styles */
@@ -41,20 +94,11 @@
   opacity: 0.4;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Montserrat', sans-serif; color: var(--text); background: var(--background-color); min-height: 100vh; overflow-y: auto; }
-#app { 
-  width: 70%; 
-  min-height: 100vh; 
-  position: relative; 
-  margin: 0 auto;
-  transition: margin-left 0.3s ease-in-out;
-}
-.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; }
-
-/* =================================================================
-   TYPOGRAPHY & BRANDING
+/* ================================================================= 
+   TIPOGRAFÍA Y BRANDING
    ================================================================= */
+
+/* Textos principales */
 .welcome-text, .title-text, .category-title {
   font-family: 'Playfair Display', serif;
   color: var(--text-color);
@@ -62,9 +106,15 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   animation: fadeIn 1s ease-in-out;
 }
 
-.welcome-text { font-size: 3rem; }
-.title-text, .category-title { font-size: 2.5rem; }
+.welcome-text { 
+  font-size: 3rem; 
+}
 
+.title-text, .category-title { 
+  font-size: 2.5rem; 
+}
+
+/* Contenedores de logo */
 .logo-container {
   display: flex;
   flex-direction: column;
@@ -72,6 +122,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   gap: 20px;
 }
 
+/* Estilos generales de logo */
 .logo {
   max-width: 300px;
   height: auto;
@@ -94,15 +145,18 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   margin: 0 auto;
 }
 
+/* Pantalla de contenido principal */
 .main-content-screen {
   padding: 20px;
   justify-content: flex-start;
   background-color: transparent;
 }
 
-/* =================================================================
-   NAVIGATION & BUTTONS
+/* ================================================================= 
+   NAVEGACIÓN Y BOTONES
    ================================================================= */
+
+/* Menú de navegación principal */
 .navigation-menu {
   width: 100%;
   display: flex;
@@ -118,6 +172,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   flex-wrap: wrap;
 }
 
+/* Botones de navegación base */
 .nav-button, .view-toggle-btn {
   background: transparent;
   border: 2px solid var(--primary-color);
@@ -128,6 +183,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   transition: all var(--transition-time) ease;
 }
 
+/* Botón de cambio de vista */
 .view-toggle-btn {
   font-size: 1.2rem;
   width: 50px;
@@ -140,6 +196,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   font-weight: bold;
 }
 
+/* Estados hover y activo */
 .nav-button:hover, .nav-button.active, .view-toggle-btn:hover {
   background-color: var(--primary-color);
   color: var(--background-color);
@@ -154,9 +211,11 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   color: var(--background-color);
 }
 
-/* =================================================================
-   LAYOUT COMPONENTS - HEADERS & CONTAINERS
+/* ================================================================= 
+   COMPONENTES DE LAYOUT - HEADERS Y CONTENEDORES
    ================================================================= */
+
+/* Header de página principal */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -168,6 +227,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   position: relative;
 }
 
+/* Título de página */
 .page-title {
   font-family: 'Playfair Display', serif;
   color: var(--text-color);
@@ -181,6 +241,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   margin-bottom: 15px;
 }
 
+/* Botones de acción principales */
 #create-order-btn, #orders-btn {
   position: relative;
   z-index: 1;
@@ -191,6 +252,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   margin-left: auto;
 }
 
+/* Pantalla de órdenes */
 .orders-screen {
   width: 100%;
   max-width: 1200px;
@@ -220,6 +282,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   white-space: nowrap;
 }
 
+/* Botones de navegación de órdenes */
 .orders-back-btn, .history-btn {
   position: relative;
   z-index: 1;
@@ -229,6 +292,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   margin-left: auto;
 }
 
+/* Contenedores de contenido principal */
 .content-wrapper {
   display: flex;
   width: 100%;
@@ -252,6 +316,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   gap: 20px;
 }
 
+/* Botón hamburguesa en contenedor flex */
 .content-container-flex .hamburger-btn {
   position: relative;
   top: unset;
@@ -263,6 +328,11 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   z-index: 1000;
 }
 
+/* ================================================================= 
+   ELEMENTOS MULTIMEDIA
+   ================================================================= */
+
+/* Iconos de video e imagen */
 .video-icon, .image-icon {
   cursor: pointer;
   text-align: center;
@@ -271,6 +341,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   /* backdrop-filter: blur(5px); */
 }
 
+/* Miniaturas de video base */
 .video-thumb {
   width: 80px;
   height: 56px;
@@ -284,6 +355,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   transform: scale(1.05);
 }
 
+/* Estilos específicos por categoría */
 [data-category="carnes"] .video-thumb {
   width: 100px;
   height: 70px;
@@ -303,7 +375,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   border: 1px solid rgba(255, 165, 0, 0.3);
 }
 
-/* Consolidated responsive styles for video thumbnails */
+/* Estilos responsivos para miniaturas de video */
 @media (max-width: 768px) {
   .video-thumb { width: 70px; height: 49px; }
 }
@@ -2852,4 +2924,122 @@ body.order-mode-active #app {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--card-bg) rgba(0, 0, 0, 0.3);
+}
+
+/* =================================================================
+   MOBILE SPECIFIC IMPLEMENTATION - PLANMAINCSS.MD
+   ================================================================= */
+
+/* === MOBILE PORTRAIT - SIDEBAR BOTTOM === */
+@media (max-width: 480px) and (orientation: portrait) {
+  /* Content wrapper mobile portrait */
+  .content-wrapper {
+    flex-direction: column;
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+  }
+  
+  /* Order sidebar - fixed bottom */
+  #order-sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    padding: var(--mobile-padding);
+    z-index: 1000;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Product grid - 2 columns */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+    margin-bottom: 45vh; /* Space for fixed sidebar */
+  }
+  
+  /* Category grid - 2 columns */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+  }
+  
+  /* Mobile typography */
+  .product-card .product-name {
+    font-size: var(--mobile-font-base);
+  }
+  
+  .product-card .product-ingredients {
+    font-size: var(--mobile-font-small);
+  }
+  
+  .category-title {
+    font-size: var(--mobile-font-base);
+  }
+}
+
+/* === MOBILE LANDSCAPE - SIDEBAR RIGHT === */
+@media (max-width: 480px) and (orientation: landscape) {
+  /* Content wrapper mobile landscape */
+  .content-wrapper {
+    flex-direction: row;
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+  }
+  
+  /* Order sidebar - fixed right */
+  #order-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--mobile-sidebar-width);
+    height: 100vh;
+    max-height: none;
+    padding: var(--mobile-padding);
+    z-index: 1000;
+    background: var(--card-bg);
+    border-left: 1px solid var(--border-color);
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Main content area adjustment */
+  .main-content {
+    margin-right: var(--mobile-sidebar-width);
+  }
+  
+  /* Product grid - 3 columns */
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+  }
+  
+  /* Category grid - 3 columns */
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--mobile-gap);
+    padding: var(--mobile-padding);
+  }
+  
+  /* Mobile typography */
+  .product-card .product-name {
+    font-size: var(--mobile-font-small);
+  }
+  
+  .product-card .product-ingredients {
+    font-size: var(--mobile-font-tiny);
+  }
+  
+  .category-title {
+    font-size: var(--mobile-font-small);
+  }
 }
