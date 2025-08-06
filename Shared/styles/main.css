@@ -2993,14 +2993,19 @@ body.order-mode-active #app {
   }
   
   /* Ajustes específicos para móvil vertical */
-  /* Primera transición (welcome-text) mantiene su tamaño base */
+  /* Primera transición (welcome-text) - reducida 25% */
   .welcome-text {
-    font-size: 2.4rem; /* Ajustado para móvil */
+    font-size: 1.8rem; /* Reducido 25% de 2.4rem */
   }
   
-  /* Tercera transición (title-text) ajustada basándose en welcome-text */
+  /* Segunda transición (title-text - Master Technology Bar) - igual que welcome-text */
   .title-text {
-    font-size: 2rem; /* Proporcionalmente ajustado */
+    font-size: 1.8rem; /* Mismo tamaño que welcome-text */
+  }
+  
+  /* Tercera transición (category-title - Coctelería) - igual que las anteriores */
+  .category-title {
+    font-size: 1.8rem; /* Mismo tamaño que welcome-text y title-text */
   }
   
   /* Logo ajustes para móvil vertical */
