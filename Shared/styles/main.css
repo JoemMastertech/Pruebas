@@ -2345,14 +2345,23 @@ textarea:focus {
    RESPONSIVE DESIGN - MOBILE PORTRAIT (max-width: 480px)
    ================================================================= */
 @media (max-width: 480px) and (orientation: portrait) {
-  /* Maximizar ancho disponible en portrait */
+  /* Aumentar tamaño del contenedor padre en 10% y centrarlo */
   :root { 
-    --table-width: 100%; 
+    --table-width: 110%; /* Aumentado 10% de 100% */
     --table-margin: 0px; 
+  }
+  
+  /* Centrar el contenedor principal */
+  #app {
+    width: 110%; /* Aumentado 10% */
+    margin: 0 auto;
+    transform: translateX(-5%); /* Centrar el contenedor expandido */
   }
   
   #content-container {
     padding: 0 2px;
+    width: 100%;
+    margin: 0 auto;
   }
   
   /* Grid con 2 columnas en portrait - ancho completo */
@@ -2363,8 +2372,6 @@ textarea:focus {
     width: 100%;
     max-width: 100%;
   }
-  
-
   
   .category-grid { 
     grid-template-columns: repeat(2, 1fr); 
@@ -2381,28 +2388,43 @@ textarea:focus {
     margin: 0;
   }
   
-  /* Botones hamburguesa y volver - visibles y con scroll */
+  /* Botón hamburguesa - más visible y mejor posicionado */
   .hamburger-btn {
     position: fixed;
-    left: 8px;
-    top: 8px;
+    left: 15px; /* Movido más hacia adentro */
+    top: 15px; /* Movido más hacia abajo */
     z-index: 1001;
     display: flex !important;
     opacity: 1;
     visibility: visible;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    background: var(--card-bg);
+    border: 3px solid var(--primary-color); /* Borde más grueso */
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5); /* Sombra cyan para visibilidad */
+    backdrop-filter: blur(10px);
+    width: 55px; /* Ligeramente más grande */
+    height: 55px;
+    border-radius: 12px; /* Más redondeado */
+    transition: all 0.3s ease;
+  }
+  
+  /* Efecto hover mejorado para el botón hamburguesa */
+  .hamburger-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 247, 255, 0.8);
   }
   
   /* Comportamiento de scroll para hamburguesa */
   .hamburger-btn.scrolled {
-    transform: translateY(-5px);
-    opacity: 0.9;
+    transform: translateY(-3px) scale(0.95);
+    opacity: 0.95;
   }
   
   .back-button-container {
     position: fixed;
-    left: 8px;
-    top: 58px;
+    left: 15px; /* Alineado con hamburguesa */
+    top: 80px; /* Más espacio del hamburguesa */
     z-index: 1001;
   }
   
