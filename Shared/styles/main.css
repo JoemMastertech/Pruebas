@@ -130,9 +130,7 @@ body {
   /* Borde cyan y efectos hover eliminados */
 }
 
-.logo:hover {
-  /* Efectos hover eliminados */
-}
+/* Removed empty logo:hover ruleset */
 
 /* Logo específico para la página */
 .main-logo {
@@ -2202,10 +2200,32 @@ textarea:focus {
   .product-card { min-height: 320px; }
 }
 
-/* =================================================================
+/* ================================================================= 
+   BARRA SUPERIOR MÓVIL - Ocultar en dispositivos más grandes
+   ================================================================= */
+.mobile-top-nav {
+  display: none; /* Ocultar por defecto en dispositivos grandes */
+}
+
+/* ================================================================= 
    RESPONSIVE DESIGN - MOBILE LANDSCAPE (max-width: 480px)
    ================================================================= */
 @media (max-width: 480px) and (orientation: landscape) {
+  /* Mostrar barra superior móvil también en landscape */
+  .mobile-top-nav {
+    display: flex !important;
+  }
+  
+  /* Ajustar contenido principal en landscape */
+  .main-content-screen {
+    padding-top: 70px !important;
+  }
+  
+  /* Ocultar botones originales en landscape móvil */
+  .page-header .hamburger-btn,
+  .back-button-container {
+    display: none !important;
+  }
   /* Replicar comportamiento de escritorio en móviles landscape */
   .content-wrapper { 
     flex-direction: row;
@@ -2346,14 +2366,23 @@ textarea:focus {
    RESPONSIVE DESIGN - MOBILE PORTRAIT (max-width: 480px)
    ================================================================= */
 @media (max-width: 480px) and (orientation: portrait) {
-  /* Maximizar ancho disponible en portrait */
+  /* Aumentar tamaño del contenedor padre en 10% y centrarlo */
   :root { 
-    --table-width: 100%; 
-    --table-margin: 0px; 
+    --table-width: 110% !important; /* Aumentado 10% de 100% */
+    --table-margin: 0px !important; 
+  }
+  
+  /* Centrar el contenedor principal */
+  #app {
+    width: 110% !important; /* Aumentado 10% */
+    margin: 0 auto !important;
+    transform: translateX(-5%) !important; /* Centrar el contenedor expandido */
   }
   
   #content-container {
-    padding: 0 2px;
+    padding: 0 2px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
   }
   
   /* Grid con 2 columnas en portrait - ancho completo */
@@ -2382,29 +2411,132 @@ textarea:focus {
     margin: 0;
   }
   
-  /* Botones hamburguesa y volver - visibles y con scroll */
+  /* Botón hamburguesa - más visible y mejor posicionado */
   .hamburger-btn {
-    position: fixed;
-    left: 8px;
-    top: 8px;
-    z-index: 1001;
+    position: fixed !important;
+    left: 15px !important; /* Movido más hacia adentro */
+    top: 15px !important; /* Movido más hacia abajo */
+    z-index: 1001 !important;
     display: flex !important;
-    opacity: 1;
-    visibility: visible;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: var(--card-bg) !important;
+    border: 3px solid var(--primary-color) !important; /* Borde más grueso */
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5) !important; /* Sombra cyan para visibilidad */
+    backdrop-filter: blur(10px) !important;
+    width: 55px !important; /* Ligeramente más grande */
+    height: 55px !important;
+    border-radius: 12px !important; /* Más redondeado */
+    transition: all 0.3s ease !important;
+  }
+  
+  /* Efecto hover mejorado para el botón hamburguesa */
+  .hamburger-btn:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 25px rgba(0, 247, 255, 0.8) !important;
+  }
   }
   
   /* Comportamiento de scroll para hamburguesa */
   .hamburger-btn.scrolled {
-    transform: translateY(-5px);
-    opacity: 0.9;
+    transform: translateY(-3px) scale(0.95);
+  }
+  
+  /* ================================================================= 
+     BARRA SUPERIOR MÓVIL - Navegación fija para dispositivos móviles
+     ================================================================= */
+  
+  /* Contenedor principal de la barra superior móvil */
+  .mobile-top-nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 60px !important;
+    z-index: 1000 !important;
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    box-shadow: var(--glow-shadow) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 15px !important;
+    transition: all var(--transition-time) ease !important;
+    /* Efecto de entrada - slide-in desde arriba */
+    animation: slideInFromTop 0.5s ease-out !important;
+  }
+  
+  /* Animación de entrada para la barra superior */
+  @keyframes slideInFromTop {
+    from {
+      transform: translateY(-100%) !important;
+      opacity: 0 !important;
+    }
+    to {
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+    }
+  }
+  
+  /* Botones dentro de la barra superior móvil */
+  .mobile-top-nav .hamburger-btn,
+  .mobile-top-nav .back-button,
+  .mobile-top-nav .view-toggle-btn {
+    position: static !important;
+    background: var(--card-bg) !important;
+    border: 2px solid var(--primary-color) !important;
+    color: var(--text-color) !important;
+    font-size: 1.2rem !important;
+    width: 45px !important;
+    height: 45px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    transition: all var(--transition-time) ease !important;
+    backdrop-filter: blur(10px) !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+    box-shadow: var(--glow-shadow) !important;
+  }
+  
+  /* Estados hover para botones de la barra superior */
+  .mobile-top-nav .hamburger-btn:hover,
+  .mobile-top-nav .back-button:hover,
+  .mobile-top-nav .view-toggle-btn:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    transform: scale(1.05) !important;
+    box-shadow: var(--glow-shadow-hover) !important;
+  }
+  
+  /* Estado activo para el botón de vista */
+  .mobile-top-nav .view-toggle-btn.active {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+  }
+  
+  /* Ajustar el contenido principal para evitar superposición con la barra superior */
+  .main-content-screen {
+    padding-top: 70px !important;
+  }
+  
+  /* Ocultar botones originales en móvil */
+  .page-header .hamburger-btn,
+  .back-button-container {
+    display: none !important;
+    opacity: 0.95;
   }
   
   .back-button-container {
-    position: fixed;
-    left: 8px;
-    top: 58px;
-    z-index: 1001;
+    position: fixed !important;
+    left: 15px !important; /* Alineado con hamburguesa */
+    top: 80px !important; /* Más espacio del hamburguesa */
+    z-index: 1001 !important;
+/* Fixed merge conflict marker */
   }
   
   /* ORDER SIDEBAR - MOBILE PORTRAIT (parte inferior) */
@@ -2419,7 +2551,7 @@ textarea:focus {
     overflow-x: hidden;
     box-sizing: border-box;
   }
-}
+
 
 /* =================================================================
    RESPONSIVE DESIGN - LANDSCAPE TABLETS (768px - 1024px)
@@ -3015,10 +3147,7 @@ body.order-mode-active #app {
     transition: none; /* Eliminar transiciones */
   }
   
-  .logo:hover {
-    transform: none; /* Eliminar efecto hover */
-    filter: none; /* Eliminar efecto hover */
-  }
+  /* .logo:hover - Completamente eliminado */
   
   .main-logo {
     max-width: 225px; /* Reducido 25% de 300px */
@@ -3046,7 +3175,7 @@ body.order-mode-active #app {
     padding: var(--mobile-padding);
     z-index: 1000;
     background: var(--card-bg);
-    border-left: 1px solid var(--border-color);
+    /* border-left: 1px solid var(--border-color); - Eliminado */
     overflow-y: auto;
     box-sizing: border-box;
   }
