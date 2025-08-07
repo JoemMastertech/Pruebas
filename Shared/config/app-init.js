@@ -617,7 +617,130 @@ const AppInit = {
       if (defaultButton && defaultButton.classList) {
         defaultButton.classList.add('active');
       }
-    };
+    }
+    
+    // Add scroll behavior for hamburger button in mobile portrait
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Only apply scroll behavior on mobile portrait
+      if (window.innerWidth <= 480 && window.innerHeight > window.innerWidth) {
+        if (currentScroll > lastScrollTop && currentScroll > 50) {
+          // Scrolling down - add scrolled class
+          hamburgerBtn.classList.add('scrolled');
+        } else {
+          // Scrolling up - remove scrolled class
+          hamburgerBtn.classList.remove('scrolled');
+        }
+      }
+      
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
+    
+    // ================================================================= 
+    // BARRA SUPERIOR MÓVIL - Enlace de eventos para dispositivos móviles
+    // ================================================================= 
+    this.initMobileTopNav();
+  },
+  
+  /**
+   * Inicializa la barra superior móvil y enlaza eventos a los botones
+   * Reutiliza las funciones existentes sin duplicar lógica
+   */
+  initMobileTopNav: function() {
+    // Obtener referencias a los botones de la barra superior móvil
+    const mobileHamburgerBtn = document.getElementById('mobile-hamburger-btn');
+    const mobileBackBtn = document.getElementById('mobile-back-btn');
+    const mobileViewToggleBtn = document.getElementById('mobile-view-toggle-btn');
+    
+    // Verificar que los elementos existen antes de agregar eventos
+    if (!mobileHamburgerBtn || !mobileBackBtn || !mobileViewToggleBtn) {
+      console.warn('Algunos botones de la barra superior móvil no se encontraron');
+      return;
+    }
+    
+    // ================================================================= 
+    // BOTÓN HAMBURGUESA MÓVIL - Reutiliza la función del drawer existente
+    // ================================================================= 
+    mobileHamburgerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const drawerMenu = document.getElementById('drawer-menu');
+      const drawerOverlay = document.getElementById('drawer-overlay');
+      
+      if (drawerMenu && drawerOverlay) {
+        // Reutilizar la misma lógica del botón hamburguesa original
+        drawerMenu.classList.toggle('open');
+        drawerOverlay.classList.toggle('active');
+      }
+    });
+    
+    // ================================================================= 
+    // BOTÓN VOLVER MÓVIL - Reutiliza la función de navegación hacia atrás
+    // ================================================================= 
+    mobileBackBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Buscar el contenedor principal para renderizar licores
+      const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
+      if (container && window.ProductRenderer && window.ProductRenderer.renderLicores) {
+        // Reutilizar la función existente de ProductRenderer
+        window.ProductRenderer.renderLicores(container);
+      }
+    });
+    
+    // ================================================================= 
+    // BOTÓN CAMBIO DE VISTA MÓVIL - Reutiliza la función toggleViewMode
+    // ================================================================= 
+    mobileViewToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      if (window.ProductRenderer && window.ProductRenderer.toggleViewMode) {
+        // Reutilizar la función existente de cambio de vista
+        const newMode = window.ProductRenderer.toggleViewMode();
+        
+        // Actualizar el texto del botón móvil para reflejar el modo actual
+        mobileViewToggleBtn.textContent = newMode === 'table' ? '📋' : '🔲';
+        mobileViewToggleBtn.classList.toggle('active', newMode === 'grid');
+        
+        // Refrescar la vista actual
+        const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
+        if (container && window.ProductRenderer.refreshCurrentView) {
+          window.ProductRenderer.refreshCurrentView(container);
+        }
+      }
+    });
+    
+    // ================================================================= 
+    // SINCRONIZACIÓN CON BOTONES ORIGINALES
+    // Mantener sincronizados los botones móviles con los originales
+    // ================================================================= 
+    
+    // Observar cambios en el botón de vista original para sincronizar
+    const originalViewToggle = document.querySelector('.view-toggle-btn:not(#mobile-view-toggle-btn)');
+    if (originalViewToggle) {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            // Sincronizar el estado activo
+            const isActive = originalViewToggle.classList.contains('active');
+            mobileViewToggleBtn.classList.toggle('active', isActive);
+          }
+          if (mutation.type === 'childList' || mutation.type === 'characterData') {
+            // Sincronizar el texto del botón
+            mobileViewToggleBtn.textContent = originalViewToggle.textContent;
+          }
+        });
+      });
+      
+      observer.observe(originalViewToggle, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+    
+    console.log('Barra superior móvil inicializada correctamente');
   },
   
   /**
