@@ -2347,21 +2347,21 @@ textarea:focus {
 @media (max-width: 480px) and (orientation: portrait) {
   /* Aumentar tamaño del contenedor padre en 10% y centrarlo */
   :root { 
-    --table-width: 110%; /* Aumentado 10% de 100% */
-    --table-margin: 0px; 
+    --table-width: 110% !important; /* Aumentado 10% de 100% */
+    --table-margin: 0px !important; 
   }
   
   /* Centrar el contenedor principal */
   #app {
-    width: 110%; /* Aumentado 10% */
-    margin: 0 auto;
-    transform: translateX(-5%); /* Centrar el contenedor expandido */
+    width: 110% !important; /* Aumentado 10% */
+    margin: 0 auto !important;
+    transform: translateX(-5%) !important; /* Centrar el contenedor expandido */
   }
   
   #content-container {
-    padding: 0 2px;
-    width: 100%;
-    margin: 0 auto;
+    padding: 0 2px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
   }
   
   /* Grid con 2 columnas en portrait - ancho completo */
@@ -2390,29 +2390,29 @@ textarea:focus {
   
   /* Botón hamburguesa - más visible y mejor posicionado */
   .hamburger-btn {
-    position: fixed;
-    left: 15px; /* Movido más hacia adentro */
-    top: 15px; /* Movido más hacia abajo */
-    z-index: 1001;
+    position: fixed !important;
+    left: 15px !important; /* Movido más hacia adentro */
+    top: 15px !important; /* Movido más hacia abajo */
+    z-index: 1001 !important;
     display: flex !important;
-    opacity: 1;
-    visibility: visible;
-    background: var(--card-bg);
-    border: 3px solid var(--primary-color); /* Borde más grueso */
-    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5); /* Sombra cyan para visibilidad */
-    backdrop-filter: blur(10px);
-    width: 55px; /* Ligeramente más grande */
-    height: 55px;
-    border-radius: 12px; /* Más redondeado */
-    transition: all 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: var(--card-bg) !important;
+    border: 3px solid var(--primary-color) !important; /* Borde más grueso */
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5) !important; /* Sombra cyan para visibilidad */
+    backdrop-filter: blur(10px) !important;
+    width: 55px !important; /* Ligeramente más grande */
+    height: 55px !important;
+    border-radius: 12px !important; /* Más redondeado */
+    transition: all 0.3s ease !important;
   }
   
   /* Efecto hover mejorado para el botón hamburguesa */
   .hamburger-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--background-color);
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 247, 255, 0.8);
+    background-color: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 25px rgba(0, 247, 255, 0.8) !important;
   }
   
   /* Comportamiento de scroll para hamburguesa */
@@ -2422,10 +2422,10 @@ textarea:focus {
   }
   
   .back-button-container {
-    position: fixed;
-    left: 15px; /* Alineado con hamburguesa */
-    top: 80px; /* Más espacio del hamburguesa */
-    z-index: 1001;
+    position: fixed !important;
+    left: 15px !important; /* Alineado con hamburguesa */
+    top: 80px !important; /* Más espacio del hamburguesa */
+    z-index: 1001 !important;
   }
   
   /* ORDER SIDEBAR - MOBILE PORTRAIT (parte inferior) */
