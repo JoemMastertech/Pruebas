@@ -42,6 +42,11 @@
   --mobile-font-small: 0.7rem;
   --mobile-font-tiny: 0.6rem;
   --font-size-base: clamp(14px, 2vw, 18px);
+  
+  /* Top Navigation Variables */
+  --top-nav-height: 60px;
+  --top-nav-bg: rgba(0, 0, 0, 0.95);
+  --top-nav-border: #00f7ff;
 }
 
 /* ================================================================= 
@@ -2612,6 +2617,102 @@ textarea:focus {
 }
 
 /* =================================================================
+   BARRA SUPERIOR GLOBAL
+   ================================================================= */
+#top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--top-nav-height);
+  background: var(--top-nav-bg);
+  border-bottom: 2px solid var(--top-nav-border);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: var(--glow-shadow);
+  /* Ocultar inicialmente hasta que termine la inicialización */
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Mostrar la barra superior cuando la app esté lista */
+#top-nav.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.nav-center {
+  justify-content: center;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+#nav-title {
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+}
+
+.top-nav-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-time) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  backdrop-filter: blur(5px);
+}
+
+.top-nav-btn:hover {
+  background: var(--accent-color);
+  color: var(--background-color);
+  box-shadow: var(--glow-shadow-hover);
+  transform: scale(1.05);
+}
+
+.top-nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* Ajustes para el contenido principal */
+body {
+  padding-top: 0;
+  transition: padding-top 0.5s ease;
+}
+
+/* Agregar padding cuando la barra superior esté visible */
+body.top-nav-visible {
+  padding-top: var(--top-nav-height);
+}
+
+#app {
+  padding-top: 0;
+}
+
+/* =================================================================
    NAVIGATION DRAWER & HAMBURGER MENU
    ================================================================= */
 .hamburger-btn {
@@ -3090,5 +3191,48 @@ body.order-mode-active #app {
   
   .category-title {
     font-size: 1.8rem;
+  }
+  
+  /* Barra superior móvil */
+  #top-nav {
+    height: 50px;
+    padding: 0 10px;
+  }
+  
+  .top-nav-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    margin: 0 3px;
+  }
+  
+  #nav-title {
+    font-size: 1rem;
+  }
+  
+  body.top-nav-visible {
+    padding-top: 50px;
+  }
+}
+
+/* === RESPONSIVE ADJUSTMENTS FOR TOP BAR === */
+@media (max-width: 768px) {
+  #top-nav {
+    height: 55px;
+    padding: 0 15px;
+  }
+  
+  .top-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+  
+  #nav-title {
+    font-size: 1.1rem;
+  }
+  
+  body.top-nav-visible {
+    padding-top: 55px;
   }
 }

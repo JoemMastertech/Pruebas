@@ -1023,6 +1023,20 @@ const ProductRenderer = {
     // Aunque los datos son controlados, se usa sanitización como medida preventiva
     setSafeInnerHTML(targetContainer, licoresHTML);
     
+    // Remove any existing back button when returning to main licores view
+    const existingBackButtonContainer = document.querySelector('.back-button-container');
+    if (existingBackButtonContainer) {
+      existingBackButtonContainer.remove();
+      Logger.debug('🗑️ Back button container eliminado al regresar a vista principal de licores');
+    }
+    
+    // Force top navigation sync after removing back button
+    if (window.topNavManager) {
+      setTimeout(() => {
+        window.topNavManager.forceSync();
+      }, 100);
+    }
+    
     // No individual event listeners needed - handled by delegation
     // Category cards will be handled by the centralized event system
   },
@@ -1116,6 +1130,13 @@ const ProductRenderer = {
     
     backButtonContainer.appendChild(backButton);
     targetContainer.appendChild(backButtonContainer);
+
+    // Force top navigation sync after creating back button
+    if (window.topNavManager) {
+      setTimeout(() => {
+        window.topNavManager.forceSync();
+      }, 100);
+    }
 
     // Update the title for all subcategory renderings
     const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);

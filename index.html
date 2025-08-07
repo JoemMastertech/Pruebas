@@ -46,6 +46,20 @@
   </video>
   
   <div id="app">
+    <!-- Barra superior global -->
+    <nav id="top-nav" aria-label="Barra de navegación principal">
+      <div class="nav-left">
+        <button id="top-hamburger-btn" class="top-nav-btn" aria-label="Abrir menú lateral">☰</button>
+        <button id="top-back-btn" class="top-nav-btn" aria-label="Volver" style="display: none;">←</button>
+      </div>
+      <div class="nav-center">
+        <span id="nav-title">Master Technology Bar</span>
+      </div>
+      <div class="nav-right">
+        <button id="top-view-toggle-btn" class="top-nav-btn" aria-label="Cambiar a vista de cuadrícula" style="display: none;">🔲</button>
+      </div>
+    </nav>
+    
     <div id="drawer-overlay" class="drawer-overlay"></div>
     <div id="drawer-menu" class="drawer-menu">
       <div class="drawer-content">
@@ -159,6 +173,8 @@
   <script type="module" src="./Interfaces/web/ui-adapters/screens/screen-manager.js"></script>
   <!-- Load order system -->
   <script type="module" src="./Interfaces/web/ui-adapters/components/order-system.js"></script>
+  <!-- Load top navigation -->
+  <script src="./Shared/js/top-nav.js"></script>
   <!-- Initialize app -->
   <script type="module">
     import AppInit from './Shared/config/app-init.js';
