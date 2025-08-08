@@ -2205,21 +2205,12 @@ textarea:focus {
   .product-card { min-height: 320px; }
 }
 
-/* ================================================================= 
-   BARRA SUPERIOR MÓVIL - Ocultar en dispositivos más grandes
-   ================================================================= */
-.mobile-top-nav {
-  display: none; /* Ocultar por defecto en dispositivos grandes */
-}
+
 
 /* ================================================================= 
    RESPONSIVE DESIGN - MOBILE LANDSCAPE (max-width: 480px)
    ================================================================= */
 @media (max-width: 480px) and (orientation: landscape) {
-  /* Mostrar barra superior móvil también en landscape */
-  .mobile-top-nav {
-    display: flex !important;
-  }
   
   /* Ajustar contenido principal en landscape */
   .main-content-screen {
@@ -2449,85 +2440,7 @@ textarea:focus {
     transform: translateY(-3px) scale(0.95);
   }
   
-  /* ================================================================= 
-     BARRA SUPERIOR MÓVIL - Navegación fija para dispositivos móviles
-     ================================================================= */
-  
-  /* Contenedor principal de la barra superior móvil */
-  .mobile-top-nav {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 60px !important;
-    z-index: 1000 !important;
-    background: var(--card-bg) !important;
-    backdrop-filter: blur(10px) !important;
-    border-bottom: 2px solid var(--border-color) !important;
-    box-shadow: var(--glow-shadow) !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 15px !important;
-    transition: all var(--transition-time) ease !important;
-    /* Efecto de entrada - slide-in desde arriba */
-    animation: slideInFromTop 0.5s ease-out !important;
-  }
-  
-  /* Animación de entrada para la barra superior */
-  @keyframes slideInFromTop {
-    from {
-      transform: translateY(-100%) !important;
-      opacity: 0 !important;
-    }
-    to {
-      transform: translateY(0) !important;
-      opacity: 1 !important;
-    }
-  }
-  
-  /* Botones dentro de la barra superior móvil */
-  .mobile-top-nav .hamburger-btn,
-  .mobile-top-nav .back-button,
-  .mobile-top-nav .view-toggle-btn {
-    position: static !important;
-    background: var(--card-bg) !important;
-    border: 2px solid var(--primary-color) !important;
-    color: var(--text-color) !important;
-    font-size: 1.2rem !important;
-    width: 45px !important;
-    height: 45px !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    cursor: pointer !important;
-    transition: all var(--transition-time) ease !important;
-    backdrop-filter: blur(10px) !important;
-    font-weight: bold !important;
-    border-radius: 8px !important;
-    box-shadow: var(--glow-shadow) !important;
-  }
-  
-  /* Estados hover para botones de la barra superior */
-  .mobile-top-nav .hamburger-btn:hover,
-  .mobile-top-nav .back-button:hover,
-  .mobile-top-nav .view-toggle-btn:hover {
-    background-color: var(--primary-color) !important;
-    color: var(--background-color) !important;
-    transform: scale(1.05) !important;
-    box-shadow: var(--glow-shadow-hover) !important;
-  }
-  
-  /* Estado activo para el botón de vista */
-  .mobile-top-nav .view-toggle-btn.active {
-    background-color: var(--primary-color) !important;
-    color: var(--background-color) !important;
-  }
-  
-  /* Ajustar el contenido principal para evitar superposición con la barra superior */
-  .main-content-screen {
-    padding-top: 70px !important;
-  }
+
   
   /* Ocultar botones originales en móvil */
   .page-header .hamburger-btn,

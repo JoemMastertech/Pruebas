@@ -43,46 +43,85 @@ class TopNavManager {
   }
 
   findButtons() {
-    // Botones de la barra superior
+    // Botones de la barra superior global
     this.topButtons.hamburger = document.getElementById('top-hamburger-btn');
     this.topButtons.back = document.getElementById('top-back-btn');
     this.topButtons.viewToggle = document.getElementById('top-view-toggle-btn');
     
-    // Botones originales
+    // Botones originales con búsqueda más exhaustiva
     this.originalButtons.hamburger = document.getElementById('hamburger-btn');
-    this.originalButtons.back = document.querySelector('.back-button-container .back-button, .back-button, #back-btn');
+    this.originalButtons.back = document.querySelector('.back-button-container .back-button') ||
+                               document.querySelector('.back-button') ||
+                               document.querySelector('#back-btn');
     this.originalButtons.viewToggle = document.querySelector('.view-toggle-btn, #view-toggle-btn');
+    
+    console.log('TopNavManager: Buttons found:', {
+      topHamburger: !!this.topButtons.hamburger,
+      topBack: !!this.topButtons.back,
+      topViewToggle: !!this.topButtons.viewToggle,
+      originalHamburger: !!this.originalButtons.hamburger,
+      originalBack: !!this.originalButtons.back,
+      originalViewToggle: !!this.originalButtons.viewToggle
+    });
   }
 
   setupEventListeners() {
-    // Hamburger button sync
+    // Event listeners para botones de la barra superior global
     if (this.topButtons.hamburger) {
       this.topButtons.hamburger.addEventListener('click', (e) => {
         e.preventDefault();
-        if (this.originalButtons.hamburger) {
-          this.originalButtons.hamburger.click();
-        }
+        this.handleHamburgerClick();
       });
     }
 
-    // Back button sync
     if (this.topButtons.back) {
       this.topButtons.back.addEventListener('click', (e) => {
         e.preventDefault();
-        if (this.originalButtons.back) {
-          this.originalButtons.back.click();
-        }
+        this.handleBackClick();
       });
     }
 
-    // View toggle sync
     if (this.topButtons.viewToggle) {
       this.topButtons.viewToggle.addEventListener('click', (e) => {
         e.preventDefault();
-        if (this.originalButtons.viewToggle) {
-          this.originalButtons.viewToggle.click();
-        }
+        this.handleViewToggleClick();
       });
+    }
+  }
+
+  handleHamburgerClick() {
+    const drawerMenu = document.getElementById('drawer-menu');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+    
+    if (drawerMenu && drawerOverlay) {
+      drawerMenu.classList.toggle('open');
+      drawerOverlay.classList.toggle('active');
+    }
+  }
+
+  handleBackClick() {
+    // Buscar el contenedor principal para renderizar licores
+    const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
+    if (container && window.ProductRenderer && window.ProductRenderer.renderLicores) {
+      window.ProductRenderer.renderLicores(container);
+    }
+  }
+
+  handleViewToggleClick() {
+    if (window.ProductRenderer && window.ProductRenderer.toggleViewMode) {
+      const newMode = window.ProductRenderer.toggleViewMode();
+      
+      // Actualizar el botón de vista de la barra superior
+      if (this.topButtons.viewToggle) {
+        this.topButtons.viewToggle.textContent = newMode === 'table' ? '📋' : '🔲';
+        this.topButtons.viewToggle.classList.toggle('active', newMode === 'grid');
+      }
+      
+      // Refrescar la vista actual
+      const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
+      if (container && window.ProductRenderer.refreshCurrentView) {
+        window.ProductRenderer.refreshCurrentView(container);
+      }
     }
   }
 
@@ -96,10 +135,20 @@ class TopNavManager {
           // Verificar si se agregaron o removieron botones
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
+              // Verificar el nodo directamente
               if (node.classList?.contains('back-button') || 
                   node.classList?.contains('view-toggle-btn') ||
+                  node.classList?.contains('back-button-container') ||
                   node.id === 'back-btn' || 
                   node.id === 'view-toggle-btn') {
+                shouldUpdate = true;
+              }
+              
+              // Verificar descendientes del nodo agregado
+              const backButtons = node.querySelectorAll?.('.back-button, .back-button-container .back-button, #back-btn');
+              const viewToggleButtons = node.querySelectorAll?.('.view-toggle-btn, #view-toggle-btn');
+              
+              if (backButtons?.length > 0 || viewToggleButtons?.length > 0) {
                 shouldUpdate = true;
               }
             }
@@ -109,6 +158,7 @@ class TopNavManager {
             if (node.nodeType === Node.ELEMENT_NODE) {
               if (node.classList?.contains('back-button') || 
                   node.classList?.contains('view-toggle-btn') ||
+                  node.classList?.contains('back-button-container') ||
                   node.id === 'back-btn' || 
                   node.id === 'view-toggle-btn') {
                 shouldUpdate = true;
@@ -135,12 +185,14 @@ class TopNavManager {
           shouldUpdate = true;
         }
       });
-      
+
       if (shouldUpdate) {
+        // Aumentar el timeout para asegurar que el DOM esté completamente actualizado
         setTimeout(() => {
           this.findButtons();
           this.syncStates();
-        }, 50);
+          console.log('TopNavManager: Buttons synchronized after DOM change');
+        }, 100);
       }
     });
 
@@ -187,59 +239,102 @@ class TopNavManager {
   }
 
   syncBackButtonVisibility() {
-    if (!this.topButtons.back) return;
-    
+    // Buscar el botón de retroceso con múltiples selectores
     const backButton = this.originalButtons.back || 
-                      document.querySelector('.back-button-container .back-button');
+                      document.querySelector('.back-button-container .back-button') ||
+                      document.querySelector('.back-button') ||
+                      document.querySelector('#back-btn');
+    
+    let isVisible = false;
     
     if (backButton) {
-      const isVisible = backButton.offsetParent !== null && 
-                       getComputedStyle(backButton).display !== 'none';
+      const computedStyle = getComputedStyle(backButton);
+      const isDisplayed = computedStyle.display !== 'none';
+      const isNotHidden = computedStyle.visibility !== 'hidden';
+      const hasOpacity = parseFloat(computedStyle.opacity) > 0;
       
-      this.topButtons.back.style.display = isVisible ? 'flex' : 'none';
+      // For fixed positioned elements, offsetParent can be null even when visible
+      // So we check display, visibility, and opacity instead
+      isVisible = isDisplayed && isNotHidden && hasOpacity;
+      
+      console.log('TopNavManager: Back button found and visibility check:', {
+        element: backButton,
+        position: computedStyle.position,
+        display: computedStyle.display,
+        visibility: computedStyle.visibility,
+        opacity: computedStyle.opacity,
+        offsetParent: backButton.offsetParent,
+        isVisible: isVisible
+      });
     } else {
-      this.topButtons.back.style.display = 'none';
+      console.log('TopNavManager: No back button found in DOM');
     }
+    
+    // Sincronizar visibilidad en la barra superior
+    if (this.topButtons.back) {
+      this.topButtons.back.style.display = isVisible ? 'flex' : 'none';
+      console.log(`TopNavManager: Top back button display set to: ${this.topButtons.back.style.display}`);
+    } else {
+      console.log('TopNavManager: Top back button not found');
+    }
+    
+    if (!backButton) {
+       if (this.topButtons.back) {
+         this.topButtons.back.style.display = 'none';
+       }
+     }
   }
 
   syncViewToggleState() {
-    if (!this.topButtons.viewToggle) return;
+    const originalToggle = this.originalButtons.viewToggle;
     
-    // El botón de vista de la barra superior siempre debe estar visible
-    // independientemente del estado del botón original
-    this.topButtons.viewToggle.style.display = 'flex';
+    if (originalToggle) {
+      const isActive = originalToggle.classList.contains('active');
+      
+      if (this.topButtons.viewToggle) {
+        this.topButtons.viewToggle.classList.toggle('active', isActive);
+        this.topButtons.viewToggle.style.display = 'flex';
+      }
+    } else {
+      // El botón de vista de la barra superior siempre debe estar visible
+      // independientemente del estado del botón original
+      if (this.topButtons.viewToggle) {
+        this.topButtons.viewToggle.style.display = 'flex';
+      }
+    }
   }
 
   syncViewToggleText() {
-    if (!this.topButtons.viewToggle) return;
+    const originalToggle = this.originalButtons.viewToggle;
+    let textContent = '🔲'; // Default text
+    let ariaLabel = 'Cambiar a vista de cuadrícula';
     
-    const viewToggle = this.originalButtons.viewToggle || 
-                      document.querySelector('.view-toggle-btn');
-    
-    if (viewToggle) {
-      const text = viewToggle.textContent || viewToggle.innerHTML;
-      // Sincronizar exactamente el mismo icono que el botón original
+    if (originalToggle) {
+      const text = originalToggle.textContent || originalToggle.innerHTML;
       if (text.includes('🔲')) {
-        // Si el original muestra 🔲 (modo tabla, para cambiar a grid)
-        this.topButtons.viewToggle.textContent = '🔲';
-        this.topButtons.viewToggle.setAttribute('aria-label', 'Cambiar a vista de cuadrícula');
+        textContent = '🔲';
+        ariaLabel = 'Cambiar a vista de cuadrícula';
       } else if (text.includes('📋')) {
-        // Si el original muestra 📋 (modo grid, para cambiar a tabla)
-        this.topButtons.viewToggle.textContent = '📋';
-        this.topButtons.viewToggle.setAttribute('aria-label', 'Cambiar a vista de tabla');
+        textContent = '📋';
+        ariaLabel = 'Cambiar a vista de tabla';
       }
-    } else {
-      // Si no hay botón original, inicializar con estado por defecto (modo tabla)
-      this.topButtons.viewToggle.textContent = '🔲';
-      this.topButtons.viewToggle.setAttribute('aria-label', 'Cambiar a vista de cuadrícula');
+    }
+    
+    // Sincronizar texto en el botón de la barra superior
+    if (this.topButtons.viewToggle) {
+      this.topButtons.viewToggle.textContent = textContent;
+      this.topButtons.viewToggle.setAttribute('aria-label', ariaLabel);
     }
   }
 
   // Método público para forzar sincronización
   forceSync() {
+    console.log('TopNavManager: Executing forceSync');
     this.findButtons();
     this.syncStates();
   }
+  
+
 
   // Método para actualizar el título de la barra
   updateTitle(title) {

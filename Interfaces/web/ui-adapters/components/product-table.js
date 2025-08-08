@@ -1131,11 +1131,17 @@ const ProductRenderer = {
     backButtonContainer.appendChild(backButton);
     targetContainer.appendChild(backButtonContainer);
 
-    // Force top navigation sync after creating back button
+    // Sync top navigation after creating back button
+    console.log('🔄 Sincronizando TopNavManager después de crear botón de retroceso');
+    
     if (window.topNavManager) {
+      // Single sync call - let the MutationObserver handle the detection naturally
       setTimeout(() => {
         window.topNavManager.forceSync();
-      }, 100);
+        console.log('✅ Sincronización del botón de retroceso completada');
+      }, 50);
+    } else {
+      console.warn('⚠️ TopNavManager no está disponible');
     }
 
     // Update the title for all subcategory renderings
