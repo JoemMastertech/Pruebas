@@ -18,12 +18,8 @@ const ProductRenderer = {
     this.currentViewMode = this.currentViewMode === 'table' ? 'grid' : 'table';
     Logger.info('View mode toggled to:', this.currentViewMode);
     
-    // Update toggle button text
-    const toggleBtn = document.querySelector('.view-toggle-btn');
-    if (toggleBtn) {
-      toggleBtn.textContent = this.currentViewMode === 'table' ? '📋' : '🔲';
-      toggleBtn.classList.toggle('active', this.currentViewMode === 'grid');
-    }
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // La actualización del botón se maneja en IndependentTopNavManager
     
     return this.currentViewMode;
   },
@@ -43,14 +39,8 @@ const ProductRenderer = {
   handleDelegatedEvent: function(e) {
     const target = e.target;
     
-    // Handle view toggle buttons
-    if (target.classList && target.classList.contains('view-toggle-btn')) {
-      e.preventDefault();
-      this.toggleViewMode();
-      const container = target.closest('.content-wrapper') || document.querySelector('.content-wrapper');
-      if (container) this.refreshCurrentView(container);
-      return;
-    }
+    // DESHABILITADO: El manejo del botón de vista ahora está en IndependentTopNavManager
+    // if (target.classList && target.classList.contains('view-toggle-btn')) { ... }
     
     // Handle back buttons
     if (target.classList && target.classList.contains('back-button')) {
@@ -123,20 +113,9 @@ const ProductRenderer = {
   
   // Create view toggle button (optimized)
   createViewToggle: function(container) {
-    // Initialize event delegation if not already done
-    this.initEventDelegation();
-    
-    const toggleContainer = document.createElement('div');
-    toggleContainer.className = 'view-toggle-container';
-    
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'view-toggle-btn';
-    toggleBtn.textContent = this.currentViewMode === 'table' ? '🔲' : '📋';
-    toggleBtn.classList.toggle('active', this.currentViewMode === 'grid');
-    
-    // No individual event listener needed - handled by delegation
-    toggleContainer.appendChild(toggleBtn);
-    return toggleContainer;
+    // DESHABILITADO: Ahora se usa la barra superior independiente
+    // El botón de cambio de vista está en la barra superior (#top-view-toggle-btn)
+    return null;
   },
   
   // Refresh current view with new mode
@@ -1207,9 +1186,9 @@ const ProductRenderer = {
   renderLiquorCategory: async function(container, subcategory, title) {
     const productRepository = getProductRepository();
     
-    // Add view toggle button
-    const toggleElement = this.createViewToggle(container);
-    container.appendChild(toggleElement);
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // const toggleElement = this.createViewToggle(container);
+    // if (toggleElement) container.appendChild(toggleElement);
     
     const liquorFields = ['nombre', 'imagen', 'precioBotella', 'precioLitro', 'precioCopa'];
     const liquorHeaders = ['NOMBRE', 'IMAGEN', 'PRECIO BOTELLA', 'PRECIO LITRO', 'PRECIO COPA'];
@@ -1274,9 +1253,9 @@ const ProductRenderer = {
   renderDigestivos: async function(container, title = 'Digestivos') {
     const productRepository = getProductRepository();
     
-    // Add view toggle button
-    const toggleElement = this.createViewToggle(container);
-    container.appendChild(toggleElement);
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // const toggleElement = this.createViewToggle(container);
+    // if (toggleElement) container.appendChild(toggleElement);
     
     try {
       const data = await productRepository.getLiquorSubcategory('digestivos');
@@ -1309,9 +1288,9 @@ const ProductRenderer = {
   renderCervezas: async function(container) {
     const productRepository = getProductRepository();
     
-    // Add view toggle button
-    const toggleElement = this.createViewToggle(container);
-    container.appendChild(toggleElement);
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // const toggleElement = this.createViewToggle(container);
+    // if (toggleElement) container.appendChild(toggleElement);
     
     try {
       const data = await productRepository.getCervezas();
@@ -1342,9 +1321,9 @@ const ProductRenderer = {
   renderPizzas: async function(container) {
     const productRepository = getProductRepository();
     
-    // Add view toggle button
-    const toggleElement = this.createViewToggle(container);
-    container.appendChild(toggleElement);
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // const toggleElement = this.createViewToggle(container);
+    // if (toggleElement) container.appendChild(toggleElement);
     
     try {
       const data = await productRepository.getPizzas();
@@ -1376,9 +1355,9 @@ const ProductRenderer = {
   renderFoodCategory: async function(container, methodName, title, fields = null, headers = null) {
     const productRepository = getProductRepository();
     
-    // Add view toggle button
-    const toggleElement = this.createViewToggle(container);
-    container.appendChild(toggleElement);
+    // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
+    // const toggleElement = this.createViewToggle(container);
+    // if (toggleElement) container.appendChild(toggleElement);
     
     // Default fields and headers for food items
     const defaultFields = ['nombre', 'ingredientes', 'video', 'precio'];

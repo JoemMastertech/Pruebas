@@ -507,7 +507,7 @@ const AppInit = {
   },
   
   initializeDrawerMenu: function() {
-    const hamburgerBtn = document.getElementById('hamburger-btn');
+    // Hamburger button is now handled by IndependentTopNavManager
     const drawerMenu = document.getElementById('drawer-menu');
     const drawerOverlay = document.getElementById('drawer-overlay');
     const drawerContent = document.querySelector('.drawer-content');
@@ -563,11 +563,7 @@ const AppInit = {
     footerContainer.innerHTML = '® MasterTechnologyBar.com';
     drawerContent.appendChild(footerContainer);
     
-    // Toggle drawer menu on hamburger button click
-    hamburgerBtn.addEventListener('click', () => {
-      drawerMenu.classList.toggle('open');
-      drawerOverlay.classList.toggle('active');
-    });
+    // Hamburger button functionality is now handled by IndependentTopNavManager
     
     // Close drawer when clicking overlay
     drawerOverlay.addEventListener('click', () => {
@@ -732,7 +728,7 @@ const AppInit = {
     const pageTitle = document.querySelector('.page-header .page-title');
     // Use a more robust selector that finds the element even if hidden
     const mainScreen = document.querySelector('.main-content-screen') || document.querySelector('[data-category]');
-    const hamburgerBtn = document.getElementById('hamburger-btn');
+    // Hamburger button is now handled by IndependentTopNavManager
     
     // Log detailed element states
     Logger.info(`[NAVIGATION DEBUG] Element search results:`, {

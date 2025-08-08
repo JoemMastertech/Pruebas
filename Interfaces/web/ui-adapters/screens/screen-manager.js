@@ -61,12 +61,12 @@ const ScreenManager = {
       logoScreen: document.querySelector('.logo-screen'),
       categoryTitleScreen: document.querySelector('.category-title-screen'),
       mainContentScreen: document.querySelector('.main-content-screen'),
-      hamburgerBtn: document.getElementById('hamburger-btn')
+      // hamburgerBtn is now handled by IndependentTopNavManager
     };
 
     // Check if all required elements exist
     const missingElements = Object.entries(elements)
-      .filter(([key, element]) => key !== 'hamburgerBtn' && !element)
+      .filter(([key, element]) => !element)
       .map(([key]) => key);
 
     if (missingElements.length > 0) {
@@ -165,11 +165,7 @@ const ScreenManager = {
         '🔄 Transitioning to main content screen'
       );
 
-      // Show hamburger menu and load content
-      if (hamburgerBtn) {
-        hamburgerBtn.className = 'hamburger-btn hamburger-visible';
-        Logger.info('Hamburger menu displayed');
-      }
+      // Hamburger menu is now handled by IndependentTopNavManager
 
       // Step 6: Load initial content
       await this.loadInitialContent();
@@ -206,10 +202,7 @@ const ScreenManager = {
       mainContentScreen.classList.add('fade-in');
     }
 
-    // Show hamburger menu
-    if (hamburgerBtn) {
-      hamburgerBtn.className = 'hamburger-btn hamburger-visible';
-    }
+    // Hamburger menu is now handled by IndependentTopNavManager
 
     // Load content immediately
     this.loadInitialContent();

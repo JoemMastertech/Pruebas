@@ -1902,11 +1902,11 @@ class OrderSystem {
       mainContentScreen: document.querySelector('.main-content-screen'),
       contentContainer: document.getElementById('content-container'),
       pageTitleElement: document.querySelector('.page-title'),
-      hamburgerBtn: document.getElementById('hamburger-btn'),
+      // hamburgerBtn is now handled by IndependentTopNavManager
       ordersScreen: document.querySelector('.orders-screen')
     };
     
-    elements.hamburgerBtn.className = 'hamburger-btn hamburger-hidden';
+    // Hamburger button visibility is now handled by IndependentTopNavManager
     elements.contentContainer.className = 'content-hidden';
     
     this.previousCategory = elements.mainContentScreen.getAttribute('data-category');
@@ -2223,11 +2223,10 @@ class OrderSystem {
     const elements = {
       contentContainer: document.getElementById('content-container'),
       ordersScreen: document.querySelector('.orders-screen'),
-      hamburgerBtn: document.getElementById('hamburger-btn')
+      // hamburgerBtn is now handled by IndependentTopNavManager
     };
     
-    elements.hamburgerBtn.classList.add('hamburger-visible');
-    elements.hamburgerBtn.classList.remove('hamburger-hidden');
+    // Hamburger button visibility is now handled by IndependentTopNavManager
     elements.ordersScreen.classList.add('screen-hidden');
     elements.ordersScreen.classList.remove('screen-visible');
     elements.contentContainer.classList.add('content-visible');

@@ -81,7 +81,7 @@
     </div>
     <div class="screen main-content-screen screen-hidden" data-category="cocteleria">
       <div class="page-header">
-        <button id="hamburger-btn" class="hamburger-btn">☰</button>
+        <!-- Botón hamburger eliminado - ahora se usa la barra superior independiente -->
         <!-- Page title removed from here as it's now integrated into tables -->
       </div>
       <div class="content-wrapper">
@@ -173,14 +173,20 @@
   <script type="module" src="./Interfaces/web/ui-adapters/screens/screen-manager.js"></script>
   <!-- Load order system -->
   <script type="module" src="./Interfaces/web/ui-adapters/components/order-system.js"></script>
-  <!-- Load top navigation -->
-  <script src="./Shared/js/top-nav.js"></script>
+  <!-- Load independent top navigation system -->
+  <script src="./Shared/js/top-nav-independent.js"></script>
   <!-- Initialize app -->
   <script type="module">
     import AppInit from './Shared/config/app-init.js';
     
     document.addEventListener('DOMContentLoaded', function() {
       AppInit.initialize();
+      
+      // Inicializar sistema de navegación independiente
+      if (window.IndependentTopNavManager) {
+        window.independentTopNavManager = new IndependentTopNavManager();
+        console.log('Sistema de navegación independiente inicializado');
+      }
     });
   </script>
 </body>
