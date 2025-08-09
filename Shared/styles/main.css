@@ -662,21 +662,29 @@ body {
 }
 
 /* === MEDIA QUERIES RESPONSIVAS PARA SISTEMA ESTANDARIZADO === */
-/* Tablet - 768px */
+
+/* === RESPONSIVE ADJUSTMENTS FOR COLUMN TABLES === */
+/* Tablets (max-width: 768px) */
 @media (max-width: 768px) {
+  /* 3 columnas - Ampliar ancho para mejor distribución en tablets */
   .cols-3.product-table {
-    width: calc(var(--container-width-3) * 0.95);
+    width: 98%;
+    margin: 0 auto;
   }
   
+  /* 4 columnas - Mantener reducción del 3% y centrado */
   .cols-4.product-table {
-    width: calc(var(--container-width-4) * 0.95);
+    width: 94%; /* 97% - 3% adicional para tablets */
+    margin: 0 auto;
   }
   
+  /* 5 columnas - Igualar ancho al de 4 columnas */
   .cols-5.liquor-table {
-    width: calc(var(--container-width-5) * 0.95);
+    width: 94%;
+    margin: 0 auto;
   }
   
-  /* Ajustar thumbnails para tablet */
+  /* Ajustar thumbnails para tablets */
   .cols-3 .image-icon img {
     width: calc(var(--thumb-size-3) * 0.9);
     height: calc(var(--thumb-size-3) * 0.9);
@@ -695,37 +703,93 @@ body {
   }
 }
 
-/* Mobile - 480px */
+/* Móviles (max-width: 480px) */
 @media (max-width: 480px) {
+  /* Todas las tablas usan ancho completo en móviles */
   .cols-3.product-table,
   .cols-4.product-table,
   .cols-5.liquor-table {
-    width: 95%;
-    padding: 15px;
+    width: 100%;
+    margin: 0;
+    padding: var(--mobile-padding);
   }
   
-  /* Thumbnails más pequeños en móvil */
+  /* Thumbnails más pequeños en móviles */
   .cols-3 .image-icon img,
   .cols-4 .image-icon img,
   .cols-5 .image-icon img,
   .product-table .image-icon img,
   .liquor-table .image-icon img {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
   
-  /* Tipografía ajustada para móvil */
+  /* Tipografía móvil para tablas */
   .cols-3 .product-name,
   .cols-4 .product-name,
   .cols-5 .product-name {
-    font-size: 14px;
+    font-size: var(--mobile-font-base);
   }
   
   .cols-3 .product-price,
   .cols-4 .product-price,
   .cols-5 .product-price {
-    font-size: 13px;
+    font-size: var(--mobile-font-small);
   }
+  
+  /* Botones de precio móviles - mantener escala de licores */
+  .cols-5 .price-button,
+  .liquor-table .price-button {
+    transform: scale(calc(var(--liquor-button-scale) * 0.9));
+    min-height: 35px;
+    min-width: 35px;
+  }
+  
+  /* Botones de precio estándar en móviles */
+   .cols-3 .price-button,
+   .cols-4 .price-button {
+     min-height: 35px;
+     min-width: 35px;
+     font-size: var(--mobile-font-small);
+   }
+ }
+
+/* === AJUSTES ESPECÍFICOS PARA VISTAS DE COLUMNAS === */
+
+/* Vista de 4 columnas - Comportamiento igual a interfaz de Coctelería */
+.cols-4.product-table {
+  width: 97%; /* Reducción del 3% del contenedor padre */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+/* Thumbnails para 4 columnas - Referencia Coctelería */
+.cols-4 .image-icon img,
+.product-table .image-icon img {
+  width: var(--thumb-size-4);
+  height: var(--thumb-size-4);
+}
+
+/* Tipografía para 4 columnas - Referencia Coctelería */
+.cols-4 .product-name {
+  font-size: var(--font-size-name);
+  line-height: 1.2;
+}
+
+.cols-4 .product-price {
+  font-size: var(--font-size-price);
+  font-weight: 600;
+}
+
+/* Vista de 3 columnas - Ampliar ancho para mejor distribución */
+.cols-3.product-table {
+  width: 100%; /* Ancho completo para mejor distribución */
+  margin: 0 auto;
+}
+
+/* Vista de 5 columnas - Igualar ancho al de 4 columnas */
+.cols-5.liquor-table {
+  width: 97%; /* Mismo ancho que 4 columnas */
+  margin: 0 auto;
 }
 
 .category-grid .page-title, .product-grid .page-title {
@@ -2404,11 +2468,8 @@ textarea:focus {
     padding-top: 70px !important;
   }
   
-  /* Ocultar botones originales en landscape móvil */
-  .page-header .hamburger-btn,
-  .back-button-container {
-    display: none !important;
-  }
+  /* REGLA ELIMINADA - Ocultaba navegación importante */
+  /* Los botones de navegación deben permanecer visibles */
   /* Replicar comportamiento de escritorio en móviles landscape */
   .content-wrapper { 
     flex-direction: row;
@@ -2548,101 +2609,13 @@ textarea:focus {
 /* =================================================================
    RESPONSIVE DESIGN - MOBILE PORTRAIT (max-width: 480px)
    ================================================================= */
-@media (max-width: 480px) and (orientation: portrait) {
-  /* Aumentar tamaño del contenedor padre en 10% y centrarlo */
-  :root { 
-    --table-width: 110% !important; /* Aumentado 10% de 100% */
-    --table-margin: 0px !important; 
-  }
-  
-  /* Centrar el contenedor principal */
-  #app {
-    width: 110% !important; /* Aumentado 10% */
-    margin: 0 auto !important;
-    transform: translateX(-5%) !important; /* Centrar el contenedor expandido */
-  }
-  
-  #content-container {
-    padding: 0 2px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-  }
-  
-  /* Grid con 2 columnas en portrait - ancho completo */
-  .product-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; 
-    padding: 8px 4px; 
-    width: 100%;
-    max-width: 100%;
-  }
+/* REGLA PROBLEMÁTICA ELIMINADA - Usaba demasiados !important y transformaciones complejas */
+/* Reemplazada por reglas modernas en líneas 3276+ que usan variables CSS */
   
 
   
-  .category-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 8px; 
-    padding: 8px 4px;
-    width: 100%;
-    max-width: 100%;
-  }
-  
-  /* Tablas de productos - ancho completo */
-  .product-table {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-  }
-  
-  /* Botón hamburguesa - más visible y mejor posicionado */
-  .hamburger-btn {
-    position: fixed !important;
-    left: 15px !important; /* Movido más hacia adentro */
-    top: 15px !important; /* Movido más hacia abajo */
-    z-index: 1001 !important;
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    background: var(--card-bg) !important;
-    border: 3px solid var(--primary-color) !important; /* Borde más grueso */
-    box-shadow: 0 0 15px rgba(0, 247, 255, 0.5) !important; /* Sombra cyan para visibilidad */
-    backdrop-filter: blur(10px) !important;
-    width: 55px !important; /* Ligeramente más grande */
-    height: 55px !important;
-    border-radius: 12px !important; /* Más redondeado */
-    transition: all 0.3s ease !important;
-  }
-  
-  /* Efecto hover mejorado para el botón hamburguesa */
-  .hamburger-btn:hover {
-    background-color: var(--primary-color) !important;
-    color: var(--background-color) !important;
-    transform: scale(1.05) !important;
-    box-shadow: 0 0 25px rgba(0, 247, 255, 0.8) !important;
-  }
-  }
-  
-  /* Comportamiento de scroll para hamburguesa */
-  .hamburger-btn.scrolled {
-    transform: translateY(-3px) scale(0.95);
-  }
-  
-
-  
-  /* Ocultar botones originales en móvil */
-  .page-header .hamburger-btn,
-  .back-button-container {
-    display: none !important;
-    opacity: 0.95;
-  }
-  
-  .back-button-container {
-    position: fixed !important;
-    left: 15px !important; /* Alineado con hamburguesa */
-    top: 80px !important; /* Más espacio del hamburguesa */
-    z-index: 1001 !important;
-/* Fixed merge conflict marker */
-  }
+  /* REGLAS CONTRADICTORIAS ELIMINADAS */
+  /* Los botones de navegación se manejan ahora por IndependentTopNavManager */
   
   /* ORDER SIDEBAR - MOBILE PORTRAIT (parte inferior) */
   #order-sidebar {
