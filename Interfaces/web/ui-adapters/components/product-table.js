@@ -414,6 +414,12 @@ const ProductRenderer = {
     table.dataset.category = normalizedCategory;
     table.dataset.productType = this._determineProductType(normalizedCategory, tableClass, categoryTitle);
     
+    // Agregar clases estandarizadas según la categoría
+    const columnClass = this._getColumnClass(normalizedCategory, tableClass);
+    if (columnClass) {
+      table.classList.add(columnClass);
+    }
+    
     return table;
   },
 
@@ -438,6 +444,28 @@ const ProductRenderer = {
       logWarning(`Unknown product type for category: ${categoryTitle} (normalized: ${normalizedCategory})`);
       return 'unknown';
     }
+  },
+
+  _getColumnClass: function(normalizedCategory, tableClass) {
+    // Interfaces de 3 columnas (Refrescos, Cervezas)
+    const cols3Categories = ['refrescos', 'cervezas'];
+    
+    // Interfaces de 4 columnas (Alitas, Pizzas, Sopas, Ensaladas, Carnes, Postres, Café, Coctelería)
+    const cols4Categories = ['alitas', 'pizzas', 'sopas', 'ensaladas', 'carnes', 'postres', 'cafe', 'cocteleria'];
+    
+    // Interfaces de 5 columnas (Subcategorías de Licores)
+    const liquorSubcategories = ['whisky', 'tequila', 'ron', 'vodka', 'ginebra', 'mezcal', 'cognac', 'brandy', 'digestivos', 'espumosos'];
+    
+    if (cols3Categories.includes(normalizedCategory)) {
+      return 'cols-3';
+    } else if (cols4Categories.includes(normalizedCategory)) {
+      return 'cols-4';
+    } else if (liquorSubcategories.includes(normalizedCategory) || tableClass === 'liquor-table') {
+      return 'cols-5';
+    }
+    
+    // Por defecto, usar cols-4 para categorías no especificadas
+    return 'cols-4';
   },
 
   _createTitleRow: function(categoryTitle, headerLength) {
