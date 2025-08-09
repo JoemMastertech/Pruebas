@@ -1393,9 +1393,8 @@ body {
 /* Los modales ahora se adaptan naturalmente sin restricciones de dispositivo */
 
 /* Optimized animations */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); } }
+@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); } }
 .fade-in { animation: fadeIn 1s ease-in-out forwards; }
 .fade-out { animation: fadeOut 1s ease-in-out forwards; }
 
@@ -1716,7 +1715,7 @@ textarea:focus {
   border-color: var(--price-color);
 }
 
-.price-selection-mode .price-button:not(.product-grid .product-card.liquor-card .price-button) { background: rgba(0, 247, 255, 0.2); transform: scale(1.05); transition: all 0.3s ease; animation: pulse 2s infinite; }
+.price-selection-mode .price-button:not(.product-grid .product-card.liquor-card .price-button) { background: rgba(0, 247, 255, 0.2); transform: scale(1.05); transition: all 0.3s ease; animation: pulseGlow 2s infinite; }
 
 .remove-order-item {
   background: transparent;
@@ -1905,7 +1904,7 @@ textarea:focus {
 .price-button:disabled { cursor: not-allowed; opacity: 0.5; }
 .price-button.non-selectable:hover, .price-button:disabled:hover { background: transparent; transform: none; box-shadow: none; }
 .price-selection-mode .price-button.non-selectable, .price-selection-mode .price-button:disabled { animation: none; background: transparent; transform: none; }
-.price-selection-mode .product-grid .product-card.liquor-card .price-button { background: rgba(0, 247, 255, 0.2); animation: pulse 2s infinite; transform: scale(1.02); }
+.price-selection-mode .product-grid .product-card.liquor-card .price-button { background: rgba(0, 247, 255, 0.2); animation: pulseGlow 2s infinite; transform: scale(1.02); }
 
 /* Reglas responsive de tablet y móvil - ELIMINADAS */
 /* La página ahora se adapta naturalmente sin restricciones de dispositivo */
@@ -2542,4 +2541,35 @@ body.grid-enhanced .product-card .product-ingredients {
 body.grid-enhanced .product-card {
   --slot-gap: clamp(6px, 1.2cqw, 12px);
   --price-gap: clamp(6px, 1.2cqw, 10px);
+}
+
+/* ================================================================= 
+   GRID ENHANCED – Fixes críticos y pulido
+   ================================================================= */
+/* Container queries support - aplicar solo en contexto grid-enhanced */
+@supports (container-type: inline-size) {
+  body.grid-enhanced .product-card {
+    container-type: inline-size;
+  }
+}
+
+/* Mapeo explícito a filas: evita depender del DOM y de order (flex) */
+body.grid-enhanced .product-card .product-media        { grid-row: 1; margin: 0; }
+body.grid-enhanced .product-card .product-name         { grid-row: 2; margin: 0; }
+body.grid-enhanced .product-card .product-ingredients  { grid-row: 3; margin: 0; }
+body.grid-enhanced .product-card .product-prices       { grid-row: 4; margin: 0; }
+
+/* Unificar gaps de precios en todos los tipos (no solo licores) */
+body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
+
+/* Microcontracción armónica en cards angostos */
+@supports (container-type: inline-size) {
+  @container (max-width: 340px) {
+    body.grid-enhanced .product-card {
+      --slot-gap:   clamp(4px, 1cqw, 8px);
+      --name-slot:  clamp(24px, 6cqw, 36px);
+      --ing-slot:   clamp(56px, 14cqw, 96px);
+      --media-slot: minmax(clamp(100px, 26cqw, 150px), auto);
+    }
+  }
 }
