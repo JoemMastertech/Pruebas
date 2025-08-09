@@ -126,13 +126,12 @@ class IndependentTopNavManager {
   }
 
   shouldShowBackButton() {
-    // Lógica independiente para determinar si mostrar el botón de retroceso
-    // Basado en el estado de la aplicación, no en elementos DOM
-    const currentScreen = document.querySelector('.screen:not(.screen-hidden)');
-    const isMainContent = currentScreen && currentScreen.classList.contains('main-content-screen');
-    const hasContent = document.querySelector('#content-container')?.children.length > 0;
+    // Mostrar botón de back solo cuando estamos en una subcategoría de licores
+    // Detectar por la presencia de tarjetas de licor (liquor-card)
+    const liquorCards = document.querySelectorAll('.product-card.liquor-card');
+    const hasLiquorCards = liquorCards.length > 0;
     
-    return isMainContent && hasContent;
+    return hasLiquorCards;
   }
 
   setupEventListeners() {

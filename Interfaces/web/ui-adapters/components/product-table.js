@@ -88,13 +88,7 @@ const ProductRenderer = {
     // DESHABILITADO: El manejo del botón de vista ahora está en IndependentTopNavManager
     // if (target.classList && target.classList.contains('view-toggle-btn')) { ... }
     
-    // Handle back buttons
-    if (target.classList && target.classList.contains('back-button')) {
-      e.preventDefault();
-      const container = target.closest('.content-wrapper') || document.querySelector('.content-wrapper');
-      if (container) this.renderLicores(container);
-      return;
-    }
+    // Back button handling removed - now managed by top navigation bar
     
     // Handle price buttons
     if (target.classList && target.classList.contains('price-button')) {
@@ -169,8 +163,7 @@ const ProductRenderer = {
     const viewData = this._extractViewData(container);
     if (!viewData) return;
     
-    const backButtonHTML = this._preserveBackButton(container);
-    const targetContainer = this._clearAndRestoreContainer(container, backButtonHTML);
+    const targetContainer = this._clearAndRestoreContainer(container);
     await this._renderCategoryView(targetContainer, viewData.category);
   },
 
@@ -184,12 +177,9 @@ const ProductRenderer = {
     return { category };
   },
 
-  _preserveBackButton: function(container) {
-    const backButtonContainer = container.querySelector('.back-button-container');
-    return backButtonContainer ? backButtonContainer.outerHTML : null;
-  },
+  // Back button preservation removed - now handled by top navigation bar
 
-  _clearAndRestoreContainer: function(container, backButtonHTML) {
+  _clearAndRestoreContainer: function(container) {
     // Get or create content container without destroying sidebar structure
     let targetContainer = document.getElementById('content-container');
     if (!targetContainer) {
@@ -216,21 +206,10 @@ const ProductRenderer = {
       targetContainer.innerHTML = '';
     }
     
-    if (backButtonHTML) {
-      this._restoreBackButton(targetContainer, backButtonHTML);
-    }
-    
     return targetContainer;
   },
 
-  _restoreBackButton: function(container, backButtonHTML) {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = backButtonHTML;
-    const restoredBackButton = tempDiv.firstChild;
-    
-    // No need to add individual event listener - handled by delegation
-    container.appendChild(restoredBackButton);
-  },
+  // Back button restoration removed - now handled by top navigation bar
   
   // Phase 3: Specific event handlers
   handleCategoryCardClick: function(target) {
@@ -341,69 +320,7 @@ const ProductRenderer = {
     Logger.debug('Product card clicked:', target);
   },
   
-  handleBackButton: function(target) {
-    // Handle back button navigation based on context
-    const wrapper = target.closest('.content-wrapper') || document.querySelector('.content-wrapper');
-    
-    if (wrapper) {
-      // Check if we're in a liquor subcategory and need to go back to licores
-      if (target.title === 'Volver a Licores' || target.dataset.action === 'back-to-licores') {
-        Logger.info('🔄 Navegando de vuelta a Licores desde subcategoría');
-        
-        // Log current DOM state before manipulation
-        const currentMainScreen = document.getElementById('main-screen');
-        const currentContentContainer = document.getElementById('content-container');
-        const currentOrdersBox = document.getElementById('orders-box');
-        
-        Logger.debug('📊 Estado DOM antes de volver a Licores:', {
-          mainScreen: !!currentMainScreen,
-          contentContainer: !!currentContentContainer,
-          ordersBox: !!currentOrdersBox,
-          mainScreenVisible: currentMainScreen ? !currentMainScreen.classList.contains('hidden') : false
-        });
-        
-        // Get or create content container for rendering
-        let container = wrapper.querySelector('#content-container');
-        if (!container) {
-          Logger.warn('⚠️ Content container no encontrado, creando uno nuevo');
-          container = document.createElement('div');
-          container.id = 'content-container';
-          const flexContainer = wrapper.querySelector('.content-container-flex');
-          if (flexContainer) {
-            flexContainer.insertBefore(container, flexContainer.firstChild);
-            Logger.debug('✅ Container insertado en flex container');
-          } else {
-            wrapper.appendChild(container);
-            Logger.debug('✅ Container agregado al wrapper');
-          }
-        } else {
-          Logger.debug('✅ Content container encontrado, limpiando contenido');
-          // Clear only the content container, preserving sidebar
-          container.innerHTML = '';
-        }
-        
-        Logger.info('🍷 Renderizando vista de Licores');
-        this.renderLicores(container);
-        
-        // Log DOM state after rendering
-        setTimeout(() => {
-          const afterMainScreen = document.getElementById('main-screen');
-          const afterContentContainer = document.getElementById('content-container');
-          const afterOrdersBox = document.getElementById('orders-box');
-          
-          Logger.debug('📊 Estado DOM después de renderizar Licores:', {
-            mainScreen: !!afterMainScreen,
-            contentContainer: !!afterContentContainer,
-            ordersBox: !!afterOrdersBox,
-            mainScreenVisible: afterMainScreen ? !afterMainScreen.classList.contains('hidden') : false
-          });
-        }, 100);
-      } else {
-        // Generic back navigation - could be extended for other contexts
-        Logger.debug('Back button clicked - implement specific navigation logic');
-      }
-    }
-  },
+  // Back button handling removed - now managed by top navigation bar
 
   _renderCategoryView: async function(container, category) {
     const categoryRenderers = this._getCategoryRenderers();
@@ -1093,14 +1010,8 @@ const ProductRenderer = {
       }
     }
     
-    // Remove any existing back button when returning to main licores view
-    const existingBackButtonContainer = document.querySelector('.back-button-container');
-    if (existingBackButtonContainer) {
-      existingBackButtonContainer.remove();
-      Logger.debug('🗑️ Back button container eliminado al regresar a vista principal de licores');
-    }
-    
-    // Force top navigation sync after removing back button
+    // Back button removal handled by top navigation bar
+    // Force top navigation sync
     if (window.topNavManager) {
       setTimeout(() => {
         window.topNavManager.forceSync();
@@ -1185,24 +1096,10 @@ const ProductRenderer = {
       }
     }
     
-    // Back button container for positioning below hamburger
-    const backButtonContainer = document.createElement('div');
-    backButtonContainer.className = 'back-button-container';
-
-    // Back button with icon
-    const backButton = document.createElement('button');
-    backButton.className = 'back-button';
-    // Asignación segura: cadena estática (símbolo de flecha), sin riesgo XSS
-    backButton.innerHTML = '←';
-    backButton.title = 'Volver a Licores';
+    // Back button creation removed - now handled by top navigation bar
     
-    // No individual event listener - handled by delegation
-    
-    backButtonContainer.appendChild(backButton);
-    targetContainer.appendChild(backButtonContainer);
-
-    // Sync top navigation after creating back button
-    console.log('🔄 Sincronizando TopNavManager después de crear botón de retroceso');
+    // Sync top navigation after content change
+    console.log('🔄 Sincronizando TopNavManager después de cambio de contenido');
     
     if (window.topNavManager) {
       // Single sync call - let the MutationObserver handle the detection naturally
