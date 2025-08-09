@@ -93,6 +93,13 @@ class IndependentTopNavManager {
       const savedViewMode = localStorage.getItem('topNav_viewMode');
       if (savedViewMode && ['table', 'grid'].includes(savedViewMode)) {
         this.state.viewMode = savedViewMode;
+        
+        // Activar grid-enhanced automáticamente si el modo es grid
+        if (savedViewMode === 'grid') {
+          document.body.classList.add('grid-enhanced');
+        } else {
+          document.body.classList.remove('grid-enhanced');
+        }
       }
       
       // El menú siempre debe iniciar cerrado
@@ -250,6 +257,13 @@ class IndependentTopNavManager {
     this.state.viewMode = this.state.viewMode === 'table' ? 'grid' : 'table';
     this.saveState();
     this.updateViewToggleUI();
+    
+    // Activar/desactivar grid-enhanced según el modo
+    if (this.state.viewMode === 'grid') {
+      document.body.classList.add('grid-enhanced');
+    } else {
+      document.body.classList.remove('grid-enhanced');
+    }
     
     // Aplicar el cambio de vista
     if (window.ProductRenderer && window.ProductRenderer.setViewMode) {

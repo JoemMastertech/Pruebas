@@ -2458,3 +2458,88 @@ body.order-mode-active #app {
 
 /* Implementación móvil específica - ELIMINADA */
 /* La página ahora se adapta naturalmente sin restricciones de dispositivo */
+
+/* =================================================================
+   GRID ENHANCED - PLAN DE ESTANDARIZACIÓN
+   ================================================================= */
+
+/* Variables CSS para centralizar tamaños y espacios */
+:root {
+  --card-min: 260px;
+  --grid-gap: clamp(12px, 2vw, 20px);
+  --grid-pad: clamp(12px, 2vw, 20px);
+  --slot-gap: clamp(6px, 1.2cqw, 12px);
+  --price-gap: clamp(6px, 1.2cqw, 10px);
+  --media-slot: auto;
+  --name-slot: auto;
+  --ing-slot: auto;
+  --price-slot: auto;
+}
+
+/* 1. Activación segura - Solo cuando body tiene clase grid-enhanced */
+body.grid-enhanced .product-grid {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: var(--grid-gap);
+  padding: var(--grid-pad);
+}
+
+body.grid-enhanced .category-grid {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: var(--grid-gap);
+  padding: var(--grid-pad);
+}
+
+/* 2. Estructura base de las cards con grid interno */
+body.grid-enhanced .product-card {
+  display: grid;
+  grid-template-rows:
+    var(--media-slot)
+    var(--name-slot)
+    var(--ing-slot)
+    var(--price-slot);
+  row-gap: var(--slot-gap);
+}
+
+/* 3. Ajustes por tipo de grid */
+/* Tipo 2: Refrescos, Cervezas - Sin ingredientes */
+body.grid-enhanced .product-grid.grid-type-2 .product-card {
+  --ing-slot: 0px;
+}
+
+body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
+  display: none;
+}
+
+/* Tipo 3: Subcategorías de Licores */
+body.grid-enhanced .product-card.liquor-card {
+  --media-slot: minmax(clamp(140px, 32cqw, 220px), auto);
+  --price-gap: clamp(4px, 1cqw, 8px);
+}
+
+body.grid-enhanced .product-card.liquor-card .product-prices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--price-gap);
+}
+
+/* Tipo 4: Categorías de licores */
+body.grid-enhanced .category-grid.grid-type-4 .category-name {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+}
+
+/* 4. Tipografía fluida */
+body.grid-enhanced .product-card .product-name {
+  font-size: clamp(0.9rem, 2.2cqw, 1.05rem);
+  line-height: 1.2;
+}
+
+body.grid-enhanced .product-card .product-ingredients {
+  font-size: clamp(0.8rem, 1.9cqw, 0.95rem);
+  line-height: 1.3;
+}
+
+/* 5. Espaciado y ritmo visual */
+body.grid-enhanced .product-card {
+  --slot-gap: clamp(6px, 1.2cqw, 12px);
+  --price-gap: clamp(6px, 1.2cqw, 10px);
+}

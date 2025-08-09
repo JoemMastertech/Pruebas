@@ -18,10 +18,56 @@ const ProductRenderer = {
     this.currentViewMode = this.currentViewMode === 'table' ? 'grid' : 'table';
     Logger.info('View mode toggled to:', this.currentViewMode);
     
+    // Activar/desactivar grid-enhanced según el modo
+    if (this.currentViewMode === 'grid') {
+      document.body.classList.add('grid-enhanced');
+      // Asignar tipos de grid automáticamente
+      this.assignGridTypes();
+    } else {
+      document.body.classList.remove('grid-enhanced');
+    }
+    
     // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
     // La actualización del botón se maneja en IndependentTopNavManager
     
     return this.currentViewMode;
+  },
+
+  // Asignar tipos de grid automáticamente según la categoría
+  assignGridTypes: function() {
+    const grids = document.querySelectorAll('.product-grid, .category-grid');
+    
+    grids.forEach(grid => {
+      // Limpiar clases de tipo previas
+      grid.classList.remove('grid-type-1', 'grid-type-2', 'grid-type-3', 'grid-type-4');
+      
+      if (grid.classList.contains('category-grid')) {
+        // Tipo 4: Categorías de licores
+        grid.classList.add('grid-type-4');
+      } else if (grid.classList.contains('product-grid')) {
+        const firstCard = grid.querySelector('.product-card');
+        
+        if (firstCard && firstCard.classList.contains('liquor-card')) {
+          // Tipo 3: Subcategorías de Licores
+          grid.classList.add('grid-type-3');
+        } else {
+          // Determinar por categoría basándose en el título o dataset
+          const category = grid.dataset.category || '';
+          const categoryText = grid.textContent.toLowerCase();
+          
+          if (category === 'refrescos' || category === 'cervezas' || 
+              categoryText.includes('refrescos') || categoryText.includes('cervezas')) {
+            // Tipo 2: Refrescos, Cervezas
+            grid.classList.add('grid-type-2');
+          } else {
+            // Tipo 1: Alitas, Pizzas, Sopas, Ensaladas, Carnes, Postres, Café
+            grid.classList.add('grid-type-1');
+          }
+        }
+      }
+    });
+    
+    Logger.info('Grid types assigned automatically');
   },
   
   // Phase 3: Initialize intelligent event delegation
@@ -646,6 +692,15 @@ const ProductRenderer = {
     }
     grid.dataset.productType = productType;
     
+    // Asignar tipo de grid automáticamente si grid-enhanced está activo
+    if (document.body.classList.contains('grid-enhanced')) {
+      if (normalizedCategory === 'refrescos' || normalizedCategory === 'cervezas') {
+        grid.classList.add('grid-type-2');
+      } else {
+        grid.classList.add('grid-type-1');
+      }
+    }
+    
     // Add title
     const titleElement = document.createElement('h2');
     titleElement.className = 'page-title';
@@ -1029,6 +1084,14 @@ const ProductRenderer = {
     // Contenido dinámico: HTML generado con datos internos de ProductData.licoresCategories
     // Aunque los datos son controlados, se usa sanitización como medida preventiva
     setSafeInnerHTML(targetContainer, licoresHTML);
+    
+    // Asignar tipo de grid automáticamente si grid-enhanced está activo
+    if (document.body.classList.contains('grid-enhanced')) {
+      const categoryGrid = targetContainer.querySelector('.category-grid');
+      if (categoryGrid) {
+        categoryGrid.classList.add('grid-type-4');
+      }
+    }
     
     // Remove any existing back button when returning to main licores view
     const existingBackButtonContainer = document.querySelector('.back-button-container');
