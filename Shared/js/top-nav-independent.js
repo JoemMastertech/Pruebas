@@ -52,13 +52,17 @@ class IndependentTopNavManager {
   syncInitialMenuState() {
     // Forzar que el menú esté cerrado al inicializar
     if (this.elements.drawerMenu && this.elements.drawerOverlay) {
+      // Verificar el estado visual actual del DOM
+      const isVisuallyOpen = this.elements.drawerMenu.classList.contains('open');
+      
       // Remover clases de apertura si existen
       this.elements.drawerMenu.classList.remove('open');
       this.elements.drawerOverlay.classList.remove('active');
       
-      // Asegurar que el estado interno sea consistente
+      // Asegurar que el estado interno sea consistente con el estado visual
       this.state.menuOpen = false;
-      console.log('IndependentTopNavManager: Menu forced to closed state on initialization');
+      
+      console.log('IndependentTopNavManager: Menu state synchronized - was visually open:', isVisuallyOpen, 'now closed');
     }
   }
 
@@ -165,6 +169,25 @@ class IndependentTopNavManager {
         console.log('IndependentTopNavManager: Menu closed due to content change');
       }
     });
+
+    // Add scroll behavior for hamburger button in mobile portrait
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Only apply scroll behavior on mobile portrait
+      if (window.innerWidth <= 480 && window.innerHeight > window.innerWidth && this.elements.hamburgerBtn) {
+        if (currentScroll > lastScrollTop && currentScroll > 50) {
+          // Scrolling down - add scrolled class
+          this.elements.hamburgerBtn.classList.add('scrolled');
+        } else {
+          // Scrolling up - remove scrolled class
+          this.elements.hamburgerBtn.classList.remove('scrolled');
+        }
+      }
+      
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
   }
 
   setupContentReadyListener() {
@@ -178,6 +201,17 @@ class IndependentTopNavManager {
   // === MÉTODOS DE ACCIÓN ===
 
   toggleMenu() {
+    // Verificar sincronización entre estado interno y visual antes del toggle
+    if (this.elements.drawerMenu) {
+      const isVisuallyOpen = this.elements.drawerMenu.classList.contains('open');
+      
+      // Si hay desincronización, corregir el estado interno
+      if (this.state.menuOpen !== isVisuallyOpen) {
+        console.log('IndependentTopNavManager: State desync detected - internal:', this.state.menuOpen, 'visual:', isVisuallyOpen);
+        this.state.menuOpen = isVisuallyOpen;
+      }
+    }
+    
     this.state.menuOpen = !this.state.menuOpen;
     this.updateMenuUI();
     console.log('IndependentTopNavManager: Menu toggled:', this.state.menuOpen);
