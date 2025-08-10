@@ -100,50 +100,14 @@ body {
   overflow-y: auto; 
 }
 
-/* =================================================================
-   LAYOUT PRINCIPAL - DISEÑO ADAPTABLE CON FLEXBOX
-   ================================================================= */
-
 #app { 
-  width: 100%;
-  max-width: 100vw;
+  width: 70%; 
   min-height: 100vh; 
   position: relative; 
-  margin: 0;
-  padding: 0 2rem;
-  box-sizing: border-box;
-}
-
-/* Contenedor principal con flexbox para distribuir contenedores de igual jerarquía */
-.content-container-flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  min-width: 320px;
-  max-width: 1400px;
   margin: 0 auto;
-  transition: all 0.3s ease;
-}
-
-/* Contenedor de contenido principal */
-#content-container {
-  flex: 1 1 auto;
-  min-width: 0; /* para evitar overflow */
-  max-width: 1120px;
-}
-
-/* Cuando solo está el contenedor principal, centrarlo */
-body:not(.order-mode-active) .content-container-flex {
+  transition: margin-left 0.3s ease-in-out;
+  display: flex;
   justify-content: center;
-}
-
-body:not(.order-mode-active) #content-container {
-  flex: 0 1 auto;
-  width: 72%;
-  max-width: 1120px;
 }
 
 .screen { 
@@ -373,7 +337,7 @@ body:not(.order-mode-active) #content-container {
   position: relative;
   margin-top: 0;
   padding-right: 0px;
-  justify-content: center; /* Centrar contenido normalmente */
+  justify-content: center; /* Centrar contenido */
 }
 
 #content-container {
@@ -381,7 +345,7 @@ body:not(.order-mode-active) #content-container {
   padding: 0;
   margin-right: 0;
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Centrar contenido interno */
   width: 100%;
 }
 
@@ -1282,7 +1246,11 @@ body:not(.order-mode-active) #content-container {
   display: none;
 }
 
-.counter-container {
+
+
+
+  
+  .counter-container {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1436,108 +1404,29 @@ body:not(.order-mode-active) #content-container {
 .fade-out { animation: fadeOut 1s ease-in-out forwards; }
 
 /* =================================================================
-   ORDER SIDEBAR - ELEMENTO FLEX DE IGUAL JERARQUÍA
+   ORDER SIDEBAR & FORMS
    ================================================================= */
-
+/* =================================================================
+   ORDER SIDEBAR - BASE STYLES (DESKTOP)
+   ================================================================= */
 #order-sidebar {
-  /* Posicionamiento como flex item */
-  position: relative;
-  
-  /* Dimensiones responsivas */
-  flex: 0 0 300px; /* Base: 300px */
-  min-width: 250px;
-  max-width: 350px;
-  
-  /* Altura y overflow */
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  
-  /* Espaciado */
-  padding: 16px;
-  margin-top: 20px;
-  
-  /* Estilos visuales */
+  width: 240px;
+  padding: 15px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
   box-shadow: var(--glow-shadow);
-  
-  /* Comportamiento */
   display: none;
-  transition: all 0.3s ease;
+  transition: all var(--transition-time) ease;
   box-sizing: border-box;
-}
-
-/* Cuando el sidebar está visible, mostrarlo como flex item */
-body.order-mode-active #order-sidebar {
-  display: block;
-}
-
-/* Responsividad al reducir espacio */
-@media screen and (max-width: 1024px) {
-  #order-sidebar {
-    flex: 0 0 250px;
-    min-width: 200px;
-  }
-  
-  #content-container {
-    flex: 1 1 auto;
-    min-width: 300px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .content-container-flex {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  #order-sidebar {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: none;
-    margin-top: 10px;
-  }
-  
-  body:not(.order-mode-active) #content-container {
-    width: 100%;
-  }
-}
-
-/* Contenido del sidebar responsive - reducido 5% */
-#order-sidebar h3 {
-  font-size: 1.4rem; /* Reducido de 1.5rem */
-  margin-bottom: 14px; /* Reducido de 15px */
-}
-
-.order-item {
-  padding: 9px 0; /* Reducido de 10px */
-  margin-bottom: 9px; /* Reducido de 10px */
-}
-
-.order-item-name {
-  font-size: 0.95rem; /* Reducido de 1rem */
-  margin-bottom: 4px; /* Reducido de 5px */
-}
-
-.order-item-price {
-  font-size: 0.9rem; /* Reducido ligeramente */
-}
-
-.order-item-customization {
-  font-size: 0.8rem; /* Reducido de 0.85rem */
-  margin-top: 4px; /* Reducido de 5px */
-}
-
-.order-total {
-  margin-top: 18px; /* Reducido de 20px */
-  padding-top: 9px; /* Reducido de 10px */
-}
-
-.order-total h4 {
-  font-size: 1.14rem; /* Reducido de 1.2rem */
 }
 
 .order-item-header {
@@ -2081,6 +1970,20 @@ textarea:focus {
    RESPONSIVE DESIGN - LARGE DESKTOP (min-width: 1200px)
    ================================================================= */
 @media (min-width: 1200px) {
+  /* ORDER SIDEBAR - LARGE DESKTOP RESPONSIVE */
+  #order-sidebar {
+    width: 240px;
+    padding: 15px;
+    max-height: 85vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  #order-sidebar h3 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+  }
+  
   .order-item {
     padding: 12px 0;
     margin-bottom: 12px;
@@ -2351,6 +2254,23 @@ body.top-nav-visible {
   padding: 0;
   background: transparent;
 }
+
+/* Cuando el modo orden está activo, desplazar el contenedor maestro hacia la izquierda */
+body.order-mode-active #app {
+  margin-left: calc(50% - 35% - 110px); /* Desplaza hacia la izquierda para hacer espacio al sidebar */
+}
+
+.content-wrapper.order-active {
+  gap: 1px;
+  justify-content: flex-start;
+  transition: gap 0.2s ease-in-out;
+}
+
+.content-container-flex {
+  margin-right: -1.5px;
+}
+
+
 
 /* =================================================================
    CATEGORY-SPECIFIC STYLES - SISTEMA ESTANDARIZADO
@@ -2698,5 +2618,62 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
       --ing-slot:   clamp(56px, 14cqw, 96px);
       --media-slot: minmax(clamp(100px, 26cqw, 150px), auto);
     }
+  }
+}
+
+/* =================================================================
+   ORDER SIDEBAR V2 - desde commit 29447d26
+   ================================================================= */
+
+/* Desktop behavior (≥1024px) - Replicando comportamiento del commit de referencia */
+@media (min-width: 1024px) {
+  /* Cuando el modo orden está activo con V2, desplazar el contenedor maestro hacia la izquierda */
+  body.order-panel-v2.order-mode-active #app {
+    margin-left: calc(50% - 35% - 110px); /* Desplaza hacia la izquierda para hacer espacio al sidebar */
+    transition: margin-left 0.3s ease;
+  }
+
+  /* Content wrapper ajustado para V2 */
+  body.order-panel-v2 .content-wrapper.order-active {
+    gap: 1px;
+    justify-content: flex-start;
+    transition: gap 0.2s ease-in-out;
+  }
+
+  /* Container flex ajustado para V2 */
+  body.order-panel-v2 .content-container-flex {
+    margin-right: -1.5px;
+  }
+
+  /* Order sidebar V2 - comportamiento desktop del commit de referencia */
+  body.order-panel-v2 #order-sidebar {
+    width: 240px !important;
+    padding: 15px !important;
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    backdrop-filter: blur(10px) !important;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    max-height: calc(100vh - 40px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    z-index: 1000 !important;
+    box-shadow: var(--glow-shadow) !important;
+    display: none !important;
+    transition: all var(--transition-time) ease !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+
+  /* Sidebar visible state for V2 */
+  body.order-panel-v2 #order-sidebar.sidebar-visible {
+    display: block !important;
+  }
+
+  /* Ensure top-nav stays above sidebar */
+  body.order-panel-v2 #top-nav {
+    z-index: 1001;
   }
 }
