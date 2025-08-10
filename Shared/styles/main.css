@@ -106,6 +106,8 @@ body {
   position: relative; 
   margin: 0 auto;
   transition: margin-left 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
 }
 
 .screen { 
@@ -335,12 +337,16 @@ body {
   position: relative;
   margin-top: 0;
   padding-right: 0px;
+  justify-content: center; /* Centrar contenido */
 }
 
 #content-container {
   flex: 1;
   padding: 0;
   margin-right: 0;
+  display: flex;
+  justify-content: center; /* Centrar contenido interno */
+  width: 100%;
 }
 
 .content-container-flex {
@@ -575,7 +581,7 @@ body {
   /* Contenedor con ancho máximo para mantener proporciones */
   max-width: var(--table-max-width);
   margin: 0 auto;
-  width: var(--table-width);
+  width: 97%; /* Mismo ancho que las tablas */
 }
 
 /* =================================================================
@@ -584,7 +590,7 @@ body {
 
 /* === CLASES BASE PARA TABLAS ESTANDARIZADAS === */
 .product-table, .liquor-table {
-  width: var(--container-width-4); /* Por defecto 4 columnas (97%) */
+  width: 97%; /* Ancho estandarizado para consistencia con grids */
   max-width: var(--table-max-width);
   margin: var(--table-margin) auto;
   background: var(--card-bg);
@@ -597,19 +603,13 @@ body {
 }
 
 /* === MODIFICADORES DE COLUMNAS PARA TABLAS === */
-/* Interfaces de 3 columnas (Refrescos, Cervezas) */
-.cols-3.product-table {
-  width: var(--container-width-3); /* 100% - ancho aumentado */
-}
-
-/* Interfaces de 4 columnas (Alitas, Pizzas, Sopas, Ensaladas, Carnes, Postres, Café) */
-.cols-4.product-table {
-  width: var(--container-width-4); /* 97% - reducido 3% */
-}
-
-/* Interfaces de 5 columnas (Subcategorías de Licores) */
+/* Todas las tablas ahora usan el mismo ancho para consistencia */
+.cols-3.product-table,
+.cols-4.product-table,
 .cols-5.liquor-table {
-  width: var(--container-width-5); /* 97% - mismo ancho visual que 4 columnas */
+  width: 97%; /* Ancho estandarizado para todas las tablas */
+  max-width: var(--table-max-width);
+  margin: var(--table-margin) auto;
 }
 
 /* === ESTANDARIZACIÓN DE THUMBNAILS === */
@@ -2521,12 +2521,18 @@ body.grid-enhanced .product-grid {
   grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
   gap: var(--grid-gap);
   padding: var(--grid-pad);
+  width: 97%; /* Mismo ancho que las tablas */
+  max-width: var(--table-max-width);
+  margin: 0 auto;
 }
 
 body.grid-enhanced .category-grid {
   grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
   gap: var(--grid-gap);
   padding: var(--grid-pad);
+  width: 97%; /* Mismo ancho que las tablas */
+  max-width: var(--table-max-width);
+  margin: 0 auto;
 }
 
 /* 2. Estructura base de las cards con grid interno */
