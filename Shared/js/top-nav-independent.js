@@ -10,7 +10,8 @@ class IndependentTopNavManager {
     this.state = {
       viewMode: 'table', // 'table' o 'grid'
       menuOpen: false,
-      backButtonVisible: false
+      currentCategory: null, // Para rastrear la categoría actual
+      isInLiquorSubcategory: false // Para saber si estamos en una subcategoría de licores
     };
     
     // Referencias a elementos DOM
@@ -79,7 +80,7 @@ class IndependentTopNavManager {
     console.log('IndependentTopNavManager: Elements found:', {
       topNav: !!this.elements.topNav,
       hamburger: !!this.elements.hamburgerBtn,
-      back: !!this.elements.backBtn,
+      backBtn: !!this.elements.backBtn,
       viewToggle: !!this.elements.viewToggleBtn,
       title: !!this.elements.navTitle,
       drawer: !!this.elements.drawerMenu,
@@ -105,10 +106,6 @@ class IndependentTopNavManager {
       // El menú siempre debe iniciar cerrado
       this.state.menuOpen = false;
       
-      // Determinar si el botón de retroceso debe estar visible
-      // Basado en la URL actual o estado de la aplicación
-      this.state.backButtonVisible = this.shouldShowBackButton();
-      
       console.log('IndependentTopNavManager: State loaded:', this.state);
     } catch (error) {
       console.warn('IndependentTopNavManager: Error loading state:', error);
@@ -125,14 +122,7 @@ class IndependentTopNavManager {
     }
   }
 
-  shouldShowBackButton() {
-    // Mostrar botón de back solo cuando estamos en una subcategoría de licores
-    // Detectar por la presencia de tarjetas de licor (liquor-card)
-    const liquorCards = document.querySelectorAll('.product-card.liquor-card');
-    const hasLiquorCards = liquorCards.length > 0;
-    
-    return hasLiquorCards;
-  }
+
 
   setupEventListeners() {
     // Event listener para botón hamburguesa
@@ -143,13 +133,15 @@ class IndependentTopNavManager {
       });
     }
 
-    // Event listener para botón de retroceso
+    // Event listener para botón de back
     if (this.elements.backBtn) {
       this.elements.backBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.handleBackClick();
       });
     }
+
+
 
     // Event listener para botón de cambio de vista
     if (this.elements.viewToggleBtn) {
@@ -166,9 +158,8 @@ class IndependentTopNavManager {
       });
     }
 
-    // Escuchar cambios en el contenido para actualizar el botón de retroceso
+    // Escuchar cambios en el contenido
     document.addEventListener('app-content-changed', () => {
-      this.updateBackButtonVisibility();
       // Cerrar el menú automáticamente cuando cambia el contenido
       if (this.state.menuOpen) {
         this.closeMenu();
@@ -200,7 +191,6 @@ class IndependentTopNavManager {
     // Escuchar cuando el contenido esté listo
     document.addEventListener('app-content-ready', () => {
       this.showTopNav();
-      this.updateBackButtonVisibility();
     });
   }
 
@@ -229,27 +219,7 @@ class IndependentTopNavManager {
     console.log('IndependentTopNavManager: Menu closed');
   }
 
-  handleBackClick() {
-    // Navegación independiente - usar historial del navegador o lógica personalizada
-    const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
-    
-    if (container && window.ProductRenderer && window.ProductRenderer.renderLicores) {
-      // Usar la funcionalidad existente del ProductRenderer
-      window.ProductRenderer.renderLicores(container);
-      console.log('IndependentTopNavManager: Back navigation executed');
-    } else {
-      // Fallback: usar historial del navegador
-      if (window.history.length > 1) {
-        window.history.back();
-      }
-      console.log('IndependentTopNavManager: Browser back navigation executed');
-    }
-    
-    // Actualizar visibilidad del botón después de la navegación
-    setTimeout(() => {
-      this.updateBackButtonVisibility();
-    }, 100);
-  }
+
 
   toggleViewMode() {
     // Cambiar modo de vista independientemente
@@ -284,7 +254,6 @@ class IndependentTopNavManager {
 
   updateUI() {
     this.updateMenuUI();
-    this.updateBackButtonVisibility();
     this.updateViewToggleUI();
   }
 
@@ -300,15 +269,7 @@ class IndependentTopNavManager {
     }
   }
 
-  updateBackButtonVisibility() {
-    const shouldShow = this.shouldShowBackButton();
-    this.state.backButtonVisible = shouldShow;
-    
-    if (this.elements.backBtn) {
-      this.elements.backBtn.style.display = shouldShow ? 'flex' : 'none';
-      console.log('IndependentTopNavManager: Back button visibility:', shouldShow);
-    }
-  }
+
 
   updateViewToggleUI() {
     if (this.elements.viewToggleBtn) {
@@ -335,6 +296,58 @@ class IndependentTopNavManager {
       document.body.classList.add('top-nav-visible');
       console.log('IndependentTopNavManager: Top navigation shown');
     }
+  }
+
+  // === MÉTODOS DE BACK BUTTON ===
+
+  handleBackClick() {
+    // Volver a la interfaz de licores
+    if (this.state.isInLiquorSubcategory) {
+      // Llamar a la función para mostrar la categoría de licores
+      if (window.ProductRenderer && window.ProductRenderer.renderLicores) {
+        const container = document.querySelector('.content-wrapper') || document.querySelector('#content-container');
+        if (container) {
+          window.ProductRenderer.renderLicores(container);
+        }
+      } else if (window.renderLicoresCategories) {
+        window.renderLicoresCategories();
+      }
+      
+      // Actualizar el estado
+      this.setLiquorSubcategoryState(false);
+      
+      console.log('IndependentTopNavManager: Back to licores interface');
+    }
+  }
+
+  showBackButton() {
+    if (this.elements.backBtn) {
+      this.elements.backBtn.style.display = 'flex';
+      console.log('IndependentTopNavManager: Back button shown');
+    }
+  }
+
+  hideBackButton() {
+    if (this.elements.backBtn) {
+      this.elements.backBtn.style.display = 'none';
+      console.log('IndependentTopNavManager: Back button hidden');
+    }
+  }
+
+  setLiquorSubcategoryState(isInSubcategory, subcategoryName = null) {
+    this.state.isInLiquorSubcategory = isInSubcategory;
+    this.state.currentCategory = subcategoryName;
+    
+    if (isInSubcategory) {
+      this.showBackButton();
+    } else {
+      this.hideBackButton();
+    }
+    
+    console.log('IndependentTopNavManager: Liquor subcategory state:', {
+      isInSubcategory,
+      subcategoryName
+    });
   }
 
   // === MÉTODOS PÚBLICOS ===

@@ -88,8 +88,6 @@ const ProductRenderer = {
     // DESHABILITADO: El manejo del botón de vista ahora está en IndependentTopNavManager
     // if (target.classList && target.classList.contains('view-toggle-btn')) { ... }
     
-    // Back button handling removed - now managed by top navigation bar
-    
     // Handle price buttons
     if (target.classList && target.classList.contains('price-button')) {
       e.preventDefault();
@@ -177,7 +175,7 @@ const ProductRenderer = {
     return { category };
   },
 
-  // Back button preservation removed - now handled by top navigation bar
+  
 
   _clearAndRestoreContainer: function(container) {
     // Get or create content container without destroying sidebar structure
@@ -209,7 +207,7 @@ const ProductRenderer = {
     return targetContainer;
   },
 
-  // Back button restoration removed - now handled by top navigation bar
+  
   
   // Phase 3: Specific event handlers
   handleCategoryCardClick: function(target) {
@@ -320,7 +318,7 @@ const ProductRenderer = {
     Logger.debug('Product card clicked:', target);
   },
   
-  // Back button handling removed - now managed by top navigation bar
+  
 
   _renderCategoryView: async function(container, category) {
     const categoryRenderers = this._getCategoryRenderers();
@@ -1010,7 +1008,12 @@ const ProductRenderer = {
       }
     }
     
-    // Back button removal handled by top navigation bar
+
+    // Notify top navigation manager that we're back to main licores interface
+    if (window.independentTopNavManager) {
+      window.independentTopNavManager.setLiquorSubcategoryState(false);
+    }
+    
     // Force top navigation sync
     if (window.topNavManager) {
       setTimeout(() => {
@@ -1096,7 +1099,7 @@ const ProductRenderer = {
       }
     }
     
-    // Back button creation removed - now handled by top navigation bar
+
     
     // Sync top navigation after content change
     console.log('🔄 Sincronizando TopNavManager después de cambio de contenido');
@@ -1151,6 +1154,11 @@ const ProductRenderer = {
         targetContainer.innerHTML += '<p>Categoría no disponible</p>';
     }
     
+    // Notify top navigation manager about liquor subcategory state
+    if (window.independentTopNavManager) {
+      window.independentTopNavManager.setLiquorSubcategoryState(true, category);
+    }
+    
     // Log DOM state after rendering subcategory
     setTimeout(() => {
       const afterMainScreen = document.getElementById('main-screen');
@@ -1199,6 +1207,12 @@ const ProductRenderer = {
           title
         );
       }
+      
+      // Dispatch app-content-ready event to notify top navigation manager
+      document.dispatchEvent(new CustomEvent('app-content-ready', {
+        detail: { contentType: subcategory }
+      }));
+      
     } catch (error) {
       logError(`Error rendering ${title}:`, error);
       container.innerHTML += `<p>Error cargando ${title}. Por favor, intente de nuevo.</p>`;
