@@ -2820,11 +2820,7 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
   }
   
   body {
-    zoom: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
+    /* Zoom y transform removidos - causaban interferencia con responsive */
   }
   
   /* Tablas optimizadas para móvil portrait */
