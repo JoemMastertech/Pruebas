@@ -1511,7 +1511,43 @@ body.order-mode-active #order-sidebar {
   }
 }
 
-@media screen and (max-width: 768px) {
+/* Sidebar para móvil portrait - parte inferior */
+@media (max-width: 767px) and (orientation: portrait) {
+  .content-container-flex {
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Espacio para sidebar inferior cuando está activo */
+    padding-bottom: 0;
+  }
+  
+  body.order-mode-active .content-container-flex {
+    padding-bottom: 200px; /* Espacio para sidebar fijo inferior */
+  }
+  
+  #order-sidebar {
+    /* Sidebar fijo en la parte inferior */
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: 180px !important;
+    margin: 0 !important;
+    z-index: 1000 !important;
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none !important;
+    overflow-y: auto;
+    flex: none;
+  }
+  
+  body:not(.order-mode-active) #content-container {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .content-container-flex {
     flex-direction: column;
     gap: 0.5rem;
@@ -2725,30 +2761,146 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
 }
 
 /* =================================================================
-   MOBILE FIRST RESPONSIVE DESIGN - NUEVAS REGLAS
+   CONFIGURACIÓN MÓVIL Y TABLET - SISTEMA RESPONSIVO AVANZADO
    ================================================================= */
 
-/* Tablets y móviles en landscape (orientation: landscape, min-width: 640px) */
-@media (orientation: landscape) and (min-width: 640px) {
+/* 📱 MODO GRID - TELÉFONO EN VERTICAL (PORTRAIT) */
+@media (max-width: 767px) and (orientation: portrait) {
+  /* Contenedor padre reducido 20% y centrado */
+  #app {
+    padding: 0 clamp(16px, 4vw, 24px);
+  }
+  
   .content-container-flex {
-    flex-direction: row;
-    gap: clamp(12px, 2.5vw, 20px);
+    width: 80%; /* Reducido 20% del ancho original */
+    max-width: 80%;
+    margin: 0 auto; /* Centrado con misma distancia desde ambos extremos */
+    gap: clamp(8px, 2vw, 12px);
   }
   
   #content-container {
-    width: 72%;
-    max-width: 1120px;
+    width: 100%;
+    padding: 0 clamp(8px, 2vw, 12px);
+  }
+  
+  /* Grids de 2 columnas con márgenes equilibrados */
+  .product-grid,
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(8px, 2vw, 12px);
+    padding: clamp(10px, 2.5vw, 15px);
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Barra superior fija - no alterada por zoom */
+  #top-nav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    height: var(--top-nav-height-mobile) !important;
+    min-height: var(--top-nav-height-mobile) !important;
+    max-height: var(--top-nav-height-mobile) !important;
+  }
+  
+  body.top-nav-visible {
+    padding-top: var(--top-nav-height-mobile) !important;
+  }
+}
+
+/* 📊 MODO TABLA - TELÉFONO EN VERTICAL (PORTRAIT) */
+@media (max-width: 767px) and (orientation: portrait) {
+  /* Página cargada con tamaño minimizado - evitar zoom del usuario */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  body {
+    zoom: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+  
+  /* Tablas optimizadas para móvil portrait */
+  .product-table {
+    width: 100%;
+    font-size: clamp(11px, 2.5vw, 13px);
+    border-collapse: collapse;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: clamp(4px, 1vw, 8px);
+    font-size: clamp(10px, 2.2vw, 12px);
+  }
+  
+  /* Barra superior estable igual que en modo Grid */
+  #top-nav {
+    position: fixed !important;
+    height: var(--top-nav-height-mobile) !important;
+    min-height: var(--top-nav-height-mobile) !important;
+    max-height: var(--top-nav-height-mobile) !important;
+  }
+}
+
+/* 📐 MODO HORIZONTAL (LANDSCAPE) - MÓVILES Y TABLETS */
+@media (orientation: landscape) and (min-width: 640px) {
+  /* Replicar comportamiento de ordenadores */
+  .content-container-flex {
+    flex-direction: row;
+    gap: clamp(12px, 2.5vw, 20px);
+    max-width: 1400px;
+  }
+  
+  #content-container {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: none;
     padding: 0 clamp(12px, 2.5vw, 20px);
   }
   
+  /* 3 columnas de Grid en lugar de 2 */
   .product-grid,
   .category-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(15px, 2.5vw, 25px);
     padding: clamp(15px, 2.5vw, 25px);
-    width: 97%;
+    width: 100%;
   }
   
+  /* Sidebar como parte integral del layout - NO superpuesto */
+  body.order-mode-active .content-container-flex {
+    gap: clamp(15px, 2vw, 20px);
+  }
+  
+  body.order-mode-active #order-sidebar {
+    position: relative !important;
+    flex: 0 0 280px;
+    min-width: 250px;
+    max-width: 320px;
+    height: auto;
+    max-height: calc(100vh - 60px);
+    margin-top: 0;
+    display: block;
+    /* Sidebar scrollable junto con la página - NO fijo */
+    position: static !important;
+  }
+  
+  /* Contenido se ajusta al espacio restante */
+  body.order-mode-active #content-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    /* Separación mínima entre contenido y sidebar */
+    margin-right: clamp(10px, 1.5vw, 15px);
+  }
+  
+  /* Tipografía optimizada para landscape */
   .product-card .product-name,
   .category-card .category-name {
     font-size: clamp(14px, 2vw, 18px);
@@ -2777,7 +2929,6 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
   
   .product-grid,
   .category-grid {
-    width: 95%;
     gap: clamp(18px, 2.8vw, 28px);
     padding: clamp(18px, 2.8vw, 28px);
   }
