@@ -1,86 +1,77 @@
-/* ================================================================= 
-   MASTER TECHNOLOGY BAR - OPTIMIZED STYLESHEET
-   ================================================================= */
+/* MASTER TECHNOLOGY BAR - OPTIMIZED STYLESHEET */
 
-/* ================================================================= 
-   VARIABLES GLOBALES Y CONFIGURACIÓN BASE
-   ================================================================= */
+/* === COMPONENTES BEM INTEGRADOS === */
+/* Los componentes han sido integrados directamente en este archivo */
+
+/* === VARIABLES GLOBALES CONSOLIDADAS === */
 :root {
-  /* Primary Colors */
-  --primary-color: #f3f6f6;
-  --accent-color: #00f7ff;
-  --background-color: #000;
-  --text-color: #ECE9D8;
-  --price-color: #00f7ff;
-  
-  /* Component Colors */
-  --card-bg: rgba(0,0,0,0.7);
-  --border-color: #00f7ff40;
-  --glow-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
-  --glow-shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
-  
-  /* Layout Variables */
-  --transition-time: 0.3s;
-  --table-width: 95%;
-  --table-max-width: 1400px;
-  --table-margin: 20px;
-  
-  /* === VARIABLES DE ESTANDARIZACIÓN DE COLUMNAS === */
-  /* Anchos de contenedor por tipo de columna */
-  --container-width-3: 100%;     /* Interfaces de 3 columnas (Refrescos, Cervezas) */
-  --container-width-4: 97%;      /* Interfaces de 4 columnas (reducido 3%) */
-  --container-width-5: 97%;      /* Interfaces de 5 columnas (mismo ancho visual que 4) */
-  
-  /* Tamaños de thumbnails estandarizados */
-  --thumb-size-3: clamp(90px, 14vw, 140px);
-  --thumb-size-4: clamp(80px, 12vw, 130px);  /* Referencia de Coctelería */
-  --thumb-size-5: clamp(75px, 11vw, 120px);
-  
-  /* Tamaños de fuente base */
-  --font-size-base: clamp(14px, 2vw, 18px);
-  --font-size-price: clamp(12px, 1.8vw, 16px);
-  --font-size-name: clamp(13px, 1.9vw, 17px);
-  
-  /* Espaciado estandarizado */
-  --gap-3: clamp(20px, 3vw, 30px);
-  --gap-4: clamp(18px, 2.8vw, 28px);
-  --gap-5: clamp(15px, 2.5vw, 25px);
-  
-  /* Padding estandarizado */
-  --padding-3: clamp(20px, 3vw, 30px);
-  --padding-4: clamp(18px, 2.8vw, 28px);
-  --padding-5: clamp(15px, 2.5vw, 25px);
-  
-  /* Botones de precio para licores (reducido 15%) */
-  --liquor-button-scale: 0.85;
-  
-  /* Legacy support */
+  /* Core Colors - Simplified */
   --primary: #f3f6f6;
   --accent: #00f7ff;
   --bg: #000;
   --text: #ECE9D8;
-  --card: rgba(0,0,0,0.7);
+  --card-bg: rgba(0,0,0,0.7);
   --border: #00f7ff40;
-  --transition: 0.3s;
   
-  /* === VARIABLES MÓVILES ESPECÍFICAS === */
-  --mobile-sidebar-width: 140px;
-  --mobile-padding: 8px;
-  --mobile-gap: 8px;
-  --mobile-font-base: 0.8rem;
-  --mobile-font-small: 0.7rem;
-  --mobile-font-tiny: 0.6rem;
+  /* Unified Shadows */
+  --shadow-base: 0 0 10px rgba(0, 247, 255, 0.3);
+  --shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
+  
+  /* Layout Constants */
+  --transition: 0.3s ease;
+  --border-radius: 10px;
+  --container-width: 95%;
+  --container-max: 1400px;
+  --spacing: 20px;
+  --nav-height: 60px;
+  
+  /* === ESTANDARIZACIÓN DE COLUMNAS === */
+  --container-width-3: 100%;     /* Interfaces de 3 columnas (Refrescos, Cervezas) */
+  --container-width-4: 97%;      /* Interfaces de 4 columnas (reducido 3%) */
+  --container-width-5: 97%;      /* Interfaces de 5 columnas (mismo ancho visual que 4) */
+  
+  /* Thumbnails estandarizados */
+  --thumb-size-3: clamp(90px, 14vw, 140px);
+  --thumb-size-4: clamp(80px, 12vw, 130px);  /* Referencia de Coctelería */
+  --thumb-size-5: clamp(75px, 11vw, 120px);
+  
+  /* Fuentes base */
   --font-size-base: clamp(14px, 2vw, 18px);
+  --font-size-price: clamp(12px, 1.8vw, 16px);
+  --font-size-name: clamp(13px, 1.9vw, 17px);
   
-  /* Top Navigation Variables */
+  /* Espaciado */
+  --gap-3: clamp(20px, 3vw, 30px);
+  --gap-4: clamp(18px, 2.8vw, 28px);
+  --gap-5: clamp(15px, 2.5vw, 25px);
+  
+  /* Padding */
+  --padding-3: clamp(20px, 3vw, 30px);
+  --padding-4: clamp(18px, 2.8vw, 28px);
+  --padding-5: clamp(15px, 2.5vw, 25px);
+  
+  /* Botones licores */
+  --liquor-button-scale: 0.85;
+  
+  /* Legacy support */
+  --primary-color: var(--primary);
+  --accent-color: var(--accent);
+  --background-color: var(--bg);
+  --text-color: var(--text);
+  --price-color: var(--accent);
+  --border-color: var(--border);
+  --transition-time: var(--transition);
+  --table-width: var(--container-width);
+  --table-max-width: var(--container-max);
+  --table-margin: var(--spacing);
+  
+  /* Top Navigation Variables - Desktop */
   --top-nav-height: 60px;
+  --top-nav-height-desktop: 60px;
   --top-nav-bg: rgba(0, 0, 0, 0.95);
   --top-nav-border: #00f7ff;
   
-  /* Fixed top navigation height for all screen sizes */
-  --top-nav-height-mobile: 60px;
-  --top-nav-height-tablet: 60px;
-  --top-nav-height-desktop: 60px;
+  /* NOTA: Variables móviles y tablet movidas a mobile.css y tablet.css respectivamente */
 }
 
 /* ================================================================= 
@@ -92,18 +83,15 @@
   box-sizing: border-box; 
 }
 
-body { 
-  font-family: 'Montserrat', sans-serif; 
-  color: var(--text); 
-  background: var(--background-color); 
-  min-height: 100vh; 
-  overflow-y: auto;
-  overflow-x: hidden; 
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* =================================================================
-   LAYOUT PRINCIPAL - DISEÑO ADAPTABLE CON FLEXBOX
-   ================================================================= */
+/* === LAYOUT PRINCIPAL === */
 
 #app { 
   width: 100%;
@@ -115,7 +103,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Contenedor principal con flexbox para distribuir contenedores de igual jerarquía */
+/* Contenedor principal flexbox */
 .content-container-flex {
   display: flex;
   flex-direction: column;
@@ -129,7 +117,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Contenedor de contenido principal */
+/* Contenido principal */
 #content-container {
   flex: 1 1 auto;
   min-width: 0; /* para evitar overflow */
@@ -138,7 +126,7 @@ body {
   padding: 0 clamp(8px, 3vw, 12px);
 }
 
-/* Cuando solo está el contenedor principal, centrarlo */
+/* Centrado cuando no hay orden */
 body:not(.order-mode-active) .content-container-flex {
   justify-content: center;
 }
@@ -162,7 +150,7 @@ body:not(.order-mode-active) #content-container {
   z-index: 1; 
 }
 
-/* Background video styles */
+/* Video de fondo */
 #background-video {
   position: fixed;
   top: 0;
@@ -174,65 +162,58 @@ body:not(.order-mode-active) #content-container {
   opacity: 0.4;
 }
 
-/* ================================================================= 
-   TIPOGRAFÍA Y BRANDING
-   ================================================================= */
+/* === TIPOGRAFÍA Y BRANDING === */
 
-/* Textos principales */
+/* Sistema tipográfico */
 .welcome-text, .title-text, .category-title {
   font-family: 'Playfair Display', serif;
-  color: var(--text-color);
+  color: var(--text);
   text-align: center;
   animation: fadeIn 1s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.welcome-text { 
-  font-size: 3rem; 
-}
+.welcome-text { font-size: clamp(2rem, 4vw, 3rem); }
+.title-text { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent); }
+.category-title { font-size: clamp(1.5rem, 3vw, 2.5rem); }
 
-.title-text, .category-title { 
-  font-size: 2.5rem; 
-}
-
-/* Contenedores de logo */
+/* Sistema de logos */
 .logo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: var(--spacing);
 }
 
-/* Estilos generales de logo */
-.logo {
-  max-width: 300px;
+.logo, .main-logo {
+  max-width: clamp(200px, 25vw, 300px);
   height: auto;
   animation: fadeIn 1s ease-in-out;
-  /* Borde cyan y efectos hover eliminados */
+  filter: drop-shadow(var(--shadow-base));
+  transition: var(--transition);
 }
 
-/* Removed empty logo:hover ruleset */
+.logo:hover, .main-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(var(--shadow-hover));
+}
 
-/* Logo específico para la página */
 .main-logo {
   content: url('https://udtlqjmrtbcpdqknwuro.supabase.co/storage/v1/object/public/productos/recursos/logos/Logo5.webp');
-  max-width: 300px;
-  height: auto;
   display: block;
   margin: 0 auto;
 }
 
-/* Pantalla de contenido principal */
+/* Pantalla principal */
 .main-content-screen {
   padding: 20px;
   justify-content: flex-start;
   background-color: transparent;
 }
 
-/* ================================================================= 
-   NAVEGACIÓN Y BOTONES
-   ================================================================= */
+/* === NAVEGACIÓN Y BOTONES === */
 
-/* Menú de navegación principal */
+/* Menú principal */
 .navigation-menu {
   width: 100%;
   display: flex;
@@ -248,73 +229,67 @@ body:not(.order-mode-active) #content-container {
   flex-wrap: wrap;
 }
 
-/* Botones de navegación base */
-.nav-button, .view-toggle-btn {
+/* Elementos transparentes */
+.nav-button, .view-toggle-btn, .page-title, .product-table td, .liquor-table td {
   background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--text-color);
+}
+
+/* Botones de navegación */
+.nav-button, .view-toggle-btn {
+  border: 2px solid var(--primary);
+  color: var(--text);
   padding: 8px 15px;
   font: 600 1rem 'Montserrat', sans-serif;
   cursor: pointer;
-  transition: all var(--transition-time) ease;
+  transition: var(--transition);
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Botón de cambio de vista */
 .view-toggle-btn {
   font-size: 1.2rem;
   width: 50px;
   height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
   backdrop-filter: blur(10px);
   font-weight: bold;
 }
 
-/* Estados hover y activo */
-.nav-button:hover, .nav-button.active, .view-toggle-btn:hover {
-  background-color: var(--primary-color);
-  color: var(--background-color);
-}
-
-.view-toggle-btn:hover {
+/* Estados hover */
+.nav-button:hover, .nav-button.active, 
+.view-toggle-btn:hover, .view-toggle-btn.active {
+  background-color: var(--primary);
+  color: var(--bg);
   transform: scale(1.05);
+  box-shadow: var(--shadow-base);
 }
 
-.view-toggle-btn.active {
-  background-color: var(--primary-color);
-  color: var(--background-color);
-}
+/* === COMPONENTES DE LAYOUT === */
 
-/* ================================================================= 
-   COMPONENTES DE LAYOUT - HEADERS Y CONTENEDORES
-   ================================================================= */
-
-/* Header de página principal */
+/* Layout de página */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: var(--table-width); 
-  max-width: var(--table-max-width); 
-  margin-left: auto;
-  margin-right: auto;
+  width: var(--container-width);
+  max-width: var(--container-max);
+  margin: 0 auto;
   position: relative;
 }
 
-/* Título de página */
 .page-title {
   font-family: 'Playfair Display', serif;
-  color: var(--text-color);
-  font-size: 2rem;
+  color: var(--text);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   text-align: center;
   width: 100%;
-  margin: 0;
-  padding: 15px 20px;
-  background: transparent;
-  border-bottom: 2px solid var(--border-color);
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
+  padding: 15px var(--spacing);
+  border-bottom: 2px solid var(--border);
 }
 
 /* Botones de acción principales */
@@ -421,7 +396,7 @@ body:not(.order-mode-active) #content-container {
   /* backdrop-filter: blur(5px); */
 }
 
-/* Miniaturas de video base */
+/* Video thumbnails */
 .video-thumb {
   width: 80px;
   height: 56px;
@@ -435,7 +410,7 @@ body:not(.order-mode-active) #content-container {
   transform: scale(1.05);
 }
 
-/* Estilos específicos por categoría */
+/* Estilos por categoría */
 [data-category="carnes"] .video-thumb {
   width: 100px;
   height: 70px;
@@ -455,74 +430,59 @@ body:not(.order-mode-active) #content-container {
   border: 1px solid rgba(255, 165, 0, 0.3);
 }
 
-/* Estilos responsivos para miniaturas de video - ELIMINADOS */
-/* Las miniaturas de video ahora se adaptan naturalmente sin restricciones móviles */
+/* Miniaturas adaptables */
 
-/* =================================================================
-   TABLES & GRID CONTAINERS
-   ================================================================= */
-/* === CONTENEDORES GENERALES === */
-.container, .category-grid, .product-grid {
-  width: var(--table-width);
-  max-width: var(--table-max-width);
-  margin: var(--table-margin) auto;
+/* === TABLES & GRID CONTAINERS === */
+.container, .category-grid, .product-grid, .product-table, .liquor-table {
+  width: var(--container-width);
+  max-width: var(--container-max);
+  margin: var(--spacing) auto;
   background: var(--card-bg);
-  border-radius: 15px;
-  box-shadow: 0 0 20px var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
   position: relative;
+  border: 1px solid var(--border);
 }
 
-.container {
-  border: 1px solid var(--primary-color);
-  background: var(--card-bg);
+/* Mejoras de tabla */
+.product-table, .liquor-table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  padding: var(--spacing);
 }
 
-/* Las tablas ya están definidas en la sección de estandarización */
-
-.product-table::before, .liquor-table::before, .category-grid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
-  pointer-events: none;
-}
-
+/* Celdas de tabla */
 .product-table th, .liquor-table th {
   font: 600 1rem 'Montserrat', sans-serif;
-  color: var(--primary-color);
+  color: var(--primary);
   text-align: center;
   padding: 15px 10px;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.product-table th:first-child, .liquor-table th:first-child {
+.product-table th:first-child, .liquor-table th:first-child,
+.product-table td:first-child, .liquor-table td:first-child {
   text-align: left;
   padding-left: 15px;
 }
 
 .product-table td, .liquor-table td {
   padding: 15px 10px;
-  background: transparent;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   text-align: center;
   vertical-align: middle;
 }
 
-.product-table td:first-child, .liquor-table td:first-child {
-  text-align: left;
-  padding-left: 15px;
-}
-
 .product-table td.product-name, .liquor-table td.product-name {
   font: 600 1rem 'Montserrat', sans-serif;
-  color: var(--primary-color);
+  color: var(--primary);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
+/* Celdas especiales */
 .product-table td.image-icon, .liquor-table td.image-icon,
 .product-table td.video-icon, .liquor-table td.video-icon,
 .product-table td.product-price, .liquor-table td.product-price {
@@ -541,16 +501,11 @@ body:not(.order-mode-active) #content-container {
   padding: 15px 10px;
 }
 
-.product-table tr:hover td,
-.liquor-table tr:hover td {
+.product-table tr:hover td, .liquor-table tr:hover td {
   background-color: rgba(0, 0, 0, 0.4);
-  transform: none;
-  box-shadow: none;
 }
 
-/* =================================================================
-   MEDIA ELEMENTS
-   ================================================================= */
+/* Media Elements - Optimized */
 .image-icon img, .product-table td.image-icon img {
   width: 40px;
   height: 40px;
@@ -558,8 +513,8 @@ body:not(.order-mode-active) #content-container {
   background: white;
   cursor: pointer;
   animation: glow 2s infinite;
-  border-radius: 10px;
-  transition: transform 0.3s ease;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
   display: block;
 }
 
@@ -579,6 +534,7 @@ body:not(.order-mode-active) #content-container {
   width: 60px;
 }
 
+/* Animations - Consolidated */
 @keyframes glow {
   0%, 100% { box-shadow: var(--glow-shadow); }
   50% { box-shadow: 0 0 15px rgba(0, 247, 255, 0.5); }
@@ -602,29 +558,11 @@ body:not(.order-mode-active) #content-container {
 /* =================================================================
    GRID LAYOUTS - MOBILE FIRST RESPONSIVE SYSTEM
    ================================================================= */
-.category-grid {
-  display: grid;
-  /* Mobile-first: 2 columnas por defecto */
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto auto auto;
-  gap: clamp(6px, 2vw, 8px);
-  row-gap: clamp(6px, 2vw, 8px);
-  padding: clamp(8px, 3vw, 12px);
-  width: 100%;
-  max-width: var(--table-max-width);
-  margin: 0 auto;
-}
+/* CATEGORY GRID RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
+/* Reglas de .category-grid ahora manejadas por el componente BEM */
 
-.product-grid {
-  display: grid;
-  /* Mobile-first: 2 columnas por defecto */
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(6px, 2vw, 8px);
-  padding: clamp(8px, 3vw, 12px);
-  width: 100%;
-  max-width: var(--table-max-width);
-  margin: 0 auto;
-}
+/* PRODUCT GRID RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
+/* Reglas de .product-grid ahora manejadas por el componente BEM */
 
 /* Tipografía mobile-first */
 .product-card .product-name,
@@ -647,53 +585,39 @@ body:not(.order-mode-active) #content-container {
    ESTANDARIZACIÓN MODO TABLA - SISTEMA DE COLUMNAS
    ================================================================= */
 
-/* === CLASES BASE PARA TABLAS ESTANDARIZADAS === */
-.product-table, .liquor-table {
-  width: 97%; /* Ancho estandarizado para consistencia con grids */
-  max-width: var(--table-max-width);
-  margin: var(--table-margin) auto;
-  background: var(--card-bg);
-  border-radius: 15px;
-  box-shadow: 0 0 20px var(--border-color);
-  border-collapse: separate;
-  border-spacing: 0 10px;
-  padding: 20px;
-  position: relative;
-}
+/* Standardized Tables - Already optimized above */
 
-/* === MODIFICADORES DE COLUMNAS PARA TABLAS === */
-/* Todas las tablas ahora usan el mismo ancho para consistencia */
-.cols-3.product-table,
-.cols-4.product-table,
+/* Modificadores de columna */
+.cols-3.product-table, .cols-4.product-table,
 .cols-5.liquor-table {
   width: 97%; /* Ancho estandarizado para todas las tablas */
   max-width: var(--table-max-width);
   margin: var(--table-margin) auto;
 }
 
-/* === ESTANDARIZACIÓN DE THUMBNAILS === */
-/* Thumbnails para interfaces de 3 columnas */
+/* === THUMBNAILS ESTANDARIZADOS === */
+/* 3 columnas */
 .cols-3 .image-icon img {
   width: var(--thumb-size-3);
   height: var(--thumb-size-3);
 }
 
-/* Thumbnails para interfaces de 4 columnas (referencia Coctelería) */
+/* 4 columnas */
 .cols-4 .image-icon img,
 .product-table .image-icon img {
   width: var(--thumb-size-4);
   height: var(--thumb-size-4);
 }
 
-/* Thumbnails para interfaces de 5 columnas */
+/* 5 columnas */
 .cols-5 .image-icon img,
 .liquor-table .image-icon img {
   width: var(--thumb-size-5);
   height: var(--thumb-size-5);
 }
 
-/* === ESTANDARIZACIÓN DE TIPOGRAFÍA === */
-/* Nombres de productos */
+/* === TIPOGRAFÍA ESTANDARIZADA === */
+/* Nombres */
 .cols-3 .product-name,
 .cols-4 .product-name,
 .cols-5 .product-name {
@@ -712,35 +636,29 @@ body:not(.order-mode-active) #content-container {
   color: var(--price-color);
 }
 
-/* === BOTONES DE PRECIO PARA LICORES (REDUCIDO 15%) === */
+/* === BOTONES LICORES === */
 .cols-5 .price-button,
 .liquor-table .price-button {
   transform: scale(var(--liquor-button-scale));
   font-size: calc(var(--font-size-price) * var(--liquor-button-scale));
 }
 
-/* === MEDIA QUERIES RESPONSIVAS PARA SISTEMA ESTANDARIZADO === */
+/* === AJUSTES POR VISTA === */
 
-/* === REGLAS MÓVILES ELIMINADAS === */
-/* Todas las restricciones móviles han sido removidas para permitir adaptación natural */
-/* La página ahora se adapta libremente sin limitaciones específicas de dispositivo */
-
-/* === AJUSTES ESPECÍFICOS PARA VISTAS DE COLUMNAS === */
-
-/* Vista de 4 columnas - Comportamiento igual a interfaz de Coctelería */
+/* Vista 4 columnas */
 .cols-4.product-table {
   width: 97%; /* Reducción del 3% del contenedor padre */
   margin: 0 auto; /* Centrado horizontal */
 }
 
-/* Thumbnails para 4 columnas - Referencia Coctelería */
+/* Thumbnails 4 columnas */
 .cols-4 .image-icon img,
 .product-table .image-icon img {
   width: var(--thumb-size-4);
   height: var(--thumb-size-4);
 }
 
-/* Tipografía para 4 columnas - Referencia Coctelería */
+/* Tipografía 4 columnas */
 .cols-4 .product-name {
   font-size: var(--font-size-name);
   line-height: 1.2;
@@ -775,57 +693,49 @@ body:not(.order-mode-active) #content-container {
   margin-bottom: 5px;
 }
 
-/* =================================================================
-   CARD COMPONENTS
-   ================================================================= */
+/* Card Components - Unified */
 .category-card, .product-card {
   background: var(--card-bg);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: var(--transition);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 15px;
-  box-shadow: 0 0 10px var(--border-color);
+  box-shadow: var(--shadow-base);
 }
 
 .category-card:hover, .product-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 5px 20px var(--price-color);
+  box-shadow: var(--shadow-hover);
 }
 
-/* === THUMBNAILS ESTANDARIZADOS POR TIPO DE COLUMNA === */
-.category-image {
-  /* Por defecto: tamaño para 4 columnas (referencia Coctelería) */
+/* Thumbnails - Responsive System */
+.category-image, .product-image {
   width: var(--thumb-size-4);
   height: var(--thumb-size-4);
   object-fit: contain;
   background: white;
   margin-bottom: clamp(5px, 1vw, 10px);
   animation: glow 2s infinite;
-  border-radius: clamp(6px, 1vw, 10px);
-  transition: all 0.3s ease;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
 }
 
-/* Thumbnails para interfaces de 3 columnas */
-.cols-3 .category-image,
-.cols-3 .product-image {
+/* Column-specific thumbnail sizes */
+.cols-3 .category-image, .cols-3 .product-image {
   width: var(--thumb-size-3);
   height: var(--thumb-size-3);
 }
 
-/* Thumbnails para interfaces de 4 columnas */
-.cols-4 .category-image,
-.cols-4 .product-image {
+.cols-4 .category-image, .cols-4 .product-image {
   width: var(--thumb-size-4);
   height: var(--thumb-size-4);
 }
 
-/* Thumbnails para interfaces de 5 columnas */
-.cols-5 .category-image,
-.cols-5 .product-image {
+.cols-5 .category-image, .cols-5 .product-image {
   width: var(--thumb-size-5);
   height: var(--thumb-size-5);
 }
@@ -878,29 +788,22 @@ body:not(.order-mode-active) #content-container {
   position: relative;
 }
 
-/* Configuración específica para títulos de licores - aumentado 50% del tamaño anterior */
+/* Títulos de licores */
 .product-card.liquor-card .product-name {
-  /* Aumentar tamaño de fuente en 50% del tamaño anterior */
   font-size: clamp(0.63rem, 1.35vw + 0.375rem, 0.9rem);
   line-height: clamp(1.15, 1.8vw + 0.9rem, 1.35);
-  
-  /* Eliminar truncamiento para mostrar texto completo */
   -webkit-line-clamp: unset;
   line-clamp: unset;
   overflow: visible;
   text-overflow: unset;
-  
-  /* Permitir que el texto se ajuste naturalmente - altura reducida 30% */
   display: block;
   height: clamp(1.62rem, 2.16vw + 0.864rem, 2.376rem);
   min-height: unset;
-  
-  /* Asegurar que el texto sea legible */
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
-/* Pseudo-elemento removido - ya no se necesita truncamiento */
+
 
 .product-card .product-media {
   display: flex;
@@ -921,42 +824,32 @@ body:not(.order-mode-active) #content-container {
   flex-grow: 1;
   order: 3;
   
-  /* NIVEL 1: Altura completamente flexible - se adapta al contenido */
-  /* height: removido para permitir expansión natural */
-  
-  /* NIVEL 2: Contenido se adapta al espacio disponible - aumentado 25% */
   font-size: clamp(0.7rem, 1.5vw + 0.3rem, 0.9rem);
   line-height: clamp(1.2, 1.3vw + 1rem, 1.4);
-  
-  /* Configuración para texto 100% responsivo - sin restricciones */
   display: block;
   overflow: visible;
   text-overflow: unset;
   word-wrap: break-word;
   hyphens: auto;
-  
-  /* Sin límite de líneas - texto libre */
   -webkit-line-clamp: unset;
   line-clamp: unset;
-  
-  /* Permitir expansión natural del texto */
   position: relative;
   height: auto;
   min-height: clamp(3.96rem, 4.95vw + 2.2rem, 5.5rem);
   max-height: none;
 }
 
-/* Pseudo-elemento removido - ya no es necesario para texto libre */
+
 .product-card .product-ingredients::after {
   display: none;
 }
 
-/* Configuración removida - sin truncamiento */
+
 .product-card .product-ingredients[data-truncated="true"]::after {
   display: none;
 }
 
-/* Configuración general para imágenes de productos (nueva configuración mejorada) */
+/* Imágenes de productos */
 .product-card .product-image {
   width: 100%;
   height: 180px;
@@ -967,13 +860,10 @@ body:not(.order-mode-active) #content-container {
   transition: transform 0.3s ease;
 }
 
-/* Configuración específica para imágenes de licores - completamente responsiva */
+/* Imágenes de licores */
 .product-card.liquor-card .product-image {
-  /* Altura responsiva que se adapta al tamaño del grid */
   height: clamp(120px, 15vw + 2vh, 200px);
   width: 100%;
-  
-  /* Mantener proporciones y centrado */
   object-fit: contain;
   object-position: center;
   background: white;
@@ -1294,6 +1184,24 @@ body:not(.order-mode-active) #content-container {
 .product-table {
   width: var(--table-width);
   max-width: var(--table-max-width);
+  /* Recuperar estilos de contenedor para modo tabla */
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border);
+  margin: var(--spacing) auto;
+}
+
+/* Liquor table styles - matching product table container styles */
+.liquor-table {
+  width: var(--table-width);
+  max-width: var(--table-max-width);
+  /* Recuperar estilos de contenedor para modo tabla */
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border);
+  margin: var(--spacing) auto;
 }
 
 .product-image {
@@ -1452,7 +1360,7 @@ body:not(.order-mode-active) #content-container {
 /* Reglas de modales móviles - ELIMINADAS */
 /* Los modales ahora se adaptan naturalmente sin restricciones de dispositivo */
 
-/* Optimized animations */
+/* Additional Animations */
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); } }
 .fade-in { animation: fadeIn 1s ease-in-out forwards; }
@@ -1512,92 +1420,11 @@ body.order-mode-active #order-sidebar {
 }
 
 /* Sidebar para móvil portrait - parte inferior */
-@media (max-width: 767px) and (orientation: portrait) {
-  .content-container-flex {
-    flex-direction: column;
-    gap: 0.5rem;
-    /* Espacio para sidebar inferior cuando está activo */
-    padding-bottom: 0;
-  }
-  
-  body.order-mode-active .content-container-flex {
-    padding-bottom: 200px; /* Espacio para sidebar fijo inferior */
-  }
-  
-  #order-sidebar {
-    /* Sidebar fijo en la parte inferior */
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    max-height: 180px !important;
-    margin: 0 !important;
-    z-index: 1000 !important;
-    border-radius: 12px 12px 0 0 !important;
-    border-bottom: none !important;
-    overflow-y: auto;
-    flex: none;
-  }
-  
-  body:not(.order-mode-active) #content-container {
-    width: 100%;
-  }
-}
+/* REGLA MÓVIL ELIMINADA - Ahora manejada por mobile.css */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .content-container-flex {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  #order-sidebar {
-    flex: 0 0 auto;
-    width: 100%;
-    max-width: none;
-    margin-top: 10px;
-  }
-  
-  body:not(.order-mode-active) #content-container {
-    width: 100%;
-  }
-}
+/* REGLA TABLET ELIMINADA - Ahora manejada por tablet.css */
 
-/* Contenido del sidebar responsive - reducido 5% */
-#order-sidebar h3 {
-  font-size: 1.4rem; /* Reducido de 1.5rem */
-  margin-bottom: 14px; /* Reducido de 15px */
-}
-
-.order-item {
-  padding: 9px 0; /* Reducido de 10px */
-  margin-bottom: 9px; /* Reducido de 10px */
-}
-
-.order-item-name {
-  font-size: 0.95rem; /* Reducido de 1rem */
-  margin-bottom: 4px; /* Reducido de 5px */
-}
-
-.order-item-price {
-  font-size: 0.9rem; /* Reducido ligeramente */
-}
-
-.order-item-customization {
-  font-size: 0.8rem; /* Reducido de 0.85rem */
-  margin-top: 4px; /* Reducido de 5px */
-}
-
-.order-total {
-  margin-top: 18px; /* Reducido de 20px */
-  padding-top: 9px; /* Reducido de 10px */
-}
-
-.order-total h4 {
-  font-size: 1.14rem; /* Reducido de 1.2rem */
-}
+/* Sidebar Content - Consolidated */
 
 .order-item-header {
   display: flex;
@@ -1610,14 +1437,14 @@ body.order-mode-active #order-sidebar {
 }
 
 #order-sidebar h3 {
-  color: var(--primary-color);
+  color: var(--primary);
   font: 1.5rem 'Playfair Display', serif;
   margin-bottom: 15px;
   text-align: center;
 }
 
 .order-item {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   padding: 10px 0;
   margin-bottom: 10px;
   width: 100%;
@@ -1628,7 +1455,7 @@ body.order-mode-active #order-sidebar {
 
 .order-item-name {
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--primary);
   margin-bottom: 5px;
   width: 100%;
   word-wrap: break-word;
@@ -1653,9 +1480,9 @@ body.order-mode-active #order-sidebar {
 }
 
 .order-total {
-  margin-top: 20px;
+  margin-top: var(--spacing);
   padding-top: 10px;
-  border-top: 2px solid var(--border-color);
+  border-top: 2px solid var(--border);
 }
 
 .order-total h4 {
@@ -1936,8 +1763,8 @@ textarea:focus {
   align-items: center;
   padding: 12px;
   margin: 8px 0;
-  border: 1px solid var(--border-color);
-  transition: all var(--transition-time) ease;
+  border: 1px solid var(--border);
+  transition: var(--transition);
   min-height: 80px;
   width: 100%;
   box-sizing: border-box;
@@ -1969,20 +1796,20 @@ textarea:focus {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   background: transparent;
-  color: var(--text-color);
+  color: var(--text);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: all var(--transition-time) ease;
+  transition: var(--transition);
 }
 
 .counter-btn:hover:not(:disabled) {
-  background-color: var(--primary-color);
-  color: var(--background-color);
+  background-color: var(--primary);
+  color: var(--bg);
 }
 
 .counter-btn:disabled {
@@ -2006,19 +1833,19 @@ textarea:focus {
 
 .saved-order {
   background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   backdrop-filter: blur(10px);
   padding: 15px;
   margin-bottom: 15px;
-  transition: all var(--transition-time) ease;
+  transition: var(--transition);
 }
 
 .saved-order h3 {
-  color: var(--primary-color);
+  color: var(--primary);
   font: 1.3rem 'Playfair Display', serif;
   margin-bottom: 10px;
   text-align: center;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 5px;
 }
 
@@ -2034,7 +1861,7 @@ textarea:focus {
 
 .saved-order-item-name {
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--primary);
   margin-bottom: 3px;
 }
 
@@ -2093,35 +1920,9 @@ textarea:focus {
 /* Los elementos ahora usan sus tamaños naturales sin restricciones de dispositivo */
 
 /* =================================================================
-   TOP NAVIGATION - RESPONSIVE FIXED HEIGHT
+   TOP NAVIGATION - DESKTOP ONLY
    ================================================================= */
-/* Mobile devices */
-@media (max-width: 480px) {
-  #top-nav {
-    height: var(--top-nav-height-mobile) !important;
-    min-height: var(--top-nav-height-mobile) !important;
-    max-height: var(--top-nav-height-mobile) !important;
-    padding: 0 15px;
-  }
-  
-  body.top-nav-visible {
-    padding-top: var(--top-nav-height-mobile) !important;
-  }
-}
-
-/* Tablets */
-@media (min-width: 481px) and (max-width: 1024px) {
-  #top-nav {
-    height: var(--top-nav-height-tablet) !important;
-    min-height: var(--top-nav-height-tablet) !important;
-    max-height: var(--top-nav-height-tablet) !important;
-    padding: 0 18px;
-  }
-  
-  body.top-nav-visible {
-    padding-top: var(--top-nav-height-tablet) !important;
-  }
-}
+/* NOTA: Reglas móviles y tablet movidas a mobile.css y tablet.css respectivamente */
 
 /* Desktop */
 @media (min-width: 1025px) {
@@ -2173,19 +1974,11 @@ textarea:focus {
     gap: 12px;
   }
   
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1400px;
-    gap: 25px;
-    padding: 25px;
-  }
+  /* PRODUCT GRID DESKTOP RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
+  /* Reglas desktop de .product-grid ahora manejadas por el componente BEM */
   
-  .category-grid {
-    grid-template-columns: repeat(5, 1fr);
-    max-width: 1400px;
-    gap: 25px;
-    padding: 25px;
-  }
+  /* CATEGORY GRID DESKTOP RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
+  /* Reglas desktop de .category-grid ahora manejadas por el componente BEM */
   
   .category-image {
     width: clamp(110px, 13vw, 150px);
@@ -2451,140 +2244,48 @@ body.top-nav-visible {
 .jager-label { font-weight: 500; color: var(--text-color); }
 
 /* =================================================================
-   INLINE STYLE REFACTORING - UTILITY CLASSES
+   UTILITY CLASSES - Optimizadas y limpias
    ================================================================= */
 
-/* Screen display utilities */
-.screen-hidden {
-  display: none !important;
-}
+/* Display utilities - Críticas para JavaScript */
+.screen-hidden { display: none !important; }
+.screen-visible { display: flex !important; opacity: 1; visibility: visible; }
+.screen-flex { display: flex !important; }
+.screen-block { display: block !important; }
 
-.screen-visible {
-  display: flex !important;
-  opacity: 1;
-  visibility: visible;
-}
+/* Navigation visibility - Sin !important innecesario */
+.hamburger-hidden { display: none; }
+.hamburger-visible { display: block; }
 
-.screen-flex {
-  display: flex !important;
-}
+/* Layout states - Críticas para modo orden */
+.sidebar-hidden { display: none !important; }
+.sidebar-visible { display: block !important; }
+.content-hidden { display: none; }
+.content-visible { display: block; }
 
-.screen-block {
-  display: block !important;
-}
+/* Component states - Simplificadas */
+.input-container-hidden, .choice-hidden, .error-hidden, .modal-hidden, .page-title-hidden { display: none; }
+.input-container-visible, .choice-visible, .error-visible, .page-title-visible { display: block; }
+.modal-flex { display: flex; }
 
-/* Hamburger menu visibility */
-.hamburger-hidden {
-  display: none;
-}
+/* Body control - Crítico para modales */
+.body-no-scroll { overflow: hidden; }
+.body-scroll { overflow: auto; }
 
-.hamburger-visible {
-  display: block;
-}
+/* Visual utilities */
+.error-red { color: red; }
+.opacity-0 { opacity: 0; }
+.opacity-1 { opacity: 1; }
+.left-0 { left: 0; }
+.left-auto { left: auto; }
 
-/* Sidebar and container display states */
-.sidebar-hidden {
-  display: none !important;
-}
+/* Product image utilities - Mantener !important para override */
+.product-image-small { width: 40px !important; height: 40px !important; }
+.product-image-large { width: 70px !important; height: 70px !important; }
 
-.sidebar-visible {
-  display: block !important;
-}
-
-.content-hidden {
-  display: none;
-}
-
-.content-visible {
-  display: block;
-}
-
-/* Input container states */
-.input-container-hidden {
-  display: none;
-}
-
-.input-container-visible {
-  display: block;
-}
-
-/* Choice container states */
-.choice-hidden {
-  display: none;
-}
-
-.choice-visible {
-  display: block;
-}
-
-/* Body overflow control */
-.body-no-scroll {
-  overflow: hidden;
-}
-
-.body-scroll {
-  overflow: auto;
-}
-
-/* Error display utilities */
-.error-red {
-  color: red;
-}
-
-.error-visible {
-  display: block;
-}
-
-.error-hidden {
-  display: none;
-}
-
-/* Modal display states */
-.modal-flex {
-  display: flex;
-}
-
-.modal-hidden {
-  display: none;
-}
-
-/* Opacity utilities */
-.opacity-0 {
-  opacity: 0;
-}
-
-.opacity-1 {
-  opacity: 1;
-}
-
-/* Left positioning utilities */
-.left-0 {
-  left: 0;
-}
-
-.left-auto {
-  left: auto;
-}
-
-/* Product image size utilities */
-.product-image-small {
-  width: 40px !important;
-  height: 40px !important;
-}
-
-.product-image-large {
-  width: 70px !important;
-  height: 70px !important;
-}
-
-/* Height and min-height utilities */
-.height-auto {
-  height: auto !important;
-}
-
-.min-height-auto {
-  min-height: auto !important;
-}
+/* Layout utilities - Mantener !important para casos específicos */
+.height-auto { height: auto !important; }
+.min-height-auto { min-height: auto !important; }
 
 /* Modal subtitle styling */
 .modal-subtitle {
@@ -2656,23 +2357,11 @@ body.top-nav-visible {
 }
 
 /* 1. Activación segura - Solo cuando body tiene clase grid-enhanced */
-body.grid-enhanced .product-grid {
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
-  gap: var(--grid-gap);
-  padding: var(--grid-pad);
-  width: 97%; /* Mismo ancho que las tablas */
-  max-width: var(--table-max-width);
-  margin: 0 auto;
-}
+/* ENHANCED PRODUCT GRID RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
+/* Reglas de body.grid-enhanced .product-grid ahora manejadas por el componente BEM */
 
-body.grid-enhanced .category-grid {
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
-  gap: var(--grid-gap);
-  padding: var(--grid-pad);
-  width: 97%; /* Mismo ancho que las tablas */
-  max-width: var(--table-max-width);
-  margin: 0 auto;
-}
+/* ENHANCED CATEGORY GRID RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
+/* Reglas de body.grid-enhanced .category-grid ahora manejadas por el componente BEM */
 
 /* 2. Estructura base de las cards con grid interno */
 body.grid-enhanced .product-card {
@@ -2765,85 +2454,9 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
    ================================================================= */
 
 /* 📱 MODO GRID - TELÉFONO EN VERTICAL (PORTRAIT) */
-@media (max-width: 767px) and (orientation: portrait) {
-  /* Contenedor padre reducido 20% y centrado */
-  #app {
-    padding: 0 clamp(16px, 4vw, 24px);
-  }
-  
-  .content-container-flex {
-    width: 80%; /* Reducido 20% del ancho original */
-    max-width: 80%;
-    margin: 0 auto; /* Centrado con misma distancia desde ambos extremos */
-    gap: clamp(8px, 2vw, 12px);
-  }
-  
-  #content-container {
-    width: 100%;
-    padding: 0 clamp(8px, 2vw, 12px);
-  }
-  
-  /* Grids de 2 columnas con márgenes equilibrados */
-  .product-grid,
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(8px, 2vw, 12px);
-    padding: clamp(10px, 2.5vw, 15px);
-    width: 100%;
-    margin: 0 auto;
-  }
-  
-  /* Barra superior fija - no alterada por zoom */
-  #top-nav {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 9999 !important;
-    height: var(--top-nav-height-mobile) !important;
-    min-height: var(--top-nav-height-mobile) !important;
-    max-height: var(--top-nav-height-mobile) !important;
-  }
-  
-  body.top-nav-visible {
-    padding-top: var(--top-nav-height-mobile) !important;
-  }
-}
+/* REGLAS GRID MÓVILES ELIMINADAS - Ahora manejadas por mobile.css */
 
-/* 📊 MODO TABLA - TELÉFONO EN VERTICAL (PORTRAIT) */
-@media (max-width: 767px) and (orientation: portrait) {
-  /* Página cargada con tamaño minimizado - evitar zoom del usuario */
-  html {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-  
-  body {
-    /* Zoom y transform removidos - causaban interferencia con responsive */
-  }
-  
-  /* Tablas optimizadas para móvil portrait */
-  .product-table {
-    width: 100%;
-    font-size: clamp(11px, 2.5vw, 13px);
-    border-collapse: collapse;
-  }
-  
-  .product-table th,
-  .product-table td {
-    padding: clamp(4px, 1vw, 8px);
-    font-size: clamp(10px, 2.2vw, 12px);
-  }
-  
-  /* Barra superior estable igual que en modo Grid */
-  #top-nav {
-    position: fixed !important;
-    height: var(--top-nav-height-mobile) !important;
-    min-height: var(--top-nav-height-mobile) !important;
-    max-height: var(--top-nav-height-mobile) !important;
-  }
-}
+/* REGLAS TABLA MÓVILES ELIMINADAS - Ahora manejadas por mobile.css */
 
 /* 📐 MODO HORIZONTAL (LANDSCAPE) - MÓVILES Y TABLETS */
 @media (orientation: landscape) and (min-width: 640px) {
@@ -2912,23 +2525,12 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
   }
 }
 
-/* Tablets específicamente (768px - 834px) */
-@media (min-width: 768px) and (max-width: 834px) {
-  #app {
-    padding: 0 clamp(12px, 3vw, 24px);
-  }
-  
-  .content-container-flex {
-    max-width: 100%;
-    gap: clamp(15px, 3vw, 25px);
-  }
-  
-  .product-grid,
-  .category-grid {
-    gap: clamp(18px, 2.8vw, 28px);
-    padding: clamp(18px, 2.8vw, 28px);
-  }
-}
+/* 📱 TABLETS EN MODO PORTRAIT - MÓVIL VERTICAL (768px - 1024px) */
+/* REGLAS TABLET PORTRAIT ELIMINADAS - Ahora manejadas por tablet.css */
+
+/* REGLAS TABLET LANDSCAPE ELIMINADAS - Ahora manejadas por tablet.css */
+
+/* REGLAS TABLET ESPECÍFICAS ELIMINADAS - Ahora manejadas por tablet.css */
 
 /* Desktop (min-width: 1025px) - Restaurar comportamiento original */
 @media (min-width: 1025px) {
@@ -2947,20 +2549,11 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     max-width: 1120px;
   }
   
-  .category-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    row-gap: 10px;
-    padding: 20px;
-    width: 97%;
-  }
+  /* CATEGORY GRID FINAL DESKTOP RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
+  /* Reglas finales desktop de .category-grid ahora manejadas por el componente BEM */
   
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(15px, 2.5vw, 25px);
-    padding: clamp(15px, 2.5vw, 25px);
-    width: 97%;
-  }
+  /* PRODUCT GRID FINAL DESKTOP RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
+  /* Reglas finales desktop de .product-grid ahora manejadas por el componente BEM */
   
   .product-card .product-name,
   .category-card .category-name {

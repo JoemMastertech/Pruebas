@@ -16,16 +16,29 @@ const ProductRenderer = {
   // Toggle between table and grid view
   toggleViewMode: function() {
     this.currentViewMode = this.currentViewMode === 'table' ? 'grid' : 'table';
-    Logger.info('View mode toggled to:', this.currentViewMode);
+    Logger.info('🔄 View mode toggled to:', this.currentViewMode);
+    
+    // DEBUG: Log viewport and body dimensions
+    console.log('🔍 DEBUG - Viewport dimensions:', {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      devicePixelRatio: window.devicePixelRatio
+    });
+    
+    console.log('🔍 DEBUG - Body classes before toggle:', Array.from(document.body.classList));
     
     // Activar/desactivar grid-enhanced según el modo
     if (this.currentViewMode === 'grid') {
       document.body.classList.add('grid-enhanced');
+      console.log('✅ DEBUG - Added grid-enhanced class to body');
       // Asignar tipos de grid automáticamente
       this.assignGridTypes();
     } else {
       document.body.classList.remove('grid-enhanced');
+      console.log('❌ DEBUG - Removed grid-enhanced class from body');
     }
+    
+    console.log('🔍 DEBUG - Body classes after toggle:', Array.from(document.body.classList));
     
     // DESHABILITADO: El botón de vista ahora está en la barra superior independiente
     // La actualización del botón se maneja en IndependentTopNavManager
@@ -36,35 +49,54 @@ const ProductRenderer = {
   // Asignar tipos de grid automáticamente según la categoría
   assignGridTypes: function() {
     const grids = document.querySelectorAll('.product-grid, .category-grid');
+    console.log('🔍 DEBUG - Found grids for type assignment:', grids.length);
     
-    grids.forEach(grid => {
+    grids.forEach((grid, index) => {
+      console.log(`🔍 DEBUG - Processing grid ${index + 1}:`, {
+        classes: Array.from(grid.classList),
+        dataset: grid.dataset,
+        textContent: grid.textContent.substring(0, 50) + '...'
+      });
+      
       // Limpiar clases de tipo previas
       grid.classList.remove('grid-type-1', 'grid-type-2', 'grid-type-3', 'grid-type-4');
       
       if (grid.classList.contains('category-grid')) {
         // Tipo 4: Categorías de licores
         grid.classList.add('grid-type-4');
+        console.log('✅ DEBUG - Assigned grid-type-4 to category-grid');
       } else if (grid.classList.contains('product-grid')) {
         const firstCard = grid.querySelector('.product-card');
         
         if (firstCard && firstCard.classList.contains('liquor-card')) {
           // Tipo 3: Subcategorías de Licores
           grid.classList.add('grid-type-3');
+          console.log('✅ DEBUG - Assigned grid-type-3 to liquor product-grid');
         } else {
           // Determinar por categoría basándose en el título o dataset
           const category = grid.dataset.category || '';
           const categoryText = grid.textContent.toLowerCase();
           
+          console.log('🔍 DEBUG - Category analysis:', {
+            datasetCategory: category,
+            hasRefrescos: categoryText.includes('refrescos'),
+            hasCervezas: categoryText.includes('cervezas')
+          });
+          
           if (category === 'refrescos' || category === 'cervezas' || 
               categoryText.includes('refrescos') || categoryText.includes('cervezas')) {
             // Tipo 2: Refrescos, Cervezas
             grid.classList.add('grid-type-2');
+            console.log('✅ DEBUG - Assigned grid-type-2 to beverages grid');
           } else {
             // Tipo 1: Alitas, Pizzas, Sopas, Ensaladas, Carnes, Postres, Café
             grid.classList.add('grid-type-1');
+            console.log('✅ DEBUG - Assigned grid-type-1 to food grid');
           }
         }
       }
+      
+      console.log(`🔍 DEBUG - Final grid ${index + 1} classes:`, Array.from(grid.classList));
     });
     
     Logger.info('Grid types assigned automatically');
@@ -583,6 +615,13 @@ const ProductRenderer = {
   
   // Create product grid view
   createProductGrid: function(container, data, fields, categoryTitle) {
+    console.log('🏗️ DEBUG - Creating product grid:', {
+      categoryTitle,
+      dataCount: data.length,
+      fields,
+      containerClasses: Array.from(container.classList)
+    });
+    
     const grid = document.createElement('div');
     grid.className = 'product-grid';
     
@@ -592,6 +631,11 @@ const ProductRenderer = {
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase();
     grid.dataset.category = normalizedCategory;
+    
+    console.log('🔍 DEBUG - Category normalization:', {
+      original: categoryTitle,
+      normalized: normalizedCategory
+    });
     
     // Determine productType based on category
     let productType;
@@ -607,14 +651,23 @@ const ProductRenderer = {
     }
     grid.dataset.productType = productType;
     
+    console.log('🔍 DEBUG - Product type determined:', productType);
+    
     // Asignar tipo de grid automáticamente si grid-enhanced está activo
-    if (document.body.classList.contains('grid-enhanced')) {
+    const isGridEnhanced = document.body.classList.contains('grid-enhanced');
+    console.log('🔍 DEBUG - Grid enhanced status:', isGridEnhanced);
+    
+    if (isGridEnhanced) {
       if (normalizedCategory === 'refrescos' || normalizedCategory === 'cervezas') {
         grid.classList.add('grid-type-2');
+        console.log('✅ DEBUG - Added grid-type-2 to grid');
       } else {
         grid.classList.add('grid-type-1');
+        console.log('✅ DEBUG - Added grid-type-1 to grid');
       }
     }
+    
+    console.log('🔍 DEBUG - Grid classes after type assignment:', Array.from(grid.classList));
     
     // Add title
     const titleElement = document.createElement('h2');
@@ -622,8 +675,17 @@ const ProductRenderer = {
     titleElement.textContent = categoryTitle;
     grid.appendChild(titleElement);
     
+    console.log('🔍 DEBUG - Starting to create product cards, count:', data.length);
+    
     // Create product cards
-    data.forEach(item => {
+    data.forEach((item, index) => {
+      console.log(`🃏 DEBUG - Creating card ${index + 1}/${data.length}:`, {
+        name: item.nombre,
+        hasVideo: !!item.video,
+        hasImage: !!(item.imagen || item.ruta_archivo),
+        hasIngredients: !!item.ingredientes
+      });
+      
       const card = document.createElement('div');
       card.className = 'product-card';
       
@@ -732,9 +794,54 @@ const ProductRenderer = {
       
       card.appendChild(pricesContainer);
       grid.appendChild(card);
+      
+      console.log(`🃏 DEBUG - Card ${index + 1} created with classes:`, Array.from(card.classList));
+    });
+    
+    console.log('🔍 DEBUG - Grid creation completed:', {
+      totalCards: grid.querySelectorAll('.product-card').length,
+      gridClasses: Array.from(grid.classList),
+      gridDataset: grid.dataset
     });
     
     container.appendChild(grid);
+    
+    // Log final container and grid dimensions after DOM insertion
+    setTimeout(() => {
+      const gridRect = grid.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const cards = grid.querySelectorAll('.product-card');
+      
+      console.log('📐 DEBUG - Final dimensions after DOM insertion:', {
+        container: {
+          width: containerRect.width,
+          height: containerRect.height,
+          classes: Array.from(container.classList)
+        },
+        grid: {
+          width: gridRect.width,
+          height: gridRect.height,
+          classes: Array.from(grid.classList),
+          computedStyle: {
+            display: getComputedStyle(grid).display,
+            gridTemplateColumns: getComputedStyle(grid).gridTemplateColumns,
+            gap: getComputedStyle(grid).gap,
+            padding: getComputedStyle(grid).padding
+          }
+        },
+        cards: Array.from(cards).slice(0, 3).map((card, i) => ({
+          index: i,
+          width: card.getBoundingClientRect().width,
+          height: card.getBoundingClientRect().height,
+          classes: Array.from(card.classList),
+          computedStyle: {
+            minHeight: getComputedStyle(card).minHeight,
+            padding: getComputedStyle(card).padding,
+            display: getComputedStyle(card).display
+          }
+        }))
+      });
+    }, 100);
     
     // Apply intelligent text truncation after grid is rendered
     this.applyIntelligentTruncation(grid);
@@ -742,11 +849,23 @@ const ProductRenderer = {
   
   // Apply intelligent text truncation to product cards
   applyIntelligentTruncation: function(gridContainer) {
+    console.log('✂️ DEBUG - Starting intelligent truncation for grid:', {
+      gridClasses: Array.from(gridContainer.classList),
+      cardCount: gridContainer.querySelectorAll('.product-card').length
+    });
+    
     // Wait for the DOM to be fully rendered
     setTimeout(() => {
       const productCards = gridContainer.querySelectorAll('.product-card');
       
-      productCards.forEach(card => {
+      console.log('✂️ DEBUG - Processing truncation for', productCards.length, 'cards');
+      
+      productCards.forEach((card, index) => {
+        console.log(`✂️ DEBUG - Processing card ${index + 1} for truncation:`, {
+          cardClasses: Array.from(card.classList),
+          cardHeight: card.getBoundingClientRect().height
+        });
+        
         // Skip product names - no truncation for titles
         const nameElement = card.querySelector('.product-name');
         if (nameElement) {

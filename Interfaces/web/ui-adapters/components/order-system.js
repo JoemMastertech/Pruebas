@@ -100,6 +100,9 @@ class OrderSystem {
     
     // Phase 3: Initialize centralized event delegation
     this.initEventDelegation();
+    
+    // Listener para cambios de orientación (sistema adaptativo)
+    this._initOrientationListener();
   }
   
   // Phase 3: Centralized event delegation system
@@ -415,6 +418,13 @@ class OrderSystem {
       
       sidebar.classList.toggle('sidebar-visible', shouldBeVisible);
       sidebar.classList.toggle('sidebar-hidden', !shouldBeVisible);
+      
+      // Agregar clase 'active' para animaciones en móviles landscape ≤480px
+      if (shouldBeVisible && window.innerWidth <= 480 && window.matchMedia('(orientation: landscape)').matches) {
+        sidebar.classList.add('active');
+      } else {
+        sidebar.classList.remove('active');
+      }
     }
   }
 
@@ -431,6 +441,8 @@ class OrderSystem {
   _updateWrapperState(wrapper, isActive) {
     if (wrapper && wrapper.classList) {
       wrapper.classList.toggle('order-active', isActive);
+      // Clase para el sistema adaptativo de sidebar
+      wrapper.classList.toggle('with-sidebar', isActive);
     }
   }
 
@@ -2246,6 +2258,31 @@ class OrderSystem {
         });
       }, 100);
     }
+  }
+
+  /**
+   * Inicializa el listener para cambios de orientación
+   * Actualiza el sidebar cuando cambia la orientación del dispositivo
+   */
+  _initOrientationListener() {
+    // Listener para cambios de orientación
+    window.addEventListener('orientationchange', () => {
+      // Pequeño delay para que la orientación se actualice completamente
+      setTimeout(() => {
+        if (this.isOrderMode) {
+          const elements = this._getOrderModeElements();
+          this._updateSidebarVisibility(elements.sidebar, true);
+        }
+      }, 100);
+    });
+
+    // También escuchar cambios de tamaño de ventana para navegadores
+    window.addEventListener('resize', () => {
+      if (this.isOrderMode) {
+        const elements = this._getOrderModeElements();
+        this._updateSidebarVisibility(elements.sidebar, true);
+      }
+    });
   }
 }
 

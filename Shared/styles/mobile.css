@@ -1,0 +1,317 @@
+/* =================================================================
+   MOBILE.CSS - ESTILOS MODULARES PARA DISPOSITIVOS MÓVILES
+   Fusión: mobile (320px+) + mobile-large (480px+)
+   ================================================================= */
+
+/* === VARIABLES MÓVILES ENCAPSULADAS === */
+:root {
+  /* Breakpoints móviles */
+  --mobile-bp-base: 320px;
+  --mobile-bp-large: 480px;
+  
+  /* Variables móviles específicas sincronizadas con main.css */
+  --mobile-sidebar-width: 140px;
+  --mobile-padding: 8px;
+  --mobile-gap: 8px;
+  --mobile-font-base: 0.8rem;
+  --mobile-font-small: 0.7rem;
+  --mobile-font-tiny: 0.6rem;
+  
+  /* Top Navigation Variables móviles */
+  --top-nav-height-mobile: 60px;
+  --top-nav-bg: rgba(0, 0, 0, 0.95);
+  --top-nav-border: #00f7ff;
+  
+  /* Grid configurations móviles */
+  --mobile-grid-columns: 2;
+  --mobile-grid-gap: clamp(8px, 2vw, 12px);
+  --mobile-grid-padding: clamp(10px, 2.5vw, 15px);
+  
+  /* Tipografía móvil */
+  --mobile-font-title: clamp(12px, 1.8vw, 14px);
+  --mobile-font-description: clamp(11px, 1.6vw, 13px);
+  --mobile-font-price: clamp(11px, 1.6vw, 13px);
+  
+  /* Espaciado móvil */
+  --mobile-card-padding: clamp(8px, 2vw, 12px);
+  --mobile-card-margin: clamp(6px, 1.5vw, 10px);
+  
+  /* Colores y efectos móviles */
+  --mobile-card-bg: rgba(0,0,0,0.8);
+  --mobile-border-color: #00f7ff40;
+  --mobile-transition: 0.2s ease;
+}
+
+/* === COMPONENTE BASE GRID MÓVIL (BEM) === */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
+  gap: var(--mobile-grid-gap);
+  padding: var(--mobile-grid-padding);
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* === MODIFICADORES DE GRID MÓVIL === */
+.grid--products {
+  grid-auto-rows: minmax(200px, auto);
+}
+
+.grid--categories {
+  grid-template-rows: repeat(auto-fit, minmax(120px, 1fr));
+  aspect-ratio: auto;
+}
+
+/* === COMPONENTES DE CARD MÓVIL (BEM) === */
+.card {
+  background: var(--mobile-card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--mobile-border-color);
+  transition: var(--mobile-transition);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 180px;
+}
+
+.card--product {
+  justify-content: space-between;
+}
+
+.card--category {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 120px;
+}
+
+/* === ELEMENTOS DE CARD === */
+.card__image {
+  width: 100%;
+  height: clamp(80px, 12vw, 120px);
+  object-fit: cover;
+  border-radius: 6px 6px 0 0;
+}
+
+.card__content {
+  padding: var(--mobile-card-padding);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card__title {
+  font-size: var(--mobile-font-title);
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  color: #ECE9D8;
+}
+
+.card__description {
+  font-size: var(--mobile-font-description);
+  opacity: 0.8;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  color: #ECE9D8;
+  flex-grow: 1;
+}
+
+.card__price {
+  margin-top: auto;
+}
+
+/* === BOTÓN DE PRECIO MÓVIL === */
+.price-button {
+  font-size: var(--mobile-font-price);
+  padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 12px);
+  background: #00f7ff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--mobile-transition);
+  width: 100%;
+  font-weight: 600;
+}
+
+.price-button:hover {
+  background: #00d4db;
+  transform: scale(1.02);
+}
+
+/* === UTILIDADES MÓVILES === */
+.u-mobile-only {
+  display: block;
+}
+
+.u-hide-mobile {
+  display: none;
+}
+
+.u-mobile-center {
+  text-align: center;
+}
+
+.u-mobile-full-width {
+  width: 100%;
+}
+
+/* === ESTADOS MÓVILES === */
+.grid--loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.grid--empty {
+  min-height: 200px;
+  place-items: center;
+  grid-template-columns: 1fr;
+}
+
+.card--loading {
+  opacity: 0.5;
+  animation: pulse-mobile 1.5s infinite;
+}
+
+@keyframes pulse-mobile {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* === RESPONSIVE MÓVIL INTERNO === */
+
+/* Mobile Base (320px - 479px) */
+@media (max-width: 479px) {
+  .grid {
+    padding: clamp(8px, 2vw, 10px);
+    gap: clamp(6px, 1.5vw, 8px);
+  }
+  
+  .card {
+    min-height: 160px;
+  }
+  
+  .card__image {
+    height: clamp(70px, 10vw, 100px);
+  }
+  
+  .card__content {
+    padding: clamp(6px, 1.5vw, 10px);
+  }
+}
+
+/* Mobile Large (480px+) */
+@media (min-width: 480px) {
+  .grid {
+    padding: clamp(12px, 2.5vw, 16px);
+    gap: clamp(10px, 2vw, 14px);
+  }
+  
+  .card {
+    min-height: 200px;
+  }
+  
+  .card__image {
+    height: clamp(90px, 14vw, 130px);
+  }
+  
+  .card__content {
+    padding: clamp(10px, 2vw, 14px);
+  }
+  
+  .card__title {
+    font-size: clamp(13px, 1.9vw, 15px);
+  }
+  
+  .card__description {
+    font-size: clamp(12px, 1.7vw, 14px);
+  }
+  
+  .price-button {
+    font-size: clamp(12px, 1.7vw, 14px);
+    padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 14px);
+  }
+}
+
+/* === ORIENTACIÓN MÓVIL === */
+@media (orientation: portrait) {
+  .grid--categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .card--category {
+    aspect-ratio: 1;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .grid {
+    gap: clamp(6px, 1.5vw, 10px);
+    padding: clamp(8px, 2vw, 12px);
+  }
+  
+  .card {
+    min-height: 140px;
+  }
+  
+  .card__image {
+    height: clamp(60px, 8vw, 90px);
+  }
+}
+
+/* === ACCESIBILIDAD MÓVIL === */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .price-button {
+    transition: none;
+  }
+  
+  .card--loading {
+    animation: none;
+  }
+}
+
+/* === MODO OSCURO MÓVIL === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mobile-card-bg: rgba(0,0,0,0.9);
+    --mobile-border-color: #00f7ff60;
+  }
+}
+
+/* === ALTO CONTRASTE MÓVIL === */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+  
+  .card__title {
+    font-weight: 700;
+  }
+  
+  .price-button {
+    font-weight: 700;
+    border: 2px solid #000;
+  }
+}
+
+/* === NAVEGACIÓN SUPERIOR MÓVIL === */
+@media (max-width: 480px) {
+  #top-nav {
+    height: var(--top-nav-height-mobile) !important;
+    min-height: var(--top-nav-height-mobile) !important;
+    max-height: var(--top-nav-height-mobile) !important;
+    padding: 0 15px;
+    background: var(--top-nav-bg);
+    border-bottom: 1px solid var(--top-nav-border);
+  }
+  
+  body.top-nav-visible {
+    padding-top: var(--top-nav-height-mobile) !important;
+  }
+}
