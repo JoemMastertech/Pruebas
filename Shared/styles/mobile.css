@@ -129,9 +129,9 @@
 .price-button {
   font-size: var(--mobile-font-price);
   padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 12px);
-  background: #00f7ff;
-  color: #000;
-  border: none;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
   border-radius: 4px;
   cursor: pointer;
   transition: var(--mobile-transition);
@@ -140,8 +140,11 @@
 }
 
 .price-button:hover {
-  background: #00d4db;
+  background-color: transparent;
   transform: scale(1.02);
+  border-color: var(--price-color);
+  color: var(--price-color);
+  box-shadow: 0 0 15px var(--price-color);
 }
 
 /* === UTILIDADES MÓVILES === */

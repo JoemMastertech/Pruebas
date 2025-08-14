@@ -985,8 +985,8 @@ body:not(.order-mode-active) #content-container {
 /* Price Buttons */
 .price-button {
   background: var(--price-bg, transparent);
-  color: var(--price-color);
-  border: 1px solid var(--price-color);
+  color: white;
+  border: 1px solid white;
   padding: 7px 12px;
   border-radius: 5px;
   cursor: pointer;
@@ -996,9 +996,11 @@ body:not(.order-mode-active) #content-container {
 }
 
 .price-button:hover {
-  background: var(--price-color);
-  color: var(--background-color);
-  transform: scale(1.05);
+  background-color: transparent;
+  transform: scale(1.02);
+  border-color: var(--price-color);
+  color: var(--price-color);
+  box-shadow: 0 0 15px var(--price-color);
 }
 
 .price-button.non-selectable {

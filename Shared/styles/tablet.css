@@ -136,21 +136,22 @@
 .price-button {
   font-size: var(--tablet-font-price);
   padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 14px);
-  background: #00f7ff;
-  color: #000;
-  border: none;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
   border-radius: 6px;
   cursor: pointer;
   transition: var(--tablet-transition);
   width: 100%;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .price-button:hover {
-  background: #00d4db;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  transform: scale(1.02);
+  border-color: var(--price-color);
+  color: var(--price-color);
+  box-shadow: 0 0 15px var(--price-color);
 }
 
 .price-button:active {
