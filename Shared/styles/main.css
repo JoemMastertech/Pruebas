@@ -2397,8 +2397,7 @@ body.top-nav-visible {
   width: 33.6%; 
   max-width: 336px; 
 }
-/* Category-specific tablet styles consolidated into main 768px media query above */
-/* Category-specific styles consolidated into main 480px media query above */
+/* Estilos específicos de categorías consolidados en media queries principales */
 .exclusive-option-group { background: rgba(0, 247, 255, 0.05); border: 1px solid rgba(0, 247, 255, 0.2); border-radius: 8px; padding: 15px; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; }
 .exclusive-option-group h4 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 1rem; text-align: center; }
 .jager-option-container { display: flex; align-items: center; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer; font-size: 1rem; }
@@ -2427,9 +2426,9 @@ body.top-nav-visible {
 .content-hidden { display: none; }
 .content-visible { display: block; }
 
-/* Component states - Simplificadas */
-.input-container-hidden, .choice-hidden, .error-hidden, .modal-hidden, .page-title-hidden { display: none; }
-.input-container-visible, .choice-visible, .error-visible, .page-title-visible { display: block; }
+/* Component states */
+.input-container-hidden, .choice-hidden, .error-hidden, .modal-hidden { display: none; }
+.input-container-visible, .choice-visible, .error-visible { display: block; }
 .modal-flex { display: flex; }
 
 /* Body control - Crítico para modales */
@@ -2437,11 +2436,9 @@ body.top-nav-visible {
 .body-scroll { overflow: auto; }
 
 /* Visual utilities */
-.error-red { color: red; }
+.error-red { color: var(--error-color, #ff4444); }
 .opacity-0 { opacity: 0; }
 .opacity-1 { opacity: 1; }
-.left-0 { left: 0; }
-.left-auto { left: auto; }
 
 /* Product image utilities - Mantener !important para override */
 .product-image-small { width: 40px !important; height: 40px !important; }
@@ -2458,14 +2455,7 @@ body.top-nav-visible {
   color: var(--text-color);
 }
 
-/* Page title visibility */
-.page-title-hidden {
-  display: none;
-}
-
-.page-title-visible {
-  display: block;
-}
+/* Eliminado: duplicado con component states arriba */
 
 /* Custom Scrollbar Styles */
 /* Webkit browsers (Chrome, Safari, Edge) */
@@ -2500,8 +2490,7 @@ body.top-nav-visible {
   scrollbar-color: var(--card-bg) rgba(0, 0, 0, 0.3);
 }
 
-/* Implementación móvil específica - ELIMINADA */
-/* La página ahora se adapta naturalmente sin restricciones de dispositivo */
+
 
 /* =================================================================
    GRID ENHANCED - PLAN DE ESTANDARIZACIÓN
@@ -2521,11 +2510,7 @@ body.top-nav-visible {
 }
 
 /* 1. Activación segura - Solo cuando body tiene clase grid-enhanced */
-/* ENHANCED PRODUCT GRID RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
-/* Reglas de body.grid-enhanced .product-grid ahora manejadas por el componente BEM */
-
-/* ENHANCED CATEGORY GRID RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
-/* Reglas de body.grid-enhanced .category-grid ahora manejadas por el componente BEM */
+/* Reglas de grid enhanced migradas a componentes BEM */
 
 /* === OPTIMIZACIÓN BEM: ESTRUCTURA BASE CARDS === */
 .product-card--enhanced {
@@ -2619,8 +2604,6 @@ body.grid-enhanced .product-card .product-ingredients {
   --price-gap: clamp(6px, 1.2cqw, 10px);
 }
 
-/* Compatibilidad legacy aplicada automáticamente por @extend anterior */
-
 /* ================================================================= 
    GRID ENHANCED – Fixes críticos y pulido
    ================================================================= */
@@ -2628,13 +2611,6 @@ body.grid-enhanced .product-card .product-ingredients {
 @supports (container-type: inline-size) {
   .product-card--enhanced {
     container-type: inline-size;
-  }
-}
-
-/* Compatibilidad legacy */
-@supports (container-type: inline-size) {
-  body.grid-enhanced .product-card {
-    @extend .product-card--enhanced;
   }
 }
 
@@ -2668,23 +2644,13 @@ body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanc
   }
 }
 
-/* Compatibilidad legacy */
-@supports (container-type: inline-size) {
-  @container (max-width: 340px) {
-    body.grid-enhanced .product-card {
-      @extend .product-card--enhanced;
-    }
-  }
-}
+/* Compatibilidad legacy aplicada automáticamente por @extend anterior */
 
 /* =================================================================
    CONFIGURACIÓN MÓVIL Y TABLET - SISTEMA RESPONSIVO AVANZADO
    ================================================================= */
 
-/* 📱 MODO GRID - TELÉFONO EN VERTICAL (PORTRAIT) */
-/* REGLAS GRID MÓVILES ELIMINADAS - Ahora manejadas por mobile.css */
-
-/* REGLAS TABLA MÓVILES ELIMINADAS - Ahora manejadas por mobile.css */
+/* Reglas móviles manejadas por mobile.css */
 
 /* 📐 MODO HORIZONTAL (LANDSCAPE) - MÓVILES Y TABLETS */
 @media (orientation: landscape) and (min-width: 640px) {
@@ -2778,12 +2744,7 @@ body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanc
   }
 }
 
-/* 📱 TABLETS EN MODO PORTRAIT - MÓVIL VERTICAL (768px - 1024px) */
-/* REGLAS TABLET PORTRAIT ELIMINADAS - Ahora manejadas por tablet.css */
-
-/* REGLAS TABLET LANDSCAPE ELIMINADAS - Ahora manejadas por tablet.css */
-
-/* REGLAS TABLET ESPECÍFICAS ELIMINADAS - Ahora manejadas por tablet.css */
+/* Reglas tablet manejadas por tablet.css */
 
 /* Desktop (min-width: 1025px) - Restaurar comportamiento original */
 @media (min-width: 1025px) {
@@ -2801,12 +2762,6 @@ body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanc
     width: 72%;
     max-width: 1120px;
   }
-  
-  /* CATEGORY GRID FINAL DESKTOP RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
-  /* Reglas finales desktop de .category-grid ahora manejadas por el componente BEM */
-  
-  /* PRODUCT GRID FINAL DESKTOP RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
-  /* Reglas finales desktop de .product-grid ahora manejadas por el componente BEM */
   
   .product-card .product-name,
   .category-card .category-name {

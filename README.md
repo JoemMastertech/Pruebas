@@ -70,11 +70,18 @@ docker-compose up -d
 
 ## 📚 **Documentación**
 
+### 📋 **Documentación Principal**
 - 📖 **[Arquitectura](docs/ARCHITECTURE.md)** - Estructura y patrones
 - 🚀 **[Guía de Desarrollo](docs/DEVELOPMENT_GUIDE.md)** - Desarrollo de features
 - 🔒 **[Seguridad](docs/SECURITY.md)** - Configuración de seguridad
 - 📊 **[Historial de Optimización](docs/OPTIMIZATION_HISTORY.md)** - Mejoras implementadas
 - ⚙️ **[Configuración Supabase](SUPABASE_SETUP.md)** - Setup de base de datos
+
+### 🔧 **Documentación de Optimización CSS/JS**
+- 📁 **[Fases de Optimización](docs/fases-optimizacion/)** - Documentación completa del proceso de optimización
+- 📋 **[Diagnóstico Inicial](docs/fases-optimizacion/DIAGNOSTICO_FRONTEND_COMPLETO.md)** - Análisis del estado inicial
+- 📚 **[Guía Técnica Completa](docs/fases-optimizacion/DOCUMENTACION_TECNICA_COMPLETA.md)** - Arquitectura y convenciones
+- ✅ **[Resumen Final](docs/fases-optimizacion/FASE4_LIMPIEZA_FINAL_COMPLETADA.md)** - Logros y métricas
 
 ## 🛠 **Stack Tecnológico**
 
