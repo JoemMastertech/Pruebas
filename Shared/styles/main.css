@@ -1534,7 +1534,7 @@ body:has(.category-grid[data-category="licores"]) {
 
 /* Compatibilidad legacy */
 body.order-mode-active #order-sidebar {
-  @extend .order-sidebar--active;
+  display: block;
 }
 
 /* Responsividad al reducir espacio */
@@ -2492,7 +2492,15 @@ body.top-nav-visible {
 
 /* Compatibilidad legacy */
 body.grid-enhanced .product-card {
-  @extend .product-card--enhanced;
+  container-type: inline-size;
+  display: grid;
+  grid-template-areas: 
+    "media title"
+    "media price";
+  grid-template-columns: var(--media-slot) 1fr;
+  grid-template-rows: 1fr auto;
+  column-gap: var(--slot-gap);
+  row-gap: var(--slot-gap);
 }
 
 /* === OPTIMIZACIÓN BEM: TIPOS DE GRID === */
@@ -2507,11 +2515,11 @@ body.grid-enhanced .product-card {
 
 /* Compatibilidad legacy */
 body.grid-enhanced .product-grid.grid-type-2 .product-card {
-  @extend .product-card--grid-type-2;
+  --ing-slot: 0px;
 }
 
 body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
-  @extend .product-card--grid-type-2 .card__description;
+  display: none;
 }
 
 /* Tipo 3: Subcategorías de Licores */
@@ -2528,11 +2536,14 @@ body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
 
 /* Compatibilidad legacy */
 body.grid-enhanced .product-card.liquor-card {
-  @extend .product-card--liquor;
+  --media-slot: minmax(clamp(140px, 32cqw, 220px), auto);
+  --price-gap: clamp(4px, 1cqw, 8px);
 }
 
 body.grid-enhanced .product-card.liquor-card .product-prices {
-  @extend .product-card--liquor .card__prices;
+  display: flex;
+  flex-direction: column;
+  gap: var(--price-gap);
 }
 
 /* Tipo 4: Categorías de licores */
@@ -2542,7 +2553,7 @@ body.grid-enhanced .product-card.liquor-card .product-prices {
 
 /* Compatibilidad legacy */
 body.grid-enhanced .category-grid.grid-type-4 .category-name {
-  @extend .category-card--grid-type-4 .card__title;
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
 }
 
 /* === OPTIMIZACIÓN BEM: TIPOGRAFÍA FLUIDA === */
@@ -2692,7 +2703,8 @@ body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanc
   
   /* Compatibilidad legacy */
   body.order-mode-active #content-container {
-    @extend .content-container--order-active;
+    /* Separación mínima entre contenido y sidebar */
+    margin-right: clamp(10px, 1.5vw, 15px);
   }
   
   /* Tipografía optimizada para landscape */
