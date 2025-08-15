@@ -3,27 +3,12 @@
 /* === COMPONENTES BEM INTEGRADOS === */
 /* Los componentes han sido integrados directamente en este archivo */
 
-/* === VARIABLES GLOBALES CONSOLIDADAS === */
+/* === VARIABLES ESPECÍFICAS DE MAIN.CSS === */
+/* Las variables globales están en _variables-unified.css */
 :root {
-  /* Core Colors - Simplified */
-  --primary: #f3f6f6;
-  --accent: #00f7ff;
-  --bg: #000;
-  --text: #ECE9D8;
-  --card-bg: rgba(0,0,0,0.7);
-  --border: #00f7ff40;
-  
-  /* Unified Shadows */
-  --shadow-base: 0 0 10px rgba(0, 247, 255, 0.3);
-  --shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
-  
-  /* Layout Constants */
-  --transition: 0.3s ease;
+  /* Layout específico */
   --border-radius: 10px;
-  --container-width: 95%;
   --container-max: 1400px;
-  --spacing: 20px;
-  --nav-height: 60px;
   
   /* === ESTANDARIZACIÓN DE COLUMNAS === */
   --container-width-3: 100%;     /* Interfaces de 3 columnas (Refrescos, Cervezas) */
@@ -65,33 +50,15 @@
   --grid-padding-desktop: clamp(15px, 2.5vw, 20px);
   --grid-padding-licores: 16px;
   
-  /* Breakpoints */
-  --bp-tablet: 768px;
-  --bp-desktop: 1200px;
-  --padding-5: clamp(15px, 2.5vw, 25px);
-  
-  /* Botones licores */
+  /* Botones licores específicos */
   --liquor-button-scale: 0.85;
   
-  /* Legacy support */
-  --primary-color: var(--primary);
-  --accent-color: var(--accent);
-  --background-color: var(--bg);
-  --text-color: var(--text);
-  --price-color: var(--accent);
-  --border-color: var(--border);
-  --transition-time: var(--transition);
+  /* Variables específicas de main.css que no están en unified */
   --table-width: var(--container-width);
   --table-max-width: var(--container-max);
   --table-margin: var(--spacing);
   
-  /* Top Navigation Variables - Desktop */
-  --top-nav-height: 60px;
-  --top-nav-height-desktop: 60px;
-  --top-nav-bg: rgba(0, 0, 0, 0.95);
-  --top-nav-border: #00f7ff;
-  
-  /* NOTA: Variables móviles y tablet movidas a mobile.css y tablet.css respectivamente */
+  /* NOTA: Variables globales movidas a _variables-unified.css */
 }
 
 /* ================================================================= 

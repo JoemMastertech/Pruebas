@@ -3,39 +3,25 @@
    Fusión: tablet-portrait (768px+) + tablet-landscape (1024px+)
    ================================================================= */
 
-/* === VARIABLES TABLET ENCAPSULADAS === */
+/* === VARIABLES TABLET ESPECÍFICAS === */
+/* Variables globales están en _variables-unified.css */
 :root {
-  /* Breakpoints tablet - Sincronizados con main.css */
-  --tablet-bp-portrait: 768px;
-  --tablet-bp-landscape: 1024px;
-  --bp-tablet: 768px;
-  --bp-desktop: 1200px;
-  
-  /* Top Navigation Variables tablet */
-  --top-nav-height-tablet: 60px;
-  --top-nav-bg: rgba(0, 0, 0, 0.95);
-  --top-nav-border: #00f7ff;
-  
-  /* Grid configurations tablet */
+  /* Variables específicas solo para tablet.css */
   --tablet-grid-columns-portrait: 2;
   --tablet-grid-columns-landscape: 3;
-  --tablet-grid-gap: clamp(12px, 2.5vw, 18px);
-  --tablet-grid-padding: clamp(15px, 3vw, 20px);
-  
-  /* Tipografía tablet */
-  --tablet-font-title: clamp(14px, 2vw, 16px);
-  --tablet-font-description: clamp(12px, 1.8vw, 14px);
-  --tablet-font-price: clamp(12px, 1.8vw, 14px);
-  
-  /* Espaciado tablet */
-  --tablet-card-padding: clamp(12px, 2.5vw, 16px);
   --tablet-card-margin: clamp(8px, 2vw, 12px);
   
-  /* Colores y efectos tablet */
-  --tablet-card-bg: rgba(0,0,0,0.75);
-  --tablet-border-color: #00f7ff40;
-  --tablet-transition: 0.3s ease;
-  --tablet-hover-scale: 1.03;
+  /* Alias para compatibilidad - usar variables unificadas */
+  --tablet-grid-gap: var(--gap);
+  --tablet-grid-padding: var(--padding);
+  --tablet-font-title: var(--font-title);
+  --tablet-font-description: var(--font-description);
+  --tablet-font-price: var(--font-price);
+  --tablet-card-padding: var(--card-padding);
+  --tablet-card-bg: var(--card-bg-current);
+  --tablet-border-color: var(--border);
+  --tablet-transition: var(--transition);
+  --tablet-hover-scale: var(--hover-scale);
 }
 
 /* === COMPONENTE BASE GRID TABLET (BEM) === */

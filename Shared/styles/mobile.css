@@ -3,45 +3,23 @@
    Fusión: mobile (320px+) + mobile-large (480px+)
    ================================================================= */
 
-/* === VARIABLES MÓVILES ENCAPSULADAS === */
+/* === VARIABLES MÓVILES ESPECÍFICAS === */
+/* Variables globales están en _variables-unified.css */
 :root {
-  /* Breakpoints móviles - Sincronizados con main.css */
-  --mobile-bp-base: 320px;
-  --mobile-bp-large: 480px;
-  --bp-tablet: 768px;
-  --bp-desktop: 1200px;
-  
-  /* Variables móviles específicas sincronizadas con main.css */
-  --mobile-sidebar-width: 98px; /* Reducido 30% de 140px */
-  --mobile-padding: 8px;
-  --mobile-gap: 8px;
-  --mobile-font-base: 0.8rem;
-  --mobile-font-small: 0.7rem;
-  --mobile-font-tiny: 0.6rem;
-  
-  /* Top Navigation Variables móviles */
-  --top-nav-height-mobile: 60px;
-  --top-nav-bg: rgba(0, 0, 0, 0.95);
-  --top-nav-border: #00f7ff;
-  
-  /* Grid configurations móviles */
-  --mobile-grid-columns: 2;
-  --mobile-grid-gap: clamp(8px, 2vw, 12px);
-  --mobile-grid-padding: clamp(10px, 2.5vw, 15px);
-  
-  /* Tipografía móvil */
-  --mobile-font-title: clamp(12px, 1.8vw, 14px);
-  --mobile-font-description: clamp(11px, 1.6vw, 13px);
-  --mobile-font-price: clamp(11px, 1.6vw, 13px);
-  
-  /* Espaciado móvil */
-  --mobile-card-padding: clamp(8px, 2vw, 12px);
+  /* Variables específicas solo para mobile.css */
   --mobile-card-margin: clamp(6px, 1.5vw, 10px);
   
-  /* Colores y efectos móviles */
-  --mobile-card-bg: rgba(0,0,0,0.8);
-  --mobile-border-color: #00f7ff40;
-  --mobile-transition: 0.2s ease;
+  /* Alias para compatibilidad - usar variables unificadas */
+  --mobile-grid-columns: var(--grid-columns);
+  --mobile-grid-gap: var(--gap);
+  --mobile-grid-padding: var(--padding);
+  --mobile-font-title: var(--font-title);
+  --mobile-font-description: var(--font-description);
+  --mobile-font-price: var(--font-price);
+  --mobile-card-padding: var(--card-padding);
+  --mobile-card-bg: var(--card-bg-current);
+  --mobile-border-color: var(--border);
+  --mobile-transition: var(--transition-fast);
 }
 
 /* === COMPONENTE BASE GRID MÓVIL (BEM) === */
@@ -422,7 +400,7 @@
 
 /* Reducir espaciado del pie de página para licores en móvil */
 .category-grid[data-category="licores"] .subcategory-prompt {
-  margin: 1px 0 6px 0 !important;
+  margin: 1px 0 6px 0;
 }
 
 .category-grid[data-category="licores"] .category-card {
@@ -436,14 +414,14 @@
   height: 65px;
   margin-bottom: 4px;
   object-fit: contain;
-  transform: scale(1.1) !important;
-  transform-origin: center !important;
+  transform: scale(1.1);
+  transform-origin: center;
 }
 
 .category-grid[data-category="licores"] .category-name {
-  font-size: 0.8rem !important;
-  height: 35px !important;
-  line-height: 1.1 !important;
+  font-size: 0.8rem;
+  height: 35px;
+  line-height: 1.1;
 }
   
   .card--category {
@@ -504,21 +482,21 @@
 /* === SIDEBAR MÓVIL VERTICAL === */
 @media (orientation: portrait) and (max-width: 480px) {
   #order-sidebar {
-    flex: 0 0 var(--mobile-sidebar-width) !important;
-    min-width: var(--mobile-sidebar-width) !important;
-    max-width: var(--mobile-sidebar-width) !important;
-    padding: 8px !important;
-    font-size: 0.75rem !important;
+    flex: 0 0 var(--mobile-sidebar-width);
+    min-width: var(--mobile-sidebar-width);
+    max-width: var(--mobile-sidebar-width);
+    padding: 8px;
+    font-size: 0.75rem;
   }
   
   #order-sidebar h3 {
-    font-size: 1rem !important;
-    margin-bottom: 8px !important;
+    font-size: 1rem;
+    margin-bottom: 8px;
   }
   
   .order-item {
-    padding: 6px 0 !important;
-    margin-bottom: 6px !important;
+    padding: 6px 0;
+    margin-bottom: 6px;
   }
   
   .order-item-name {
