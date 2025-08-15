@@ -243,23 +243,63 @@
 }
 
 /* === ORIENTACIÓN MÓVIL === */
-@media (orientation: portrait) {
+@media (orientation: portrait) and (max-width: 480px) {
   .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 768px) {
   .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Eliminar espacios laterales en horizontal */
+  .grid {
+    padding: 5px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
   }
 }
 
-/* Licores grid responsive para móvil */
-.category-grid[data-category="licores"] {
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(7px, 1.8vw, 13px);
-  padding: clamp(7px, 1.8vw, 13px);
+/* === GRIDS Y CONTENEDORES MÓVIL === */
+@media (max-width: 480px) {
+  .grid,
+  .category-grid,
+  .grid--categories,
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: clamp(5px, 1.5vw, 10px);
+    padding: clamp(5px, 1.5vw, 10px) !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Contenedor principal sin espacios laterales */
+  .content-container,
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Licores grid responsive para móvil */
+  .category-grid[data-category="licores"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: clamp(7px, 1.8vw, 13px);
+    padding: clamp(7px, 1.8vw, 13px);
+  }
 }
 
 /* Tarjetas responsive para móvil */
@@ -455,6 +495,13 @@
   .product-table td.image-icon img, .liquor-table td.image-icon img {
     width: 20px !important;
     height: 20px !important;
+  }
+}
+
+/* === MENÚ LATERAL MÓVIL === */
+@media (orientation: portrait) and (max-width: 480px) {
+  .drawer-menu {
+    width: 150px !important; /* 50% de 300px */
   }
 }
 
