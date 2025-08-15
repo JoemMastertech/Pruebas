@@ -735,17 +735,19 @@ body:not(.order-mode-active) #content-container {
   max-width: 100%;
 }
 
-/* Licores category grid - 2 filas con 5 columnas */
-.category-grid[data-category="licores"] {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: auto auto auto;
-  gap: 16px;
-  padding: 16px;
-  max-width: 970px;
-  margin: 0 auto;
-  /* Ocultar scrollbar en interfaz de licores */
-  overflow: hidden;
+/* Licores category grid - 2 filas con 5 columnas - SOLO DESKTOP */
+@media (min-width: 1200px) {
+  .category-grid[data-category="licores"] {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 16px;
+    padding: 16px;
+    max-width: 970px;
+    margin: 0 auto;
+    /* Ocultar scrollbar en interfaz de licores */
+    overflow: hidden;
+  }
 }
 
 /* Ocultar scrollbar específicamente para la interfaz de licores */
@@ -2591,8 +2593,8 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
 
 /* REGLAS TABLA MÓVILES ELIMINADAS - Ahora manejadas por mobile.css */
 
-/* 📐 MODO HORIZONTAL (LANDSCAPE) - MÓVILES Y TABLETS */
-@media (orientation: landscape) and (min-width: 640px) {
+/* 📐 MODO HORIZONTAL (LANDSCAPE) - TABLETS Y DESKTOP SOLAMENTE */
+@media (orientation: landscape) and (min-width: 769px) {
   /* Replicar comportamiento de ordenadores */
   .content-container-flex {
     flex-direction: row;
@@ -2607,7 +2609,7 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     padding: 0 clamp(12px, 2.5vw, 20px);
   }
   
-  /* 3 columnas de Grid en lugar de 2 */
+  /* 3 columnas de Grid en lugar de 2 - SOLO PARA TABLETS Y DESKTOP */
   .product-grid,
   .category-grid {
     display: grid;
