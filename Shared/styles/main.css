@@ -48,6 +48,26 @@
   /* Padding */
   --padding-3: clamp(20px, 3vw, 30px);
   --padding-4: clamp(18px, 2.8vw, 28px);
+  
+  /* === VARIABLES GRID CONSOLIDADAS === */
+  /* Grid Columns */
+  --grid-cols-mobile: repeat(2, 1fr);
+  --grid-cols-desktop: repeat(3, 1fr);
+  --grid-cols-licores: repeat(5, 1fr);
+  
+  /* Grid Spacing */
+  --grid-gap-mobile: clamp(10px, 2vw, 15px);
+  --grid-gap-desktop: clamp(15px, 2.5vw, 20px);
+  --grid-gap-licores: 16px;
+  
+  /* Grid Padding */
+  --grid-padding-mobile: clamp(10px, 2vw, 15px);
+  --grid-padding-desktop: clamp(15px, 2.5vw, 20px);
+  --grid-padding-licores: 16px;
+  
+  /* Breakpoints */
+  --bp-tablet: 768px;
+  --bp-desktop: 1200px;
   --padding-5: clamp(15px, 2.5vw, 25px);
   
   /* Botones licores */
@@ -746,11 +766,11 @@ body:not(.order-mode-active) #content-container {
 }
 
 /* Licores: 5 columnas solo en desktop */
-@media (min-width: 1200px) {
+@media (min-width: var(--bp-desktop)) {
   .category-grid[data-category="licores"] {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    padding: 16px;
+    grid-template-columns: var(--grid-cols-licores);
+    gap: var(--grid-gap-licores);
+    padding: var(--grid-padding-licores);
   }
 }
 
@@ -2617,19 +2637,19 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
   .product-grid,
   .category-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(10px, 2vw, 15px);
-    padding: clamp(10px, 2vw, 15px);
+    grid-template-columns: var(--grid-cols-mobile);
+    gap: var(--grid-gap-mobile);
+    padding: var(--grid-padding-mobile);
     width: 100%;
   }
   
   /* Desktop: 3 columnas solo en pantallas grandes */
-  @media (min-width: 1200px) {
+  @media (min-width: var(--bp-desktop)) {
     .product-grid,
     .category-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(15px, 2.5vw, 25px);
-      padding: clamp(15px, 2.5vw, 25px);
+      grid-template-columns: var(--grid-cols-desktop);
+      gap: var(--grid-gap-desktop);
+      padding: var(--grid-padding-desktop);
     }
   }
   

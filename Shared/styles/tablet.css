@@ -5,9 +5,11 @@
 
 /* === VARIABLES TABLET ENCAPSULADAS === */
 :root {
-  /* Breakpoints tablet */
+  /* Breakpoints tablet - Sincronizados con main.css */
   --tablet-bp-portrait: 768px;
   --tablet-bp-landscape: 1024px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1200px;
   
   /* Top Navigation Variables tablet */
   --top-nav-height-tablet: 60px;
@@ -204,7 +206,7 @@
 /* === RESPONSIVE TABLET INTERNO === */
 
 /* Tablet Portrait (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: var(--bp-tablet)) and (max-width: 1023px) {
   .grid {
     grid-template-columns: repeat(var(--tablet-grid-columns-portrait), 1fr);
     gap: clamp(12px, 2.5vw, 16px);
@@ -313,7 +315,7 @@
 }
 
 /* === ORIENTACIÓN TABLET === */
-@media (orientation: portrait) and (min-width: 768px) {
+@media (orientation: portrait) and (min-width: var(--bp-tablet)) {
   .grid--products {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -327,7 +329,7 @@
   }
 }
 
-@media (orientation: landscape) and (min-width: 768px) {
+@media (orientation: landscape) and (min-width: var(--bp-tablet)) {
   .grid--products {
     grid-template-columns: repeat(3, 1fr);
   }

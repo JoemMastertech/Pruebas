@@ -5,9 +5,11 @@
 
 /* === VARIABLES MÓVILES ENCAPSULADAS === */
 :root {
-  /* Breakpoints móviles */
+  /* Breakpoints móviles - Sincronizados con main.css */
   --mobile-bp-base: 320px;
   --mobile-bp-large: 480px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1200px;
   
   /* Variables móviles específicas sincronizadas con main.css */
   --mobile-sidebar-width: 98px; /* Reducido 30% de 140px */
@@ -253,7 +255,7 @@
   }
 }
 
-@media (orientation: landscape) and (max-width: 768px) {
+@media (orientation: landscape) and (max-width: var(--bp-tablet)) {
   .grid--categories {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -272,7 +274,7 @@
 }
 
 /* === GRIDS Y CONTENEDORES MÓVIL === */
-@media (max-width: 480px) {
+@media (max-width: var(--mobile-bp-large)) {
   .grid,
   .category-grid,
   .grid--categories,
@@ -372,7 +374,6 @@
   .card--category {
     aspect-ratio: 1;
   }
-}
 
 @media (orientation: landscape) and (max-height: 500px) {
   .grid {
