@@ -2569,11 +2569,13 @@ body.grid-enhanced .category-grid.grid-type-4 .category-name {
 
 /* Compatibilidad legacy */
 body.grid-enhanced .product-card .product-name {
-  @extend .product-card--enhanced .card__title;
+  grid-row: 2;
+  margin: 0;
 }
 
 body.grid-enhanced .product-card .product-ingredients {
-  @extend .product-card--enhanced .card__description;
+  grid-row: 3;
+  margin: 0;
 }
 
 /* === OPTIMIZACIÓN BEM: ESPACIADO Y RITMO VISUAL === */
@@ -2599,16 +2601,16 @@ body.grid-enhanced .product-card .product-ingredients {
 .product-card--enhanced .card__prices       { grid-row: 4; margin: 0; }
 
 /* Compatibilidad legacy */
-body.grid-enhanced .product-card .product-media        { @extend .product-card--enhanced .card__media; }
-body.grid-enhanced .product-card .product-name         { @extend .product-card--enhanced .card__title; }
-body.grid-enhanced .product-card .product-ingredients  { @extend .product-card--enhanced .card__description; }
-body.grid-enhanced .product-card .product-prices       { @extend .product-card--enhanced .card__prices; }
+body.grid-enhanced .product-card .product-media        { grid-row: 1; margin: 0; }
+body.grid-enhanced .product-card .product-name         { grid-row: 2; margin: 0; }
+body.grid-enhanced .product-card .product-ingredients  { grid-row: 3; margin: 0; }
+body.grid-enhanced .product-card .product-prices       { grid-row: 4; margin: 0; }
 
 /* === OPTIMIZACIÓN BEM: GAPS DE PRECIOS === */
 .product-card--enhanced .card__prices { gap: var(--price-gap); }
 
 /* Compatibilidad legacy */
-body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanced .card__prices; }
+body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
 
 /* === OPTIMIZACIÓN BEM: MICROCONTRACCIÓN ARMÓNICA === */
 @supports (container-type: inline-size) {
@@ -2680,11 +2682,14 @@ body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanc
   
   /* Compatibilidad legacy */
   body.order-mode-active .content-container-flex {
-    @extend .content-container-flex--order-active;
+    gap: clamp(15px, 2vw, 20px);
   }
   
   body.order-mode-active #order-sidebar {
-    @extend .order-sidebar--landscape;
+    position: relative !important;
+    flex: 0 0 280px;
+    min-width: 250px;
+    max-width: 320px;
     height: auto;
     max-height: calc(100vh - 60px);
     margin-top: 0;
