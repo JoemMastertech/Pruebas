@@ -1560,9 +1560,14 @@ body:has(.category-grid[data-category="licores"]) {
   box-sizing: border-box;
 }
 
-/* Cuando el sidebar está visible, mostrarlo como flex item */
-body.order-mode-active #order-sidebar {
+/* === OPTIMIZACIÓN BEM: SIDEBAR VISIBLE === */
+.order-sidebar--active {
   display: block;
+}
+
+/* Compatibilidad legacy */
+body.order-mode-active #order-sidebar {
+  @extend .order-sidebar--active;
 }
 
 /* Responsividad al reducir espacio */
@@ -2522,8 +2527,8 @@ body.top-nav-visible {
 /* ENHANCED CATEGORY GRID RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
 /* Reglas de body.grid-enhanced .category-grid ahora manejadas por el componente BEM */
 
-/* 2. Estructura base de las cards con grid interno */
-body.grid-enhanced .product-card {
+/* === OPTIMIZACIÓN BEM: ESTRUCTURA BASE CARDS === */
+.product-card--enhanced {
   display: grid;
   grid-template-rows:
     var(--media-slot)
@@ -2533,77 +2538,141 @@ body.grid-enhanced .product-card {
   row-gap: var(--slot-gap);
 }
 
-/* 3. Ajustes por tipo de grid */
+/* Compatibilidad legacy */
+body.grid-enhanced .product-card {
+  @extend .product-card--enhanced;
+}
+
+/* === OPTIMIZACIÓN BEM: TIPOS DE GRID === */
 /* Tipo 2: Refrescos, Cervezas - Sin ingredientes */
-body.grid-enhanced .product-grid.grid-type-2 .product-card {
+.product-card--grid-type-2 {
   --ing-slot: 0px;
 }
 
-body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
+.product-card--grid-type-2 .card__description {
   display: none;
 }
 
+/* Compatibilidad legacy */
+body.grid-enhanced .product-grid.grid-type-2 .product-card {
+  @extend .product-card--grid-type-2;
+}
+
+body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
+  @extend .product-card--grid-type-2 .card__description;
+}
+
 /* Tipo 3: Subcategorías de Licores */
-body.grid-enhanced .product-card.liquor-card {
+.product-card--liquor {
   --media-slot: minmax(clamp(140px, 32cqw, 220px), auto);
   --price-gap: clamp(4px, 1cqw, 8px);
 }
 
-body.grid-enhanced .product-card.liquor-card .product-prices {
+.product-card--liquor .card__prices {
   display: flex;
   flex-direction: column;
   gap: var(--price-gap);
 }
 
+/* Compatibilidad legacy */
+body.grid-enhanced .product-card.liquor-card {
+  @extend .product-card--liquor;
+}
+
+body.grid-enhanced .product-card.liquor-card .product-prices {
+  @extend .product-card--liquor .card__prices;
+}
+
 /* Tipo 4: Categorías de licores */
-body.grid-enhanced .category-grid.grid-type-4 .category-name {
+.category-card--grid-type-4 .card__title {
   font-size: clamp(0.95rem, 1.8vw, 1.2rem);
 }
 
-/* 4. Tipografía fluida */
-body.grid-enhanced .product-card .product-name {
+/* Compatibilidad legacy */
+body.grid-enhanced .category-grid.grid-type-4 .category-name {
+  @extend .category-card--grid-type-4 .card__title;
+}
+
+/* === OPTIMIZACIÓN BEM: TIPOGRAFÍA FLUIDA === */
+.product-card--enhanced .card__title {
   font-size: clamp(0.9rem, 2.2cqw, 1.05rem);
   line-height: 1.2;
 }
 
-body.grid-enhanced .product-card .product-ingredients {
+.product-card--enhanced .card__description {
   font-size: clamp(0.8rem, 1.9cqw, 0.95rem);
   line-height: 1.3;
 }
 
-/* 5. Espaciado y ritmo visual */
-body.grid-enhanced .product-card {
+/* Compatibilidad legacy */
+body.grid-enhanced .product-card .product-name {
+  @extend .product-card--enhanced .card__title;
+}
+
+body.grid-enhanced .product-card .product-ingredients {
+  @extend .product-card--enhanced .card__description;
+}
+
+/* === OPTIMIZACIÓN BEM: ESPACIADO Y RITMO VISUAL === */
+.product-card--enhanced {
   --slot-gap: clamp(6px, 1.2cqw, 12px);
   --price-gap: clamp(6px, 1.2cqw, 10px);
 }
 
+/* Compatibilidad legacy aplicada automáticamente por @extend anterior */
+
 /* ================================================================= 
    GRID ENHANCED – Fixes críticos y pulido
    ================================================================= */
-/* Container queries support - aplicar solo en contexto grid-enhanced */
+/* === OPTIMIZACIÓN BEM: CONTAINER QUERIES === */
 @supports (container-type: inline-size) {
-  body.grid-enhanced .product-card {
+  .product-card--enhanced {
     container-type: inline-size;
   }
 }
 
-/* Mapeo explícito a filas: evita depender del DOM y de order (flex) */
-body.grid-enhanced .product-card .product-media        { grid-row: 1; margin: 0; }
-body.grid-enhanced .product-card .product-name         { grid-row: 2; margin: 0; }
-body.grid-enhanced .product-card .product-ingredients  { grid-row: 3; margin: 0; }
-body.grid-enhanced .product-card .product-prices       { grid-row: 4; margin: 0; }
+/* Compatibilidad legacy */
+@supports (container-type: inline-size) {
+  body.grid-enhanced .product-card {
+    @extend .product-card--enhanced;
+  }
+}
 
-/* Unificar gaps de precios en todos los tipos (no solo licores) */
-body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
+/* === OPTIMIZACIÓN BEM: MAPEO EXPLÍCITO DE FILAS === */
+.product-card--enhanced .card__media        { grid-row: 1; margin: 0; }
+.product-card--enhanced .card__title        { grid-row: 2; margin: 0; }
+.product-card--enhanced .card__description  { grid-row: 3; margin: 0; }
+.product-card--enhanced .card__prices       { grid-row: 4; margin: 0; }
 
-/* Microcontracción armónica en cards angostos */
+/* Compatibilidad legacy */
+body.grid-enhanced .product-card .product-media        { @extend .product-card--enhanced .card__media; }
+body.grid-enhanced .product-card .product-name         { @extend .product-card--enhanced .card__title; }
+body.grid-enhanced .product-card .product-ingredients  { @extend .product-card--enhanced .card__description; }
+body.grid-enhanced .product-card .product-prices       { @extend .product-card--enhanced .card__prices; }
+
+/* === OPTIMIZACIÓN BEM: GAPS DE PRECIOS === */
+.product-card--enhanced .card__prices { gap: var(--price-gap); }
+
+/* Compatibilidad legacy */
+body.grid-enhanced .product-card .product-prices { @extend .product-card--enhanced .card__prices; }
+
+/* === OPTIMIZACIÓN BEM: MICROCONTRACCIÓN ARMÓNICA === */
 @supports (container-type: inline-size) {
   @container (max-width: 340px) {
-    body.grid-enhanced .product-card {
+    .product-card--enhanced {
       --slot-gap:   clamp(4px, 1cqw, 8px);
       --name-slot:  clamp(24px, 6cqw, 36px);
       --ing-slot:   clamp(56px, 14cqw, 96px);
       --media-slot: minmax(clamp(100px, 26cqw, 150px), auto);
+    }
+  }
+}
+
+/* Compatibilidad legacy */
+@supports (container-type: inline-size) {
+  @container (max-width: 340px) {
+    body.grid-enhanced .product-card {
+      @extend .product-card--enhanced;
     }
   }
 }
@@ -2653,16 +2722,25 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     }
   }
   
-  /* Sidebar como parte integral del layout - NO superpuesto */
-  body.order-mode-active .content-container-flex {
+  /* === OPTIMIZACIÓN BEM: SIDEBAR INTEGRAL === */
+  .content-container-flex--order-active {
     gap: clamp(15px, 2vw, 20px);
   }
   
-  body.order-mode-active #order-sidebar {
+  .order-sidebar--landscape {
     position: relative !important;
     flex: 0 0 280px;
     min-width: 250px;
     max-width: 320px;
+  }
+  
+  /* Compatibilidad legacy */
+  body.order-mode-active .content-container-flex {
+    @extend .content-container-flex--order-active;
+  }
+  
+  body.order-mode-active #order-sidebar {
+    @extend .order-sidebar--landscape;
     height: auto;
     max-height: calc(100vh - 60px);
     margin-top: 0;
@@ -2671,12 +2749,17 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     position: static !important;
   }
   
-  /* Contenido se ajusta al espacio restante */
-  body.order-mode-active #content-container {
+  /* === OPTIMIZACIÓN BEM: CONTENIDO AJUSTADO === */
+  .content-container--order-active {
     flex: 1 1 auto;
     min-width: 0;
     /* Separación mínima entre contenido y sidebar */
     margin-right: clamp(10px, 1.5vw, 15px);
+  }
+  
+  /* Compatibilidad legacy */
+  body.order-mode-active #content-container {
+    @extend .content-container--order-active;
   }
   
   /* Tipografía optimizada para landscape */
