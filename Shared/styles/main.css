@@ -447,38 +447,41 @@ body:not(.order-mode-active) #content-container {
 /* Mejoras de tabla */
 .product-table, .liquor-table {
   border-collapse: separate;
-  border-spacing: 0 10px;
-  padding: var(--spacing);
+  border-spacing: 0 clamp(5px, 1vw, 15px);
+  padding: clamp(10px, 2vw, 20px);
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Celdas de tabla */
 .product-table th, .liquor-table th {
-  font: 600 1rem 'Montserrat', sans-serif;
+  font: 600 clamp(0.8rem, 2vw, 1.2rem) 'Montserrat', sans-serif;
   color: var(--primary);
   text-align: center;
-  padding: 15px 10px;
+  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
   border-bottom: 2px solid var(--border);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: clamp(0.5px, 0.1vw, 1.5px);
 }
 
 .product-table th:first-child, .liquor-table th:first-child,
 .product-table td:first-child, .liquor-table td:first-child {
   text-align: left;
-  padding-left: 15px;
+  padding-left: clamp(8px, 2vw, 20px);
 }
 
 .product-table td, .liquor-table td {
-  padding: 15px 10px;
+  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
   transition: var(--transition);
   text-align: center;
   vertical-align: middle;
+  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
 }
 
 .product-table td.product-name, .liquor-table td.product-name {
-  font: 600 1rem 'Montserrat', sans-serif;
+  font: 600 clamp(0.8rem, 2vw, 1.2rem) 'Montserrat', sans-serif;
   color: var(--primary);
-  letter-spacing: 0.5px;
+  letter-spacing: clamp(0.3px, 0.1vw, 0.8px);
   text-transform: uppercase;
 }
 
@@ -487,18 +490,23 @@ body:not(.order-mode-active) #content-container {
 .product-table td.video-icon, .liquor-table td.video-icon,
 .product-table td.product-price, .liquor-table td.product-price {
   text-align: center;
-  padding: 10px;
+  padding: clamp(5px, 1.5vw, 15px);
   vertical-align: middle;
 }
 
 .product-table td.image-icon img, .liquor-table td.image-icon img {
   display: block;
   margin: 0 auto;
+  width: clamp(30px, 5vw, 60px);
+  height: clamp(30px, 5vw, 60px);
+  object-fit: contain;
 }
 
 .product-table td.product-ingredients {
   text-align: left;
-  padding: 15px 10px;
+  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
+  font-size: clamp(0.7rem, 1.6vw, 1rem);
+  line-height: clamp(1.2, 1.4vw, 1.5);
 }
 
 .product-table tr:hover td, .liquor-table tr:hover td {
@@ -507,8 +515,8 @@ body:not(.order-mode-active) #content-container {
 
 /* Media Elements - Optimized */
 .image-icon img, .product-table td.image-icon img {
-  width: 40px;
-  height: 40px;
+  width: clamp(30px, 5vw, 60px);
+  height: clamp(30px, 5vw, 60px);
   object-fit: contain;
   background: white;
   cursor: pointer;
@@ -567,13 +575,31 @@ body:not(.order-mode-active) #content-container {
 /* Tipografía mobile-first */
 .product-card .product-name,
 .category-card .category-name {
-  font-size: clamp(12px, 1.8vw, 14px);
-  line-height: 1.2;
+  font-size: clamp(12px, 2.5vw, 18px);
+  line-height: clamp(1.2, 1.5vw, 1.4);
+  height: auto;
+  min-height: clamp(2rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.product-card .product-name {
+  font-size: clamp(11px, 2.2vw, 16px);
+  line-height: clamp(1.2, 1.4vw, 1.3);
+  height: auto;
+  min-height: clamp(1.8rem, 3.5vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .product-card .product-ingredients {
-  font-size: clamp(11px, 1.6vw, 13px);
-  line-height: 1.3;
+  font-size: clamp(10px, 2vw, 14px);
+  line-height: clamp(1.2, 1.3vw, 1.4);
+  height: auto;
 }
 
 .price-button {
@@ -703,8 +729,111 @@ body:not(.order-mode-active) #content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: clamp(10px, 2vw, 20px);
   box-shadow: var(--shadow-base);
+  min-height: clamp(150px, 20vw, 250px);
+  max-width: 100%;
+}
+
+/* Licores category grid - 2 filas con 5 columnas */
+.category-grid[data-category="licores"] {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 16px;
+  padding: 16px;
+  max-width: 970px;
+  margin: 0 auto;
+  /* Ocultar scrollbar en interfaz de licores */
+  overflow: hidden;
+}
+
+/* Ocultar scrollbar específicamente para la interfaz de licores */
+.category-grid[data-category="licores"]::-webkit-scrollbar {
+  display: none;
+}
+
+.category-grid[data-category="licores"] {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Ocultar scrollbar del body cuando se muestra la interfaz de licores */
+body:has(.category-grid[data-category="licores"])::-webkit-scrollbar {
+  display: none;
+}
+
+body:has(.category-grid[data-category="licores"]) {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overflow-x: hidden;
+}
+
+/* Reducir espaciado del encabezado para licores */
+.category-grid[data-category="licores"] .page-title {
+  margin: 0 0 10px 0 !important;
+  padding: 10px var(--spacing) !important;
+}
+
+/* Reducir espaciado del pie de página para licores */
+.category-grid[data-category="licores"] .subcategory-prompt {
+  margin: 3px 0 10px 0 !important;
+}
+
+/* Licores category cards - rectangular style */
+.category-grid[data-category="licores"] .category-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  overflow: visible;
+  /* Dimensiones fijas para consistencia */
+  min-height: 194px;
+  max-height: 194px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-grid[data-category="licores"] .category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 247, 255, 0.3);
+  border-color: var(--accent);
+}
+
+/* Licores category images - rectangular style */
+.category-grid[data-category="licores"] .category-image {
+  width: 100%;
+  height: 116px;
+  object-fit: contain;
+  transform: scale(1.1) !important;
+  transform-origin: center !important;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  padding: 8px;
+  /* Dimensiones fijas */
+  flex-shrink: 0;
+}
+
+/* Licores category names */
+.category-grid[data-category="licores"] .category-name {
+  font-size: 1rem !important;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Altura fija para consistencia */
+  line-height: 1.2;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .category-card:hover, .product-card:hover {
@@ -714,14 +843,15 @@ body:not(.order-mode-active) #content-container {
 
 /* Thumbnails - Responsive System */
 .category-image, .product-image {
-  width: var(--thumb-size-4);
-  height: var(--thumb-size-4);
+  width: clamp(60px, 8vw, 120px);
+  height: clamp(60px, 8vw, 120px);
   object-fit: contain;
   background: white;
-  margin-bottom: clamp(5px, 1vw, 10px);
+  margin-bottom: clamp(5px, 1vw, 15px);
   animation: glow 2s infinite;
   border-radius: var(--border-radius);
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 /* Column-specific thumbnail sizes */
@@ -985,14 +1115,15 @@ body:not(.order-mode-active) #content-container {
 /* Price Buttons */
 .price-button {
   background: var(--price-bg, transparent);
-  color: white;
-  border: 1px solid white;
+  color: var(--price-color);
+  border: 1px solid var(--price-color);
   padding: 7px 12px;
   border-radius: 5px;
   cursor: pointer;
   transition: all var(--transition-time) ease;
   font: 600 0.9rem 'Montserrat', sans-serif;
   min-height: 32px;
+  box-shadow: 0 0 15px var(--price-color);
 }
 
 .price-button:hover {
@@ -2479,6 +2610,7 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
   /* 3 columnas de Grid en lugar de 2 */
   .product-grid,
   .category-grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(15px, 2.5vw, 25px);
     padding: clamp(15px, 2.5vw, 25px);

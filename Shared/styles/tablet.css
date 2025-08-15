@@ -137,13 +137,14 @@
   font-size: var(--tablet-font-price);
   padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 14px);
   background: transparent;
-  color: white;
-  border: 1px solid white;
+  color: var(--price-color);
+  border: 1px solid var(--price-color);
   border-radius: 6px;
   cursor: pointer;
   transition: var(--tablet-transition);
   width: 100%;
   font-weight: 600;
+  box-shadow: 0 0 15px var(--price-color);
 }
 
 .price-button:hover {
@@ -228,8 +229,66 @@
   }
   
   .grid--categories {
-    grid-template-columns: repeat(4, 1fr); /* Transición hacia desktop */
-  }
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablet horizontal */
+}
+
+/* Licores grid responsive para tablet */
+.category-grid[data-category="licores"] {
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(9px, 1.8vw, 18px);
+  padding: clamp(9px, 1.8vw, 18px);
+}
+
+/* Tarjetas responsive para tablet */
+.category-card, .product-card {
+  padding: clamp(8px, 2vw, 16px);
+  min-height: clamp(140px, 18vw, 220px);
+}
+
+/* Imágenes responsive para tablet */
+.category-image, .product-image {
+  width: clamp(50px, 7vw, 100px);
+  height: clamp(50px, 7vw, 100px);
+}
+
+/* Texto responsive para tablet */
+.category-card .category-name,
+.product-card .product-name {
+  font-size: clamp(11px, 2.2vw, 16px);
+  min-height: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+/* Reducir espaciado del encabezado para licores en tablet */
+.category-grid[data-category="licores"] .page-title {
+  margin: 0 0 8px 0 !important;
+  padding: 8px var(--spacing) !important;
+}
+
+/* Reducir espaciado del pie de página para licores en tablet */
+.category-grid[data-category="licores"] .subcategory-prompt {
+  margin: 2px 0 8px 0 !important;
+}
+
+.category-grid[data-category="licores"] .category-card {
+  min-height: 194px;
+  max-height: 194px;
+  padding: 13px;
+  overflow: visible;
+}
+
+.category-grid[data-category="licores"] .category-image {
+  height: 86px;
+  margin-bottom: 4px;
+  object-fit: contain;
+  transform: scale(1.1) !important;
+  transform-origin: center !important;
+}
+
+.category-grid[data-category="licores"] .category-name {
+  font-size: 0.9rem !important;
+  height: 40px !important;
+  line-height: 1.2 !important;
+}
   
   .card {
     min-height: 240px;
