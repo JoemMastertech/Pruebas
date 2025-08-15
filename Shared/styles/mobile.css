@@ -245,29 +245,29 @@
 /* === ORIENTACIÓN MÓVIL === */
 @media (orientation: portrait) and (max-width: 480px) {
   .grid--categories {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .category-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (orientation: landscape) and (max-width: 768px) {
   .grid--categories {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .category-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   /* Eliminar espacios laterales en horizontal */
   .grid {
-    padding: 5px !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
   }
 }
 
@@ -277,26 +277,26 @@
   .category-grid,
   .grid--categories,
   .product-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(5px, 1.5vw, 10px);
-    padding: clamp(5px, 1.5vw, 10px) !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
+    padding: clamp(5px, 1.5vw, 10px);
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
   }
   
   /* Contenedor principal sin espacios laterales */
   .content-container,
   .main-content {
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
   }
   
   /* Licores grid responsive para móvil */
   .category-grid[data-category="licores"] {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(7px, 1.8vw, 13px);
     padding: clamp(7px, 1.8vw, 13px);
   }

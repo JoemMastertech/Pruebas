@@ -735,17 +735,23 @@ body:not(.order-mode-active) #content-container {
   max-width: 100%;
 }
 
-/* Licores category grid - 2 filas con 5 columnas */
+/* Licores category grid - responsive */
 .category-grid[data-category="licores"] {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto auto auto;
-  gap: 16px;
-  padding: 16px;
   max-width: 970px;
   margin: 0 auto;
   /* Ocultar scrollbar en interfaz de licores */
   overflow: hidden;
+}
+
+/* Licores: 5 columnas solo en desktop */
+@media (min-width: 1200px) {
+  .category-grid[data-category="licores"] {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
 }
 
 /* Ocultar scrollbar específicamente para la interfaz de licores */
@@ -2607,14 +2613,24 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     padding: 0 clamp(12px, 2.5vw, 20px);
   }
   
-  /* 3 columnas de Grid en lugar de 2 */
+  /* Base mobile-first para grids */
   .product-grid,
   .category-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(15px, 2.5vw, 25px);
-    padding: clamp(15px, 2.5vw, 25px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 2vw, 15px);
+    padding: clamp(10px, 2vw, 15px);
     width: 100%;
+  }
+  
+  /* Desktop: 3 columnas solo en pantallas grandes */
+  @media (min-width: 1200px) {
+    .product-grid,
+    .category-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(15px, 2.5vw, 25px);
+      padding: clamp(15px, 2.5vw, 25px);
+    }
   }
   
   /* Sidebar como parte integral del layout - NO superpuesto */
