@@ -27,12 +27,11 @@
   display: grid;
   grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
   gap: var(--mobile-grid-gap);
-  padding: 0; /* Sin padding lateral para ancho completo */
-  width: 100vw; /* Ancho completo de viewport */
-  max-width: none; /* Sin restricción de ancho máximo */
-  margin: 0;
+  padding: var(--mobile-grid-padding);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
-  overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 /* === MODIFICADORES DE GRID MÓVIL === */
@@ -52,12 +51,11 @@
   display: grid;
   grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
   gap: var(--mobile-grid-gap);
-  padding: 0; /* Sin padding lateral para ancho completo */
-  width: 100vw; /* Ancho completo de viewport */
-  max-width: none; /* Sin restricción de ancho máximo */
-  margin: 0;
+  padding: var(--mobile-grid-padding);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   box-sizing: border-box;
-  overflow-x: auto; /* Permite desplazamiento horizontal */
 }
 
 .product-grid {
@@ -577,69 +575,10 @@
   }
 }
 
-/* === ESTILOS PARA CONTENIDO ANCHO Y TABLAS === */
-@media (max-width: 767px) {
-  /* Permitir que las tablas y contenido ancho se muestren completos */
-  table {
-    width: auto !important;
-    min-width: 100% !important;
-    table-layout: auto !important;
-    overflow-x: auto !important;
-  }
-  
-  /* Contenedores de tabla con scroll horizontal */
-  .table-container,
-  .table-wrapper {
-    width: 100vw !important;
-    max-width: none !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
-  }
-  
-  /* Permitir zoom en elementos específicos */
-  .zoomable,
-  .table-content,
-  .wide-content {
-    transform-origin: top left;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Asegurar que el contenido no se corte */
-  * {
-    box-sizing: border-box;
-  }
-  
-  /* Prevenir que elementos padre limiten el ancho */
-  body, html {
-    overflow-x: auto !important;
-    width: 100vw !important;
-    max-width: none !important;
-  }
-}
+
 
 /* === CONTENIDO MODO TABLA MÓVIL === */
 @media (max-width: 480px) {
-  /* Ajustes específicos para móviles pequeños */
-  #app {
-    padding: 0 !important; /* Sin padding lateral */
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-  }
-  
-  #content-container {
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    overflow-x: auto !important; /* Permite desplazamiento horizontal */
-  }
-  
-  .content-container-flex {
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-  }
   
 
   
