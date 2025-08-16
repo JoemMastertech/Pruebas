@@ -1,593 +1,595 @@
 /* =================================================================
-   MOBILE.CSS - ESTILOS MODULARES PARA DISPOSITIVOS MÓVILES
-   Fusión: mobile (320px+) + mobile-large (480px+)
+   MOBILE-FIRST ARCHITECTURE - OPTIMIZED FOR TOUCH & PERFORMANCE
+   Senior Frontend Engineer Implementation
    ================================================================= */
 
-/* === VARIABLES MÓVILES ESPECÍFICAS === */
-/* Variables globales están en _variables-unified.css */
+/* === MOBILE-FIRST VARIABLES === */
 :root {
-  /* Variables específicas solo para mobile.css */
-  --mobile-card-margin: clamp(6px, 1.5vw, 10px);
+  /* Touch-optimized dimensions */
+  --touch-target-min: 44px;
+  --touch-spacing: 8px;
+  --mobile-safe-area: max(env(safe-area-inset-left), 16px);
   
-  /* Alias para compatibilidad - usar variables unificadas */
-  --mobile-grid-columns: var(--grid-columns);
-  --mobile-grid-gap: var(--gap);
-  --mobile-grid-padding: var(--padding);
-  --mobile-font-title: var(--font-title);
-  --mobile-font-description: var(--font-description);
-  --mobile-font-price: var(--font-price);
-  --mobile-card-padding: var(--card-padding);
-  --mobile-card-bg: var(--card-bg-current);
-  --mobile-border-color: var(--border);
-  --mobile-transition: var(--transition-fast);
+  /* Performance-optimized transitions */
+  --mobile-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --mobile-transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Mobile typography scale */
+  --mobile-text-xs: clamp(12px, 3vw, 14px);
+  --mobile-text-sm: clamp(14px, 3.5vw, 16px);
+  --mobile-text-base: clamp(16px, 4vw, 18px);
+  --mobile-text-lg: clamp(18px, 4.5vw, 20px);
+  --mobile-text-xl: clamp(20px, 5vw, 24px);
+  
+  /* Mobile spacing system */
+  --mobile-space-1: clamp(4px, 1vw, 6px);
+  --mobile-space-2: clamp(8px, 2vw, 12px);
+  --mobile-space-3: clamp(12px, 3vw, 16px);
+  --mobile-space-4: clamp(16px, 4vw, 20px);
+  --mobile-space-5: clamp(20px, 5vw, 24px);
+  --mobile-space-6: clamp(24px, 6vw, 32px);
+  
+  /* Mobile grid system */
+  --mobile-grid-gap: var(--mobile-space-3);
+  --mobile-grid-padding: var(--mobile-space-4);
+  --mobile-container-padding: var(--mobile-safe-area);
+  
+  /* Mobile card system */
+  --mobile-card-radius: 12px;
+  --mobile-card-padding: var(--mobile-space-3);
+  --mobile-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Mobile interaction states */
+  --mobile-active-scale: 0.96;
+  --mobile-hover-scale: 1.02;
 }
 
-/* === COMPONENTE BASE GRID MÓVIL (BEM) === */
-.grid {
+/* === MOBILE-FIRST BASE STYLES === */
+
+/* Optimize for mobile performance */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection for content */
+.card__title,
+.card__description,
+.page-title,
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Mobile-optimized body */
+body {
+  /* Prevent bounce scrolling on iOS */
+  overscroll-behavior: none;
+  /* Optimize font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Improve scroll performance */
+  scroll-behavior: smooth;
+}
+
+/* === MOBILE LAYOUT SYSTEM === */
+
+/* Mobile container */
+.mobile-container {
+  width: 100%;
+  max-width: 100vw;
+  padding-left: var(--mobile-container-padding);
+  padding-right: var(--mobile-container-padding);
+  margin: 0 auto;
+}
+
+/* Mobile grid system */
+.mobile-grid {
   display: grid;
-  grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
   gap: var(--mobile-grid-gap);
   padding: var(--mobile-grid-padding);
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
 }
 
-/* === MODIFICADORES DE GRID MÓVIL === */
-.grid--products {
-  grid-auto-rows: minmax(200px, auto);
+/* Grid variants */
+.mobile-grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.grid--categories {
-  grid-template-rows: repeat(auto-fit, minmax(120px, 1fr));
-  aspect-ratio: auto;
+.mobile-grid--3-col {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-/* === REGLAS LEGACY PARA COMPATIBILIDAD === */
-.category-grid,
-.product-grid {
-  /* Redirección a componente BEM */
-  display: grid;
-  grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
-  gap: var(--mobile-grid-gap);
-  padding: var(--mobile-grid-padding);
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
+.mobile-grid--auto {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
-.product-grid {
-  grid-auto-rows: minmax(200px, auto);
-}
+/* === MOBILE NAVIGATION === */
 
-.category-grid {
-  grid-template-rows: repeat(auto-fit, minmax(120px, 1fr));
-  aspect-ratio: auto;
-}
-
-/* === COMPONENTES DE CARD MÓVIL (BEM) === */
-.card {
-  background: var(--mobile-card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--mobile-border-color);
-  transition: var(--mobile-transition);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 180px;
-}
-
-.card--product {
-  justify-content: space-between;
-}
-
-.card--category {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 120px;
-}
-
-/* === ELEMENTOS DE CARD === */
-.card__image {
-  width: 100%;
-  height: clamp(80px, 12vw, 120px);
-  object-fit: cover;
-  border-radius: 6px 6px 0 0;
-}
-
-.card__content {
-  padding: var(--mobile-card-padding);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card__title {
-  font-size: var(--mobile-font-title);
-  font-weight: 600;
-  margin-bottom: 4px;
-  line-height: 1.2;
-  color: #ECE9D8;
-}
-
-.card__description {
-  font-size: var(--mobile-font-description);
-  opacity: 0.8;
-  line-height: 1.3;
-  margin-bottom: 8px;
-  color: #ECE9D8;
-  flex-grow: 1;
-}
-
-.card__price {
-  margin-top: auto;
-}
-
-/* === BOTÓN DE PRECIO MÓVIL === */
-.price-button {
-  font-size: var(--mobile-font-price);
-  padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 12px);
-  background: transparent;
-  color: var(--price-color);
-  border: 1px solid var(--price-color);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: var(--mobile-transition);
-  width: 100%;
-  font-weight: 600;
-  box-shadow: 0 0 15px var(--price-color);
-}
-
-.price-button:hover {
-  background-color: transparent;
-  transform: scale(1.02);
-  border-color: var(--price-color);
-  color: var(--price-color);
-  box-shadow: 0 0 15px var(--price-color);
-}
-
-/* === UTILIDADES MÓVILES === */
-.u-mobile-only {
-  display: block;
-}
-
-.u-hide-mobile {
-  display: none;
-}
-
-.u-mobile-center {
-  text-align: center;
-}
-
-.u-mobile-full-width {
-  width: 100%;
-}
-
-/* === ESTADOS MÓVILES === */
-.grid--loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.grid--empty {
-  min-height: 200px;
-  place-items: center;
-  grid-template-columns: 1fr;
-}
-
-.card--loading {
-  opacity: 0.5;
-  animation: pulse-mobile 1.5s infinite;
-}
-
-@keyframes pulse-mobile {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 0.8; }
-}
-
-/* === RESPONSIVE MÓVIL INTERNO === */
-
-/* Mobile Base (320px - 479px) */
-@media (max-width: 479px) {
-  .grid {
-    padding: clamp(8px, 2vw, 10px);
-    gap: clamp(6px, 1.5vw, 8px);
-  }
-  
-  .card {
-    min-height: 160px;
-  }
-  
-  .card__image {
-    height: clamp(70px, 10vw, 100px);
-  }
-  
-  .card__content {
-    padding: clamp(6px, 1.5vw, 10px);
-  }
-}
-
-/* Mobile Large (480px+) */
-@media (min-width: 480px) {
-  .grid {
-    padding: clamp(12px, 2.5vw, 16px);
-    gap: clamp(10px, 2vw, 14px);
-  }
-  
-  .card {
-    min-height: 200px;
-  }
-  
-  .card__image {
-    height: clamp(90px, 14vw, 130px);
-  }
-  
-  .card__content {
-    padding: clamp(10px, 2vw, 14px);
-  }
-  
-  .card__title {
-    font-size: clamp(13px, 1.9vw, 15px);
-  }
-  
-  .card__description {
-    font-size: clamp(12px, 1.7vw, 14px);
-  }
-  
-  .price-button {
-    font-size: clamp(12px, 1.7vw, 14px);
-    padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 14px);
-  }
-}
-
-/* === ORIENTACIÓN LANDSCAPE MÓVIL === */
-@media (orientation: landscape) and (max-width: 767px) {
-  /* Ajustes para móviles en orientación horizontal */
-  .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* === ORIENTACIÓN PORTRAIT MÓVIL === */
-@media (orientation: portrait) and (max-width: 480px) {
-  /* Ajustes para móviles en orientación vertical */
-  .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .grid--categories {
-     grid-template-columns: repeat(2, 1fr);
-     gap: 8px;
-   }
-   
-   .category-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (orientation: landscape) and (max-width: var(--bp-tablet)) {
-  .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  /* Eliminar espacios laterales en horizontal */
-  .grid {
-    padding: 5px;
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
-}
-
-/* === GRIDS Y CONTENEDORES MÓVIL === */
-@media (max-width: var(--mobile-bp-large)) {
-  .grid,
-  .category-grid,
-  .grid--categories,
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(5px, 1.5vw, 10px);
-    padding: clamp(5px, 1.5vw, 10px);
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
-  
-  /* Contenedor principal sin espacios laterales */
-  .content-container,
-  .main-content {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
-  
-  /* Licores grid responsive para móvil */
-  .category-grid[data-category="licores"] {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(7px, 1.8vw, 13px);
-    padding: clamp(7px, 1.8vw, 13px);
-  }
-}
-
-/* === MIGRACIÓN A BEM: CARDS === */
-.category-card,
-.product-card {
-  /* Usar componente BEM base */
-  background: var(--mobile-card-bg);
-  border-radius: 8px;
-  border: 1px solid var(--mobile-border-color);
-  transition: var(--mobile-transition);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: clamp(6px, 2vw, 12px);
-  min-height: clamp(120px, 16vw, 180px);
-}
-
-.product-card {
-  justify-content: space-between;
-  min-height: 180px;
-}
-
-.category-card {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 120px;
-}
-
-/* === MIGRACIÓN A BEM: IMÁGENES === */
-.category-image,
-.product-image {
-  /* Usar componente BEM base */
-  width: clamp(40px, 6vw, 80px);
-  height: clamp(40px, 6vw, 80px);
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-/* Alias BEM para imágenes */
-.category-image {
-  /* Hereda de .card__image */
-  object-fit: contain;
-}
-
-.product-image {
-  /* Hereda de .card__image */
-  object-fit: cover;
-}
-
-/* === MIGRACIÓN A BEM: TÍTULOS === */
-.category-card .category-name,
-.product-card .product-name {
-  /* Usar componente BEM base */
-  font-size: clamp(10px, 2.5vw, 14px);
-  min-height: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 600;
-  line-height: 1.2;
-  color: #ECE9D8;
-}
-
-/* Alias BEM para títulos */
-.category-name {
-  /* Hereda de .card__title */
-  text-align: center;
-}
-
-.product-name {
-  /* Hereda de .card__title */
-  margin-bottom: 4px;
-}
-
-/* Tablas responsive para móvil */
-.product-table th, .liquor-table th {
-  font-size: clamp(0.7rem, 2.2vw, 1rem);
-  padding: clamp(6px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
-}
-
-.product-table td, .liquor-table td {
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  padding: clamp(6px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
-}
-
-.product-table td.image-icon img, .liquor-table td.image-icon img {
-  width: clamp(25px, 4vw, 45px);
-  height: clamp(25px, 4vw, 45px);
-}
-
-/* Reducir espaciado del encabezado para licores en móvil */
-.category-grid[data-category="licores"] .page-title {
-  margin: 0 0 6px 0 !important;
-  padding: 6px var(--spacing) !important;
-}
-
-/* Reducir espaciado del pie de página para licores en móvil */
-.category-grid[data-category="licores"] .subcategory-prompt {
-  margin: 1px 0 6px 0;
-}
-
-.category-grid[data-category="licores"] .category-card {
-  min-height: 173px;
-  max-height: 173px;
-  padding: 9px;
-  overflow: visible;
-}
-
-.category-grid[data-category="licores"] .category-image {
-  height: 65px;
-  margin-bottom: 4px;
-  object-fit: contain;
-  transform: scale(1.1);
-  transform-origin: center;
-}
-
-.category-grid[data-category="licores"] .category-name {
-  font-size: 0.8rem;
-  height: 35px;
-  line-height: 1.1;
-}
-  
-  .card--category {
-    aspect-ratio: 1;
-  }
-
-@media (orientation: landscape) and (max-height: 500px) {
-  .grid {
-    gap: clamp(6px, 1.5vw, 10px);
-    padding: clamp(8px, 2vw, 12px);
-  }
-  
-  .card {
-    min-height: 140px;
-  }
-  
-  .card__image {
-    height: clamp(60px, 8vw, 90px);
-  }
-}
-
-/* === ACCESIBILIDAD MÓVIL === */
-@media (prefers-reduced-motion: reduce) {
-  .card,
-  .price-button {
-    transition: none;
-  }
-  
-  .card--loading {
-    animation: none;
-  }
-}
-
-/* === MODO OSCURO MÓVIL === */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mobile-card-bg: rgba(0,0,0,0.9);
-    --mobile-border-color: #00f7ff60;
-  }
-}
-
-/* === ALTO CONTRASTE MÓVIL === */
-@media (prefers-contrast: high) {
-  .card {
-    border-width: 2px;
-  }
-  
-  .card__title {
-    font-weight: 700;
-  }
-  
-  .price-button {
-    font-weight: 700;
-    border: 2px solid #000;
-  }
-}
-
-/* === SIDEBAR MÓVIL VERTICAL === */
-@media (orientation: portrait) and (max-width: 480px) {
-  #order-sidebar {
-    flex: 0 0 var(--mobile-sidebar-width);
-    min-width: var(--mobile-sidebar-width);
-    max-width: var(--mobile-sidebar-width);
-    padding: 8px;
-    font-size: 0.75rem;
-  }
-  
-  #order-sidebar h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-  
-  .order-item {
-    padding: 6px 0;
-    margin-bottom: 6px;
-  }
-  
-  .order-item-name {
-    font-size: 0.7rem !important;
-    margin-bottom: 3px !important;
-  }
-  
-  .order-item-price {
-    font-size: 0.65rem !important;
-  }
-}
-
-
-
-/* === CONTENIDO MODO TABLA MÓVIL === */
-@media (max-width: 480px) {
-  
-
-  
-  /* Tablas al mínimo tamaño inicial */
-  .product-table, .liquor-table {
-    min-width: 280px;
-    width: auto;
-    font-size: 0.65rem;
-    transform: scale(0.8);
-    transform-origin: center top;
-    margin: 0 auto;
-    touch-action: pinch-zoom;
-  }
-  
-  .product-table th, .liquor-table th {
-    padding: 4px 2px !important;
-    font-size: 0.6rem !important;
-    white-space: nowrap;
-  }
-  
-  .product-table td, .liquor-table td {
-    padding: 4px 2px !important;
-    font-size: 0.55rem !important;
-    white-space: nowrap;
-  }
-  
-  .product-table td.image-icon img, .liquor-table td.image-icon img {
-    width: 20px !important;
-    height: 20px !important;
-  }
-}
-
-/* === MENÚ LATERAL MÓVIL === */
-@media (orientation: portrait) and (max-width: 480px) {
-  .drawer-menu {
-    width: 150px !important; /* 50% de 300px */
-  }
-}
-
-/* === NAVEGACIÓN SUPERIOR MÓVIL === */
-@media (max-width: 480px) {
+/* Top navigation mobile optimization */
+@media (max-width: 768px) {
   #top-nav {
-    height: var(--top-nav-height-mobile) !important;
-    min-height: var(--top-nav-height-mobile) !important;
-    max-height: var(--top-nav-height-mobile) !important;
-    padding: 0 15px;
-    background: var(--top-nav-bg);
-    border-bottom: 1px solid var(--top-nav-border);
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    padding: 0 var(--mobile-container-padding);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   
   body.top-nav-visible {
-    padding-top: var(--top-nav-height-mobile) !important;
+    padding-top: 56px !important;
+  }
+  
+  .top-nav-btn {
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    border-radius: 12px;
+    transition: transform var(--mobile-transition-fast);
+  }
+  
+  .top-nav-btn:active {
+    transform: scale(var(--mobile-active-scale));
+  }
+  
+  #nav-title {
+    font-size: var(--mobile-text-lg);
+  }
+}
+
+/* Mobile navigation menu */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mobile-space-2);
+  padding: var(--mobile-space-4);
+}
+
+.mobile-nav-row {
+  display: flex;
+  gap: var(--mobile-space-2);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Mobile navigation buttons */
+.mobile-nav-btn {
+  min-height: var(--touch-target-min);
+  padding: var(--mobile-space-2) var(--mobile-space-4);
+  border-radius: var(--mobile-card-radius);
+  font-size: var(--mobile-text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--mobile-transition-fast);
+  cursor: pointer;
+  
+  /* Touch optimization */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-btn:active {
+  transform: scale(var(--mobile-active-scale));
+}
+
+.mobile-nav-btn:hover {
+  transform: scale(var(--mobile-hover-scale));
+}
+
+/* === MOBILE CARD SYSTEM === */
+
+/* Base mobile card */
+.mobile-card {
+  background: var(--card-bg-current);
+  border-radius: var(--mobile-card-radius);
+  border: 1px solid var(--border);
+  padding: var(--mobile-card-padding);
+  transition: all var(--mobile-transition-smooth);
+  cursor: pointer;
+  
+  /* Touch optimization */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Performance optimization */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.mobile-card:active {
+  transform: scale(var(--mobile-active-scale));
+}
+
+/* Mobile card variants */
+.mobile-card--product {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.mobile-card--category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 120px;
+}
+
+/* Mobile card elements */
+.mobile-card__image {
+  width: 100%;
+  height: clamp(80px, 20vw, 120px);
+  object-fit: contain;
+  background: transparent;
+  border-radius: 8px;
+  margin-bottom: var(--mobile-space-2);
+}
+
+.mobile-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mobile-space-1);
+}
+
+.mobile-card__title {
+  font-size: var(--mobile-text-base);
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.3;
+  margin-bottom: var(--mobile-space-1);
+}
+
+.mobile-card__description {
+  font-size: var(--mobile-text-sm);
+  color: var(--text-color);
+  opacity: 0.8;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.mobile-card__price {
+  margin-top: auto;
+  padding-top: var(--mobile-space-2);
+}
+
+/* Mobile price button */
+.mobile-price-btn {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: var(--mobile-space-2);
+  background: transparent;
+  color: var(--price-color);
+  border: 2px solid var(--price-color);
+  border-radius: 8px;
+  font-size: var(--mobile-text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--mobile-transition-fast);
+  
+  /* Touch optimization */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-price-btn:active {
+  transform: scale(var(--mobile-active-scale));
+  background: var(--price-color);
+  color: var(--bg);
+}
+
+/* === MOBILE TABLES === */
+
+/* Mobile table wrapper */
+.mobile-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobile-table-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile table */
+.mobile-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+.mobile-table td {
+  padding: var(--mobile-space-3);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+/* Mobile table image cells */
+.mobile-table .image-icon {
+  width: 60px;
+  text-align: center;
+}
+
+.mobile-table .image-icon img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 8px;
+}
+
+/* === MOBILE UTILITIES === */
+
+/* Visibility utilities */
+.mobile-only {
+  display: block;
+}
+
+.mobile-hidden {
+  display: none;
+}
+
+/* Layout utilities */
+.mobile-center {
+  text-align: center;
+}
+
+.mobile-full-width {
+  width: 100%;
+}
+
+.mobile-flex {
+  display: flex;
+}
+
+.mobile-flex-col {
+  flex-direction: column;
+}
+
+.mobile-flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spacing utilities */
+.mobile-mt-1 { margin-top: var(--mobile-space-1); }
+.mobile-mt-2 { margin-top: var(--mobile-space-2); }
+.mobile-mt-3 { margin-top: var(--mobile-space-3); }
+.mobile-mt-4 { margin-top: var(--mobile-space-4); }
+
+.mobile-mb-1 { margin-bottom: var(--mobile-space-1); }
+.mobile-mb-2 { margin-bottom: var(--mobile-space-2); }
+.mobile-mb-3 { margin-bottom: var(--mobile-space-3); }
+.mobile-mb-4 { margin-bottom: var(--mobile-space-4); }
+
+.mobile-p-1 { padding: var(--mobile-space-1); }
+.mobile-p-2 { padding: var(--mobile-space-2); }
+.mobile-p-3 { padding: var(--mobile-space-3); }
+.mobile-p-4 { padding: var(--mobile-space-4); }
+
+/* === MOBILE RESPONSIVE BREAKPOINTS === */
+
+/* Small mobile (320px - 479px) */
+@media (max-width: 479px) {
+  :root {
+    --mobile-grid-gap: var(--mobile-space-2);
+    --mobile-grid-padding: var(--mobile-space-3);
+  }
+  
+  .mobile-grid--3-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mobile-card--product {
+    min-height: 180px;
+  }
+  
+  .mobile-card__image {
+    height: clamp(70px, 18vw, 100px);
+  }
+}
+
+/* Large mobile (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .mobile-grid--auto {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  
+  .mobile-card--product {
+    min-height: 220px;
+  }
+  
+  .mobile-card__image {
+    height: clamp(90px, 22vw, 140px);
+  }
+}
+
+/* === MOBILE PERFORMANCE OPTIMIZATIONS === */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .mobile-card {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .mobile-card {
+    border-width: 2px;
+  }
+  
+  .mobile-nav-btn,
+  .mobile-price-btn {
+    border-width: 3px;
+  }
+}
+
+/* === MOBILE LEGACY COMPATIBILITY === */
+
+/* Apply mobile styles to existing components */
+@media (max-width: 768px) {
+  /* Fix white backgrounds on mobile images */
+  .image-icon img,
+  .product-table td.image-icon img,
+  .category-image,
+  .product-image,
+  .product-card .product-image,
+  .product-card.liquor-card .product-image {
+    background: transparent !important;
+  }
+  
+  /* Optimize existing navigation */
+  .nav-button {
+    min-height: var(--touch-target-min);
+    padding: var(--mobile-space-2) var(--mobile-space-3);
+    font-size: var(--mobile-text-sm);
+    border-radius: var(--mobile-card-radius);
+    transition: transform var(--mobile-transition-fast);
+  }
+  
+  .nav-button:active {
+    transform: scale(var(--mobile-active-scale));
+  }
+  
+  /* Optimize existing grids */
+  .category-grid,
+  .product-grid {
+    gap: var(--mobile-grid-gap);
+    padding: var(--mobile-grid-padding);
+  }
+  
+  /* Optimize existing cards */
+  .card {
+    border-radius: var(--mobile-card-radius);
+    transition: transform var(--mobile-transition-smooth);
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  
+  .card:active {
+    transform: scale(var(--mobile-active-scale));
+  }
+  
+  /* Optimize existing tables */
+  .product-table,
+  .liquor-table {
+    font-size: var(--mobile-text-sm);
+  }
+  
+  .product-table td,
+  .liquor-table td {
+    padding: var(--mobile-space-2);
+  }
+  
+  /* Optimize page layout */
+  #app {
+    padding: 0 var(--mobile-container-padding);
+  }
+  
+  .content-container-flex {
+    gap: var(--mobile-space-3);
+  }
+  
+  #content-container {
+    padding: 0;
+  }
+  
+  /* Optimize typography */
+  .page-title {
+    font-size: var(--mobile-text-xl);
+    padding: var(--mobile-space-3) 0;
+  }
+  
+  .welcome-text {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+  
+  .title-text {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .category-title {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+  }
+}
+
+/* === MOBILE LANDSCAPE OPTIMIZATIONS === */
+@media (orientation: landscape) and (max-width: 767px) {
+  /* Reduce vertical spacing in landscape */
+  :root {
+    --mobile-grid-padding: var(--mobile-space-2);
+  }
+  
+  #top-nav {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+  }
+  
+  body.top-nav-visible {
+    padding-top: 48px !important;
+  }
+  
+  .mobile-card--product {
+    min-height: 160px;
+  }
+  
+  .mobile-card__image {
+    height: clamp(60px, 15vw, 90px);
+  }
+}
+
+/* === MOBILE ACCESSIBILITY === */
+
+/* Focus styles for keyboard navigation */
+@media (max-width: 768px) {
+  .mobile-nav-btn:focus,
+  .mobile-price-btn:focus,
+  .nav-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+  }
+  
+  /* Ensure sufficient color contrast */
+  .mobile-card__title {
+    color: var(--text-color);
+  }
+  
+  .mobile-card__description {
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+}
+
+/* === MOBILE PRINT STYLES === */
+@media print {
+  .mobile-nav,
+  #top-nav,
+  .mobile-nav-btn {
+    display: none !important;
+  }
+  
+  .mobile-card {
+    break-inside: avoid;
+    border: 1px solid #000;
   }
 }
