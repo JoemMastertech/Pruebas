@@ -446,16 +446,50 @@ body {
 /* === MOBILE LEGACY COMPATIBILITY === */
 
 /* Apply mobile styles to existing components */
-@media (max-width: 768px) {
-  /* Fix white backgrounds on mobile images */
-  .image-icon img,
-  .product-table td.image-icon img,
-  .category-image,
-  .product-image,
-  .product-card .product-image,
-  .product-card.liquor-card .product-image {
-    background: transparent !important;
-  }
+@media (max-width: 1024px) {
+  /* Mobile-optimized image backgrounds */
+   .image-icon img,
+   .product-table td.image-icon img,
+   .category-image,
+   .product-image,
+   .product-card .product-image,
+   .product-card.liquor-card .product-image {
+     background: transparent;
+     background-color: transparent;
+   }
+   
+   /* Mobile card styling with glass effect */
+   .card,
+   .product-card,
+   .category-card {
+     background: transparent;
+     backdrop-filter: blur(10px);
+     border: 1px solid rgba(0, 247, 255, 0.2);
+     border-radius: 12px;
+   }
+   
+   /* Mobile grid optimizations */
+   .category-grid,
+   .product-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+     gap: 16px;
+     padding: 16px;
+   }
+   
+   /* Mobile table improvements */
+   .product-table,
+   .liquor-table {
+     background: rgba(0, 0, 0, 0.3);
+     border-radius: 8px;
+     overflow: hidden;
+   }
+   
+   .product-table td,
+   .liquor-table td {
+     background: transparent;
+     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   }
   
   /* Optimize existing navigation */
   .nav-button {
@@ -561,7 +595,7 @@ body {
 /* === MOBILE ACCESSIBILITY === */
 
 /* Focus styles for keyboard navigation */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mobile-nav-btn:focus,
   .mobile-price-btn:focus,
   .nav-button:focus {

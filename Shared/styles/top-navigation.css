@@ -163,7 +163,7 @@ body.top-nav-visible {
     min-height: var(--top-nav-height-tablet) !important;
     max-height: var(--top-nav-height-tablet) !important;
     background: var(--top-nav-bg);
-    border-bottom: 1px solid var(--top-nav-border);
+    border-bottom: 1px solid rgba(0, 247, 255, 0.3);
   }
   
   body.top-nav-visible {
@@ -182,7 +182,7 @@ body.top-nav-visible {
     min-height: var(--top-nav-height-mobile) !important;
     max-height: var(--top-nav-height-mobile) !important;
     background: var(--top-nav-bg);
-    border-bottom: 1px solid var(--top-nav-border);
+    border-bottom: 1px solid rgba(0, 247, 255, 0.3);
   }
   
   body.top-nav-visible {
