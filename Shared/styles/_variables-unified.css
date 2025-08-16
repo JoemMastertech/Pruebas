@@ -24,6 +24,11 @@
   --shadow-base: 0 0 10px rgba(0, 247, 255, 0.3);
   --shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
   
+  /* === EFECTOS GLOW CYAN === */
+  --glow-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+  --glow-shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
+  --price-color: #00f7ff;
+  
   /* === TRANSICIONES === */
   --transition: 0.3s ease;
   --transition-fast: 0.2s ease;

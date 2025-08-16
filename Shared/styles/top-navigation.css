@@ -105,6 +105,7 @@
   flex-grow: 0;
   overflow: hidden;
   line-height: 1;
+  box-shadow: 0 0 8px rgba(0, 247, 255, 0.2);
 }
 
 .top-nav-btn:hover, .top-nav-btn.active {
