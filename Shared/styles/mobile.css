@@ -248,68 +248,26 @@
 /* === ORIENTACIÓN LANDSCAPE MÓVIL === */
 @media (orientation: landscape) and (max-width: 767px) {
   /* Ajustes para móviles en orientación horizontal */
-  #app {
-    padding: 0 !important; /* Sin padding lateral */
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
+  .grid--categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
-  #content-container {
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    overflow-x: auto !important; /* Permite desplazamiento horizontal */
-  }
-  
-  .content-container-flex {
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-  }
-  
-  .grid,
-  .category-grid,
-  .product-grid {
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    padding: 0 !important; /* Sin padding lateral */
-    overflow-x: auto !important; /* Permite desplazamiento horizontal */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 /* === ORIENTACIÓN PORTRAIT MÓVIL === */
 @media (orientation: portrait) and (max-width: 480px) {
   /* Ajustes para móviles en orientación vertical */
-  #app {
-    padding: 0 !important; /* Sin padding lateral */
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
+  .grid--categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
-  #content-container {
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    overflow-x: auto !important; /* Permite desplazamiento horizontal */
-  }
-  
-  .content-container-flex {
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    padding: 0 !important; /* Sin padding lateral */
-    margin: 0 !important;
-  }
-  
-  .grid,
-  .category-grid,
-  .product-grid {
-    width: 100vw !important; /* Ancho completo de viewport */
-    max-width: none !important; /* Sin restricción de ancho máximo */
-    padding: 0 !important; /* Sin padding lateral */
-    overflow-x: auto !important; /* Permite desplazamiento horizontal */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .grid--categories {
