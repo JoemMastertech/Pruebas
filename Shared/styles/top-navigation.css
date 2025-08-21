@@ -2,14 +2,8 @@
    TOP NAVIGATION BAR - ISOLATED STYLES
    ================================================================= */
 
-/* Top Navigation Variables */
-:root {
-  /* Desktop Variables */
-  --top-nav-height: 60px;
-  --top-nav-height-desktop: 60px;
-  --top-nav-bg: rgba(0, 0, 0, 0.95);
-  --top-nav-border: #00f7ff;
-}
+/* Top Navigation Variables - Using Unified Variables */
+/* Variables are now imported from _variables-unified.css */
 
 /* =================================================================
    BARRA SUPERIOR GLOBAL

@@ -11,29 +11,22 @@
   --tablet-grid-columns-landscape: 3;
   --tablet-card-margin: clamp(8px, 2vw, 12px);
   
-  /* Alias para compatibilidad - usar variables unificadas */
-  --tablet-grid-gap: var(--gap);
-  --tablet-grid-padding: var(--padding);
-  --tablet-font-title: var(--font-title);
-  --tablet-font-description: var(--font-description);
-  --tablet-font-price: var(--font-price);
-  --tablet-card-padding: var(--card-padding);
-  --tablet-card-bg: var(--card-bg-current);
-  --tablet-border-color: var(--border);
-  --tablet-transition: var(--transition);
-  --tablet-hover-scale: var(--hover-scale);
+  /* Variables específicas tablet (no duplicadas) */
+  /* Usar directamente variables unificadas: --gap, --padding, --font-title, etc. */
 }
 
 /* === COMPONENTE BASE GRID TABLET (BEM) === */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(var(--tablet-grid-columns-portrait), 1fr);
-  gap: var(--tablet-grid-gap);
-  padding: var(--tablet-grid-padding);
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+@media (min-width: var(--bp-tablet)) and (max-width: 1023px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--tablet-grid-columns-portrait), 1fr);
+    gap: var(--gap);
+    padding: var(--padding);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 }
 
 /* === MODIFICADORES DE GRID TABLET === */
@@ -48,10 +41,10 @@
 
 /* === COMPONENTES DE CARD TABLET (BEM) === */
 .card {
-  background: var(--tablet-card-bg);
+  background: var(--card-bg-current);
   border-radius: 12px;
-  border: 1px solid var(--tablet-border-color);
-  transition: var(--tablet-transition);
+  border: 1px solid var(--border);
+  transition: var(--transition);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -315,7 +308,7 @@
   }
 }
 
-@media (orientation: landscape) and (min-width: var(--bp-tablet)) {
+@media (orientation: landscape) and (min-width: var(--bp-tablet)) and (max-width: 1023px) {
   .grid--products {
     grid-template-columns: repeat(3, 1fr);
   }

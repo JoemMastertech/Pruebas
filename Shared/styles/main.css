@@ -20,34 +20,22 @@
   --thumb-size-4: clamp(80px, 12vw, 130px);  /* Referencia de Coctelería */
   --thumb-size-5: clamp(75px, 11vw, 120px);
   
-  /* Fuentes base */
-  --font-size-base: clamp(14px, 2vw, 18px);
-  --font-size-price: clamp(12px, 1.8vw, 16px);
+  /* Variables específicas de contexto (no duplicadas) */
   --font-size-name: clamp(13px, 1.9vw, 17px);
   
-  /* Espaciado */
+  /* Espaciado específico por categorías */
   --gap-3: clamp(20px, 3vw, 30px);
   --gap-4: clamp(18px, 2.8vw, 28px);
   --gap-5: clamp(15px, 2.5vw, 25px);
   
-  /* Padding */
+  /* Padding específico por categorías */
   --padding-3: clamp(20px, 3vw, 30px);
   --padding-4: clamp(18px, 2.8vw, 28px);
   
-  /* === VARIABLES GRID CONSOLIDADAS === */
-  /* Grid Columns */
-  --grid-cols-mobile: repeat(2, 1fr);
-  --grid-cols-desktop: repeat(3, 1fr);
+  /* === VARIABLES ESPECÍFICAS DE LICORES === */
+  /* Grid específico para categoría licores */
   --grid-cols-licores: repeat(5, 1fr);
-  
-  /* Grid Spacing */
-  --grid-gap-mobile: clamp(10px, 2vw, 15px);
-  --grid-gap-desktop: clamp(15px, 2.5vw, 20px);
   --grid-gap-licores: 16px;
-  
-  /* Grid Padding */
-  --grid-padding-mobile: clamp(10px, 2vw, 15px);
-  --grid-padding-desktop: clamp(15px, 2.5vw, 20px);
   --grid-padding-licores: 16px;
   
   /* Botones licores específicos */
@@ -161,7 +149,7 @@ body:not(.order-mode-active) #content-container {
 }
 
 .welcome-text { font-size: clamp(2rem, 4vw, 3rem); }
-.title-text { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent); }
+.title-text { font-size: clamp(2rem, 4vw, 3rem); color: var(--text); }
 .category-title { font-size: clamp(1.5rem, 3vw, 2.5rem); }
 
 /* Sistema de logos */
@@ -176,13 +164,19 @@ body:not(.order-mode-active) #content-container {
   max-width: clamp(200px, 25vw, 300px);
   height: auto;
   animation: fadeIn 1s ease-in-out;
-  filter: drop-shadow(var(--shadow-base));
-  transition: var(--transition);
+  filter: none;
+  transition: none;
 }
 
-.logo:hover, .main-logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(var(--shadow-hover));
+/* Hover effects removed for transition screens */
+.logo-screen .logo {
+  filter: none;
+  transition: none;
+}
+
+.logo-screen .logo:hover {
+  transform: none;
+  filter: none;
 }
 
 .main-logo {
@@ -2426,9 +2420,13 @@ body.top-nav-visible {
 .input-container-visible, .choice-visible, .error-visible { display: block; }
 .modal-flex { display: flex; }
 
-/* Body control - Crítico para modales */
+/* Body control - Crítico para modales y transiciones */
 .body-no-scroll { overflow: hidden; }
 .body-scroll { overflow: auto; }
+
+/* Control de scroll durante transiciones */
+.screen:not(.main-content-screen) { overflow: hidden; }
+body:has(.screen:not(.main-content-screen):not(.screen-hidden)) { overflow: hidden; }
 
 /* Visual utilities */
 .error-red { color: var(--error-color, #ff4444); }
@@ -2491,10 +2489,9 @@ body.top-nav-visible {
    GRID ENHANCED - PLAN DE ESTANDARIZACIÓN
    ================================================================= */
 
-/* Variables CSS para centralizar tamaños y espacios */
+/* Variables CSS específicas para layout de cards */
 :root {
   --card-min: 260px;
-  --grid-gap: clamp(12px, 2vw, 20px);
   --grid-pad: clamp(12px, 2vw, 20px);
   --slot-gap: clamp(6px, 1.2cqw, 12px);
   --price-gap: clamp(6px, 1.2cqw, 10px);
@@ -2686,13 +2683,13 @@ body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
     width: 100%;
   }
   
-  /* Desktop: 3 columnas solo en pantallas grandes */
+  /* Desktop: 4 columnas usando variables unificadas */
   @media (min-width: var(--bp-desktop)) {
     .product-grid,
     .category-grid {
-      grid-template-columns: var(--grid-cols-desktop);
-      gap: var(--grid-gap-desktop);
-      padding: var(--grid-padding-desktop);
+      grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
+      gap: var(--gap-desktop);
+      padding: var(--padding-desktop);
     }
   }
   

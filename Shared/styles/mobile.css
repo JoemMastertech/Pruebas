@@ -9,25 +9,16 @@
   /* Variables específicas solo para mobile.css */
   --mobile-card-margin: clamp(6px, 1.5vw, 10px);
   
-  /* Alias para compatibilidad - usar variables unificadas */
-  --mobile-grid-columns: var(--grid-columns);
-  --mobile-grid-gap: var(--gap);
-  --mobile-grid-padding: var(--padding);
-  --mobile-font-title: var(--font-title);
-  --mobile-font-description: var(--font-description);
-  --mobile-font-price: var(--font-price);
-  --mobile-card-padding: var(--card-padding);
-  --mobile-card-bg: var(--card-bg-current);
-  --mobile-border-color: var(--border);
-  --mobile-transition: var(--transition-fast);
+  /* Variables específicas móviles (no duplicadas) */
+  /* Usar directamente variables unificadas: --grid-columns, --gap, --padding, etc. */
 }
 
 /* === COMPONENTE BASE GRID MÓVIL (BEM) === */
 .grid {
   display: grid;
-  grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
-  gap: var(--mobile-grid-gap);
-  padding: var(--mobile-grid-padding);
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--gap);
+  padding: var(--padding);
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
@@ -49,9 +40,9 @@
 .product-grid {
   /* Redirección a componente BEM */
   display: grid;
-  grid-template-columns: repeat(var(--mobile-grid-columns), 1fr);
-  gap: var(--mobile-grid-gap);
-  padding: var(--mobile-grid-padding);
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--gap);
+  padding: var(--padding);
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
