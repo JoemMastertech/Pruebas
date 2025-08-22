@@ -15,17 +15,29 @@
   /* Usar directamente variables unificadas: --gap, --padding, --font-title, etc. */
 }
 
-/* === COMPONENTE BASE GRID TABLET (BEM) === */
+/* === TABLET PORTRAIT RULES - 2 COLUMNAS === */
 @media (min-width: var(--bp-tablet)) and (max-width: 1023px) {
-  .grid {
+  .grid,
+  .product-grid,
+  .category-grid {
     display: grid;
-    grid-template-columns: repeat(var(--tablet-grid-columns-portrait), 1fr);
-    gap: var(--gap);
-    padding: var(--padding);
+    grid-template-columns: repeat(var(--grid-columns-tablet-portrait), 1fr);
+    gap: var(--gap-tablet);
+    padding: var(--padding-tablet);
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
     box-sizing: border-box;
+  }
+  
+  /* Configuración específica para productos */
+  .product-grid {
+    grid-auto-rows: minmax(240px, auto);
+  }
+  
+  /* Configuración específica para categorías */
+  .category-grid {
+    grid-template-rows: repeat(auto-fit, minmax(160px, 1fr));
   }
 }
 
@@ -185,9 +197,9 @@
 /* === RESPONSIVE TABLET INTERNO === */
 
 /* Tablet Portrait (768px - 1023px) */
+/* Grid rules moved to main.css for consolidation */
 @media (min-width: var(--bp-tablet)) and (max-width: 1023px) {
   .grid {
-    grid-template-columns: repeat(var(--tablet-grid-columns-portrait), 1fr);
     gap: clamp(12px, 2.5vw, 16px);
     padding: clamp(15px, 3vw, 18px);
   }
@@ -201,24 +213,9 @@
   }
 }
 
-/* Tablet Landscape (1024px+) */
-@media (min-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(var(--tablet-grid-columns-landscape), 1fr);
-    gap: clamp(16px, 2.8vw, 20px);
-    padding: clamp(18px, 3.2vw, 22px);
-  }
-  
-  .grid--categories {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablet horizontal */
-}
+/* Grid rules moved to main.css for consolidation */
 
-/* Licores grid responsive para tablet */
-.category-grid[data-category="licores"] {
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(9px, 1.8vw, 18px);
-  padding: clamp(9px, 1.8vw, 18px);
-}
+/* Licores grid rules moved to main.css for consolidation */
 
 /* Tarjetas responsive para tablet */
 .category-card, .product-card {
@@ -240,10 +237,13 @@
 }
 
 /* Reducir espaciado del encabezado para licores en tablet */
-.category-grid[data-category="licores"] .page-title {
-  margin: 0 0 8px 0 !important;
-  padding: 8px var(--spacing) !important;
-}
+/* .category-grid[data-category="licores"] .page-title {
+  margin: 0 0 0.35rem 0; 
+  padding: 0.35rem var(--spacing); 
+} */
+
+/* Reducir altura del contenedor padre en tablet modo grid */
+
 
 /* Reducir espaciado del pie de página para licores en tablet */
 .category-grid[data-category="licores"] .subcategory-prompt {
@@ -258,17 +258,22 @@
 }
 
 .category-grid[data-category="licores"] .category-image {
-  height: 86px;
+  width: var(--image-profile-size-tablet);
+  height: var(--image-profile-size-tablet);
+  aspect-ratio: var(--image-profile-aspect-ratio);
+  object-fit: var(--image-profile-fit);
   margin-bottom: 4px;
-  object-fit: contain;
-  transform: scale(1.1) !important;
-  transform-origin: center !important;
+  transform: scale(1.1);
+  transform-origin: center;
+  border-radius: var(--image-profile-radius);
+  background: white;
+  padding: 8px;
 }
 
 .category-grid[data-category="licores"] .category-name {
-  font-size: 0.9rem !important;
-  height: 40px !important;
-  line-height: 1.2 !important;
+  font-size: 0.9rem;
+  height: 40px;
+  line-height: 1.2;
 }
   
   .card {
@@ -291,8 +296,8 @@
     font-size: clamp(13px, 1.9vw, 15px);
     padding: clamp(8px, 1.4vw, 12px) clamp(10px, 2vw, 16px);
   }
-}
 
+  
 /* === ORIENTACIÓN TABLET === */
 @media (orientation: portrait) and (min-width: var(--bp-tablet)) {
   .grid--products {
@@ -308,15 +313,8 @@
   }
 }
 
+/* Grid rules moved to main.css for consolidation */
 @media (orientation: landscape) and (min-width: var(--bp-tablet)) and (max-width: 1023px) {
-  .grid--products {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .grid--categories {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
   .card--category {
     aspect-ratio: 1;
   }

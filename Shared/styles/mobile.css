@@ -237,47 +237,11 @@
 }
 
 /* === ORIENTACIÓN MÓVIL === */
-@media (orientation: portrait) and (max-width: 480px) {
-  .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* Grid rules moved to main.css for consolidation */
 
-@media (orientation: landscape) and (max-width: var(--bp-tablet)) {
-  .grid--categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .category-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  /* Eliminar espacios laterales en horizontal */
-  .grid {
-    padding: 5px;
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
-}
+/* Grid rules moved to main.css for consolidation */
 
-/* === GRIDS Y CONTENEDORES MÓVIL === */
-@media (max-width: var(--mobile-bp-large)) {
-  .grid,
-  .category-grid,
-  .grid--categories,
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(5px, 1.5vw, 10px);
-    padding: clamp(5px, 1.5vw, 10px);
-    margin: 0;
-    width: 100%;
-    max-width: 100vw;
-  }
+/* Grid rules moved to main.css for consolidation */
   
   /* Contenedor principal sin espacios laterales */
   .content-container,
@@ -294,7 +258,7 @@
     gap: clamp(7px, 1.8vw, 13px);
     padding: clamp(7px, 1.8vw, 13px);
   }
-}
+
 
 /* === MIGRACIÓN A BEM: CARDS === */
 .category-card,
@@ -367,27 +331,17 @@
   margin-bottom: 4px;
 }
 
-/* Tablas responsive para móvil */
-.product-table th, .liquor-table th {
-  font-size: clamp(0.7rem, 2.2vw, 1rem);
-  padding: clamp(6px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
-}
-
-.product-table td, .liquor-table td {
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
-  padding: clamp(6px, 1.5vw, 12px) clamp(4px, 1vw, 8px);
-}
-
-.product-table td.image-icon img, .liquor-table td.image-icon img {
-  width: clamp(25px, 4vw, 45px);
-  height: clamp(25px, 4vw, 45px);
-}
+/* Table rules moved to main.css for consolidation */
 
 /* Reducir espaciado del encabezado para licores en móvil */
-.category-grid[data-category="licores"] .page-title {
-  margin: 0 0 6px 0 !important;
-  padding: 6px var(--spacing) !important;
-}
+/* Reducir espaciado del encabezado para licores en móvil */
+/* .category-grid[data-category="licores"] .page-title {
+  margin: 0 0 0.25rem 0;
+  padding: 0.25rem var(--spacing);
+} */
+
+/* Reducir altura del contenedor padre en móvil modo grid */
+
 
 /* Reducir espaciado del pie de página para licores en móvil */
 .category-grid[data-category="licores"] .subcategory-prompt {
@@ -402,11 +356,16 @@
 }
 
 .category-grid[data-category="licores"] .category-image {
-  height: 65px;
+  width: var(--image-profile-size-mobile);
+  height: var(--image-profile-size-mobile);
+  aspect-ratio: var(--image-profile-aspect-ratio);
+  object-fit: var(--image-profile-fit);
   margin-bottom: 4px;
-  object-fit: contain;
   transform: scale(1.1);
   transform-origin: center;
+  border-radius: var(--image-profile-radius);
+  background: white;
+  padding: 8px;
 }
 
 .category-grid[data-category="licores"] .category-name {
@@ -514,7 +473,7 @@
     box-sizing: border-box;
   }
   
-  /* Tablas al mínimo tamaño inicial */
+  /* Compact table rules for very small screens */
   .product-table, .liquor-table {
     min-width: 280px;
     width: auto;

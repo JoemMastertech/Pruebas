@@ -1,131 +1,35 @@
-/* MASTER TECHNOLOGY BAR - OPTIMIZED STYLESHEET */
-
-/* === COMPONENTES BEM INTEGRADOS === */
-/* Los componentes han sido integrados directamente en este archivo */
-
-/* === VARIABLES ESPECÍFICAS DE MAIN.CSS === */
-/* Las variables globales están en _variables-unified.css */
+/* Master Technology Bar - Optimized Stylesheet */
 :root {
-  /* Layout específico */
-  --border-radius: 10px;
-  --container-max: 1400px;
+  /* Primary Colors */
+  --primary-color: #f3f6f6;
+  --accent-color: #00f7ff;
+  --background-color: #000;
+  --text-color: #ECE9D8;
+  --price-color: #00f7ff;
   
-  /* === ESTANDARIZACIÓN DE COLUMNAS === */
-  --container-width-3: 100%;     /* Interfaces de 3 columnas (Refrescos, Cervezas) */
-  --container-width-4: 97%;      /* Interfaces de 4 columnas (reducido 3%) */
-  --container-width-5: 97%;      /* Interfaces de 5 columnas (mismo ancho visual que 4) */
+  /* Component Colors */
+  --card-bg: rgba(0,0,0,0.7);
+  --border-color: #00f7ff40;
+  --glow-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+  --glow-shadow-hover: 0 0 20px rgba(0, 247, 255, 0.6);
   
-  /* Thumbnails estandarizados */
-  --thumb-size-3: clamp(90px, 14vw, 140px);
-  --thumb-size-4: clamp(80px, 12vw, 130px);  /* Referencia de Coctelería */
-  --thumb-size-5: clamp(75px, 11vw, 120px);
+  /* Layout Variables */
+  --transition-time: 0.3s;
+  --table-width: 95%;
+  --table-max-width: 1400px;
+  --table-margin: 20px;
   
-  /* Variables específicas de contexto (no duplicadas) */
-  --font-size-name: clamp(13px, 1.9vw, 17px);
-  
-  /* Espaciado específico por categorías */
-  --gap-3: clamp(20px, 3vw, 30px);
-  --gap-4: clamp(18px, 2.8vw, 28px);
-  --gap-5: clamp(15px, 2.5vw, 25px);
-  
-  /* Padding específico por categorías */
-  --padding-3: clamp(20px, 3vw, 30px);
-  --padding-4: clamp(18px, 2.8vw, 28px);
-  
-  /* === VARIABLES ESPECÍFICAS DE LICORES === */
-  /* Grid específico para categoría licores */
-  --grid-cols-licores: repeat(5, 1fr);
-  --grid-gap-licores: 16px;
-  --grid-padding-licores: 16px;
-  
-  /* Botones licores específicos */
-  --liquor-button-scale: 0.85;
-  
-  /* Variables específicas de main.css que no están en unified */
-  --table-width: var(--container-width);
-  --table-max-width: var(--container-max);
-  --table-margin: var(--spacing);
-  
-  /* NOTA: Variables globales movidas a _variables-unified.css */
+  /* Legacy support */
+  --primary: #f3f6f6;
+  --accent: #00f7ff;
+  --bg: #000;
+  --text: #ECE9D8;
+  --card: rgba(0,0,0,0.7);
+  --border: #00f7ff40;
+  --transition: 0.3s;
 }
 
-/* ================================================================= 
-   RESET Y ELEMENTOS BASE - MOBILE FIRST
-   ================================================================= */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Montserrat', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* === LAYOUT PRINCIPAL === */
-
-#app { 
-  width: 100%;
-  max-width: 100vw;
-  min-height: 100vh; 
-  position: relative; 
-  margin: 0;
-  padding: 0 clamp(8px, 3vw, 2rem);
-  box-sizing: border-box;
-}
-
-/* Contenedor principal flexbox */
-.content-container-flex {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  gap: clamp(8px, 2vw, 1rem);
-  width: 100%;
-  min-width: 320px;
-  max-width: 1400px;
-  margin: 0 auto;
-  transition: all 0.3s ease;
-}
-
-/* Contenido principal */
-#content-container {
-  flex: 1 1 auto;
-  min-width: 0; /* para evitar overflow */
-  max-width: 1120px;
-  width: 100%;
-  padding: 0 clamp(8px, 3vw, 12px);
-}
-
-/* Centrado cuando no hay orden */
-body:not(.order-mode-active) .content-container-flex {
-  justify-content: center;
-}
-
-body:not(.order-mode-active) #content-container {
-  flex: 0 1 auto;
-  width: 72%;
-  max-width: 1120px;
-}
-
-.screen { 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100vh; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-  z-index: 1; 
-}
-
-/* Video de fondo */
+/* Background video styles */
 #background-video {
   position: fixed;
   top: 0;
@@ -137,64 +41,68 @@ body:not(.order-mode-active) #content-container {
   opacity: 0.4;
 }
 
-/* === TIPOGRAFÍA Y BRANDING === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; color: var(--text); background: var(--background-color); min-height: 100vh; overflow-y: auto; }
+#app { 
+  width: 70%; 
+  min-height: 100vh; 
+  position: relative; 
+  margin: 0 auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+.screen { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1; }
 
-/* Sistema tipográfico */
+/* =================================================================
+   TYPOGRAPHY & BRANDING
+   ================================================================= */
 .welcome-text, .title-text, .category-title {
   font-family: 'Playfair Display', serif;
-  color: var(--text);
+  color: var(--text-color);
   text-align: center;
   animation: fadeIn 1s ease-in-out;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.welcome-text { font-size: clamp(2rem, 4vw, 3rem); }
-.title-text { font-size: clamp(2rem, 4vw, 3rem); color: var(--text); }
-.category-title { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+.welcome-text { font-size: 3rem; }
+.title-text, .category-title { font-size: 2.5rem; }
 
-/* Sistema de logos */
 .logo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing);
+  gap: 20px;
 }
 
-.logo, .main-logo {
-  max-width: clamp(200px, 25vw, 300px);
+.logo {
+  max-width: 300px;
   height: auto;
   animation: fadeIn 1s ease-in-out;
-  filter: none;
-  transition: none;
+  filter: drop-shadow(0 0 10px rgba(0, 247, 255, 0.3));
+  transition: all var(--transition-time) ease;
 }
 
-/* Hover effects removed for transition screens */
-.logo-screen .logo {
-  filter: none;
-  transition: none;
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 20px rgba(0, 247, 255, 0.6));
 }
 
-.logo-screen .logo:hover {
-  transform: none;
-  filter: none;
-}
-
+/* Logo específico para la página */
 .main-logo {
   content: url('https://udtlqjmrtbcpdqknwuro.supabase.co/storage/v1/object/public/productos/recursos/logos/Logo5.webp');
+  max-width: 300px;
+  height: auto;
   display: block;
   margin: 0 auto;
 }
 
-/* Pantalla principal */
 .main-content-screen {
   padding: 20px;
   justify-content: flex-start;
   background-color: transparent;
 }
 
-/* === NAVEGACIÓN Y BOTONES === */
-
-/* Menú principal */
+/* =================================================================
+   NAVIGATION & BUTTONS
+   ================================================================= */
 .navigation-menu {
   width: 100%;
   display: flex;
@@ -210,70 +118,69 @@ body:not(.order-mode-active) #content-container {
   flex-wrap: wrap;
 }
 
-/* Elementos transparentes */
-.nav-button, .view-toggle-btn, .page-title, .product-table td, .liquor-table td {
-  background: transparent;
-}
-
-/* Botones de navegación */
 .nav-button, .view-toggle-btn {
-  border: 2px solid var(--primary);
-  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--text-color);
   padding: 8px 15px;
   font: 600 1rem 'Montserrat', sans-serif;
   cursor: pointer;
-  transition: var(--transition);
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  transition: all var(--transition-time) ease;
 }
 
 .view-toggle-btn {
   font-size: 1.2rem;
   width: 50px;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
   backdrop-filter: blur(10px);
   font-weight: bold;
 }
 
-/* Estados hover */
-.nav-button:hover, .nav-button.active, 
-.view-toggle-btn:hover, .view-toggle-btn.active {
-  background-color: var(--primary);
-  color: var(--bg);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-base);
+.nav-button:hover, .nav-button.active, .view-toggle-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
-/* === COMPONENTES DE LAYOUT === */
+.view-toggle-btn:hover {
+  transform: scale(1.05);
+}
 
-/* Layout de página */
+.view-toggle-btn.active {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+/* =================================================================
+   LAYOUT COMPONENTS - HEADERS & CONTAINERS
+   ================================================================= */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: var(--container-width);
-  max-width: var(--container-max);
-  margin: 0 auto;
+  width: var(--table-width); 
+  max-width: var(--table-max-width); 
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
 }
 
 .page-title {
   font-family: 'Playfair Display', serif;
-  color: var(--text);
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--text-color);
+  font-size: 2rem;
   text-align: center;
   width: 100%;
-  margin: 0 0 15px 0;
-  padding: 15px var(--spacing);
-  border-bottom: 2px solid var(--border);
+  margin: 0;
+  padding: 15px 20px;
+  background: transparent;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 15px;
 }
 
-/* Botones de acción principales */
 #create-order-btn, #orders-btn {
   position: relative;
   z-index: 1;
@@ -284,7 +191,6 @@ body:not(.order-mode-active) #content-container {
   margin-left: auto;
 }
 
-/* Pantalla de órdenes */
 .orders-screen {
   width: 100%;
   max-width: 1200px;
@@ -314,7 +220,6 @@ body:not(.order-mode-active) #content-container {
   white-space: nowrap;
 }
 
-/* Botones de navegación de órdenes */
 .orders-back-btn, .history-btn {
   position: relative;
   z-index: 1;
@@ -324,7 +229,6 @@ body:not(.order-mode-active) #content-container {
   margin-left: auto;
 }
 
-/* Contenedores de contenido principal */
 .content-wrapper {
   display: flex;
   width: 100%;
@@ -332,16 +236,12 @@ body:not(.order-mode-active) #content-container {
   position: relative;
   margin-top: 0;
   padding-right: 0px;
-  justify-content: center; /* Centrar contenido normalmente */
 }
 
 #content-container {
   flex: 1;
   padding: 0;
   margin-right: 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
 }
 
 .content-container-flex {
@@ -352,7 +252,6 @@ body:not(.order-mode-active) #content-container {
   gap: 20px;
 }
 
-/* Botón hamburguesa en contenedor flex */
 .content-container-flex .hamburger-btn {
   position: relative;
   top: unset;
@@ -364,11 +263,6 @@ body:not(.order-mode-active) #content-container {
   z-index: 1000;
 }
 
-/* ================================================================= 
-   ELEMENTOS MULTIMEDIA
-   ================================================================= */
-
-/* Iconos de video e imagen */
 .video-icon, .image-icon {
   cursor: pointer;
   text-align: center;
@@ -377,7 +271,6 @@ body:not(.order-mode-active) #content-container {
   /* backdrop-filter: blur(5px); */
 }
 
-/* Video thumbnails */
 .video-thumb {
   width: 80px;
   height: 56px;
@@ -391,21 +284,14 @@ body:not(.order-mode-active) #content-container {
   transform: scale(1.05);
 }
 
-/* Estilos estandarizados para categorías de 4 columnas */
-/* Todas las categorías de 4 columnas usan el mismo tamaño que carnes */
-[data-category="carnes"] .video-thumb,
-[data-category="alitas"] .video-thumb,
-[data-category="pizzas"] .video-thumb,
-[data-category="ensaladas"] .video-thumb,
-[data-category="sopas"] .video-thumb,
-[data-category="postres"] .video-thumb,
-[data-category="cafe"] .video-thumb {
-  width: 100px;
-  height: 70px;
-  border-radius: 6px;
+/* === THUMBNAILS ESTANDARIZADOS PARA MODO TABLA === */
+.video-thumb {
+  width: var(--table-thumb-width);
+  height: var(--table-thumb-height);
+  border-radius: var(--table-thumb-radius);
 }
 
-/* Efectos hover específicos mantenidos */
+/* Efectos específicos por categoría (mantener únicamente efectos únicos) */
 [data-category="postres"] .video-thumb:hover {
   transform: rotate(-2deg) scale(1.05);
 }
@@ -414,99 +300,114 @@ body:not(.order-mode-active) #content-container {
   border: 1px solid rgba(255, 165, 0, 0.3);
 }
 
-/* Miniaturas adaptables */
+/* Las reglas responsive para thumbnails ahora se manejan automáticamente 
+   a través de las variables CSS unificadas en _variables-unified.css */
 
-/* === TABLES & GRID CONTAINERS === */
-.container, .category-grid, .product-grid, .product-table, .liquor-table {
-  width: var(--container-width);
-  max-width: var(--container-max);
-  margin: var(--spacing) auto;
+/* =================================================================
+   TABLES & GRID CONTAINERS
+   ================================================================= */
+.container, .product-table, .liquor-table, .category-grid, .product-grid {
+  width: var(--table-width);
+  max-width: var(--table-max-width);
+  margin: var(--table-margin) auto;
   background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-hover);
+  border-radius: 15px;
+  box-shadow: 0 0 20px var(--border-color);
   position: relative;
-  border: 1px solid var(--border);
 }
 
-/* Mejoras de tabla */
+.container {
+  border: 1px solid var(--primary-color);
+  background: var(--card-bg);
+}
+
 .product-table, .liquor-table {
   border-collapse: separate;
-  border-spacing: 0 clamp(5px, 1vw, 15px);
-  padding: clamp(10px, 2vw, 20px);
-  width: 100%;
-  max-width: 100%;
+  border-spacing: 0 10px;
+  padding: 20px;
 }
 
-/* Celdas de tabla */
+.product-table::before, .liquor-table::before, .category-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  pointer-events: none;
+}
+
 .product-table th, .liquor-table th {
-  font: 600 clamp(0.8rem, 2vw, 1.2rem) 'Montserrat', sans-serif;
-  color: var(--primary);
+  font: var(--table-font-header);
+  color: var(--primary-color);
   text-align: center;
-  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
-  border-bottom: 2px solid var(--border);
+  padding: var(--table-cell-padding);
+  border-bottom: 2px solid var(--border-color);
   text-transform: uppercase;
-  letter-spacing: clamp(0.5px, 0.1vw, 1.5px);
+  letter-spacing: 1px;
 }
 
-.product-table th:first-child, .liquor-table th:first-child,
-.product-table td:first-child, .liquor-table td:first-child {
+.product-table th:first-child, .liquor-table th:first-child {
   text-align: left;
-  padding-left: clamp(8px, 2vw, 20px);
+  padding: var(--table-cell-padding-first);
 }
 
 .product-table td, .liquor-table td {
-  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
-  transition: var(--transition);
+  padding: var(--table-cell-padding);
+  background: transparent;
+  transition: all 0.3s ease;
   text-align: center;
   vertical-align: middle;
-  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+.product-table td:first-child, .liquor-table td:first-child {
+  text-align: left;
+  padding: var(--table-cell-padding-first);
 }
 
 .product-table td.product-name, .liquor-table td.product-name {
-  font: 600 clamp(0.8rem, 2vw, 1.2rem) 'Montserrat', sans-serif;
-  color: var(--primary);
-  letter-spacing: clamp(0.3px, 0.1vw, 0.8px);
+  font: var(--table-font-name);
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
-/* Celdas especiales */
 .product-table td.image-icon, .liquor-table td.image-icon,
 .product-table td.video-icon, .liquor-table td.video-icon,
 .product-table td.product-price, .liquor-table td.product-price {
   text-align: center;
-  padding: clamp(5px, 1.5vw, 15px);
+  padding: 10px;
   vertical-align: middle;
 }
 
 .product-table td.image-icon img, .liquor-table td.image-icon img {
   display: block;
   margin: 0 auto;
-  width: clamp(30px, 5vw, 60px);
-  height: clamp(30px, 5vw, 60px);
-  object-fit: contain;
 }
 
 .product-table td.product-ingredients {
   text-align: left;
-  padding: clamp(8px, 2vw, 20px) clamp(5px, 1.5vw, 15px);
-  font-size: clamp(0.7rem, 1.6vw, 1rem);
-  line-height: clamp(1.2, 1.4vw, 1.5);
+  padding: 15px 10px;
 }
 
-.product-table tr:hover td, .liquor-table tr:hover td {
+.product-table tr:hover td,
+.liquor-table tr:hover td {
   background-color: rgba(0, 0, 0, 0.4);
+  transform: none;
+  box-shadow: none;
 }
 
-/* Media Elements - Optimized */
+/* =================================================================
+   MEDIA ELEMENTS
+   ================================================================= */
 .image-icon img, .product-table td.image-icon img {
-  width: clamp(30px, 5vw, 60px);
-  height: clamp(30px, 5vw, 60px);
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   background: white;
   cursor: pointer;
   animation: glow 2s infinite;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
   display: block;
 }
 
@@ -526,7 +427,6 @@ body:not(.order-mode-active) #content-container {
   width: 60px;
 }
 
-/* Animations - Consolidated */
 @keyframes glow {
   0%, 100% { box-shadow: var(--glow-shadow); }
   50% { box-shadow: 0 0 15px rgba(0, 247, 255, 0.5); }
@@ -548,172 +448,27 @@ body:not(.order-mode-active) #content-container {
 }
 
 /* =================================================================
-   GRID LAYOUTS - MOBILE FIRST RESPONSIVE SYSTEM
+   GRID LAYOUTS - RESPONSIVE SYSTEM
    ================================================================= */
-/* CATEGORY GRID RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
-/* Reglas de .category-grid ahora manejadas por el componente BEM */
-
-/* PRODUCT GRID RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
-/* Reglas de .product-grid ahora manejadas por el componente BEM */
-
-/* Tipografía mobile-first */
-.product-card .product-name,
-.category-card .category-name {
-  font-size: clamp(12px, 2.5vw, 18px);
-  line-height: clamp(1.2, 1.5vw, 1.4);
-  height: auto;
-  min-height: clamp(2rem, 4vw, 3rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 20px;
+  row-gap: 10px;
+  padding: 20px;
 }
 
-.product-card .product-name {
-  font-size: clamp(11px, 2.2vw, 16px);
-  line-height: clamp(1.2, 1.4vw, 1.3);
-  height: auto;
-  min-height: clamp(1.8rem, 3.5vw, 2.5rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.product-card .product-ingredients {
-  font-size: clamp(10px, 2vw, 14px);
-  line-height: clamp(1.2, 1.3vw, 1.4);
-  height: auto;
-}
-
-.price-button {
-  font-size: clamp(11px, 1.6vw, 13px);
-  padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 12px);
-}
-
-/* =================================================================
-   ESTANDARIZACIÓN MODO TABLA - SISTEMA DE COLUMNAS
-   ================================================================= */
-
-/* Standardized Tables - Already optimized above */
-
-/* Modificadores de columna */
-.cols-3.product-table, .cols-4.product-table,
-.cols-5.liquor-table {
-  width: 97%; /* Ancho estandarizado para todas las tablas */
+.product-grid {
+  display: grid;
+  /* Nivel 1: Espacio fijo asignado - Grid base de 3 columnas para desktop */
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(15px, 2.5vw, 25px);
+  padding: clamp(15px, 2.5vw, 25px);
+  /* Contenedor con ancho máximo para mantener proporciones */
   max-width: var(--table-max-width);
-  margin: var(--table-margin) auto;
-}
-
-/* === THUMBNAILS ESTANDARIZADOS === */
-/* 3 columnas */
-.cols-3 .image-icon img {
-  width: var(--thumb-size-3);
-  height: var(--thumb-size-3);
-}
-
-/* 4 columnas - Thumbnails estandarizados */
-.cols-4 .image-icon img,
-.product-table .image-icon img {
-  width: var(--thumb-size-4);
-  height: var(--thumb-size-4);
-}
-
-/* 4 columnas - Tipografía estandarizada */
-.cols-4 .product-name,
-[data-category="alitas"] .product-name,
-[data-category="pizzas"] .product-name,
-[data-category="ensaladas"] .product-name,
-[data-category="sopas"] .product-name,
-[data-category="carnes"] .product-name,
-[data-category="postres"] .product-name,
-[data-category="cafe"] .product-name {
-  font-size: var(--font-size-name);
-  line-height: 1.2;
-}
-
-.cols-4 .product-price,
-[data-category="alitas"] .product-price,
-[data-category="pizzas"] .product-price,
-[data-category="ensaladas"] .product-price,
-[data-category="sopas"] .product-price,
-[data-category="carnes"] .product-price,
-[data-category="postres"] .product-price,
-[data-category="cafe"] .product-price {
-  font-size: var(--font-size-price);
-  font-weight: 600;
-}
-
-/* 5 columnas */
-.cols-5 .image-icon img,
-.liquor-table .image-icon img {
-  width: var(--thumb-size-5);
-  height: var(--thumb-size-5);
-}
-
-/* === TIPOGRAFÍA ESTANDARIZADA === */
-/* Nombres */
-.cols-3 .product-name,
-.cols-4 .product-name,
-.cols-5 .product-name {
-  font-size: var(--font-size-name);
-  font-weight: 600;
-  color: var(--primary-color);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-/* Precios */
-.cols-3 .product-price,
-.cols-4 .product-price,
-.cols-5 .product-price {
-  font-size: var(--font-size-price);
-  color: var(--price-color);
-}
-
-/* === BOTONES LICORES === */
-.cols-5 .price-button,
-.liquor-table .price-button {
-  transform: scale(var(--liquor-button-scale));
-  font-size: calc(var(--font-size-price) * var(--liquor-button-scale));
-}
-
-/* === AJUSTES POR VISTA === */
-
-/* Vista 4 columnas */
-.cols-4.product-table {
-  width: 97%; /* Reducción del 3% del contenedor padre */
-  margin: 0 auto; /* Centrado horizontal */
-}
-
-/* Thumbnails 4 columnas */
-.cols-4 .image-icon img,
-.product-table .image-icon img {
-  width: var(--thumb-size-4);
-  height: var(--thumb-size-4);
-}
-
-/* Tipografía 4 columnas */
-.cols-4 .product-name {
-  font-size: var(--font-size-name);
-  line-height: 1.2;
-}
-
-.cols-4 .product-price {
-  font-size: var(--font-size-price);
-  font-weight: 600;
-}
-
-/* Vista de 3 columnas - Ampliar ancho para mejor distribución */
-.cols-3.product-table {
-  width: 100%; /* Ancho completo para mejor distribución */
   margin: 0 auto;
-}
-
-/* Vista de 5 columnas - Igualar ancho al de 4 columnas */
-.cols-5.liquor-table {
-  width: 97%; /* Mismo ancho que 4 columnas */
-  margin: 0 auto;
+  width: var(--table-width);
 }
 
 .category-grid .page-title, .product-grid .page-title {
@@ -728,161 +483,37 @@ body:not(.order-mode-active) #content-container {
   margin-bottom: 5px;
 }
 
-/* Card Components - Unified */
+/* =================================================================
+   CARD COMPONENTS
+   ================================================================= */
 .category-card, .product-card {
   background: var(--card-bg);
-  border-radius: var(--border-radius);
+  border-radius: 10px;
   overflow: hidden;
-  transition: var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(10px, 2vw, 20px);
-  box-shadow: var(--shadow-base);
-  min-height: clamp(150px, 20vw, 250px);
-  max-width: 100%;
-}
-
-/* Licores category grid - responsive */
-.category-grid[data-category="licores"] {
-  display: grid;
-  grid-template-rows: auto auto auto;
-  max-width: 970px;
-  margin: 0 auto;
-  /* Ocultar scrollbar en interfaz de licores */
-  overflow: hidden;
-}
-
-/* Licores: 5 columnas solo en desktop */
-@media (min-width: var(--bp-desktop)) {
-  .category-grid[data-category="licores"] {
-    grid-template-columns: var(--grid-cols-licores);
-    gap: var(--grid-gap-licores);
-    padding: var(--grid-padding-licores);
-  }
-}
-
-/* Ocultar scrollbar específicamente para la interfaz de licores */
-.category-grid[data-category="licores"]::-webkit-scrollbar {
-  display: none;
-}
-
-.category-grid[data-category="licores"] {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
-
-/* Ocultar scrollbar del body cuando se muestra la interfaz de licores */
-body:has(.category-grid[data-category="licores"])::-webkit-scrollbar {
-  display: none;
-}
-
-body:has(.category-grid[data-category="licores"]) {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  overflow-x: hidden;
-}
-
-/* Reducir espaciado del encabezado para licores */
-.category-grid[data-category="licores"] .page-title {
-  margin: 0 0 10px 0;
-  padding: 10px var(--spacing);
-}
-
-/* Reducir espaciado del pie de página para licores */
-.category-grid[data-category="licores"] .subcategory-prompt {
-  margin: 3px 0 10px 0;
-}
-
-/* Licores category cards - rectangular style */
-.category-grid[data-category="licores"] .category-card {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  overflow: visible;
-  /* Dimensiones fijas para consistencia */
-  min-height: 194px;
-  max-height: 194px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.category-grid[data-category="licores"] .category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 247, 255, 0.3);
-  border-color: var(--accent);
-}
-
-/* Licores category images - rectangular style */
-.category-grid[data-category="licores"] .category-image {
-  width: 100%;
-  height: 116px;
-  object-fit: contain;
-  transform: scale(1.1);
-  transform-origin: center;
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 4px;
-  padding: 8px;
-  /* Dimensiones fijas */
-  flex-shrink: 0;
-}
-
-/* Licores category names */
-.category-grid[data-category="licores"] .category-name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  /* Altura fija para consistencia */
-  line-height: 1.2;
-  height: 2.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  padding: 15px;
+  box-shadow: 0 0 10px var(--border-color);
 }
 
 .category-card:hover, .product-card:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 5px 20px var(--price-color);
 }
 
-/* Thumbnails - Responsive System */
-.category-image, .product-image {
-  width: clamp(60px, 8vw, 120px);
-  height: clamp(60px, 8vw, 120px);
+.category-image {
+  /* Tamaño responsivo que se adapta al grid de 5 columnas */
+  width: clamp(80px, 12vw, 130px);
+  height: clamp(80px, 12vw, 130px);
   object-fit: contain;
   background: white;
-  margin-bottom: clamp(5px, 1vw, 15px);
+  margin-bottom: clamp(5px, 1vw, 10px);
   animation: glow 2s infinite;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
-  flex-shrink: 0;
-}
-
-/* Column-specific thumbnail sizes */
-.cols-3 .category-image, .cols-3 .product-image {
-  width: var(--thumb-size-3);
-  height: var(--thumb-size-3);
-}
-
-.cols-4 .category-image, .cols-4 .product-image {
-  width: var(--thumb-size-4);
-  height: var(--thumb-size-4);
-}
-
-.cols-5 .category-image, .cols-5 .product-image {
-  width: var(--thumb-size-5);
-  height: var(--thumb-size-5);
+  border-radius: clamp(6px, 1vw, 10px);
+  transition: all 0.3s ease;
 }
 
 .category-name {
@@ -933,22 +564,29 @@ body:has(.category-grid[data-category="licores"]) {
   position: relative;
 }
 
-/* Títulos de licores */
+/* Configuración específica para títulos de licores - aumentado 50% del tamaño anterior */
 .product-card.liquor-card .product-name {
+  /* Aumentar tamaño de fuente en 50% del tamaño anterior */
   font-size: clamp(0.63rem, 1.35vw + 0.375rem, 0.9rem);
   line-height: clamp(1.15, 1.8vw + 0.9rem, 1.35);
+  
+  /* Eliminar truncamiento para mostrar texto completo */
   -webkit-line-clamp: unset;
   line-clamp: unset;
   overflow: visible;
   text-overflow: unset;
+  
+  /* Permitir que el texto se ajuste naturalmente - altura reducida 30% */
   display: block;
   height: clamp(1.62rem, 2.16vw + 0.864rem, 2.376rem);
   min-height: unset;
+  
+  /* Asegurar que el texto sea legible */
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
-
+/* Pseudo-elemento removido - ya no se necesita truncamiento */
 
 .product-card .product-media {
   display: flex;
@@ -969,32 +607,42 @@ body:has(.category-grid[data-category="licores"]) {
   flex-grow: 1;
   order: 3;
   
+  /* NIVEL 1: Altura completamente flexible - se adapta al contenido */
+  /* height: removido para permitir expansión natural */
+  
+  /* NIVEL 2: Contenido se adapta al espacio disponible - aumentado 25% */
   font-size: clamp(0.7rem, 1.5vw + 0.3rem, 0.9rem);
   line-height: clamp(1.2, 1.3vw + 1rem, 1.4);
+  
+  /* Configuración para texto 100% responsivo - sin restricciones */
   display: block;
   overflow: visible;
   text-overflow: unset;
   word-wrap: break-word;
   hyphens: auto;
+  
+  /* Sin límite de líneas - texto libre */
   -webkit-line-clamp: unset;
   line-clamp: unset;
+  
+  /* Permitir expansión natural del texto */
   position: relative;
   height: auto;
   min-height: clamp(3.96rem, 4.95vw + 2.2rem, 5.5rem);
   max-height: none;
 }
 
-
+/* Pseudo-elemento removido - ya no es necesario para texto libre */
 .product-card .product-ingredients::after {
   display: none;
 }
 
-
+/* Configuración removida - sin truncamiento */
 .product-card .product-ingredients[data-truncated="true"]::after {
   display: none;
 }
 
-/* Imágenes de productos */
+/* Configuración general para imágenes de productos (nueva configuración mejorada) */
 .product-card .product-image {
   width: 100%;
   height: 180px;
@@ -1005,10 +653,13 @@ body:has(.category-grid[data-category="licores"]) {
   transition: transform 0.3s ease;
 }
 
-/* Imágenes de licores */
+/* Configuración específica para imágenes de licores - completamente responsiva */
 .product-card.liquor-card .product-image {
+  /* Altura responsiva que se adapta al tamaño del grid */
   height: clamp(120px, 15vw + 2vh, 200px);
   width: 100%;
+  
+  /* Mantener proporciones y centrado */
   object-fit: contain;
   object-position: center;
   background: white;
@@ -1124,8 +775,34 @@ body:has(.category-grid[data-category="licores"]) {
   transition: all 0.2s ease;
 }
 
-/* Estilos optimizados para tarjetas de licores - ELIMINADOS */
-/* Las tarjetas ahora usan tamaños naturales sin restricciones responsivas */
+/* Optimized responsive styles for liquor cards */
+@media (max-width: 1200px) {
+  .product-card.liquor-card .price-button {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    min-width: 45px;
+  }
+  .product-card.liquor-card .price-label {
+    font-size: clamp(0.5rem, 3.5% + 0.05rem, 0.7rem);
+    min-width: clamp(30px, 25%, 50px);
+  }
+}
+
+@media (max-width: 900px) {
+  .product-card.liquor-card .price-button {
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    min-width: 40px;
+  }
+  .product-card.liquor-card .price-label {
+    font-size: clamp(0.45rem, 4% + 0.02rem, 0.65rem);
+    min-width: clamp(25px, 30%, 45px);
+  }
+  .product-card.liquor-card .product-prices {
+    gap: clamp(2px, 1%, 6px);
+    min-height: clamp(60px, 30%, 120px);
+  }
+}
 
 /* Price Buttons */
 .price-button {
@@ -1138,15 +815,12 @@ body:has(.category-grid[data-category="licores"]) {
   transition: all var(--transition-time) ease;
   font: 600 0.9rem 'Montserrat', sans-serif;
   min-height: 32px;
-  box-shadow: 0 0 15px var(--price-color);
 }
 
 .price-button:hover {
-  background-color: transparent;
-  transform: scale(1.02);
-  border-color: var(--price-color);
-  color: var(--price-color);
-  box-shadow: 0 0 15px var(--price-color);
+  background: var(--price-color);
+  color: var(--background-color);
+  transform: scale(1.05);
 }
 
 .price-button.non-selectable {
@@ -1245,8 +919,65 @@ body:has(.category-grid[data-category="licores"]) {
   aspect-ratio: 1.4/1;
 }
 
-/* Reglas responsive de modales - ELIMINADAS */
-/* Los modales ahora se adaptan naturalmente sin restricciones de dispositivo */
+/* RESPONSIVE MODAL ADJUSTMENTS - CONSISTENT SIZING */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-width: none;
+    padding: 20px 15px;
+  }
+  
+  #drink-options-modal .modal-content {
+    width: auto;
+    max-width: 400px;
+    max-height: none;
+    padding: 12px;
+    min-width: 300px;
+    border-radius: 10px;
+  }
+  
+  #meat-customization-modal .modal-content {
+    width: 72%;
+    max-width: none;
+    max-height: 54.05vh;
+    aspect-ratio: 1.2/1;
+    padding: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 5px;
+    padding-top: 15px;
+  }
+  
+  .modal-content {
+    width: 98%;
+    padding: 15px 10px;
+    border-radius: 10px;
+  }
+  
+  .modal-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  #drink-options-modal .modal-content {
+    width: auto;
+    max-width: 350px;
+    max-height: none;
+    padding: 10px;
+    min-width: 280px;
+    border-radius: 8px;
+  }
+  
+  #meat-customization-modal .modal-content {
+    width: 75%;
+    max-width: none;
+    max-height: 56.35vh;
+    aspect-ratio: 1.1/1;
+    padding: 13px;
+  }
+}
 
 /* Image modals exception */
 .modal-content.image-modal {
@@ -1332,24 +1063,6 @@ body:has(.category-grid[data-category="licores"]) {
 .product-table {
   width: var(--table-width);
   max-width: var(--table-max-width);
-  /* Recuperar estilos de contenedor para modo tabla */
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-hover);
-  border: 1px solid var(--border);
-  margin: var(--spacing) auto;
-}
-
-/* Liquor table styles - matching product table container styles */
-.liquor-table {
-  width: var(--table-width);
-  max-width: var(--table-max-width);
-  /* Recuperar estilos de contenedor para modo tabla */
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-hover);
-  border: 1px solid var(--border);
-  margin: var(--spacing) auto;
 }
 
 .product-image {
@@ -1361,7 +1074,11 @@ body:has(.category-grid[data-category="licores"]) {
   display: none;
 }
 
-.counter-container {
+
+
+
+  
+  .counter-container {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1505,79 +1222,67 @@ body:has(.category-grid[data-category="licores"]) {
     margin-right: 8px;
   }
 
-/* Reglas de modales móviles - ELIMINADAS */
-/* Los modales ahora se adaptan naturalmente sin restricciones de dispositivo */
+/* Portrait Orientation Modals */
+@media (max-width: 768px) and (orientation: portrait) {
+  .modal-content {
+    max-height: 92vh;
+  }
+  
+  .options-grid {
+    max-height: 30vh;
+  }
+  
+  .modal-content img {
+    max-height: 40vh;
+  }
+}
 
-/* Additional Animations */
+@media (max-width: 480px) and (orientation: portrait) {
+  .modal-content {
+    max-height: 97.75vh;
+  }
+  
+  .options-grid {
+    max-height: 35vh;
+  }
+  
+  .modal-content img {
+    max-height: 35vh;
+  }
+}
+
+/* Optimized animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); } }
 .fade-in { animation: fadeIn 1s ease-in-out forwards; }
 .fade-out { animation: fadeOut 1s ease-in-out forwards; }
 
 /* =================================================================
-   ORDER SIDEBAR - ELEMENTO FLEX DE IGUAL JERARQUÍA
+   ORDER SIDEBAR & FORMS
    ================================================================= */
-
+/* =================================================================
+   ORDER SIDEBAR - BASE STYLES (DESKTOP)
+   ================================================================= */
 #order-sidebar {
-  /* Posicionamiento como flex item */
-  position: relative;
-  
-  /* Dimensiones responsivas */
-  flex: 0 0 300px; /* Base: 300px */
-  min-width: 250px;
-  max-width: 350px;
-  
-  /* Altura y overflow */
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  
-  /* Espaciado */
-  padding: 16px;
-  margin-top: 20px;
-  
-  /* Estilos visuales */
+  width: 240px;
+  padding: 15px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1000;
   box-shadow: var(--glow-shadow);
-  
-  /* Comportamiento */
   display: none;
-  transition: all 0.3s ease;
+  transition: all var(--transition-time) ease;
   box-sizing: border-box;
 }
-
-/* === OPTIMIZACIÓN BEM: SIDEBAR VISIBLE === */
-.order-sidebar--active {
-  display: block;
-}
-
-/* Compatibilidad legacy */
-body.order-mode-active #order-sidebar {
-  display: block;
-}
-
-/* Responsividad al reducir espacio */
-@media screen and (max-width: 1024px) {
-  #order-sidebar {
-    flex: 0 0 250px;
-    min-width: 200px;
-  }
-  
-  #content-container {
-    flex: 1 1 auto;
-    min-width: 300px;
-  }
-}
-
-/* Sidebar para móvil portrait - parte inferior */
-/* REGLA MÓVIL ELIMINADA - Ahora manejada por mobile.css */
-
-/* REGLA TABLET ELIMINADA - Ahora manejada por tablet.css */
-
-/* Sidebar Content - Consolidated */
 
 .order-item-header {
   display: flex;
@@ -1590,14 +1295,14 @@ body.order-mode-active #order-sidebar {
 }
 
 #order-sidebar h3 {
-  color: var(--primary);
+  color: var(--primary-color);
   font: 1.5rem 'Playfair Display', serif;
   margin-bottom: 15px;
   text-align: center;
 }
 
 .order-item {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
   padding: 10px 0;
   margin-bottom: 10px;
   width: 100%;
@@ -1608,7 +1313,7 @@ body.order-mode-active #order-sidebar {
 
 .order-item-name {
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-color);
   margin-bottom: 5px;
   width: 100%;
   word-wrap: break-word;
@@ -1633,9 +1338,9 @@ body.order-mode-active #order-sidebar {
 }
 
 .order-total {
-  margin-top: var(--spacing);
+  margin-top: 20px;
   padding-top: 10px;
-  border-top: 2px solid var(--border);
+  border-top: 2px solid var(--border-color);
 }
 
 .order-total h4 {
@@ -1870,7 +1575,7 @@ textarea:focus {
   border-color: var(--price-color);
 }
 
-.price-selection-mode .price-button:not(.product-grid .product-card.liquor-card .price-button) { background: rgba(0, 247, 255, 0.2); transform: scale(1.05); transition: all 0.3s ease; animation: pulseGlow 2s infinite; }
+.price-selection-mode .price-button:not(.product-grid .product-card.liquor-card .price-button) { background: rgba(0, 247, 255, 0.2); transform: scale(1.05); transition: all 0.3s ease; animation: pulse 2s infinite; }
 
 .remove-order-item {
   background: transparent;
@@ -1916,8 +1621,8 @@ textarea:focus {
   align-items: center;
   padding: 12px;
   margin: 8px 0;
-  border: 1px solid var(--border);
-  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-time) ease;
   min-height: 80px;
   width: 100%;
   box-sizing: border-box;
@@ -1949,20 +1654,20 @@ textarea:focus {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   background: transparent;
-  color: var(--text);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all var(--transition-time) ease;
 }
 
 .counter-btn:hover:not(:disabled) {
-  background-color: var(--primary);
-  color: var(--bg);
+  background-color: var(--primary-color);
+  color: var(--background-color);
 }
 
 .counter-btn:disabled {
@@ -1986,19 +1691,19 @@ textarea:focus {
 
 .saved-order {
   background: var(--card-bg);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
   padding: 15px;
   margin-bottom: 15px;
-  transition: var(--transition);
+  transition: all var(--transition-time) ease;
 }
 
 .saved-order h3 {
-  color: var(--primary);
+  color: var(--primary-color);
   font: 1.3rem 'Playfair Display', serif;
   margin-bottom: 10px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 5px;
 }
 
@@ -2014,7 +1719,7 @@ textarea:focus {
 
 .saved-order-item-name {
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-color);
   margin-bottom: 3px;
 }
 
@@ -2052,41 +1757,650 @@ textarea:focus {
   color: white;
 }
 
-/* Reglas responsive de tablet consolidadas - ELIMINADAS */
-/* La página ahora se adapta naturalmente sin restricciones de dispositivo */
+/* Consolidated tablet responsive styles */
+@media (max-width: 768px) {
+  :root { --table-width: 95%; --table-margin: 15px; }
+  body { font-size: 14px; }
+  .content-wrapper { flex-direction: column; gap: 5px; }
+  
+  /* En tablets y móviles, no desplazar el contenedor maestro */
+  body.order-mode-active #app {
+    margin-left: auto;
+  }
+  
+  /* ORDER SIDEBAR - TABLET RESPONSIVE */
+  #order-sidebar { 
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 20px 0 0 0; 
+    padding: 15px;
+    max-height: 70vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  #order-sidebar h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  .order-item {
+    padding: 8px 0;
+    margin-bottom: 8px;
+  }
+  .order-item-name {
+    font-size: 0.9rem;
+  }
+  .order-item-price {
+    font-size: 0.85rem;
+  }
+  .order-item-customization {
+    font-size: 0.8rem;
+  }
+  .order-total h4 {
+    font-size: 1.1rem;
+  }
+  .order-actions {
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .order-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
+    font-size: 0.85rem;
+  }
+  
+  /* Drink options modal responsive adjustments for tablet */
+  #drink-options-modal .modal-content {
+    width: 85%;
+    max-width: 750px;
+    min-width: 450px;
+    max-height: 80vh;
+  }
+  
+  #drink-options-modal .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 18px;
+    padding: 18px;
+    align-content: start;
+    justify-content: center;
+  }
+  
+  #drink-options-modal .drink-option {
+    min-height: 45px;
+    padding: 9px 7px;
+    font-size: 0.95rem;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: 500;
+    word-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+    width: 100%;
+  }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
+  .category-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 15px; }
+  .category-image { width: clamp(70px, 10vw, 110px); height: clamp(70px, 10vw, 110px); }
+  .view-toggle-container { padding: 0 15px; }
+  .product-card { min-height: 280px; height: auto; }
+  .product-card .product-name { font-size: 0.81rem; height: clamp(1.386rem, 2.07vw + 0.576rem, 1.845rem); -webkit-line-clamp: unset; line-clamp: unset; overflow: visible; text-overflow: unset; display: block; }
+  .product-card .product-ingredients { font-size: 0.75rem; }
+  .product-card .product-media { min-height: 140px; }
+  .product-card .video-thumbnail { height: 120px; }
+  .product-card:has(.video-thumbnail) .product-media { min-height: 120px; }
+  .modal { padding: 5px; align-items: flex-start; padding-top: 20px; }
+  .content-wrapper.order-active { gap: 2px; }
+  
+  /* Hamburger and back button positioning */
+  .hamburger-btn { left: calc((100vw - var(--table-width)) / 2 + 15px); }
+  .back-button-container {
+    left: calc((100vw - var(--table-width)) / 2 + 15px);
+    top: 80px;
+  }
+  
+  /* Category-specific table adjustments */
+  .product-table[data-category="refrescos"] th:nth-child(2), 
+  .product-table[data-category="refrescos"] td:nth-child(2), 
+  .product-table[data-category="cervezas"] th:nth-child(2), 
+  .product-table[data-category="cervezas"] td:nth-child(2) { 
+    width: 30%; 
+  }
+}
 
 /* Optimized disabled states and selection modes */
 .price-button:disabled { cursor: not-allowed; opacity: 0.5; }
 .price-button.non-selectable:hover, .price-button:disabled:hover { background: transparent; transform: none; box-shadow: none; }
 .price-selection-mode .price-button.non-selectable, .price-selection-mode .price-button:disabled { animation: none; background: transparent; transform: none; }
-.price-selection-mode .product-grid .product-card.liquor-card .price-button { background: rgba(0, 247, 255, 0.2); animation: pulseGlow 2s infinite; transform: scale(1.02); }
-
-/* Reglas responsive de tablet y móvil - ELIMINADAS */
-/* La página ahora se adapta naturalmente sin restricciones de dispositivo */
-  
-/* Más reglas responsive móviles - ELIMINADAS */
-/* La página ahora se adapta naturalmente sin restricciones de dispositivo */
-/* Todas las reglas responsive móviles - ELIMINADAS */
-/* La página ahora se adapta naturalmente sin restricciones de dispositivo */
-
-/* Reglas de touch targets para tablets - ELIMINADAS */
-/* Los elementos ahora usan sus tamaños naturales sin restricciones de dispositivo */
+.price-selection-mode .product-grid .product-card.liquor-card .price-button { background: rgba(0, 247, 255, 0.2); animation: pulse 2s infinite; transform: scale(1.02); }
 
 /* =================================================================
-   TOP NAVIGATION - DESKTOP ONLY
+   RESPONSIVE DESIGN - TABLET (481px - 768px)
    ================================================================= */
-/* NOTA: Reglas móviles y tablet movidas a mobile.css y tablet.css respectivamente */
-
-/* Desktop */
-@media (min-width: 1025px) {
-  #top-nav {
-    height: var(--top-nav-height-desktop) !important;
-    min-height: var(--top-nav-height-desktop) !important;
-    max-height: var(--top-nav-height-desktop) !important;
+@media (min-width: 481px) and (max-width: 768px) {
+  .product-grid .product-card.liquor-card .price-button,
+  .product-grid .product-card.liquor-card .price-button:not(.non-selectable),
+  .product-grid .product-card.liquor-card .price-button:not(:disabled) {
+    /* Configuración compacta como thumbnails */
+    padding: 3px 6px;
+    font-size: 0.7rem;
+    min-width: 45px;
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    transform: none;
+    animation: none;
+    /* Mantener flexibilidad */
+    flex: 1;
+    max-width: 100%;
   }
   
-  body.top-nav-visible {
-    padding-top: var(--top-nav-height-desktop) !important;
+  /* Image modal responsive for tablet */
+  .modal-content.image-modal {
+    max-width: 437px; /* Increased 15% from 380px */
+    padding: 15px 12px;
+  }
+  
+  .modal-content.image-modal.video-modal {
+    width: 55.2%; /* Increased 15% from 48% */
+    max-width: 552px; /* Increased 15% from 480px */
+  }
+  
+  .modal-content.image-modal img {
+    max-height: 45vh;
+    margin: 8px 0;
+  }
+  
+  .modal-content.image-modal .nav-button {
+    padding: 8px 16px;
+    margin: 8px auto 0;
+    font-size: 0.9rem;
+  }
+}
+
+/* Consolidated mobile responsive styles */
+@media (max-width: 480px) {
+  :root { --table-width: 98%; --table-margin: 10px; }
+  body { font-size: 13px; }
+  .welcome-text, .title-text, .category-title { font-size: 1.8rem; }
+  .nav-row { flex-direction: column; gap: 5px; }
+  .nav-button { font-size: 0.9rem; padding: 10px 12px; }
+  .product-table th, .product-table td { padding: 8px 5px; }
+  #content-container { padding: 0 5px; }
+  
+  /* En móviles, no desplazar el contenedor maestro */
+  body.order-mode-active #app {
+    margin-left: auto;
+  }
+  
+  /* ORDER SIDEBAR - MOBILE RESPONSIVE */
+  #order-sidebar {
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 15px 0 0 0;
+    padding: 12px;
+    max-height: 60vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  #order-sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .order-item {
+    padding: 6px 0;
+    margin-bottom: 6px;
+  }
+  .order-item-name {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  .order-item-price {
+    font-size: 0.8rem;
+  }
+  .order-item-customization {
+    font-size: 0.75rem;
+    margin-top: 3px;
+  }
+  .order-total {
+    margin-top: 15px;
+    padding-top: 8px;
+  }
+  .order-total h4 {
+    font-size: 1rem;
+  }
+  .order-actions {
+    flex-direction: row;
+    gap: 6px;
+    margin-top: 15px;
+  }
+  
+  .order-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 5px;
+    font-size: 0.8rem;
+  }
+  .order-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .remove-order-item {
+    font-size: 0.9rem;
+    margin-left: 5px;
+  }
+  .category-image { width: clamp(60px, 8vw, 90px); height: clamp(60px, 8vw, 90px); }
+  /* Grid por defecto para móviles (se sobrescribe con orientation) */
+  .product-grid { grid-template-columns: 1fr; gap: 15px; padding: 15px; }
+  .category-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto auto repeat(5, auto); gap: 10px; padding: 10px; }
+  .product-card { min-height: 260px; height: auto; /* max-height removido */ }
+  .product-card .product-name { font-size: 0.775rem; height: clamp(1.386rem, 2.07vw + 0.576rem, 1.845rem); -webkit-line-clamp: unset; line-clamp: unset; overflow: visible; text-overflow: unset; display: block; }
+  .product-card .product-ingredients { font-size: 0.7rem; }
+  .product-card .product-media { min-height: 120px; }
+  .product-card .video-thumbnail { height: clamp(80px, 12vh, 120px); }
+  .product-card:has(.video-thumbnail) .product-media { min-height: clamp(80px, 12vh, 120px); }
+  .product-grid .product-card.liquor-card .price-button,
+  .product-grid .product-card.liquor-card .price-button:not(.non-selectable),
+  .product-grid .product-card.liquor-card .price-button:not(:disabled) {
+    padding: 2px 5px;
+    font-size: 0.65rem;
+    min-width: 40px;
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    transform: none;
+    animation: none;
+    flex: 1;
+    max-width: 100%;
+    min-height: 26px;
+  }
+  .view-toggle-container { padding: 0 15px; }
+  .options-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+  .drink-option { min-height: 40px; padding: 10px 8px; }
+  .drink-option-container { padding: 10px; min-height: 70px; flex-direction: column; justify-content: center; text-align: center; border-radius: 6px; }
+  
+  /* Drink options modal responsive adjustments for mobile */
+  #drink-options-modal .modal-content {
+    width: 95%;
+    max-width: 550px;
+    min-width: 320px;
+    max-height: 80vh;
+  }
+  
+  #drink-options-modal .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    align-content: start;
+    justify-content: center;
+  }
+  
+  #drink-options-modal .drink-option {
+    min-height: 40px;
+    padding: 8px 6px;
+    font-size: 0.85rem;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-weight: 500;
+    word-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+    width: 100%;
+  }
+  
+  /* Hamburger and back button positioning - solo para tablets */
+  @media (min-width: 481px) {
+    .hamburger-btn { left: calc((100vw - var(--table-width)) / 2 + 10px); }
+    .back-button-container {
+      left: calc((100vw - var(--table-width)) / 2 + 10px);
+      top: 80px;
+    }
+  }
+  
+  /* Category-specific table adjustments */
+  .product-table[data-category="refrescos"] th:nth-child(2), 
+  .product-table[data-category="refrescos"] td:nth-child(2), 
+  .product-table[data-category="cervezas"] th:nth-child(2), 
+  .product-table[data-category="cervezas"] td:nth-child(2) { 
+    width: 35%; 
+  }
+  
+  /* Image modal responsive for mobile */
+  .modal-content.image-modal {
+    max-width: 368px; /* Increased 15% from 320px */
+    padding: 12px 10px;
+    margin: 10px;
+  }
+  
+  .modal-content.image-modal.video-modal {
+    width: 55.2%; /* Increased 15% from 48% */
+    max-width: 552px; /* Increased 15% from 480px */
+  }
+  
+  .modal-content.image-modal img {
+    max-height: 40vh;
+    margin: 6px 0;
+  }
+  
+  .modal-content.image-modal .nav-button {
+    padding: 8px 14px;
+    margin: 6px auto 0;
+    font-size: 0.85rem;
+  }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN - PORTRAIT TABLETS (768px - 1024px)
+   ================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .content-wrapper { flex-direction: column; gap: 10px; }
+  /* ORDER SIDEBAR - PORTRAIT TABLET RESPONSIVE */
+  #order-sidebar { 
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 15px 0 0 0; 
+    padding: 20px;
+    max-height: 60vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
+  .category-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; }
+  .product-card { min-height: 320px; }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN - MOBILE LANDSCAPE (max-width: 480px)
+   ================================================================= */
+@media (max-width: 480px) and (orientation: landscape) {
+  /* Replicar comportamiento de escritorio en móviles landscape */
+  .content-wrapper { 
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  /* Grid con 3 columnas en landscape - ancho completo */
+  .product-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; 
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .category-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; 
+    padding: 8px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Tabla de productos - ancho completo */
+  .product-table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  #content-container {
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Modales más pequeños para landscape móvil */
+  .modal-content.image-modal {
+    max-width: 280px;
+    padding: 10px 8px;
+    margin: 8px;
+  }
+  
+  .modal-content.image-modal.video-modal {
+    width: 45%;
+    max-width: 320px;
+  }
+  
+  .modal-content.image-modal img {
+    max-height: 30vh;
+    margin: 4px 0;
+  }
+  
+  /* ORDER SIDEBAR - MOBILE LANDSCAPE (pegado al borde derecho) */
+  body.order-mode-active #app {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .content-wrapper {
+    width: calc(100% - 140px);
+  }
+  
+  #order-sidebar {
+    width: 140px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    border-radius: 0;
+  }
+  
+  #order-sidebar h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .order-item {
+    padding: 4px 0;
+    margin-bottom: 4px;
+  }
+  
+  .order-item-name {
+    font-size: 0.75rem;
+    line-height: 1.1;
+  }
+  
+  .order-item-price {
+    font-size: 0.7rem;
+  }
+  
+  .order-item-customization {
+    font-size: 0.65rem;
+    margin-top: 2px;
+  }
+  
+  .order-total h4 {
+    font-size: 0.85rem;
+    margin: 8px 0 4px 0;
+  }
+  
+  .order-actions {
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  
+  .order-actions button {
+    padding: 6px 4px;
+    font-size: 0.7rem;
+    min-height: 28px;
+  }
+  
+  /* Botones hamburguesa y volver superpuestos */
+  .hamburger-btn,
+  .back-button-container {
+    position: fixed;
+    z-index: 1001;
+  }
+  
+  .hamburger-btn {
+    left: 15px;
+    top: 15px;
+  }
+  
+  .back-button-container {
+    left: 15px;
+    top: 65px;
+  }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN - MOBILE PORTRAIT (max-width: 480px)
+   ================================================================= */
+@media (max-width: 480px) and (orientation: portrait) {
+  /* Maximizar ancho disponible en portrait */
+  :root { 
+    --table-width: 100%; 
+    --table-margin: 0px; 
+  }
+  
+  #content-container {
+    padding: 0 2px;
+  }
+  
+  /* Grid con 2 columnas en portrait - ancho completo */
+  .product-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 8px; 
+    padding: 8px 4px; 
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .category-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 8px; 
+    padding: 8px 4px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Tablas de productos - ancho completo */
+  .product-table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  /* Botones hamburguesa y volver superpuestos */
+  .hamburger-btn,
+  .back-button-container {
+    position: fixed;
+    z-index: 1001;
+  }
+  
+  .hamburger-btn {
+    left: 8px;
+    top: 8px;
+  }
+  
+  .back-button-container {
+    left: 8px;
+    top: 58px;
+  }
+  
+  /* ORDER SIDEBAR - MOBILE PORTRAIT (parte inferior) */
+  #order-sidebar {
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 10px 0 0 0;
+    padding: 12px 8px;
+    max-height: 60vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN - LANDSCAPE TABLETS (768px - 1024px)
+   ================================================================= */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  /* Layout adjustments for landscape */
+  .content-wrapper { flex-direction: row; }
+  /* ORDER SIDEBAR - LANDSCAPE TABLET RESPONSIVE */
+  #order-sidebar { 
+    width: 240px;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 15px;
+    max-height: 75vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  #order-sidebar h3 {
+    font-size: 1.4rem;
+  }
+  .order-item {
+    padding: 9px 0;
+  }
+  .order-item-name {
+    font-size: 0.95rem;
+  }
+  .order-item-price {
+    font-size: 0.9rem;
+  }
+  .order-total h4 {
+    font-size: 1.15rem;
+  }
+  
+  .product-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 18px; }
+  .category-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 18px; }
+  .category-image { width: clamp(90px, 11vw, 120px); height: clamp(90px, 11vw, 120px); }
+  .product-card { min-height: 280px; height: auto; /* max-height removido */ }
+  .product-card .product-name { font-size: 0.81rem; height: clamp(1.386rem, 2.07vw + 0.576rem, 1.845rem); -webkit-line-clamp: unset; line-clamp: unset; overflow: visible; text-overflow: unset; display: block; }
+  .product-card .product-ingredients { font-size: 0.8rem; }
+}
+
+/* =================================================================
+   TOUCH TARGETS - TABLETS (max-width: 1024px)
+   ================================================================= */
+@media (max-width: 1024px) {
+  .nav-button {
+    min-height: 44px;
+    padding: 12px 18px;
+  }
+  .price-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 12px;
+  }
+  .view-toggle-btn {
+    min-height: 50px;
+    min-width: 50px;
+  }
+  .hamburger-btn, .back-button {
+    min-height: 50px;
+    min-width: 50px;
+  }
+  
+  .price-button:not(.product-card.liquor-card .price-button) {
+    min-height: 44px;
+  }
+  
+  .counter-btn {
+    width: 36px;
+    height: 36px;
   }
 }
 
@@ -2094,6 +2408,20 @@ textarea:focus {
    RESPONSIVE DESIGN - LARGE DESKTOP (min-width: 1200px)
    ================================================================= */
 @media (min-width: 1200px) {
+  /* ORDER SIDEBAR - LARGE DESKTOP RESPONSIVE */
+  #order-sidebar {
+    width: 240px;
+    padding: 15px;
+    max-height: 85vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  #order-sidebar h3 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+  }
+  
   .order-item {
     padding: 12px 0;
     margin-bottom: 12px;
@@ -2127,11 +2455,19 @@ textarea:focus {
     gap: 12px;
   }
   
-  /* PRODUCT GRID DESKTOP RULES MOVED TO COMPONENTS/PRODUCT-GRID.CSS */
-  /* Reglas desktop de .product-grid ahora manejadas por el componente BEM */
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1400px;
+    gap: 25px;
+    padding: 25px;
+  }
   
-  /* CATEGORY GRID DESKTOP RULES MOVED TO COMPONENTS/CATEGORY-GRID.CSS */
-  /* Reglas desktop de .category-grid ahora manejadas por el componente BEM */
+  .category-grid {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1400px;
+    gap: 25px;
+    padding: 25px;
+  }
   
   .category-image {
     width: clamp(110px, 13vw, 150px);
@@ -2188,129 +2524,6 @@ textarea:focus {
 }
 
 /* =================================================================
-   BARRA SUPERIOR GLOBAL
-   ================================================================= */
-#top-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: var(--top-nav-height);
-  min-height: var(--top-nav-height);
-  max-height: var(--top-nav-height);
-  background: var(--top-nav-bg);
-  border-bottom: 1px solid rgba(0, 247, 255, 0.3);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: var(--glow-shadow);
-  /* Ocultar inicialmente hasta que termine la inicialización */
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  /* Prevent content from affecting the navbar size */
-  flex-shrink: 0;
-  flex-grow: 0;
-  overflow: hidden;
-}
-
-/* Mostrar la barra superior cuando la app esté lista */
-#top-nav.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.nav-left,
-.nav-center,
-.nav-right {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  height: 100%;
-  min-height: var(--top-nav-height);
-  max-height: var(--top-nav-height);
-  overflow: hidden;
-}
-
-.nav-center {
-  justify-content: center;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-
-#nav-title {
-  color: var(--accent-color);
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-.top-nav-btn {
-  background: var(--card-bg);
-  border: 2px solid var(--primary-color);
-  color: var(--text-color);
-  font-size: 1.2rem;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all var(--transition-time) ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  backdrop-filter: blur(5px);
-  flex-shrink: 0;
-  flex-grow: 0;
-  overflow: hidden;
-  line-height: 1;
-}
-
-.top-nav-btn:hover, .top-nav-btn.active {
-  background-color: transparent;
-  transform: scale(1.02);
-  border-color: var(--price-color);
-  color: var(--price-color);
-  box-shadow: 0 0 15px var(--price-color);
-}
-
-.top-nav-btn:active {
-  transform: scale(0.95);
-}
-
-/* Ajustes para el contenido principal */
-body {
-  padding-top: 0;
-  transition: padding-top 0.5s ease;
-}
-
-/* Agregar padding cuando la barra superior esté visible */
-body.top-nav-visible {
-  padding-top: var(--top-nav-height);
-}
-
-#app {
-  padding-top: 0;
-}
-
-/* =================================================================
    NAVIGATION DRAWER & HAMBURGER MENU
    ================================================================= */
 .hamburger-btn {
@@ -2336,14 +2549,48 @@ body.top-nav-visible {
   color: var(--background-color);
 }
 
+/* Back button container - positioned fixed below hamburger */
+.back-button-container {
+  position: fixed;
+  top: 80px;
+  left: calc((100vw - var(--table-width)) / 2 + 20px);
+  z-index: 999;
+}
+
+/* Styles consolidated into main 768px media query above */
+
+/* Styles consolidated into main 480px media query above */
+
+.back-button {
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
+  color: var(--text-color);
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all var(--transition-time) ease;
+  backdrop-filter: blur(10px);
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.back-button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
 /* Optimized drawer menu */
-.drawer-menu { position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); z-index: 999; transform: translateX(-100%); transition: transform 0.3s ease-in-out; overflow-y: auto; /* Borde cyan eliminado */ }
+.drawer-menu { position: fixed; top: 0; left: 0; width: 300px; height: 100vh; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); z-index: 999; transform: translateX(-100%); transition: transform 0.3s ease-in-out; overflow-y: auto; border-right: 1px solid var(--border-color); box-shadow: 3px 0 15px rgba(0, 247, 255, 0.2); }
 .drawer-menu.open { transform: translateX(0); }
 .drawer-content { padding: 80px 20px 20px 20px; display: flex; flex-direction: column; gap: 15px; }
 .drawer-logo-container { display: flex; justify-content: center; margin-bottom: 10px; }
 .drawer-logo { width: 100px; height: auto; object-fit: contain; margin-bottom: 10px; }
 .drawer-footer { margin-top: 20px; text-align: center; font-size: 0.9rem; color: var(--primary-color); opacity: 0.8; font-style: italic; }
-.drawer-menu .nav-button { width: 100%; text-align: left; padding: 12px 15px; font: 700 1.1rem 'Playfair Display', serif; text-transform: none; transition: all 0.3s ease; border: 1.4px solid rgba(0, 247, 255, 0.3); background: rgba(255, 255, 255, 0.02); border-radius: 5px; box-shadow: 0 0 8px rgba(0, 247, 255, 0.2); }
+.drawer-menu .nav-button { width: 100%; text-align: left; padding: 12px 15px; font: 700 1.1rem 'Playfair Display', serif; text-transform: none; transition: all 0.3s ease; border: 1.4px solid var(--border-color); box-shadow: 0 0 10px var(--border-color); background: rgba(0, 247, 255, 0.02); border-radius: 5px; }
 .drawer-menu .nav-button:hover, .drawer-menu .nav-button.active { background-color: transparent; transform: scale(1.02); border-color: var(--price-color); color: var(--price-color); box-shadow: 0 0 15px var(--price-color); }
 .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 .drawer-overlay.active { opacity: 1; pointer-events: all; }
@@ -2357,13 +2604,33 @@ body.top-nav-visible {
   background: transparent;
 }
 
+/* Cuando el modo orden está activo, desplazar el contenedor maestro hacia la izquierda */
+body.order-mode-active #app {
+  margin-left: calc(50% - 35% - 110px); /* Desplaza hacia la izquierda para hacer espacio al sidebar */
+}
+
+.content-wrapper.order-active {
+  gap: 1px;
+  justify-content: flex-start;
+  transition: gap 0.2s ease-in-out;
+}
+
+.content-container-flex {
+  margin-right: -1.5px;
+}
+
+
+
 /* =================================================================
-   CATEGORY-SPECIFIC STYLES - SISTEMA ESTANDARIZADO
+   CATEGORY-SPECIFIC STYLES
    ================================================================= */
+.product-table[data-category="refrescos"],
+.product-table[data-category="cervezas"] {
+  width: calc(var(--table-width) * 0.75);
+  max-width: calc(var(--table-max-width) * 0.75);
+  table-layout: fixed;
+}
 
-/* Refrescos y Cervezas ahora usan .cols-3 aplicado dinámicamente en JavaScript */
-
-/* Estilos específicos que se mantienen */
 .product-table[data-category="refrescos"] th,
 .product-table[data-category="cervezas"] th,
 .product-table[data-category="refrescos"] td,
@@ -2380,13 +2647,11 @@ body.top-nav-visible {
   width: 45%;
 }
 
-/* Anchos de columnas ahora controlados por .cols-3 */
-.modal-content[data-category="refrescos"], 
-.modal-content[data-category="cervezas"] { 
-  width: 33.6%; 
-  max-width: 336px; 
-}
-/* Estilos específicos de categorías consolidados en media queries principales */
+.product-table[data-category="refrescos"] th:nth-child(2), .product-table[data-category="cervezas"] th:nth-child(2), .product-table[data-category="refrescos"] td:nth-child(2), .product-table[data-category="cervezas"] td:nth-child(2) { width: 25%; }
+.product-table[data-category="refrescos"] th:nth-child(3), .product-table[data-category="cervezas"] th:nth-child(3), .product-table[data-category="refrescos"] td:nth-child(3), .product-table[data-category="cervezas"] td:nth-child(3) { width: 30%; }
+.modal-content[data-category="refrescos"], .modal-content[data-category="cervezas"] { width: 33.6%; max-width: 336px; }
+/* Category-specific tablet styles consolidated into main 768px media query above */
+/* Category-specific styles consolidated into main 480px media query above */
 .exclusive-option-group { background: rgba(0, 247, 255, 0.05); border: 1px solid rgba(0, 247, 255, 0.2); border-radius: 8px; padding: 15px; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; }
 .exclusive-option-group h4 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 1rem; text-align: center; }
 .jager-option-container { display: flex; align-items: center; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer; font-size: 1rem; }
@@ -2396,50 +2661,140 @@ body.top-nav-visible {
 .jager-label { font-weight: 500; color: var(--text-color); }
 
 /* =================================================================
-   UTILITY CLASSES - Optimizadas y limpias
+   INLINE STYLE REFACTORING - UTILITY CLASSES
    ================================================================= */
 
-/* Display utilities - Críticas para JavaScript */
-.screen-hidden { display: none !important; }
-.screen-visible { display: flex !important; opacity: 1; visibility: visible; }
-.screen-flex { display: flex !important; }
-.screen-block { display: block !important; }
+/* Screen display utilities */
+.screen-hidden {
+  display: none !important;
+}
 
-/* Navigation visibility - Sin !important innecesario */
-.hamburger-hidden { display: none; }
-.hamburger-visible { display: block; }
+.screen-visible {
+  display: flex !important;
+  opacity: 1;
+  visibility: visible;
+}
 
-/* Layout states - Críticas para modo orden */
-.sidebar-hidden { display: none !important; }
-.sidebar-visible { display: block !important; }
-.content-hidden { display: none; }
-.content-visible { display: block; }
+.screen-flex {
+  display: flex !important;
+}
 
-/* Component states */
-.input-container-hidden, .choice-hidden, .error-hidden, .modal-hidden { display: none; }
-.input-container-visible, .choice-visible, .error-visible { display: block; }
-.modal-flex { display: flex; }
+.screen-block {
+  display: block !important;
+}
 
-/* Body control - Crítico para modales y transiciones */
-.body-no-scroll { overflow: hidden; }
-.body-scroll { overflow: auto; }
+/* Hamburger menu visibility */
+.hamburger-hidden {
+  display: none;
+}
 
-/* Control de scroll durante transiciones */
-.screen:not(.main-content-screen) { overflow: hidden; }
-body:has(.screen:not(.main-content-screen):not(.screen-hidden)) { overflow: hidden; }
+.hamburger-visible {
+  display: block;
+}
 
-/* Visual utilities */
-.error-red { color: var(--error-color, #ff4444); }
-.opacity-0 { opacity: 0; }
-.opacity-1 { opacity: 1; }
+/* Sidebar and container display states */
+.sidebar-hidden {
+  display: none !important;
+}
 
-/* Product image utilities - Mantener !important para override */
-.product-image-small { width: 40px !important; height: 40px !important; }
-.product-image-large { width: 70px !important; height: 70px !important; }
+.sidebar-visible {
+  display: block !important;
+}
 
-/* Layout utilities - Mantener !important para casos específicos */
-.height-auto { height: auto !important; }
-.min-height-auto { min-height: auto !important; }
+.content-hidden {
+  display: none;
+}
+
+.content-visible {
+  display: block;
+}
+
+/* Input container states */
+.input-container-hidden {
+  display: none;
+}
+
+.input-container-visible {
+  display: block;
+}
+
+/* Choice container states */
+.choice-hidden {
+  display: none;
+}
+
+.choice-visible {
+  display: block;
+}
+
+/* Body overflow control */
+.body-no-scroll {
+  overflow: hidden;
+}
+
+.body-scroll {
+  overflow: auto;
+}
+
+/* Error display utilities */
+.error-red {
+  color: red;
+}
+
+.error-visible {
+  display: block;
+}
+
+.error-hidden {
+  display: none;
+}
+
+/* Modal display states */
+.modal-flex {
+  display: flex;
+}
+
+.modal-hidden {
+  display: none;
+}
+
+/* Opacity utilities */
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-1 {
+  opacity: 1;
+}
+
+/* Left positioning utilities */
+.left-0 {
+  left: 0;
+}
+
+.left-auto {
+  left: auto;
+}
+
+/* Product image size utilities */
+.product-image-small {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.product-image-large {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+/* Height and min-height utilities */
+.height-auto {
+  height: auto !important;
+}
+
+.min-height-auto {
+  min-height: auto !important;
+}
 
 /* Modal subtitle styling */
 .modal-subtitle {
@@ -2448,7 +2803,14 @@ body:has(.screen:not(.main-content-screen):not(.screen-hidden)) { overflow: hidd
   color: var(--text-color);
 }
 
-/* Eliminado: duplicado con component states arriba */
+/* Page title visibility */
+.page-title-hidden {
+  display: none;
+}
+
+.page-title-visible {
+  display: block;
+}
 
 /* Custom Scrollbar Styles */
 /* Webkit browsers (Chrome, Safari, Edge) */
@@ -2481,308 +2843,4 @@ body:has(.screen:not(.main-content-screen):not(.screen-hidden)) { overflow: hidd
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--card-bg) rgba(0, 0, 0, 0.3);
-}
-
-
-
-/* =================================================================
-   GRID ENHANCED - PLAN DE ESTANDARIZACIÓN
-   ================================================================= */
-
-/* Variables CSS específicas para layout de cards */
-:root {
-  --card-min: 260px;
-  --grid-pad: clamp(12px, 2vw, 20px);
-  --slot-gap: clamp(6px, 1.2cqw, 12px);
-  --price-gap: clamp(6px, 1.2cqw, 10px);
-  --media-slot: auto;
-  --name-slot: auto;
-  --ing-slot: auto;
-  --price-slot: auto;
-}
-
-/* 1. Activación segura - Solo cuando body tiene clase grid-enhanced */
-/* Reglas de grid enhanced migradas a componentes BEM */
-
-/* === OPTIMIZACIÓN BEM: ESTRUCTURA BASE CARDS === */
-.product-card--enhanced {
-  display: grid;
-  grid-template-rows:
-    var(--media-slot)
-    var(--name-slot)
-    var(--ing-slot)
-    var(--price-slot);
-  row-gap: var(--slot-gap);
-}
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-card {
-  container-type: inline-size;
-  display: grid;
-  grid-template-areas: 
-    "media title"
-    "media price";
-  grid-template-columns: var(--media-slot) 1fr;
-  grid-template-rows: 1fr auto;
-  column-gap: var(--slot-gap);
-  row-gap: var(--slot-gap);
-}
-
-/* === OPTIMIZACIÓN BEM: TIPOS DE GRID === */
-/* Tipo 2: Refrescos, Cervezas - Sin ingredientes */
-.product-card--grid-type-2 {
-  --ing-slot: 0px;
-}
-
-.product-card--grid-type-2 .card__description {
-  display: none;
-}
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-grid.grid-type-2 .product-card {
-  --ing-slot: 0px;
-}
-
-body.grid-enhanced .product-grid.grid-type-2 .product-ingredients {
-  display: none;
-}
-
-/* Tipo 3: Subcategorías de Licores */
-.product-card--liquor {
-  --media-slot: minmax(clamp(140px, 32cqw, 220px), auto);
-  --price-gap: clamp(4px, 1cqw, 8px);
-}
-
-.product-card--liquor .card__prices {
-  display: flex;
-  flex-direction: column;
-  gap: var(--price-gap);
-}
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-card.liquor-card {
-  --media-slot: minmax(clamp(140px, 32cqw, 220px), auto);
-  --price-gap: clamp(4px, 1cqw, 8px);
-}
-
-body.grid-enhanced .product-card.liquor-card .product-prices {
-  display: flex;
-  flex-direction: column;
-  gap: var(--price-gap);
-}
-
-/* Tipo 4: Categorías de licores */
-.category-card--grid-type-4 .card__title {
-  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-}
-
-/* Compatibilidad legacy */
-body.grid-enhanced .category-grid.grid-type-4 .category-name {
-  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-}
-
-/* === OPTIMIZACIÓN BEM: TIPOGRAFÍA FLUIDA === */
-.product-card--enhanced .card__title {
-  font-size: clamp(0.9rem, 2.2cqw, 1.05rem);
-  line-height: 1.2;
-}
-
-.product-card--enhanced .card__description {
-  font-size: clamp(0.8rem, 1.9cqw, 0.95rem);
-  line-height: 1.3;
-}
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-card .product-name {
-  grid-row: 2;
-  margin: 0;
-}
-
-body.grid-enhanced .product-card .product-ingredients {
-  grid-row: 3;
-  margin: 0;
-}
-
-/* === OPTIMIZACIÓN BEM: ESPACIADO Y RITMO VISUAL === */
-.product-card--enhanced {
-  --slot-gap: clamp(6px, 1.2cqw, 12px);
-  --price-gap: clamp(6px, 1.2cqw, 10px);
-}
-
-/* ================================================================= 
-   GRID ENHANCED – Fixes críticos y pulido
-   ================================================================= */
-/* === OPTIMIZACIÓN BEM: CONTAINER QUERIES === */
-@supports (container-type: inline-size) {
-  .product-card--enhanced {
-    container-type: inline-size;
-  }
-}
-
-/* === OPTIMIZACIÓN BEM: MAPEO EXPLÍCITO DE FILAS === */
-.product-card--enhanced .card__media        { grid-row: 1; margin: 0; }
-.product-card--enhanced .card__title        { grid-row: 2; margin: 0; }
-.product-card--enhanced .card__description  { grid-row: 3; margin: 0; }
-.product-card--enhanced .card__prices       { grid-row: 4; margin: 0; }
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-card .product-media        { grid-row: 1; margin: 0; }
-body.grid-enhanced .product-card .product-name         { grid-row: 2; margin: 0; }
-body.grid-enhanced .product-card .product-ingredients  { grid-row: 3; margin: 0; }
-body.grid-enhanced .product-card .product-prices       { grid-row: 4; margin: 0; }
-
-/* === OPTIMIZACIÓN BEM: GAPS DE PRECIOS === */
-.product-card--enhanced .card__prices { gap: var(--price-gap); }
-
-/* Compatibilidad legacy */
-body.grid-enhanced .product-card .product-prices { gap: var(--price-gap); }
-
-/* === OPTIMIZACIÓN BEM: MICROCONTRACCIÓN ARMÓNICA === */
-@supports (container-type: inline-size) {
-  @container (max-width: 340px) {
-    .product-card--enhanced {
-      --slot-gap:   clamp(4px, 1cqw, 8px);
-      --name-slot:  clamp(24px, 6cqw, 36px);
-      --ing-slot:   clamp(56px, 14cqw, 96px);
-      --media-slot: minmax(clamp(100px, 26cqw, 150px), auto);
-    }
-  }
-}
-
-/* Compatibilidad legacy aplicada automáticamente por @extend anterior */
-
-/* =================================================================
-   CONFIGURACIÓN MÓVIL Y TABLET - SISTEMA RESPONSIVO AVANZADO
-   ================================================================= */
-
-/* Reglas móviles manejadas por mobile.css */
-
-/* 📐 MODO HORIZONTAL (LANDSCAPE) - MÓVILES Y TABLETS */
-@media (orientation: landscape) and (min-width: 640px) {
-  /* Replicar comportamiento de ordenadores */
-  .content-container-flex {
-    flex-direction: row;
-    gap: clamp(12px, 2.5vw, 20px);
-    max-width: 1400px;
-  }
-  
-  #content-container {
-    flex: 1 1 auto;
-    width: auto;
-    max-width: none;
-    padding: 0 clamp(12px, 2.5vw, 20px);
-  }
-  
-  /* Base mobile-first para grids */
-  .product-grid,
-  .category-grid {
-    display: grid;
-    grid-template-columns: var(--grid-cols-mobile);
-    gap: var(--grid-gap-mobile);
-    padding: var(--grid-padding-mobile);
-    width: 100%;
-  }
-  
-  /* Desktop: 4 columnas usando variables unificadas */
-  @media (min-width: var(--bp-desktop)) {
-    .product-grid,
-    .category-grid {
-      grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
-      gap: var(--gap-desktop);
-      padding: var(--padding-desktop);
-    }
-  }
-  
-  /* === OPTIMIZACIÓN BEM: SIDEBAR INTEGRAL === */
-  .content-container-flex--order-active {
-    gap: clamp(15px, 2vw, 20px);
-  }
-  
-  .order-sidebar--landscape {
-    position: relative;
-    flex: 0 0 280px;
-    min-width: 250px;
-    max-width: 320px;
-  }
-  
-  /* Compatibilidad legacy */
-  body.order-mode-active .content-container-flex {
-    gap: clamp(15px, 2vw, 20px);
-  }
-  
-  body.order-mode-active #order-sidebar {
-    position: relative !important;
-    flex: 0 0 280px;
-    min-width: 250px;
-    max-width: 320px;
-    height: auto;
-    max-height: calc(100vh - 60px);
-    margin-top: 0;
-    display: block;
-    /* Sidebar scrollable junto con la página - NO fijo */
-    position: static;
-  }
-  
-  /* === OPTIMIZACIÓN BEM: CONTENIDO AJUSTADO === */
-  .content-container--order-active {
-    flex: 1 1 auto;
-    min-width: 0;
-    /* Separación mínima entre contenido y sidebar */
-    margin-right: clamp(10px, 1.5vw, 15px);
-  }
-  
-  /* Compatibilidad legacy */
-  body.order-mode-active #content-container {
-    /* Separación mínima entre contenido y sidebar */
-    margin-right: clamp(10px, 1.5vw, 15px);
-  }
-  
-  /* Tipografía optimizada para landscape */
-  .product-card .product-name,
-  .category-card .category-name {
-    font-size: clamp(14px, 2vw, 18px);
-  }
-  
-  .product-card .product-ingredients {
-    font-size: clamp(12px, 1.8vw, 16px);
-  }
-  
-  .price-button {
-    font-size: clamp(12px, 1.8vw, 16px);
-    padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.8vw, 15px);
-  }
-}
-
-/* Reglas tablet manejadas por tablet.css */
-
-/* Desktop (min-width: 1025px) - Restaurar comportamiento original */
-@media (min-width: 1025px) {
-  .content-container-flex {
-    flex-direction: row;
-    gap: 1rem;
-  }
-  
-  body:not(.order-mode-active) .content-container-flex {
-    justify-content: center;
-  }
-  
-  body:not(.order-mode-active) #content-container {
-    flex: 0 1 auto;
-    width: 72%;
-    max-width: 1120px;
-  }
-  
-  .product-card .product-name,
-  .category-card .category-name {
-    font-size: clamp(14px, 2vw, 18px);
-  }
-  
-  .product-card .product-ingredients {
-    font-size: clamp(12px, 1.8vw, 16px);
-  }
-  
-  .price-button {
-    font-size: clamp(12px, 1.8vw, 16px);
-    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 18px);
-  }
 }

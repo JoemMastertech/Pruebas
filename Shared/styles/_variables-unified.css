@@ -46,6 +46,7 @@
   /* === GRID SYSTEM RESPONSIVE === */
   /* Configuración base móvil */
   --grid-columns-mobile: 2;
+  --grid-columns-tablet-portrait: 2;
   --grid-columns-tablet: 3;
   --grid-columns-desktop: 4;
   --grid-columns-liquor: 5;
@@ -123,14 +124,93 @@
   
   /* === CONTENEDORES === */
   --container-width: 95%;
+  --container-max: 1400px;
   --container-max-width: 1400px;
   --container-padding: var(--padding);
+  
+  /* === TABLAS === */
+  --table-margin: var(--spacing) auto;
+  --table-max-width: var(--container-max);
+  --table-width: var(--container-width);
+  
+  /* === THUMBNAILS ESPECÍFICOS === */
+  --thumb-size-3: clamp(90px, 14vw, 140px);
+  --thumb-size-4: clamp(80px, 12vw, 130px);
+  --thumb-size-5: clamp(75px, 11vw, 120px);
+  
+  /* === TIPOGRAFÍA === */
+  --font-size-name: clamp(13px, 1.9vw, 17px);
+  --font-size-price: clamp(14px, 2vw, 18px);
   
   /* === THUMBNAILS RESPONSIVE === */
   --thumb-size-mobile: clamp(70px, 12vw, 90px);
   --thumb-size-tablet: clamp(90px, 14vw, 120px);
   --thumb-size-desktop: clamp(100px, 16vw, 140px);
   --thumb-size: var(--thumb-size-mobile); /* Default móvil */
+  
+  /* === MODO TABLA ESTANDARIZADO (basado en interfaz Carnes) === */
+  --table-thumb-width-mobile: 80px;
+  --table-thumb-width-tablet: 90px;
+  --table-thumb-width-desktop: 100px;
+  --table-thumb-width: var(--table-thumb-width-mobile);
+  
+  --table-thumb-height-mobile: 56px;
+  --table-thumb-height-tablet: 63px;
+  --table-thumb-height-desktop: 70px;
+  --table-thumb-height: var(--table-thumb-height-mobile);
+  
+  --table-thumb-radius: 6px;
+  
+  --table-font-name: 600 1rem 'Montserrat', sans-serif;
+  --table-font-header: 600 1rem 'Montserrat', sans-serif;
+  --table-cell-padding: 15px 10px;
+  --table-cell-padding-first: 15px 10px 15px 15px;
+  
+  /* === CONTROL DE ALTURA DE TÍTULOS === */
+  /* Variables críticas para evitar expansión del header */
+  --page-title-min-height-mobile: 45px;
+  --page-title-min-height-tablet: 50px;
+  --page-title-min-height-desktop: 55px;
+  --page-title-min-height: var(--page-title-min-height-mobile);
+  
+  --page-title-max-height-mobile: 60px;
+  --page-title-max-height-tablet: 65px;
+  --page-title-max-height-desktop: 70px;
+  --page-title-max-height: var(--page-title-max-height-mobile);
+  
+  --page-title-pad-block-mobile: 8px;
+  --page-title-pad-block-tablet: 10px;
+  --page-title-pad-block-desktop: 12px;
+  --page-title-pad-block: var(--page-title-pad-block-mobile);
+  
+  /* === PERFILES DE PRODUCTOS === */
+  /* Perfil Thumbnails (Carnes, Alitas) */
+  --thumb-profile-size-mobile: 80px;
+  --thumb-profile-size-tablet: 100px;
+  --thumb-profile-size-desktop: 120px;
+  --thumb-profile-size: var(--thumb-profile-size-mobile);
+  --thumb-profile-radius: 8px;
+  --thumb-profile-fit: cover;
+  
+  /* Perfil Imágenes (Licores, Refrescos, Cervezas) */
+  --image-profile-size-mobile: 90px;
+  --image-profile-size-tablet: 110px;
+  --image-profile-size-desktop: 130px;
+  --image-profile-size: var(--image-profile-size-mobile);
+  --image-profile-aspect-ratio: 3/4;
+  --image-profile-radius: 6px;
+  --image-profile-fit: contain;
+  
+  /* === ASPECT RATIOS UNIFICADOS === */
+  --card-aspect-ratio-mobile: 4/5;
+  --card-aspect-ratio-tablet: 3/4;
+  --card-aspect-ratio-desktop: 3/4;
+  --card-aspect-ratio: var(--card-aspect-ratio-mobile);
+  
+  /* === ALIASES PARA COLUMNAS DE TABLA === */
+  --table-cols-3-width: 33.333%;
+  --table-cols-4-width: 25%;
+  --table-cols-5-width: 20%;
 }
 
 /* =================================================================
@@ -162,12 +242,26 @@
     --card-radius: var(--card-radius-tablet);
     --card-padding: var(--card-padding-tablet);
     --card-min-height: var(--card-min-height-tablet);
+    --card-aspect-ratio: var(--card-aspect-ratio-tablet);
     
     /* Efectos */
     --hover-scale: var(--hover-scale-tablet);
     
     /* Thumbnails */
     --thumb-size: var(--thumb-size-tablet);
+    
+    /* Modo tabla */
+    --table-thumb-width: var(--table-thumb-width-tablet);
+    --table-thumb-height: var(--table-thumb-height-tablet);
+    
+    /* Títulos */
+    --page-title-min-height: var(--page-title-min-height-tablet);
+    --page-title-max-height: var(--page-title-max-height-tablet);
+    --page-title-pad-block: var(--page-title-pad-block-tablet);
+    
+    /* Perfiles de productos */
+    --thumb-profile-size: var(--thumb-profile-size-tablet);
+    --image-profile-size: var(--image-profile-size-tablet);
   }
 }
 
@@ -195,12 +289,26 @@
     --card-radius: var(--card-radius-desktop);
     --card-padding: var(--card-padding-desktop);
     --card-min-height: var(--card-min-height-desktop);
+    --card-aspect-ratio: var(--card-aspect-ratio-desktop);
     
     /* Efectos */
     --hover-scale: var(--hover-scale-desktop);
     
     /* Thumbnails */
     --thumb-size: var(--thumb-size-desktop);
+    
+    /* Modo tabla */
+    --table-thumb-width: var(--table-thumb-width-desktop);
+    --table-thumb-height: var(--table-thumb-height-desktop);
+    
+    /* Títulos */
+    --page-title-min-height: var(--page-title-min-height-desktop);
+    --page-title-max-height: var(--page-title-max-height-desktop);
+    --page-title-pad-block: var(--page-title-pad-block-desktop);
+    
+    /* Perfiles de productos */
+    --thumb-profile-size: var(--thumb-profile-size-desktop);
+    --image-profile-size: var(--image-profile-size-desktop);
   }
 }
 
