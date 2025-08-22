@@ -197,7 +197,6 @@
 /* === RESPONSIVE TABLET INTERNO === */
 
 /* Tablet Portrait (768px - 1023px) */
-/* Grid rules moved to main.css for consolidation */
 @media (min-width: var(--bp-tablet)) and (max-width: 1023px) {
   .grid {
     gap: clamp(12px, 2.5vw, 16px);
@@ -212,10 +211,6 @@
     height: clamp(100px, 15vw, 140px);
   }
 }
-
-/* Grid rules moved to main.css for consolidation */
-
-/* Licores grid rules moved to main.css for consolidation */
 
 /* Tarjetas responsive para tablet */
 .category-card, .product-card {
@@ -235,15 +230,6 @@
   font-size: clamp(11px, 2.2vw, 16px);
   min-height: clamp(1.8rem, 3.5vw, 2.8rem);
 }
-
-/* Reducir espaciado del encabezado para licores en tablet */
-/* .category-grid[data-category="licores"] .page-title {
-  margin: 0 0 0.35rem 0; 
-  padding: 0.35rem var(--spacing); 
-} */
-
-/* Reducir altura del contenedor padre en tablet modo grid */
-
 
 /* Reducir espaciado del pie de página para licores en tablet */
 .category-grid[data-category="licores"] .subcategory-prompt {
@@ -313,7 +299,6 @@
   }
 }
 
-/* Grid rules moved to main.css for consolidation */
 @media (orientation: landscape) and (min-width: var(--bp-tablet)) and (max-width: 1023px) {
   .card--category {
     aspect-ratio: 1;

@@ -48,7 +48,7 @@
   --grid-columns-mobile: 2;
   --grid-columns-tablet-portrait: 2;
   --grid-columns-tablet: 3;
-  --grid-columns-desktop: 4;
+  --grid-columns-desktop: 3;
   --grid-columns-liquor: 5;
   --grid-columns: var(--grid-columns-mobile); /* Default móvil */
   
@@ -57,7 +57,7 @@
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 12px;
-  --spacing-lg: 16px;
+  --spacing-lg: 25px;
   --spacing-xl: 20px;
   --spacing-xxl: 24px;
   
@@ -103,12 +103,12 @@
   
   --card-radius-mobile: 8px;
   --card-radius-tablet: 10px;
-  --card-radius-desktop: 12px;
+  --card-radius-desktop: 10px;
   --card-radius: var(--card-radius-mobile); /* Default móvil */
   
   --card-padding-mobile: var(--spacing-sm);
   --card-padding-tablet: var(--spacing-md);
-  --card-padding-desktop: var(--spacing-lg);
+  --card-padding-desktop: 20px;
   --card-padding: var(--card-padding-mobile); /* Default móvil */
   
   --card-min-height-mobile: 180px;
@@ -147,6 +147,100 @@
   --thumb-size-tablet: clamp(90px, 14vw, 120px);
   --thumb-size-desktop: clamp(100px, 16vw, 140px);
   --thumb-size: var(--thumb-size-mobile); /* Default móvil */
+  
+  /* =================================================================
+     SISTEMA DE VARIABLES RESPONSIVAS UNIFICADO
+     Reemplaza alturas fijas problemáticas con escalado proporcional
+     ================================================================= */
+  
+  /* === ESCALADO PROPORCIONAL BASE === */
+  --scale-factor-sm: 0.8;    /* Mobile: 80% del tamaño base */
+  --scale-factor-md: 0.9;    /* Tablet: 90% del tamaño base */
+  --scale-factor-lg: 1.0;    /* Desktop: 100% del tamaño base */
+  --scale-factor-xl: 1.1;    /* Large: 110% del tamaño base */
+  
+  /* === PRODUCT CARDS - Altura responsiva === */
+  --card-height-base: 280px;
+  --card-height-mobile: clamp(180px, 25vh, 220px);
+  --card-height-tablet: clamp(220px, 30vh, 280px);
+  --card-height-desktop: clamp(280px, 35vh, 350px);
+  --card-height-large: clamp(320px, 40vh, 400px);
+  --card-height-xlarge: clamp(350px, 45vh, 450px);
+  --card-height-current: var(--card-height-mobile); /* Default móvil */
+  
+  /* === PRODUCT CARDS - Variantes específicas === */
+  --card-height-compact: clamp(200px, 28vh, 240px);     /* Para grids densos */
+  --card-height-expanded: clamp(300px, 38vh, 380px);    /* Para contenido rico */
+  --card-height-liquor: clamp(260px, 33vh, 320px);      /* Específico para licores */
+  
+  /* === CONTENEDORES DE MEDIA - Imágenes y Videos === */
+  --media-height-mobile: clamp(120px, 16vh, 150px);
+  --media-height-tablet: clamp(160px, 20vh, 200px);
+  --media-height-desktop: clamp(180px, 22vh, 220px);
+  --media-height-large: clamp(200px, 25vh, 250px);
+  --media-height-current: var(--media-height-mobile); /* Default móvil */
+  
+  /* === VIDEO THUMBNAILS - Específicos === */
+  --video-height-mobile: clamp(100px, 14vh, 130px);
+  --video-height-tablet: clamp(120px, 16vh, 160px);
+  --video-height-desktop: clamp(140px, 18vh, 180px);
+  --video-height-current: var(--video-height-mobile); /* Default móvil */
+  
+  /* === PRODUCT IMAGES - Específicos === */
+  --image-height-mobile: clamp(120px, 16vh, 150px);
+  --image-height-tablet: clamp(160px, 20vh, 200px);
+  --image-height-desktop: clamp(180px, 22vh, 220px);
+  --image-height-current: var(--image-height-mobile); /* Default móvil */
+  
+  /* === CATEGORÍAS - Category Cards y Elements === */
+  --category-height-mobile: clamp(173px, 22vh, 210px);
+  --category-height-tablet: clamp(194px, 25vh, 240px);
+  --category-height-desktop: clamp(220px, 28vh, 270px);
+  --category-height-current: var(--category-height-mobile); /* Default móvil */
+  
+  /* === CATEGORY IMAGES === */
+  --category-image-mobile: clamp(60px, 8vw, 90px);
+  --category-image-tablet: clamp(90px, 11vw, 120px);
+  --category-image-desktop: clamp(110px, 13vw, 150px);
+  --category-image-current: var(--category-image-mobile); /* Default móvil */
+  
+  /* === CATEGORY NAMES === */
+  --category-name-height-mobile: clamp(35px, 4vh, 50px);
+  --category-name-height-tablet: clamp(40px, 5vh, 55px);
+  --category-name-height-desktop: clamp(45px, 6vh, 60px);
+  --category-name-height-current: var(--category-name-height-mobile); /* Default móvil */
+  
+  /* === ELEMENTOS INTERACTIVOS - Botones y Controles === */
+  --button-height-sm: clamp(40px, 5vh, 50px);      /* Botones pequeños */
+  --button-height-md: clamp(44px, 6vh, 55px);      /* Botones estándar */
+  --button-height-lg: clamp(50px, 7vh, 65px);      /* Botones grandes */
+  --button-height-xl: clamp(56px, 8vh, 70px);      /* Botones principales */
+  --button-height-current: var(--button-height-md); /* Default móvil */
+  
+  /* === DRINK OPTIONS === */
+  --drink-option-height: clamp(40px, 5vh, 60px);
+  --drink-container-height: clamp(70px, 8vh, 100px);
+  
+  /* === PRICE BUTTONS - Específicos para licores === */
+  --price-button-height-mobile: clamp(26px, 3.5vh, 35px);
+  --price-button-height-tablet: clamp(28px, 4vh, 40px);
+  --price-button-height-desktop: clamp(32px, 4.5vh, 45px);
+  --price-button-height-current: var(--price-button-height-mobile); /* Default móvil */
+  
+  /* === ELEMENTOS FIJOS - No responsivos por usabilidad === */
+  --nav-height-fixed: 40px;                    /* Estándar de navegación */
+  --nav-height-mobile-fixed: 50px;             /* Móvil - mayor área táctil */
+  --nav-height-compact: 36px;                  /* Compacto para pantallas pequeñas */
+  
+  /* === ICONOS Y ELEMENTOS PEQUEÑOS === */
+  --icon-size-sm: 12px;                        /* Separadores, líneas */
+  --icon-size-md: 28px;                        /* Iconos estándar */
+  --icon-size-lg: 36px;                        /* Iconos grandes */
+  
+  /* === ELEMENTOS CRÍTICOS - Accesibilidad === */
+  --touch-target-min: 44px;                    /* Mínimo táctil WCAG */
+  --touch-target-comfortable: 48px;            /* Cómodo para la mayoría */
+  --touch-target-large: 56px;                  /* Óptimo para accesibilidad */
   
   /* === MODO TABLA ESTANDARIZADO (basado en interfaz Carnes) === */
   --table-thumb-width-mobile: 80px;
@@ -262,6 +356,17 @@
     /* Perfiles de productos */
     --thumb-profile-size: var(--thumb-profile-size-tablet);
     --image-profile-size: var(--image-profile-size-tablet);
+    
+    /* === SISTEMA RESPONSIVO UNIFICADO - TABLET === */
+    --card-height-current: var(--card-height-tablet);
+    --media-height-current: var(--media-height-tablet);
+    --video-height-current: var(--video-height-tablet);
+    --image-height-current: var(--image-height-tablet);
+    --category-height-current: var(--category-height-tablet);
+    --category-image-current: var(--category-image-tablet);
+    --category-name-height-current: var(--category-name-height-tablet);
+    --price-button-height-current: var(--price-button-height-tablet);
+    --button-height-current: var(--button-height-md);
   }
 }
 
@@ -309,6 +414,17 @@
     /* Perfiles de productos */
     --thumb-profile-size: var(--thumb-profile-size-desktop);
     --image-profile-size: var(--image-profile-size-desktop);
+    
+    /* === SISTEMA RESPONSIVO UNIFICADO - DESKTOP === */
+    --card-height-current: var(--card-height-desktop);
+    --media-height-current: var(--media-height-desktop);
+    --video-height-current: var(--video-height-desktop);
+    --image-height-current: var(--image-height-desktop);
+    --category-height-current: var(--category-height-desktop);
+    --category-image-current: var(--category-image-desktop);
+    --category-name-height-current: var(--category-name-height-desktop);
+    --price-button-height-current: var(--price-button-height-desktop);
+    --button-height-current: var(--button-height-lg);
   }
 }
 
@@ -317,8 +433,27 @@
   :root {
     /* Ajustes finos para pantallas grandes */
     --container-width: 90%;
-    --spacing: calc(var(--spacing-desktop) * 1.2);
-    --padding: calc(var(--padding-desktop) * 1.2);
+    
+    /* Valores exactos que se aplican en desktop según análisis */
+    --grid-columns: 3;
+    --gap: 25px;
+    --padding: 25px;
+    --card-padding: 20px;
+    --card-radius: 10px;
+    
+    /* === SISTEMA RESPONSIVO UNIFICADO - LARGE === */
+    --card-height-current: var(--card-height-large);
+    --media-height-current: var(--media-height-large);
+    --button-height-current: var(--button-height-xl);
+  }
+}
+
+/* === EXTRA LARGE (1400px+) === */
+@media (min-width: 1400px) {
+  :root {
+    /* === SISTEMA RESPONSIVO UNIFICADO - XLARGE === */
+    --card-height-current: var(--card-height-xlarge);
+    --media-height-current: var(--media-height-large);
   }
 }
 
@@ -357,21 +492,3 @@
   --top-nav-bg: var(--nav-bg);
   --top-nav-border: var(--nav-border);
 }
-
-/* =================================================================
-   NOTAS DE MIGRACIÓN
-   ================================================================= */
-
-/*
-TODO: Migración gradual
-1. Reemplazar variables duplicadas en main.css
-2. Actualizar referencias en mobile.css
-3. Consolidar variables en tablet.css
-4. Eliminar variables legacy una vez completada la migración
-
-BENEFICIOS:
-- Eliminación de 40+ variables duplicadas
-- Consistencia en breakpoints
-- Mantenimiento centralizado
-- Mejor performance (menos recálculos)
-*/

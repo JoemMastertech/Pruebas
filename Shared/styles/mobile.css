@@ -237,11 +237,6 @@
 }
 
 /* === ORIENTACIÓN MÓVIL === */
-/* Grid rules moved to main.css for consolidation */
-
-/* Grid rules moved to main.css for consolidation */
-
-/* Grid rules moved to main.css for consolidation */
   
   /* Contenedor principal sin espacios laterales */
   .content-container,
@@ -330,18 +325,6 @@
   /* Hereda de .card__title */
   margin-bottom: 4px;
 }
-
-/* Table rules moved to main.css for consolidation */
-
-/* Reducir espaciado del encabezado para licores en móvil */
-/* Reducir espaciado del encabezado para licores en móvil */
-/* .category-grid[data-category="licores"] .page-title {
-  margin: 0 0 0.25rem 0;
-  padding: 0.25rem var(--spacing);
-} */
-
-/* Reducir altura del contenedor padre en móvil modo grid */
-
 
 /* Reducir espaciado del pie de página para licores en móvil */
 .category-grid[data-category="licores"] .subcategory-prompt {

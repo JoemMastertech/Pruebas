@@ -284,17 +284,14 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   transform: scale(1.05);
 }
 
-[data-category="carnes"] .video-thumb {
-  width: 100px;
-  height: 70px;
-  border-radius: 6px;
+/* === THUMBNAILS ESTANDARIZADOS PARA MODO TABLA === */
+.video-thumb {
+  width: var(--table-thumb-width);
+  height: var(--table-thumb-height);
+  border-radius: var(--table-thumb-radius);
 }
 
-[data-category="cafe"] .video-thumb {
-  width: 90px;
-  height: 60px;
-}
-
+/* Efectos específicos por categoría (mantener únicamente efectos únicos) */
 [data-category="postres"] .video-thumb:hover {
   transform: rotate(-2deg) scale(1.05);
 }
@@ -303,14 +300,8 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   border: 1px solid rgba(255, 165, 0, 0.3);
 }
 
-/* Consolidated responsive styles for video thumbnails */
-@media (max-width: 768px) {
-  .video-thumb { width: 70px; height: 49px; }
-}
-
-@media (max-width: 480px) {
-  .video-thumb { width: 60px; height: 42px; }
-}
+/* Las reglas responsive para thumbnails ahora se manejan automáticamente 
+   a través de las variables CSS unificadas en _variables-unified.css */
 
 /* =================================================================
    TABLES & GRID CONTAINERS
@@ -346,10 +337,10 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 .product-table th, .liquor-table th {
-  font: 600 1rem 'Montserrat', sans-serif;
+  font: var(--table-font-header);
   color: var(--primary-color);
   text-align: center;
-  padding: 15px 10px;
+  padding: var(--table-cell-padding);
   border-bottom: 2px solid var(--border-color);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -357,11 +348,11 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 
 .product-table th:first-child, .liquor-table th:first-child {
   text-align: left;
-  padding-left: 15px;
+  padding: var(--table-cell-padding-first);
 }
 
 .product-table td, .liquor-table td {
-  padding: 15px 10px;
+  padding: var(--table-cell-padding);
   background: transparent;
   transition: all 0.3s ease;
   text-align: center;
@@ -370,11 +361,11 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 
 .product-table td:first-child, .liquor-table td:first-child {
   text-align: left;
-  padding-left: 15px;
+  padding: var(--table-cell-padding-first);
 }
 
 .product-table td.product-name, .liquor-table td.product-name {
-  font: 600 1rem 'Montserrat', sans-serif;
+  font: var(--table-font-name);
   color: var(--primary-color);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -1084,9 +1075,6 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 
-
-
-  
   .counter-container {
     display: flex;
     align-items: center;
@@ -1170,7 +1158,6 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     margin-bottom: 15px;
     padding: 0 5px;
   }
-/* Duplicated styles removed - consolidated in main sections */
   
   .counter-btn {
     width: 28px;
@@ -2566,9 +2553,6 @@ textarea:focus {
   z-index: 999;
 }
 
-/* Styles consolidated into main 768px media query above */
-
-/* Styles consolidated into main 480px media query above */
 
 .back-button {
   background: var(--card-bg);
@@ -2659,8 +2643,7 @@ body.order-mode-active #app {
 .product-table[data-category="refrescos"] th:nth-child(2), .product-table[data-category="cervezas"] th:nth-child(2), .product-table[data-category="refrescos"] td:nth-child(2), .product-table[data-category="cervezas"] td:nth-child(2) { width: 25%; }
 .product-table[data-category="refrescos"] th:nth-child(3), .product-table[data-category="cervezas"] th:nth-child(3), .product-table[data-category="refrescos"] td:nth-child(3), .product-table[data-category="cervezas"] td:nth-child(3) { width: 30%; }
 .modal-content[data-category="refrescos"], .modal-content[data-category="cervezas"] { width: 33.6%; max-width: 336px; }
-/* Category-specific tablet styles consolidated into main 768px media query above */
-/* Category-specific styles consolidated into main 480px media query above */
+
 .exclusive-option-group { background: rgba(0, 247, 255, 0.05); border: 1px solid rgba(0, 247, 255, 0.2); border-radius: 8px; padding: 15px; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; }
 .exclusive-option-group h4 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 1rem; text-align: center; }
 .jager-option-container { display: flex; align-items: center; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; transition: background-color 0.3s ease; cursor: pointer; font-size: 1rem; }
