@@ -48,6 +48,12 @@
   --grid-columns-mobile: 2;
   --grid-columns-tablet-portrait: 2;
   --grid-columns-tablet: 3;
+  
+  /* === TABLE RESPONSIVE WIDTHS === */
+  /* Anchos responsivos para consolidar media queries */
+  --table-col2-width-mobile: 35%;
+  --table-col2-width-tablet: 30%;
+  --table-col2-width: var(--table-col2-width-mobile); /* Default móvil */
   --grid-columns-desktop: 3;
   --grid-columns-liquor: 5;
   --grid-columns: var(--grid-columns-mobile); /* Default móvil */
@@ -486,9 +492,19 @@
   
   /* Top Navigation Legacy */
   --top-nav-height: var(--nav-height);
-  --top-nav-height-mobile: var(--nav-height-mobile);
-  --top-nav-height-tablet: var(--nav-height-tablet);
-  --top-nav-height-desktop: var(--nav-height-desktop);
-  --top-nav-bg: var(--nav-bg);
-  --top-nav-border: var(--nav-border);
+}
+
+/* === RESPONSIVE VARIABLE UPDATES === */
+/* Actualizar variables según breakpoints para consolidar media queries */
+
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --table-col2-width: var(--table-col2-width-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --table-col2-width: var(--table-col2-width-mobile);
+  }
 }
