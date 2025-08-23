@@ -1,4 +1,11 @@
 /* Master Technology Bar - Optimized Stylesheet */
+
+/* Importar sistema de variables responsivas unificado */
+@import '_variables-unified.css';
+
+/* Importar arquitectura BEM para reducir especificidad */
+@import '_bem-architecture.css';
+
 :root {
   /* Primary Colors */
   --primary-color: #f3f6f6;
@@ -756,7 +763,8 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Liquor card price buttons - compact thumbnail style */
-.product-card.liquor-card .price-button {
+.product-card.liquor-card .price-button,
+.liquor-price-button {
   padding: 4px 8px;
   font-size: 0.75rem;
   min-width: 50px;
@@ -900,7 +908,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Drink options modal specific sizing - Horizontal layout */
-#drink-options-modal .modal-content {
+.modal--drink-options .modal-content {
   width: 60%;
   max-width: 700px;
   max-height: 92vh;
@@ -911,7 +919,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Meat customization modal specific sizing */
-#meat-customization-modal .modal-content {
+.modal--meat-customization .modal-content {
   width: 42%;
   max-width: 535px;
   max-height: 43.7vh;
@@ -927,7 +935,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     padding: 20px 15px;
   }
   
-  #drink-options-modal .modal-content {
+  .modal--drink-options .modal-content {
     width: auto;
     max-width: 400px;
     max-height: none;
@@ -936,7 +944,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     border-radius: 10px;
   }
   
-  #meat-customization-modal .modal-content {
+  .modal--meat-customization .modal-content {
     width: 72%;
     max-width: none;
     max-height: 54.05vh;
@@ -962,7 +970,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     font-size: 1.1rem;
   }
   
-  #drink-options-modal .modal-content {
+  .modal--drink-options .modal-content {
     width: auto;
     max-width: 350px;
     max-height: none;
@@ -971,7 +979,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     border-radius: 8px;
   }
   
-  #meat-customization-modal .modal-content {
+  .modal--meat-customization .modal-content {
     width: 75%;
     max-width: none;
     max-height: 56.35vh;
@@ -1078,14 +1086,14 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Drink options modal specific title */
-#drink-options-modal .modal-content h3 {
+.modal--drink-options .modal-content h3 {
   font-size: 1rem;
   margin-bottom: 12px;
   line-height: 1.3;
 }
 
 /* Meat modal specific title sizing */
-#meat-customization-modal .modal-content h3 {
+.modal--meat-customization .modal-content h3 {
   font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   margin-bottom: 2vh;
 }
@@ -1169,13 +1177,13 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   }
   
   /* Drink options modal specific button actions */
-  #drink-options-modal .modal-actions {
+  .modal--drink-options .modal-actions {
     margin-top: 10px;
     gap: 8px;
     flex-shrink: 0;
   }
   
-  #drink-options-modal .modal-actions .nav-button {
+  .modal--drink-options .modal-actions .nav-button {
     min-width: 70px;
     padding: 8px 12px;
     font-size: 0.85rem;
@@ -1443,15 +1451,15 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Meat modal specific spacing */
-#meat-customization-modal .ingredients-choice,
-#meat-customization-modal .garnish-choice {
+.modal--meat-customization .ingredients-choice,
+.modal--meat-customization .garnish-choice {
   gap: 3%;
   margin-top: 2vh;
 }
 
 /* Meat modal specific button sizing */
-#meat-customization-modal .ingredients-choice .nav-button,
-#meat-customization-modal .garnish-choice .nav-button {
+.modal--meat-customization .ingredients-choice .nav-button,
+.modal--meat-customization .garnish-choice .nav-button {
   flex: 0 0 auto;
   min-width: 28%;
   max-width: 32%;
@@ -1509,7 +1517,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Drink options modal specific grid adjustments */
-#drink-options-modal .options-grid {
+.modal--drink-options .options-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
@@ -1538,7 +1546,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 /* Drink options modal specific button styling */
-#drink-options-modal .drink-option {
+.modal--drink-options .drink-option {
   min-height: 50px;
   padding: 10px 8px;
   font-size: 1rem;
@@ -1631,7 +1639,13 @@ textarea:focus {
   border-color: var(--price-color);
 }
 
-.price-selection-mode .price-button:not(.product-grid .product-card.liquor-card .price-button) { background: rgba(0, 247, 255, 0.2); transform: scale(1.05); transition: all 0.3s ease; animation: pulse 2s infinite; }
+/* Selector simplificado para evitar :not() complejo */
+.price-selection-mode .price-button:not(.liquor-price-button) { 
+  background: rgba(0, 247, 255, 0.2); 
+  transform: scale(1.05); 
+  transition: all 0.3s ease; 
+  animation: pulse 2s infinite; 
+}
 
 .remove-order-item {
   background: transparent;
@@ -1869,14 +1883,14 @@ textarea:focus {
   }
   
   /* Drink options modal responsive adjustments for tablet */
-  #drink-options-modal .modal-content {
+  .modal--drink-options .modal-content {
     width: 85%;
     max-width: 750px;
     min-width: 450px;
     max-height: 80vh;
   }
   
-  #drink-options-modal .options-grid {
+  .modal--drink-options .options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
     gap: 18px;
@@ -1885,7 +1899,7 @@ textarea:focus {
     justify-content: center;
   }
   
-  #drink-options-modal .drink-option {
+  .modal--drink-options .drink-option {
     min-height: 45px;
     padding: 9px 7px;
     font-size: 0.95rem;
@@ -1933,15 +1947,15 @@ textarea:focus {
 .price-button:disabled { cursor: not-allowed; opacity: 0.5; }
 .price-button.non-selectable:hover, .price-button:disabled:hover { background: transparent; transform: none; box-shadow: none; }
 .price-selection-mode .price-button.non-selectable, .price-selection-mode .price-button:disabled { animation: none; background: transparent; transform: none; }
-.price-selection-mode .product-grid .product-card.liquor-card .price-button { background: rgba(0, 247, 255, 0.2); animation: pulse 2s infinite; transform: scale(1.02); }
+.price-selection-mode .liquor-price-button { background: rgba(0, 247, 255, 0.2); animation: pulse 2s infinite; transform: scale(1.02); }
 
 /* =================================================================
    RESPONSIVE DESIGN - TABLET (481px - 768px)
    ================================================================= */
 @media (min-width: 481px) and (max-width: 768px) {
-  .product-grid .product-card.liquor-card .price-button,
-  .product-grid .product-card.liquor-card .price-button:not(.non-selectable),
-  .product-grid .product-card.liquor-card .price-button:not(:disabled) {
+  .liquor-price-button,
+  .liquor-price-button:not(.non-selectable),
+  .liquor-price-button:not(:disabled) {
     /* Configuración compacta como thumbnails */
     padding: 3px 6px;
     font-size: 0.7rem;
@@ -2031,9 +2045,9 @@ textarea:focus {
   .product-card .product-media { min-height: 120px; }
   .product-card .video-thumbnail { height: clamp(80px, 12vh, 120px); }
   .product-card:has(.video-thumbnail) .product-media { min-height: clamp(80px, 12vh, 120px); }
-  .product-grid .product-card.liquor-card .price-button,
-  .product-grid .product-card.liquor-card .price-button:not(.non-selectable),
-  .product-grid .product-card.liquor-card .price-button:not(:disabled) {
+  .liquor-price-button,
+  .liquor-price-button:not(.non-selectable),
+  .liquor-price-button:not(:disabled) {
     padding: 2px 5px;
     font-size: 0.65rem;
     min-width: 40px;
@@ -2865,9 +2879,3 @@ body.order-mode-active #app {
 /* ========================================
    SISTEMA UNIFICADO - FASE 5 IMPLEMENTACIÓN
    ======================================== */
-
-/* Importar sistema de variables responsivas unificado */
-@import '_variables-unified.css';
-
-/* Importar arquitectura BEM para reducir especificidad */
-@import '_bem-architecture.css';
