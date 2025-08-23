@@ -2836,3 +2836,13 @@ body.order-mode-active #app {
   scrollbar-width: thin;
   scrollbar-color: var(--card-bg) rgba(0, 0, 0, 0.3);
 }
+
+/* ========================================
+   SISTEMA UNIFICADO - FASE 5 IMPLEMENTACIÓN
+   ======================================== */
+
+/* Importar sistema de variables responsivas unificado */
+@import '_variables-unified.css';
+
+/* Importar arquitectura BEM para reducir especificidad */
+@import '_bem-architecture.css';

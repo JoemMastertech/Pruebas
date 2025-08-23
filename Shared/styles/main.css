@@ -135,7 +135,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--border-radius-lg);
   backdrop-filter: blur(10px);
   font-weight: bold;
 }
@@ -275,7 +275,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   width: 80px;
   height: 56px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--border-radius-lg);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -648,7 +648,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   height: 180px;
   object-fit: contain;
   background: white;
-  border-radius: 8px;
+  border-radius: var(--border-radius-lg);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -810,7 +810,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   color: var(--price-color);
   border: 1px solid var(--price-color);
   padding: 7px 12px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: all var(--transition-time) ease;
   font: 600 0.9rem 'Montserrat', sans-serif;
@@ -946,6 +946,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
 }
 
 @media (max-width: 480px) {
+  /* Modal styles */
   .modal {
     padding: 5px;
     padding-top: 15px;
@@ -976,6 +977,77 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
     max-height: 56.35vh;
     aspect-ratio: 1.1/1;
     padding: 13px;
+  }
+  
+  /* Portrait-specific rules */
+  .modal-content {
+    max-height: 97.75vh;
+  }
+  
+  .options-grid {
+    max-height: 35vh;
+  }
+  
+  .modal-content img {
+    max-height: 35vh;
+  }
+  
+  /* General mobile styles */
+  :root { --table-width: 98%; --table-margin: 10px; }
+  body { font-size: 13px; }
+  .welcome-text, .title-text, .category-title { font-size: 1.8rem; }
+  .nav-row { flex-direction: column; gap: 5px; }
+  .nav-button { font-size: 0.9rem; padding: 10px 12px; }
+  .product-table th, .product-table td { padding: 8px 5px; }
+  #content-container { padding: 0 5px; }
+  
+  /* En móviles, no desplazar el contenedor maestro */
+  body.order-mode-active #app {
+    margin-left: auto;
+  }
+  
+  /* ORDER SIDEBAR - MOBILE RESPONSIVE */
+  #order-sidebar {
+    width: 100%;
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 15px 0 0 0;
+    padding: 12px;
+    max-height: 60vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  #order-sidebar h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .order-item {
+    padding: 6px 0;
+    margin-bottom: 6px;
+  }
+  .order-item-name {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+  .order-item-price {
+    font-size: 0.8rem;
+  }
+  .order-item-customization {
+    font-size: 0.75rem;
+    margin-top: 3px;
+  }
+  .order-total {
+    margin-top: 15px;
+    padding-top: 8px;
+  }
+  .order-total h4 {
+    font-size: 1rem;
+  }
+  .order-actions {
+    flex-direction: row;
+    gap: 6px;
+    margin-top: 15px;
   }
 }
 
@@ -1233,19 +1305,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   }
 }
 
-@media (max-width: 480px) and (orientation: portrait) {
-  .modal-content {
-    max-height: 97.75vh;
-  }
-  
-  .options-grid {
-    max-height: 35vh;
-  }
-  
-  .modal-content img {
-    max-height: 35vh;
-  }
-}
+/* Portrait-specific rules moved to main 480px media query */
 
 /* Optimized animations */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -1399,7 +1459,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--text); background: va
   text-align: center;
   font-size: clamp(0.7rem, 1.6vw, 0.9rem);
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: var(--border-radius-md);
   transition: all 0.3s ease;
 }
 
@@ -1839,6 +1899,7 @@ textarea:focus {
     line-height: 1.3;
     width: 100%;
   }
+  /* Grid layouts consolidados para tablet */
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: var(--gap-tablet); padding: var(--padding-tablet); }
   .category-grid { grid-template-columns: repeat(3, 1fr); gap: var(--gap-tablet); padding: var(--padding-tablet); }
   .category-image { width: clamp(70px, 10vw, 110px); height: clamp(70px, 10vw, 110px); }
@@ -1917,46 +1978,11 @@ textarea:focus {
   }
 }
 
-/* Consolidated mobile responsive styles */
+/* Duplicate media query removed - rules consolidated above */
+
+/* ORDER SIDEBAR - MOBILE RESPONSIVE STYLES */
 @media (max-width: 480px) {
-  :root { --table-width: 98%; --table-margin: 10px; }
-  body { font-size: 13px; }
-  .welcome-text, .title-text, .category-title { font-size: 1.8rem; }
-  .nav-row { flex-direction: column; gap: 5px; }
-  .nav-button { font-size: 0.9rem; padding: 10px 12px; }
-  .product-table th, .product-table td { padding: 8px 5px; }
-  #content-container { padding: 0 5px; }
-  
-  /* En móviles, no desplazar el contenedor maestro */
-  body.order-mode-active #app {
-    margin-left: auto;
-  }
-  
-  /* ORDER SIDEBAR - MOBILE RESPONSIVE */
-  #order-sidebar {
-    width: 100%;
-    position: relative;
-    top: auto;
-    right: auto;
-    margin: 15px 0 0 0;
-    padding: 12px;
-    max-height: 60vh;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-  #order-sidebar h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  .order-item {
-    padding: 6px 0;
-    margin-bottom: 6px;
-  }
   .order-item-name {
-    font-size: 0.85rem;
-    line-height: 1.2;
-  }
-  .order-item-price {
     font-size: 0.8rem;
   }
   .order-item-customization {
@@ -2114,8 +2140,7 @@ textarea:focus {
     overflow-x: hidden;
     box-sizing: border-box;
   }
-  .product-grid { grid-template-columns: repeat(2, 1fr); gap: var(--gap-tablet); padding: var(--padding-tablet); }
-  .category-grid { grid-template-columns: repeat(3, 1fr); gap: var(--gap-tablet); padding: var(--padding-tablet); }
+  /* Ajuste específico para portrait - solo altura diferente */
   .product-card { min-height: 320px; }
 }
 
