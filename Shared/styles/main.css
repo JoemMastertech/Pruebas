@@ -2063,14 +2063,14 @@ textarea:focus {
   .drink-option-container { padding: 10px; min-height: 70px; flex-direction: column; justify-content: center; text-align: center; border-radius: 6px; }
   
   /* Drink options modal responsive adjustments for mobile */
-  #drink-options-modal .modal-content {
+  .modal--drink-options .modal-content {
     width: 95%;
     max-width: 550px;
     min-width: 320px;
     max-height: 80vh;
   }
   
-  #drink-options-modal .options-grid {
+  .modal--drink-options .options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
     gap: 15px;
@@ -2079,7 +2079,7 @@ textarea:focus {
     justify-content: center;
   }
   
-  #drink-options-modal .drink-option {
+  .modal--drink-options .drink-option {
     min-height: 40px;
     padding: 8px 6px;
     font-size: 0.85rem;
@@ -2422,7 +2422,7 @@ textarea:focus {
     min-width: 50px;
   }
   
-  .price-button:not(.product-card.liquor-card .price-button) {
+  .price-button:not(.liquor-price-button) {
     min-height: 44px;
   }
   
