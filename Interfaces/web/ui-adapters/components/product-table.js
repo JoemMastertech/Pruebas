@@ -135,7 +135,7 @@ const ProductRenderer = {
     }
     
     // Handle product images
-    if (target.classList && target.classList.contains('product-image')) {
+    if (target.classList && target.classList.contains('product-card__image')) {
       e.preventDefault();
       this.handleImageClick(target);
       return;
@@ -537,12 +537,12 @@ const ProductRenderer = {
   },
 
   _createNameCell: function(td, nombre) {
-    td.className = 'product-name';
+    td.className = 'product-card__name';
     td.textContent = nombre;
   },
 
   _createIngredientsCell: function(td, ingredientes) {
-    td.className = 'product-ingredients';
+    td.className = 'product-card__description';
     td.textContent = ingredientes || '';
   },
 
@@ -596,11 +596,11 @@ const ProductRenderer = {
       const isBeverage = categoryTitle && (categoryTitle.toLowerCase() === 'cervezas' || categoryTitle.toLowerCase() === 'refrescos');
       const isLiquorSubcategory = categoryTitle && liquorCategories.includes(categoryTitle.toLowerCase());
       
-      img.className = 'product-image';
+      img.className = 'product-card__image';
       if (isBeverage || isLiquorSubcategory) {
-        img.classList.add('product-image-large');
+        img.classList.add('product-card__image--large');
       } else {
-        img.classList.add('product-image-small');
+        img.classList.add('product-card__image--small');
       }
       // No individual event listener - handled by delegation
       td.appendChild(img);
@@ -691,14 +691,14 @@ const ProductRenderer = {
       
       // Product name
       const nameElement = document.createElement('div');
-      nameElement.className = 'product-name';
+      nameElement.className = 'product-card__name';
       nameElement.textContent = item.nombre;
       card.appendChild(nameElement);
       
       // Product ingredients (if available)
       if (item.ingredientes) {
         const ingredientsElement = document.createElement('div');
-        ingredientsElement.className = 'product-ingredients';
+        ingredientsElement.className = 'product-card__description';
         ingredientsElement.textContent = item.ingredientes;
         card.appendChild(ingredientsElement);
       }
@@ -717,7 +717,7 @@ const ProductRenderer = {
         mediaContainer.appendChild(videoThumbnail);
       } else if (item.imagen || item.ruta_archivo) {
         const image = document.createElement('img');
-        image.className = 'product-image';
+        image.className = 'product-card__image';
         image.src = item.imagen || item.ruta_archivo;
         image.alt = item.nombre;
         // No individual event listener - handled by delegation
