@@ -6,7 +6,7 @@ class ErrorHandler {
     const timestamp = new Date().toISOString();
     
     // Log error with context
-    Logger.error(`[${timestamp}] [${context}] ERROR: ${errorMessage}`, {
+    window.Logger.error(`[${timestamp}] [${context}] ERROR: ${errorMessage}`, {
       name: error?.name,
       stack: error?.stack,
       context,
@@ -58,7 +58,7 @@ class ErrorHandler {
   }
 
   static logWarning(message, context = {}) {
-    Logger.warn(message, context);
+    window.Logger.warn(message, context);
   }
 
   static handleValidationError(field, value, rule) {
@@ -133,6 +133,16 @@ export const logError = (message, error = null, context = {}) => {
     additionalInfo: context
   });
 };
+
+// Expose ErrorHandler globally
+window.ErrorHandler = ErrorHandler;
+window.logError = logError;
+window.logWarning = ErrorHandler.logWarning;
+window.handleValidationError = ErrorHandler.handleValidationError;
+window.handleMissingElementError = ErrorHandler.handle;
+window.showUserError = ErrorHandler.showUserError;
+window.clearUserError = ErrorHandler.clearUserError;
+window.handleXSSError = ErrorHandler.handleXSSError;
 
 export const logWarning = ErrorHandler.logWarning;
 export const handleValidationError = ErrorHandler.handleValidationError;

@@ -78,7 +78,7 @@ class AddFavoriteUseCase {
     try {
       const favorite = new Favorite(userId, productId, new Date());
       const result = await this.repository.addFavorite(favorite);
-      Logger.info(`Favorite added: ${productId} for user ${userId}`);
+      window.Logger.info(`Favorite added: ${productId} for user ${userId}`);
       return result;
     } catch (error) {
       ErrorHandler.handle(error, 'AddFavoriteUseCase');
@@ -211,10 +211,10 @@ if (Validator.isValidEmail(email)) {
 ```javascript
 import Logger from '../../../Shared/utils/logger.js';
 
-Logger.info('Feature initialized successfully');
-Logger.warn('Deprecated method used');
-Logger.error('Critical error occurred', { context: data });
-Logger.debug('Debug information', { details: debugData });
+window.Logger.info('Feature initialized successfully');
+window.Logger.warn('Deprecated method used');
+window.Logger.error('Critical error occurred', { context: data });
+window.Logger.debug('Debug information', { details: debugData });
 ```
 
 ## 🎨 Estilos y CSS
@@ -286,11 +286,11 @@ npm run format       # Formatear código
 ### Debugging
 ```javascript
 // Usar el logger en lugar de console.log
-Logger.debug('Variable value', { variable: value });
+window.Logger.debug('Variable value', { variable: value });
 
 // Para debugging temporal
 if (DEBUG) {
-  Logger.debug('Debug info', { context });
+  window.Logger.debug('Debug info', { context });
 }
 ```
 

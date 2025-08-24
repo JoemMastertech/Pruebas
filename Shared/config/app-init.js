@@ -70,7 +70,7 @@ const AppInit = {
    */
   async initialize(options = {}) {
     if (this.isInitialized) {
-      Logger.info('AppInit already initialized');
+      window.Logger.info('AppInit already initialized');
       return true;
     }
 
@@ -91,12 +91,12 @@ const AppInit = {
   async performEnhancedInitialization(options) {
     try {
       this.startTime = performance.now();
-      Logger.info('Starting Enhanced Master Technology Bar Application...');
+      window.Logger.info('Starting Enhanced Master Technology Bar Application...');
       
       // Clear any stale cache on app start if needed
       if (options.clearCache) {
         SimpleCache.clear();
-        Logger.debug('AppInit: Cache cleared on startup');
+        window.Logger.debug('AppInit: Cache cleared on startup');
       }
       
       // Make AppInit globally available first
@@ -146,7 +146,7 @@ const AppInit = {
       AppConfig.validateConfiguration();
       const configSuccess = true;
       
-      Logger.info('Enhanced configuration initialized');
+      window.Logger.info('Enhanced configuration initialized');
       
       // Store reference for easy access
       this.modules.set('appConfig', AppConfig);
@@ -169,7 +169,7 @@ const AppInit = {
     // SafeModal auto-registers itself as 'safe-modal' when imported
     // No need to register it manually here
     
-    Logger.info('Core systems initialized');
+    window.Logger.info('Core systems initialized');
   },
 
   /**
@@ -183,7 +183,7 @@ const AppInit = {
       this.initializeLegacyConfig();
     }
     
-    Logger.info('Legacy systems initialized');
+    window.Logger.info('Legacy systems initialized');
   },
 
   /**
@@ -204,7 +204,7 @@ const AppInit = {
         this.setupPerformanceMonitoring();
       }
       
-      Logger.info('Enhanced modules initialized');
+      window.Logger.info('Enhanced modules initialized');
     } catch (error) {
       logWarning('Some enhanced modules failed to initialize', error);
     }
@@ -230,7 +230,7 @@ const AppInit = {
       this.initializeEnhancedUI();
     }, delay);
     
-    Logger.info('Application started');
+    window.Logger.info('Application started');
   },
 
   /**
@@ -247,7 +247,7 @@ const AppInit = {
       }
     };
     
-    Logger.info('Legacy configuration initialized');
+    window.Logger.info('Legacy configuration initialized');
   },
 
   /**
@@ -281,7 +281,7 @@ const AppInit = {
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
             if (entry.duration > 50) {
-              Logger.warn(`Long task in AppInit: ${entry.duration.toFixed(2)}ms`);
+              window.Logger.warn(`Long task in AppInit: ${entry.duration.toFixed(2)}ms`);
             }
           }
         });
@@ -301,7 +301,7 @@ const AppInit = {
     // Create a global modal enhancement function
     window.enhanceModalGlobally = function(modal) {
       if (!modal || !modal.id) {
-        Logger.warn('enhanceModalGlobally: Invalid modal provided');
+        window.Logger.warn('enhanceModalGlobally: Invalid modal provided');
         return;
       }
       
@@ -372,7 +372,7 @@ const AppInit = {
     document.documentElement.classList.add('js-enabled', 'enhanced-features');
     document.documentElement.classList.remove('no-js');
     
-    Logger.info('Enhanced UI features initialized');
+    window.Logger.info('Enhanced UI features initialized');
   },
 
   /**
@@ -387,7 +387,7 @@ const AppInit = {
     
     // Prevent multiple recovery attempts
     if (this.isRecovering) {
-      Logger.warn('Recovery already in progress, skipping duplicate attempt');
+      window.Logger.warn('Recovery already in progress, skipping duplicate attempt');
       return false;
     }
     
@@ -396,7 +396,7 @@ const AppInit = {
     try {
       // Try fallback initialization without enhanced features
       if (options.enableEnhancedFeatures !== false) {
-        Logger.info('Attempting fallback initialization...');
+        window.Logger.info('Attempting fallback initialization...');
         const result = await this.performEnhancedInitialization({
           ...options,
           enableEnhancedFeatures: false
@@ -406,7 +406,7 @@ const AppInit = {
       }
       
       // Last resort: basic legacy initialization
-      Logger.info('Attempting basic legacy initialization...');
+      window.Logger.info('Attempting basic legacy initialization...');
       this.basicLegacyInitialize();
       this.isRecovering = false;
       return true;
@@ -444,7 +444,7 @@ const AppInit = {
     }, INITIAL_DELAY);
     
     this.isInitialized = true;
-    Logger.info('Basic legacy initialization completed');
+    window.Logger.info('Basic legacy initialization completed');
   },
 
   /**
@@ -454,15 +454,15 @@ const AppInit = {
     const endTime = performance.now();
     const totalTime = endTime - this.startTime;
     
-    Logger.info('Enhanced AppInit initialization completed successfully!', {
+    window.Logger.info('Enhanced AppInit initialization completed successfully!', {
       totalTime: `${totalTime.toFixed(2)}ms`,
       modules: Array.from(this.modules.keys()).length
     });
     
     if (AppConfig.get && AppConfig.get('ui.debugMode')) {
-       Logger.debug('Initialization modules', Array.from(this.modules.keys()));
-       // Logger.debug('AppConfig stats', AppConfig.getStats()); // Method doesn't exist
-      Logger.debug('SimpleCache stats', SimpleCache.getStats());
+       window.Logger.debug('Initialization modules', Array.from(this.modules.keys()));
+       // window.Logger.debug('AppConfig stats', AppConfig.getStats()); // Method doesn't exist
+      window.Logger.debug('SimpleCache stats', SimpleCache.getStats());
     }
     
     // Emit event to notify other components that initialization is complete
@@ -474,7 +474,7 @@ const AppInit = {
       }
     });
     document.dispatchEvent(event);
-    Logger.debug('app-init-complete event dispatched');
+    window.Logger.debug('app-init-complete event dispatched');
   },
 
   /**
@@ -627,15 +627,15 @@ const AppInit = {
    * Used as a fallback when DOM elements are not found
    */
   ensureMainScreenVisible: function(contentType) {
-    Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible called with contentType: ${contentType}`);
+    window.Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible called with contentType: ${contentType}`);
     
     setTimeout(() => {
-      Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible timeout executed`);
+      window.Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible timeout executed`);
       
       const mainScreen = document.querySelector('.main-content-screen') || 
                         document.querySelector('[data-category]');
       
-      Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible - element search:`, {
+      window.Logger.info(`[NAVIGATION DEBUG] ensureMainScreenVisible - element search:`, {
         mainScreenFound: !!mainScreen,
         mainScreenClasses: mainScreen?.className,
         mainScreenDisplay: mainScreen ? getComputedStyle(mainScreen).display : 'N/A',
@@ -643,14 +643,14 @@ const AppInit = {
       });
       
       if (mainScreen) {
-        Logger.info(`[NAVIGATION DEBUG] Attempting to make mainScreen visible`);
+        window.Logger.info(`[NAVIGATION DEBUG] Attempting to make mainScreen visible`);
         
         const beforeClasses = mainScreen.className;
         mainScreen.classList.remove('screen-hidden');
         mainScreen.classList.add('screen-visible');
         const afterClasses = mainScreen.className;
         
-        Logger.info(`[NAVIGATION DEBUG] Class changes:`, {
+        window.Logger.info(`[NAVIGATION DEBUG] Class changes:`, {
           before: beforeClasses,
           after: afterClasses,
           displayAfter: getComputedStyle(mainScreen).display,
@@ -658,10 +658,10 @@ const AppInit = {
         });
         
         // Screen visibility fixed, but not retrying loadContent to avoid recursion
-        Logger.info(`[NAVIGATION DEBUG] Screen visibility fixed, but stopping here to avoid recursion`);
+        window.Logger.info(`[NAVIGATION DEBUG] Screen visibility fixed, but stopping here to avoid recursion`);
         this.isLoading = false; // Release lock
       } else {
-        Logger.error(`[NAVIGATION DEBUG] MainScreen still not found in ensureMainScreenVisible`);
+        window.Logger.error(`[NAVIGATION DEBUG] MainScreen still not found in ensureMainScreenVisible`);
         
         // Log all available elements for debugging
         const allElements = document.querySelectorAll('*');
@@ -669,7 +669,7 @@ const AppInit = {
           el.className && (el.className.includes('screen') || el.className.includes('content'))
         );
         
-        Logger.info(`[NAVIGATION DEBUG] Available screen/content elements:`, 
+        window.Logger.info(`[NAVIGATION DEBUG] Available screen/content elements:`, 
           screenElements.map(el => ({
             tag: el.tagName,
             id: el.id,
@@ -691,21 +691,21 @@ const AppInit = {
   loadContent: async function(contentType = 'cocteleria') {
     // Prevent concurrent calls
     if (this.isLoading) {
-      Logger.warn(`[NAVIGATION DEBUG] loadContent already in progress, ignoring call for: ${contentType}`);
+      window.Logger.warn(`[NAVIGATION DEBUG] loadContent already in progress, ignoring call for: ${contentType}`);
       return;
     }
     
     // Check if user is actively navigating (DOM is being modified)
     const isUserNavigating = this.checkUserNavigation();
     if (isUserNavigating && contentType === 'cocteleria') {
-      Logger.info('🚫 User navigation detected, skipping automatic cocteleria load');
+      window.Logger.info('🚫 User navigation detected, skipping automatic cocteleria load');
       return;
     }
     
     this.isLoading = true;
-    Logger.info(`[NAVIGATION DEBUG] loadContent called with contentType: ${contentType}`);
-    Logger.info(`[NAVIGATION DEBUG] Current URL: ${window.location.href}`);
-    Logger.info(`[NAVIGATION DEBUG] Current retry count: ${this.retryCount || 0}`);
+    window.Logger.info(`[NAVIGATION DEBUG] loadContent called with contentType: ${contentType}`);
+    window.Logger.info(`[NAVIGATION DEBUG] Current URL: ${window.location.href}`);
+    window.Logger.info(`[NAVIGATION DEBUG] Current retry count: ${this.retryCount || 0}`);
     
     const contentContainer = document.getElementById('content-container');
     const pageTitle = document.querySelector('.page-header .page-title');
@@ -714,7 +714,7 @@ const AppInit = {
     // Hamburger button is now handled by IndependentTopNavManager
     
     // Log detailed element states
-    Logger.info(`[NAVIGATION DEBUG] Element search results:`, {
+    window.Logger.info(`[NAVIGATION DEBUG] Element search results:`, {
       contentContainer: {
         found: !!contentContainer,
         id: contentContainer?.id,
@@ -734,9 +734,9 @@ const AppInit = {
     
     // Log all elements with relevant classes for debugging
     const allScreens = document.querySelectorAll('[class*="screen"]');
-    Logger.info(`[NAVIGATION DEBUG] All screen elements found: ${allScreens.length}`);
+    window.Logger.info(`[NAVIGATION DEBUG] All screen elements found: ${allScreens.length}`);
     allScreens.forEach((screen, index) => {
-      Logger.info(`[NAVIGATION DEBUG] Screen ${index}:`, {
+      window.Logger.info(`[NAVIGATION DEBUG] Screen ${index}:`, {
         classes: screen.className,
         id: screen.id,
         display: getComputedStyle(screen).display,
@@ -745,7 +745,7 @@ const AppInit = {
     });
     
     // Additional debugging right before validation
-    Logger.info(`[NAVIGATION DEBUG] Pre-validation check:`, {
+    window.Logger.info(`[NAVIGATION DEBUG] Pre-validation check:`, {
       contentContainer: {
         exists: !!contentContainer,
         isNull: contentContainer === null,
@@ -763,7 +763,7 @@ const AppInit = {
     });
     
     // Additional debugging for mainScreen validation issue
-    Logger.info(`[NAVIGATION DEBUG] Validation check details:`, {
+    window.Logger.info(`[NAVIGATION DEBUG] Validation check details:`, {
       contentContainer: {
         exists: !!contentContainer,
         truthyCheck: !contentContainer,
@@ -779,8 +779,8 @@ const AppInit = {
     });
     
     if (!contentContainer || !mainScreen) {
-      Logger.warn(`[NAVIGATION DEBUG] Required DOM elements not found, retrying in 100ms... (attempt ${(this.retryCount || 0) + 1})`);
-      Logger.warn('[NAVIGATION DEBUG] Missing elements:', {
+      window.Logger.warn(`[NAVIGATION DEBUG] Required DOM elements not found, retrying in 100ms... (attempt ${(this.retryCount || 0) + 1})`);
+      window.Logger.warn('[NAVIGATION DEBUG] Missing elements:', {
         contentContainer: !!contentContainer,
         mainScreen: !!mainScreen
       });
@@ -793,7 +793,7 @@ const AppInit = {
           const retryContainer = document.getElementById('content-container');
           const retryMainScreen = document.querySelector('.main-content-screen') || document.querySelector('[data-category]');
           
-          Logger.info(`[NAVIGATION DEBUG] Retry ${this.retryCount} - Element check:`, {
+          window.Logger.info(`[NAVIGATION DEBUG] Retry ${this.retryCount} - Element check:`, {
             retryContainer: !!retryContainer,
             retryMainScreen: !!retryMainScreen
           });
@@ -802,7 +802,7 @@ const AppInit = {
             logError('Required DOM elements still not found after retry ' + this.retryCount);
             this.isLoading = false; // Release lock on error
             if (this.retryCount >= 3) {
-              Logger.error(`[NAVIGATION DEBUG] Max retries reached. Attempting recovery...`);
+              window.Logger.error(`[NAVIGATION DEBUG] Max retries reached. Attempting recovery...`);
               // Reset retry count and try to show the main screen
               this.retryCount = 0;
               this.ensureMainScreenVisible();
@@ -811,12 +811,12 @@ const AppInit = {
           }
           
           // Elements found in retry, but not calling loadContent recursively to avoid concurrency issues
-          Logger.info(`[NAVIGATION DEBUG] Elements found in retry, releasing lock`);
+          window.Logger.info(`[NAVIGATION DEBUG] Elements found in retry, releasing lock`);
           this.isLoading = false; // Release lock
         }, 100);
         return;
       } else {
-        Logger.error(`[NAVIGATION DEBUG] Max retries reached. Attempting recovery...`);
+        window.Logger.error(`[NAVIGATION DEBUG] Max retries reached. Attempting recovery...`);
         // Reset retry count and try to show the main screen
         this.retryCount = 0;
         this.ensureMainScreenVisible();
@@ -827,15 +827,15 @@ const AppInit = {
     // Reset retry count on successful element finding
     this.retryCount = 0;
     
-    Logger.info(`[NAVIGATION DEBUG] Elements found successfully. Processing visibility...`);
+    window.Logger.info(`[NAVIGATION DEBUG] Elements found successfully. Processing visibility...`);
     
     // Ensure main screen is visible
     if (mainScreen.classList.contains('screen-hidden')) {
-      Logger.info(`[NAVIGATION DEBUG] MainScreen was hidden, making it visible`);
+      window.Logger.info(`[NAVIGATION DEBUG] MainScreen was hidden, making it visible`);
       mainScreen.classList.remove('screen-hidden');
       mainScreen.classList.add('screen-visible');
     } else {
-      Logger.info(`[NAVIGATION DEBUG] MainScreen visibility state:`, {
+      window.Logger.info(`[NAVIGATION DEBUG] MainScreen visibility state:`, {
         hasScreenHidden: mainScreen.classList.contains('screen-hidden'),
         hasScreenVisible: mainScreen.classList.contains('screen-visible'),
         allClasses: mainScreen.className
@@ -1077,7 +1077,7 @@ const AppInit = {
       return new ProductDataAdapter();
     });
 
-    Logger.info('DI Container initialized (simplified)');
+    window.Logger.info('DI Container initialized (simplified)');
   }
 };
 

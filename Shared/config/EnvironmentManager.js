@@ -282,7 +282,7 @@ export class EnvironmentManager {
     }
 
     if (this.isDebugMode) {
-      Logger.info(`Environment detected: ${this.currentEnvironment}`);
+      window.Logger.info(`Environment detected: ${this.currentEnvironment}`);
     }
   }
 
@@ -322,7 +322,7 @@ export class EnvironmentManager {
       this.notifyWatchers('configRegistered', { environment, config: finalConfig });
 
       if (this.isDebugMode) {
-        Logger.info(`Configuration registered for ${environment}`);
+        window.Logger.info(`Configuration registered for ${environment}`);
       }
 
       return true;
@@ -385,7 +385,7 @@ export class EnvironmentManager {
       });
 
       if (this.isDebugMode) {
-        Logger.info(`Environment switched from ${previousEnvironment} to ${environment}`);
+        window.Logger.info(`Environment switched from ${previousEnvironment} to ${environment}`);
       }
 
       return true;
@@ -400,7 +400,7 @@ export class EnvironmentManager {
       this.featureFlags.registerFlag(flagName, flagConfig);
       
       if (this.isDebugMode) {
-        Logger.info(`Feature flag registered: ${flagName}`);
+        window.Logger.info(`Feature flag registered: ${flagName}`);
       }
       
       return true;
@@ -499,7 +499,7 @@ export class EnvironmentManager {
       }
 
       if (this.isDebugMode) {
-        Logger.info('Configuration imported successfully');
+        window.Logger.info('Configuration imported successfully');
       }
 
       return true;

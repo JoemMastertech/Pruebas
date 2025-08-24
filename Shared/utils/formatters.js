@@ -99,7 +99,7 @@ export const formatNumber = (num, decimals = 2) => {
 };
 
 // Exportación por defecto con todas las funciones
-export default {
+const Formatters = {
   formatPrice,
   formatIngredients,
   formatProductName,
@@ -107,3 +107,14 @@ export default {
   cleanText,
   formatNumber
 };
+
+// Expose globally for non-module scripts
+window.formatPrice = formatPrice;
+window.formatIngredients = formatIngredients;
+window.formatProductName = formatProductName;
+window.formatTitle = formatTitle;
+window.cleanText = cleanText;
+window.formatNumber = formatNumber;
+window.Formatters = Formatters;
+
+export default Formatters;

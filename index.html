@@ -174,8 +174,14 @@
     </template>
   </div>
 
-  <!-- Load data providers -->
+  <!-- Load base utilities first (required by other modules) -->
+  <script type="module" src="./Shared/utils/logger.js"></script>
+  <script type="module" src="./Shared/utils/formatters.js"></script>
+  <script type="module" src="./Shared/utils/errorHandler.js"></script>
+  <script type="module" src="./Shared/core/AppConfig.js"></script>
+  <script type="module" src="./Aplicacion/services/OrderCore.js"></script>
   
+  <!-- Load data providers -->
   <script type="module" src="./Infraestructura/data-providers/product-data.js"></script>
   <!-- Load UI components -->
   <script type="module" src="./Interfaces/web/ui-adapters/components/product-table.js"></script>

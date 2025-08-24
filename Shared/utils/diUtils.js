@@ -64,7 +64,7 @@ export function safeResolveService(serviceName, fallback = null) {
   try {
     return resolveService(serviceName);
   } catch (error) {
-    Logger.warn(`Failed to resolve service '${serviceName}':`, error.message);
+    window.Logger.warn(`Failed to resolve service '${serviceName}':`, error.message);
     return fallback;
   }
 }

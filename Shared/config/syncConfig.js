@@ -121,14 +121,14 @@ export function validateSyncConfig(config) {
   
   for (const key of required) {
     if (!(key in config)) {
-      Logger.error(`Missing required config key: ${key}`);
+      window.Logger.error(`Missing required config key: ${key}`);
       return false;
     }
   }
   
   // Validate sync intervals
   if (config.sync.BACKGROUND_SYNC_INTERVAL < 30000) {
-    Logger.warn('Background sync interval is very short (<30s), this may impact performance');
+    window.Logger.warn('Background sync interval is very short (<30s), this may impact performance');
   }
   
   return true;
@@ -148,7 +148,7 @@ export function applySyncConfig(config) {
     window.SYNC_SYSTEM_CONFIG = config;
   }
   
-  Logger.info('Sync configuration applied:', {
+  window.Logger.info('Sync configuration applied:', {
     enabled: config.enabled,
     autoUpdate: config.sync.AUTO_UPDATE_ENABLED,
     syncInterval: `${config.sync.BACKGROUND_SYNC_INTERVAL / 1000}s`,

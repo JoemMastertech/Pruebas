@@ -11,7 +11,7 @@ import Validator from '../../Shared/utils/validator.js';
 class BaseAdapter {
   constructor() {
     this.adapterName = this.constructor.name;
-    Logger.debug(`${this.adapterName}: Initialized`);
+    window.Logger.debug(`${this.adapterName}: Initialized`);
   }
 
   /**
@@ -24,11 +24,11 @@ class BaseAdapter {
   safeExecute(operation, methodName, fallbackValue = []) {
     try {
       const result = operation();
-      Logger.debug(`${this.adapterName}.${methodName}: Success`);
+      window.Logger.debug(`${this.adapterName}.${methodName}: Success`);
       return result;
     } catch (error) {
       ErrorHandler.handle(error, `${this.adapterName}.${methodName}`);
-      Logger.error(`${this.adapterName}.${methodName}: Error occurred`, { error: error.message });
+      window.Logger.error(`${this.adapterName}.${methodName}: Error occurred`, { error: error.message });
       return fallbackValue;
     }
   }
@@ -47,13 +47,13 @@ class BaseAdapter {
     );
 
     if (error) {
-      Logger.error(`${this.adapterName}.${methodName}: Async error`, { 
+      window.Logger.error(`${this.adapterName}.${methodName}: Async error`, { 
         userMessage: error.userMessage 
       });
       return fallbackValue;
     }
 
-    Logger.debug(`${this.adapterName}.${methodName}: Async success`);
+    window.Logger.debug(`${this.adapterName}.${methodName}: Async success`);
     return result;
   }
 
@@ -65,7 +65,7 @@ class BaseAdapter {
    */
   validateTextParam(text, paramName) {
     if (!Validator.isValidText(text)) {
-      Logger.warn(`${this.adapterName}: Invalid ${paramName} parameter`, { [paramName]: text });
+      window.Logger.warn(`${this.adapterName}: Invalid ${paramName} parameter`, { [paramName]: text });
       return false;
     }
     return true;

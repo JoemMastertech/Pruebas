@@ -31,8 +31,8 @@ console.error('Error loading content:', error);
 
 // ✅ DESPUÉS
 import { Logger } from '../../../Shared/utils/logger.js';
-Logger.info('View mode toggled to:', this.currentViewMode);
-Logger.error('Error loading content:', error);
+window.Logger.info('View mode toggled to:', this.currentViewMode);
+window.Logger.error('Error loading content:', error);
 ```
 
 **Archivos a modificar:**

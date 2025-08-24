@@ -17,7 +17,7 @@ class LoadCocktailsUseCase {
     
     // Return cache if valid and not forcing refresh
     if (!forceRefresh && this.enableCache && this._isCacheValid(now)) {
-      Logger.debug('Using cache');
+      window.Logger.debug('Using cache');
       return this.cache.data;
     }
     
@@ -36,7 +36,7 @@ class LoadCocktailsUseCase {
       );
       
       if (error) {
-        Logger.warn('Repository error, using cache fallback');
+        window.Logger.warn('Repository error, using cache fallback');
         return this.cache.data || [];
       }
       
@@ -46,7 +46,7 @@ class LoadCocktailsUseCase {
         SimpleCache.set(CACHE_KEYS.COCKTAILS, cocktails, this.cacheTime);
       }
       
-      Logger.info(`Loaded ${cocktails?.length || 0} cocktails`);
+      window.Logger.info(`Loaded ${cocktails?.length || 0} cocktails`);
       return cocktails;
     } finally {
       this.loading = false;

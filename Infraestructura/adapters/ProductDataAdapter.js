@@ -62,7 +62,7 @@ class ProductDataAdapter extends BaseAdapter {
       });
 
       if (response.status === 404) {
-        Logger.debug(`Tabla '${tableName}' no encontrada en Supabase. Manteniendo datos locales.`);
+        window.Logger.debug(`Tabla '${tableName}' no encontrada en Supabase. Manteniendo datos locales.`);
         return;
       }
 
@@ -71,7 +71,7 @@ class ProductDataAdapter extends BaseAdapter {
       }
 
       const data = await response.json();
-      Logger.info(`Datos actualizados en background desde Supabase tabla '${tableName}': ${data.length} registros`);
+      window.Logger.info(`Datos actualizados en background desde Supabase tabla '${tableName}': ${data.length} registros`);
       
       // Normalize and cache the fresh data
       const normalizedData = this._normalizeSupabaseData(data, tableName);
@@ -83,10 +83,10 @@ class ProductDataAdapter extends BaseAdapter {
         const SimpleCache = (await import('../../Shared/utils/simpleCache.js')).default;
         SimpleCache.set(`supabase_${tableName}`, normalizedData, 3600000); // 1 hour cache
         
-        Logger.info(`Cache actualizado para tabla '${tableName}'`);
+        window.Logger.info(`Cache actualizado para tabla '${tableName}'`);
       }
     } catch (error) {
-      Logger.debug(`Background sync failed for ${tableName}:`, error.message);
+      window.Logger.debug(`Background sync failed for ${tableName}:`, error.message);
       // Silent failure - doesn't affect user experience
     }
   }
@@ -165,7 +165,7 @@ class ProductDataAdapter extends BaseAdapter {
       
       // Log image fields for cervezas and refrescos to debug
       if (tableName === 'cervezas' || tableName === 'refrescos') {
-        Logger.debug(`Normalized ${tableName} item:`, {
+        window.Logger.debug(`Normalized ${tableName} item:`, {
           id: normalizedItem.id,
           nombre: normalizedItem.nombre,
           imagen: normalizedItem.imagen,
@@ -173,7 +173,7 @@ class ProductDataAdapter extends BaseAdapter {
           precio: normalizedItem.precio
         });
       } else {
-        Logger.debug(`Normalized ${tableName} item:`, {
+        window.Logger.debug(`Normalized ${tableName} item:`, {
           id: normalizedItem.id,
           nombre: normalizedItem.nombre,
           precioBotella: normalizedItem.precioBotella,
@@ -196,7 +196,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('cocteleria');
       return data.length > 0 ? data : this.productData.cocteles || [];
     } catch (error) {
-      Logger.error('Error in getCocteles:', error);
+      window.Logger.error('Error in getCocteles:', error);
       return this.productData.cocteles || [];
     }
   }
@@ -210,7 +210,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('refrescos');
       return data.length > 0 ? data : this.productData.refrescos || [];
     } catch (error) {
-      Logger.error('Error in getRefrescos:', error);
+      window.Logger.error('Error in getRefrescos:', error);
       return this.productData.refrescos || [];
     }
   }
@@ -238,7 +238,7 @@ class ProductDataAdapter extends BaseAdapter {
       const allLiquors = [...vodka, ...whisky, ...tequila, ...ron, ...brandy, ...cognac, ...digestivos, ...ginebra, ...mezcal, ...licores];
       return allLiquors.length > 0 ? allLiquors : this.productData.licores || [];
     } catch (error) {
-      Logger.error('Error in getLicores:', error);
+      window.Logger.error('Error in getLicores:', error);
       return this.productData.licores || [];
     }
   }
@@ -254,7 +254,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('cervezas');
       return data.length > 0 ? data : this.productData.cervezas || [];
     } catch (error) {
-      Logger.error('Error in getCervezas:', error);
+      window.Logger.error('Error in getCervezas:', error);
       return this.productData.cervezas || [];
     }
   }
@@ -268,7 +268,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('pizzas');
       return data.length > 0 ? data : this.productData.pizzas || [];
     } catch (error) {
-      Logger.error('Error in getPizzas:', error);
+      window.Logger.error('Error in getPizzas:', error);
       return this.productData.pizzas || [];
     }
   }
@@ -282,7 +282,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('alitas');
       return data.length > 0 ? data : this.productData.alitas || [];
     } catch (error) {
-      Logger.error('Error in getAlitas:', error);
+      window.Logger.error('Error in getAlitas:', error);
       return this.productData.alitas || [];
     }
   }
@@ -296,7 +296,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('sopas');
       return data.length > 0 ? data : this.productData.sopas || [];
     } catch (error) {
-      Logger.error('Error in getSopas:', error);
+      window.Logger.error('Error in getSopas:', error);
       return this.productData.sopas || [];
     }
   }
@@ -310,7 +310,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('ensaladas');
       return data.length > 0 ? data : this.productData.ensaladas || [];
     } catch (error) {
-      Logger.error('Error in getEnsaladas:', error);
+      window.Logger.error('Error in getEnsaladas:', error);
       return this.productData.ensaladas || [];
     }
   }
@@ -324,7 +324,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('carnes');
       return data.length > 0 ? data : this.productData.carnes || [];
     } catch (error) {
-      Logger.error('Error in getCarnes:', error);
+      window.Logger.error('Error in getCarnes:', error);
       return this.productData.carnes || [];
     }
   }
@@ -338,7 +338,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('cafe');
       return data.length > 0 ? data : this.productData.cafes || [];
     } catch (error) {
-      Logger.error('Error in getCafe:', error);
+      window.Logger.error('Error in getCafe:', error);
       return this.productData.cafes || [];
     }
   }
@@ -352,7 +352,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('espumosos');
       return data.length > 0 ? data : this.productData.espumosos || [];
     } catch (error) {
-      Logger.error('Error in getEspumosos:', error);
+      window.Logger.error('Error in getEspumosos:', error);
       return this.productData.espumosos || [];
     }
   }
@@ -366,7 +366,7 @@ class ProductDataAdapter extends BaseAdapter {
       const data = await this._fetchFromSupabase('postres');
       return data.length > 0 ? data : this.productData.postres || [];
     } catch (error) {
-      Logger.error('Error in getPostres:', error);
+      window.Logger.error('Error in getPostres:', error);
       return this.productData.postres || [];
     }
   }
@@ -447,7 +447,7 @@ class ProductDataAdapter extends BaseAdapter {
        const data = await this._fetchFromSupabase(normalizedCategory);
        return data.length > 0 ? data : this.productData[normalizedCategory] || [];
      } catch (error) {
-       Logger.error(`Error in getProductsByCategory for ${category}:`, error);
+       window.Logger.error(`Error in getProductsByCategory for ${category}:`, error);
        return [];
      }
   }
@@ -522,7 +522,7 @@ class ProductDataAdapter extends BaseAdapter {
        const data = await this._fetchFromSupabase(subcategory);
        return data.length > 0 ? data : this.productData[subcategory] || [];
      } catch (error) {
-       Logger.error(`Error in getLiquorSubcategory for ${subcategory}:`, error);
+       window.Logger.error(`Error in getLiquorSubcategory for ${subcategory}:`, error);
        return [];
      }
   }

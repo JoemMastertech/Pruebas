@@ -31,7 +31,7 @@ const ScreenManager = {
    * @param {string} logMessage - Message to log
    */
   async transitionScreen(fromScreen, toScreen, logMessage) {
-    Logger.info(logMessage);
+    window.Logger.info(logMessage);
     
     // Start fade out
     if (fromScreen && fromScreen.classList) {
@@ -70,7 +70,7 @@ const ScreenManager = {
       .map(([key]) => key);
 
     if (missingElements.length > 0) {
-      Logger.error('Missing required screen elements:', missingElements);
+      window.Logger.error('Missing required screen elements:', missingElements);
       return null;
     }
 
@@ -81,7 +81,7 @@ const ScreenManager = {
    * Load initial content with error handling
    */
   async loadInitialContent() {
-    Logger.info('Loading initial content...');
+    window.Logger.info('Loading initial content...');
     
     try {
       const AppInit = window.AppInit;
@@ -92,12 +92,12 @@ const ScreenManager = {
       // Small delay to ensure DOM is ready
       await this.delay(100);
       
-      Logger.info('Calling AppInit.loadContent("cocteleria")');
+      window.Logger.info('Calling AppInit.loadContent("cocteleria")');
       await AppInit.loadContent('cocteleria');
-      Logger.info('Welcome sequence completed successfully');
+      window.Logger.info('Welcome sequence completed successfully');
       
     } catch (error) {
-        Logger.error('Error loading content:', error);
+        window.Logger.error('Error loading content:', error);
         // Optionally show fallback content or error message
         this.showErrorFallback(error);
       }
@@ -125,7 +125,7 @@ const ScreenManager = {
    * Start the welcome sequence with optimized async/await pattern
    */
   async startWelcomeSequence() {
-    Logger.info('Starting welcome sequence...');
+    window.Logger.info('Starting welcome sequence...');
     
     try {
       // Validate all required elements
@@ -135,7 +135,7 @@ const ScreenManager = {
       const { welcomeScreen, logoScreen, categoryTitleScreen, mainContentScreen, hamburgerBtn } = elements;
 
       // Step 1: Show welcome screen
-      Logger.info('Showing welcome screen for', DURATIONS.WELCOME, 'ms');
+      window.Logger.info('Showing welcome screen for', DURATIONS.WELCOME, 'ms');
       await this.delay(DURATIONS.WELCOME);
 
       // Step 2: Transition to logo screen
@@ -145,7 +145,7 @@ const ScreenManager = {
         '🔄 Transitioning from welcome to logo screen'
       );
       
-      Logger.info('Showing logo screen for', DURATIONS.LOGO, 'ms');
+      window.Logger.info('Showing logo screen for', DURATIONS.LOGO, 'ms');
       await this.delay(DURATIONS.LOGO);
 
       // Step 3: Transition to category screen
@@ -155,7 +155,7 @@ const ScreenManager = {
         '🔄 Transitioning from logo to category screen'
       );
       
-      Logger.info('Showing category screen for', DURATIONS.CATEGORY, 'ms');
+      window.Logger.info('Showing category screen for', DURATIONS.CATEGORY, 'ms');
       await this.delay(DURATIONS.CATEGORY);
 
       // Step 4: Transition to main content
@@ -171,7 +171,7 @@ const ScreenManager = {
       await this.loadInitialContent();
       
     } catch (error) {
-      Logger.error('Error in welcome sequence:', error);
+      window.Logger.error('Error in welcome sequence:', error);
       this.showErrorFallback(error);
     }
   },
@@ -180,7 +180,7 @@ const ScreenManager = {
    * Skip welcome sequence and go directly to main content
    */
   skipToMainContent() {
-    Logger.info('Skipping welcome sequence...');
+    window.Logger.info('Skipping welcome sequence...');
     
     const elements = this.validateScreenElements();
     if (!elements) return;

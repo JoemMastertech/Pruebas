@@ -32,10 +32,10 @@ class SyncMonitor {
         help: () => this.showHelp()
       };
       
-      Logger.info('🔧 SyncMonitor initialized. Type "syncMonitor.help()" for available commands.');
+      window.Logger.info('🔧 SyncMonitor initialized. Type "syncMonitor.help()" for available commands.');
     }
     
-    Logger.info('SyncMonitor: Initialized');
+    window.Logger.info('SyncMonitor: Initialized');
   }
 
   /**
@@ -82,15 +82,15 @@ class SyncMonitor {
     const stats = SimpleCache.getStats();
     const keys = stats.memoryKeys;
     
-    Logger.info('Cache Statistics:');
+    window.Logger.info('Cache Statistics:');
     console.table(stats);
     
     if (keys.length > 0) {
-      Logger.info('\nCached Items:');
+      window.Logger.info('\nCached Items:');
       keys.forEach(key => {
         const info = SimpleCache.getCacheInfo(key);
         if (info) {
-          Logger.info(`${key}: ${info.accessCount} accesses, expires in ${Math.round(info.timeToExpire / 1000)}s`);
+          window.Logger.info(`${key}: ${info.accessCount} accesses, expires in ${Math.round(info.timeToExpire / 1000)}s`);
         }
       });
     }
@@ -103,19 +103,19 @@ class SyncMonitor {
    */
   async forceSync() {
     if (!this.adapter) {
-      Logger.error('Adapter not available');
+      window.Logger.error('Adapter not available');
       return;
     }
 
-    Logger.info('Starting forced synchronization...');
+    window.Logger.info('Starting forced synchronization...');
     const startTime = Date.now();
     
     try {
       await this.adapter.forceSyncNow();
       const duration = Date.now() - startTime;
-      Logger.info(`Sync completed in ${duration}ms`);
+      window.Logger.info(`Sync completed in ${duration}ms`);
     } catch (error) {
-      Logger.error('Sync failed:', error.message);
+      window.Logger.error('Sync failed:', error.message);
     }
   }
 
@@ -124,12 +124,12 @@ class SyncMonitor {
    */
   startSync() {
     if (!this.adapter) {
-      Logger.error('Adapter not available');
+      window.Logger.error('Adapter not available');
       return;
     }
 
     this.adapter.startAutoSync();
-    Logger.info('▶️ Auto-sync started');
+    window.Logger.info('▶️ Auto-sync started');
   }
 
   /**
@@ -137,12 +137,12 @@ class SyncMonitor {
    */
   stopSync() {
     if (!this.adapter) {
-      Logger.error('Adapter not available');
+      window.Logger.error('Adapter not available');
       return;
     }
 
     this.adapter.stopAutoSync();
-    Logger.info('⏹️ Auto-sync stopped');
+    window.Logger.info('⏹️ Auto-sync stopped');
   }
 
   /**
@@ -151,7 +151,7 @@ class SyncMonitor {
   clearCache() {
     const beforeSize = SimpleCache.getStats().cacheSize;
     SimpleCache.clear();
-    Logger.info(`Cache cleared (${beforeSize} items removed)`);
+    window.Logger.info(`Cache cleared (${beforeSize} items removed)`);
   }
 
   /**
@@ -168,13 +168,13 @@ class SyncMonitor {
       'syncMonitor.help()': 'Show this help message'
     };
 
-    Logger.info('Available SyncMonitor Commands:');
+    window.Logger.info('Available SyncMonitor Commands:');
     console.table(commands);
     
-    Logger.info('\nTips:');
-    Logger.info('- Use status() to check if sync is working properly');
-    Logger.info('- Use cache() to see cache performance');
-    Logger.info('- Use sync() to test immediate data updates');
+    window.Logger.info('\nTips:');
+    window.Logger.info('- Use status() to check if sync is working properly');
+    window.Logger.info('- Use cache() to see cache performance');
+    window.Logger.info('- Use sync() to test immediate data updates');
   }
 
   /**
@@ -186,7 +186,7 @@ class SyncMonitor {
     if (!this.isEnabled) return;
     
     const timestamp = new Date().toISOString();
-    Logger.debug(`SyncMonitor: ${event}`, { timestamp, ...data });
+    window.Logger.debug(`SyncMonitor: ${event}`, { timestamp, ...data });
   }
 
   /**
@@ -200,7 +200,7 @@ class SyncMonitor {
       delete window.syncMonitor;
     }
     
-    Logger.info('SyncMonitor: Destroyed');
+    window.Logger.info('SyncMonitor: Destroyed');
   }
 }
 

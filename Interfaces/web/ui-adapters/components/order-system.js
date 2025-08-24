@@ -113,7 +113,7 @@ class OrderSystem {
     document.addEventListener('click', this.boundDelegatedHandler);
     this.eventDelegationInitialized = true;
     
-    Logger.debug('OrderSystem event delegation initialized');
+    window.Logger.debug('OrderSystem event delegation initialized');
   }
   
   handleDelegatedEvent(event) {
@@ -250,7 +250,7 @@ class OrderSystem {
     if (this.eventDelegationInitialized) {
       document.removeEventListener('click', this.boundDelegatedHandler);
       this.eventDelegationInitialized = false;
-      Logger.debug('OrderSystem event delegation destroyed');
+      window.Logger.debug('OrderSystem event delegation destroyed');
     }
   }
   
@@ -865,7 +865,7 @@ class OrderSystem {
   renderDrinkOptions(container, options) {
     // Validate that options is an array
     if (!Array.isArray(options)) {
-      Logger.error('renderDrinkOptions: options is not an array:', options);
+      window.Logger.error('renderDrinkOptions: options is not an array:', options);
       return;
     }
     
@@ -1022,7 +1022,7 @@ class OrderSystem {
   getDrinkOptionsForProduct(productName) {
     // Validate input
     if (!productName || typeof productName !== 'string') {
-      Logger.error('getDrinkOptionsForProduct: Invalid productName:', productName);
+      window.Logger.error('getDrinkOptionsForProduct: Invalid productName:', productName);
       return { drinkOptions: ['Ninguno'], message: 'Error: Producto no válido' };
     }
     
@@ -1334,7 +1334,7 @@ class OrderSystem {
     }
     const optionsContainer = document.getElementById('drink-options-container');
     if (!optionsContainer) {
-      Logger.error(`Element 'drink-options-container' not found in ${type} options modal.`);
+      window.Logger.error(`Element 'drink-options-container' not found in ${type} options modal.`);
       this._hideModal('drink-options-modal');
       return;
     }
@@ -1616,7 +1616,7 @@ class OrderSystem {
               console.log('  - All elements with class sidebar-visible:', document.querySelectorAll('.sidebar-visible').length);
               console.log('  - All elements with id order-sidebar:', document.querySelectorAll('#order-sidebar').length);
               // Don't force order mode off, just log the error
-              Logger.error('Unable to find order-items container even after making sidebar visible');
+              window.Logger.error('Unable to find order-items container even after making sidebar visible');
             }
           }, 150); // Increased timeout to allow for CSS transitions
         } else {
@@ -1847,7 +1847,7 @@ class OrderSystem {
    */
   enhanceModalElement(modal) {
     if (!modal) {
-      Logger.error('enhanceModalElement: No modal provided');
+      window.Logger.error('enhanceModalElement: No modal provided');
       return;
     }
     
@@ -1868,7 +1868,7 @@ class OrderSystem {
     
     // Verify methods were added correctly (only log errors)
     if (typeof modal.show !== 'function' || typeof modal.hide !== 'function') {
-      Logger.error(`Modal ${modal.id} enhancement FAILED - show: ${typeof modal.show}, hide: ${typeof modal.hide}`);
+      window.Logger.error(`Modal ${modal.id} enhancement FAILED - show: ${typeof modal.show}, hide: ${typeof modal.hide}`);
     }
   }
 
@@ -2224,7 +2224,7 @@ class OrderSystem {
   }
 
   async hideOrdersScreen() {
-    Logger.debug('🔄 Ocultando pantalla de órdenes - Estado DOM antes:', {
+    window.Logger.debug('🔄 Ocultando pantalla de órdenes - Estado DOM antes:', {
       mainScreen: !!document.getElementById('main-screen'),
       contentContainer: !!document.getElementById('content-container'),
       ordersBox: !!document.getElementById('orders-box'),
@@ -2245,12 +2245,12 @@ class OrderSystem {
     elements.contentContainer.classList.remove('content-hidden');
     
     if (this.previousCategory && window.AppInit) {
-      Logger.debug('📞 Llamando a AppInit.loadContent con categoría:', this.previousCategory);
+      window.Logger.debug('📞 Llamando a AppInit.loadContent con categoría:', this.previousCategory);
       await window.AppInit.loadContent(this.previousCategory);
       
       // Log DOM state after loadContent
       setTimeout(() => {
-        Logger.debug('📊 Estado DOM después de loadContent:', {
+        window.Logger.debug('📊 Estado DOM después de loadContent:', {
           mainScreen: !!document.getElementById('main-screen'),
           contentContainer: !!document.getElementById('content-container'),
           ordersBox: !!document.getElementById('orders-box'),
@@ -2291,7 +2291,7 @@ let orderSystemInitialized = false;
 
 function initializeOrderSystem() {
   if (orderSystemInitialized) {
-    Logger.info('OrderSystem already initialized, skipping...');
+    window.Logger.info('OrderSystem already initialized, skipping...');
     return;
   }
   
@@ -2300,7 +2300,7 @@ function initializeOrderSystem() {
   const contentContainer = document.getElementById('content-container');
   const ordersBox = document.getElementById('orders-box');
   
-  Logger.debug('🔧 Inicializando OrderSystem - Estado DOM:', {
+  window.Logger.debug('🔧 Inicializando OrderSystem - Estado DOM:', {
     mainScreen: !!mainScreen,
     contentContainer: !!contentContainer,
     ordersBox: !!ordersBox,
@@ -2320,7 +2320,7 @@ function initializeOrderSystem() {
       const afterContentContainer = document.getElementById('content-container');
       const afterOrdersBox = document.getElementById('orders-box');
       
-      Logger.debug('✅ OrderSystem inicializado - Estado DOM después:', {
+      window.Logger.debug('✅ OrderSystem inicializado - Estado DOM después:', {
         mainScreen: !!afterMainScreen,
         contentContainer: !!afterContentContainer,
         ordersBox: !!afterOrdersBox,
@@ -2329,9 +2329,9 @@ function initializeOrderSystem() {
       });
     }, 50);
     
-    Logger.info('OrderSystem initialized successfully');
+    window.Logger.info('OrderSystem initialized successfully');
   } catch (error) {
-    Logger.error('Failed to initialize OrderSystem:', error);
+    window.Logger.error('Failed to initialize OrderSystem:', error);
     // Retry after a short delay
     setTimeout(initializeOrderSystem, 100);
   }

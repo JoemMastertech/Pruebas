@@ -10,11 +10,11 @@ const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 // Validación de variables de entorno
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     const errorMsg = 'SupabaseAdapter: Variables de entorno no configuradas';
-    Logger.error(errorMsg);
+    window.Logger.error(errorMsg);
     throw new Error('Configuración de Supabase incompleta');
 }
 
-Logger.info('SupabaseAdapter: Configuración validada correctamente');
+window.Logger.info('SupabaseAdapter: Configuración validada correctamente');
 
 /**
  * Supabase Database Adapter
@@ -88,7 +88,7 @@ export default class SupabaseAdapter extends BaseAdapter {
    * @returns {Promise<Array>} Array of cocktail objects
    */
   async getCocktails() {
-    Logger.warn('SupabaseAdapter.getCocktails: Using deprecated method, use getAllCocktails() instead');
+    window.Logger.warn('SupabaseAdapter.getCocktails: Using deprecated method, use getAllCocktails() instead');
     return this.getAllCocktails();
   }
 

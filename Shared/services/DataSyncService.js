@@ -14,7 +14,7 @@ class DataSyncService {
     this.lastSyncTime = null;
     this.syncRetries = new Map();
     
-    Logger.debug('DataSyncService: Initialized');
+    window.Logger.debug('DataSyncService: Initialized');
   }
 
   /**
@@ -22,12 +22,12 @@ class DataSyncService {
    */
   startAutoSync() {
     if (this.isRunning) {
-      Logger.debug('DataSyncService: Auto-sync already running');
+      window.Logger.debug('DataSyncService: Auto-sync already running');
       return;
     }
 
     if (!SYNC_CONFIG.AUTO_UPDATE_ENABLED) {
-      Logger.info('DataSyncService: Auto-sync disabled in configuration');
+      window.Logger.info('DataSyncService: Auto-sync disabled in configuration');
       return;
     }
 
@@ -36,7 +36,7 @@ class DataSyncService {
       this.syncAllCategories();
     }, SYNC_CONFIG.BACKGROUND_SYNC_INTERVAL);
 
-    Logger.info(`DataSyncService: Auto-sync started (interval: ${SYNC_CONFIG.BACKGROUND_SYNC_INTERVAL}ms)`);
+    window.Logger.info(`DataSyncService: Auto-sync started (interval: ${SYNC_CONFIG.BACKGROUND_SYNC_INTERVAL}ms)`);
     
     // Perform initial sync after a short delay
     setTimeout(() => {
@@ -54,7 +54,7 @@ class DataSyncService {
     }
     
     this.isRunning = false;
-    Logger.info('DataSyncService: Auto-sync stopped');
+    window.Logger.info('DataSyncService: Auto-sync stopped');
   }
 
   /**
@@ -62,7 +62,7 @@ class DataSyncService {
    */
   async syncAllCategories() {
     if (!this.adapter) {
-      Logger.warn('DataSyncService: No adapter available for sync');
+      window.Logger.warn('DataSyncService: No adapter available for sync');
       return;
     }
 
@@ -75,7 +75,7 @@ class DataSyncService {
       'digestivos', 'ginebra', 'mezcal'
     ];
 
-    Logger.debug(`DataSyncService: Starting sync for ${categories.length} categories`);
+    window.Logger.debug(`DataSyncService: Starting sync for ${categories.length} categories`);
     this.lastSyncTime = Date.now();
 
     const syncPromises = categories.map(category => 
@@ -84,9 +84,9 @@ class DataSyncService {
 
     try {
       await Promise.allSettled(syncPromises);
-      Logger.info('DataSyncService: Background sync completed');
+      window.Logger.info('DataSyncService: Background sync completed');
     } catch (error) {
-      Logger.error('DataSyncService: Error during sync', { error: error.message });
+      window.Logger.error('DataSyncService: Error during sync', { error: error.message });
     }
   }
 
@@ -102,7 +102,7 @@ class DataSyncService {
         this.syncRetries.delete(category);
       }
     } catch (error) {
-      Logger.debug(`DataSyncService: Sync failed for ${category}`, { error: error.message });
+      window.Logger.debug(`DataSyncService: Sync failed for ${category}`, { error: error.message });
       
       if (SYNC_CONFIG.RETRY_FAILED_SYNC) {
         this.scheduleRetry(category);
@@ -121,11 +121,11 @@ class DataSyncService {
       this.syncRetries.set(category, retryCount + 1);
       
       setTimeout(() => {
-        Logger.debug(`DataSyncService: Retrying sync for ${category} (attempt ${retryCount + 1})`);
+        window.Logger.debug(`DataSyncService: Retrying sync for ${category} (attempt ${retryCount + 1})`);
         this.syncCategory(category);
       }, SYNC_CONFIG.SYNC_RETRY_DELAY);
     } else {
-      Logger.warn(`DataSyncService: Max retries reached for ${category}`);
+      window.Logger.warn(`DataSyncService: Max retries reached for ${category}`);
       this.syncRetries.delete(category);
     }
   }
@@ -134,7 +134,7 @@ class DataSyncService {
    * Force immediate sync of all categories
    */
   async forceSyncNow() {
-    Logger.info('DataSyncService: Force sync requested');
+    window.Logger.info('DataSyncService: Force sync requested');
     await this.syncAllCategories();
   }
 
@@ -161,7 +161,7 @@ class DataSyncService {
     this.stopAutoSync();
     this.syncRetries.clear();
     this.adapter = null;
-    Logger.debug('DataSyncService: Destroyed');
+    window.Logger.debug('DataSyncService: Destroyed');
   }
 }
 

@@ -274,5 +274,13 @@ class AppConfig {
   }
 }
 
+// Create and expose singleton instance
+const appConfigInstance = new AppConfig();
+
+// Expose globally for non-module scripts
+window.AppConfig = appConfigInstance;
+window.AppConfigClass = AppConfig;
+
 // Export singleton instance
-export default new AppConfig();
+export default appConfigInstance;
+export { AppConfig as AppConfigClass };

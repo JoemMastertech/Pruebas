@@ -27,7 +27,7 @@ class SimpleCache {
     try {
       localStorage.setItem(this.prefix + key, JSON.stringify(cacheItem));
     } catch (error) {
-      Logger.debug('SimpleCache: localStorage write failed', error);
+      window.Logger.debug('SimpleCache: localStorage write failed', error);
     }
   }
 
@@ -42,7 +42,7 @@ class SimpleCache {
           item = JSON.parse(stored);
         }
       } catch (error) {
-        Logger.debug('SimpleCache: localStorage read failed', error);
+        window.Logger.debug('SimpleCache: localStorage read failed', error);
       }
     }
     
@@ -71,7 +71,7 @@ class SimpleCache {
     try {
       localStorage.removeItem(this.prefix + key);
     } catch (error) {
-      Logger.debug('SimpleCache: localStorage remove failed', error);
+      window.Logger.debug('SimpleCache: localStorage remove failed', error);
     }
   }
 
@@ -83,7 +83,7 @@ class SimpleCache {
         .filter(k => k.startsWith(this.prefix))
         .forEach(k => localStorage.removeItem(k));
     } catch (error) {
-      Logger.debug('SimpleCache: localStorage clear failed', error);
+      window.Logger.debug('SimpleCache: localStorage clear failed', error);
     }
     
     // Reset stats

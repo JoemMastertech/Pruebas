@@ -12,7 +12,7 @@ function sanitizeHTML(html, options = {}) {
   }
   
   if (!window.DOMPurify) {
-    Logger.error('DOMPurify not available. HTML sanitization disabled.');
+    window.Logger.error('DOMPurify not available. HTML sanitization disabled.');
     return '';
   }
   

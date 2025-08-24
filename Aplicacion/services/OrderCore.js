@@ -70,4 +70,7 @@ class OrderSystemCore {
   }
 }
 
+// Expose globally for non-module scripts
+window.OrderSystemCore = OrderSystemCore;
+
 export default OrderSystemCore;

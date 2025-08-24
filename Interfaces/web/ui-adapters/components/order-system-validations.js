@@ -29,7 +29,7 @@ export class OrderSystemValidations {
    */
   static validateDrinkOptions(drinkOptionsResult, productName) {
     if (!drinkOptionsResult || !drinkOptionsResult.drinkOptions) {
-      Logger.error('No drink options found for product:', productName);
+      window.Logger.error('No drink options found for product:', productName);
       return false;
     }
     return true;
@@ -231,7 +231,7 @@ export class OrderSystemValidations {
    */
   static validateDOMElement(element, elementName) {
     if (!element) {
-      Logger.error(`Element '${elementName}' not found`);
+      window.Logger.error(`Element '${elementName}' not found`);
       return false;
     }
     return true;
@@ -244,13 +244,13 @@ export class OrderSystemValidations {
    */
   static validateModalElement(modal) {
     if (!modal) {
-      Logger.error('validateModalElement: No modal provided');
+      window.Logger.error('validateModalElement: No modal provided');
       return false;
     }
     
     // Check if modal has required methods after enhancement
     if (typeof modal.show !== 'function' || typeof modal.hide !== 'function') {
-      Logger.error(`Modal ${modal.id} validation FAILED - show: ${typeof modal.show}, hide: ${typeof modal.hide}`);
+      window.Logger.error(`Modal ${modal.id} validation FAILED - show: ${typeof modal.show}, hide: ${typeof modal.hide}`);
       return false;
     }
     
@@ -307,7 +307,7 @@ export class OrderSystemValidations {
     if (typeof createModalCallback === 'function') {
       createModalCallback(message, 'Aceptar', () => {});
     } else {
-      Logger.error('showValidationModal: createModalCallback is not a function');
+      window.Logger.error('showValidationModal: createModalCallback is not a function');
     }
   }
 }

@@ -16,7 +16,7 @@ const ProductRenderer = {
   // Toggle between table and grid view
   toggleViewMode: function() {
     this.currentViewMode = this.currentViewMode === 'table' ? 'grid' : 'table';
-    Logger.info('🔄 View mode toggled to:', this.currentViewMode);
+    window.Logger.info('🔄 View mode toggled to:', this.currentViewMode);
     
     // DEBUG: Log viewport and body dimensions
     console.log('🔍 DEBUG - Viewport dimensions:', {
@@ -99,7 +99,7 @@ const ProductRenderer = {
       console.log(`🔍 DEBUG - Final grid ${index + 1} classes:`, Array.from(grid.classList));
     });
     
-    Logger.info('Grid types assigned automatically');
+    window.Logger.info('Grid types assigned automatically');
   },
   
   // Phase 3: Initialize intelligent event delegation
@@ -110,7 +110,7 @@ const ProductRenderer = {
     document.addEventListener('click', this.boundDelegatedHandler);
     this.eventDelegationInitialized = true;
     
-    Logger.info('Event delegation system initialized for ProductRenderer');
+    window.Logger.info('Event delegation system initialized for ProductRenderer');
   },
   
   // Phase 3: Centralized event handler
@@ -177,7 +177,7 @@ const ProductRenderer = {
       document.removeEventListener('click', this.boundDelegatedHandler);
       this.boundDelegatedHandler = null;
       this.eventDelegationInitialized = false;
-      Logger.info('Event delegation system destroyed');
+      window.Logger.info('Event delegation system destroyed');
     }
   },
   
@@ -246,14 +246,14 @@ const ProductRenderer = {
     const categoryCard = target.closest('.category-card') || target;
     const category = categoryCard.dataset.category;
     
-    Logger.info(`🎯 Clic en categoría de licor: ${category}`);
+    window.Logger.info(`🎯 Clic en categoría de licor: ${category}`);
     
     // Log current DOM state before navigation
     const currentMainScreen = document.getElementById('main-screen');
     const currentContentContainer = document.getElementById('content-container');
     const currentOrdersBox = document.getElementById('orders-box');
     
-    Logger.debug('📊 Estado DOM antes de clic en categoría:', {
+    window.Logger.debug('📊 Estado DOM antes de clic en categoría:', {
       category: category,
       mainScreen: !!currentMainScreen,
       contentContainer: !!currentContentContainer,
@@ -265,13 +265,13 @@ const ProductRenderer = {
     if (category) {
       const container = categoryCard.closest('.content-wrapper') || document.querySelector('.content-wrapper');
       if (container) {
-        Logger.debug(`📦 Container encontrado para categoría ${category}`);
+        window.Logger.debug(`📦 Container encontrado para categoría ${category}`);
         this.renderLicorSubcategory(container, category);
       } else {
-        Logger.error(`❌ No se encontró container para categoría ${category}`);
+        window.Logger.error(`❌ No se encontró container para categoría ${category}`);
       }
     } else {
-      Logger.warn('⚠️ No se encontró categoría en el elemento clickeado');
+      window.Logger.warn('⚠️ No se encontró categoría en el elemento clickeado');
     }
   },
   
@@ -311,7 +311,7 @@ const ProductRenderer = {
       const productName = target.dataset.productName;
       const priceText = target.textContent;
       
-      Logger.debug('[GRID DEBUG] Price button clicked:', {
+      window.Logger.debug('[GRID DEBUG] Price button clicked:', {
         productName,
         priceText,
         field: target.dataset.field,
@@ -347,7 +347,7 @@ const ProductRenderer = {
   
   handleCardClick: function(target, event) {
     // Handle card clicks if needed for future functionality
-    Logger.debug('Product card clicked:', target);
+    window.Logger.debug('Product card clicked:', target);
   },
   
   
@@ -359,7 +359,7 @@ const ProductRenderer = {
     if (renderer) {
       await renderer(container);
     } else {
-      Logger.warn('Unknown category for refresh:', category);
+      window.Logger.warn('Unknown category for refresh:', category);
     }
   },
 
@@ -1021,7 +1021,7 @@ const ProductRenderer = {
     });
     
     video.addEventListener('loadstart', () => {
-      Logger.info('Loading video:', videoUrl);
+      window.Logger.info('Loading video:', videoUrl);
     });
     
     modalContent.appendChild(video);
@@ -1159,14 +1159,14 @@ const ProductRenderer = {
   },
 
   renderLicorSubcategory: async function(container, category) {
-    Logger.info(`🍾 Navegando hacia subcategoría de licores: ${category}`);
+    window.Logger.info(`🍾 Navegando hacia subcategoría de licores: ${category}`);
     
     // Log current DOM state before manipulation
     const currentMainScreen = document.getElementById('main-screen');
     const currentContentContainer = document.getElementById('content-container');
     const currentOrdersBox = document.getElementById('orders-box');
     
-    Logger.debug('📊 Estado DOM antes de renderizar subcategoría:', {
+    window.Logger.debug('📊 Estado DOM antes de renderizar subcategoría:', {
       category: category,
       mainScreen: !!currentMainScreen,
       contentContainer: !!currentContentContainer,
@@ -1181,10 +1181,10 @@ const ProductRenderer = {
     let sidebarHTML = null;
     if (sidebar) {
       sidebarHTML = sidebar.outerHTML;
-      Logger.debug('💾 Sidebar preservado para subcategoría');
+      window.Logger.debug('💾 Sidebar preservado para subcategoría');
     } else {
-      Logger.warn('⚠️ No se encontró sidebar para preservar');
-      Logger.debug('🔍 Buscando sidebar en DOM completo:', {
+      window.Logger.warn('⚠️ No se encontró sidebar para preservar');
+      window.Logger.debug('🔍 Buscando sidebar en DOM completo:', {
         sidebarInDocument: !!document.getElementById('order-sidebar'),
         contentContainerFlex: !!document.querySelector('.content-container-flex'),
         containerType: container.className || container.tagName
@@ -1196,9 +1196,9 @@ const ProductRenderer = {
     if (targetContainer) {
       // Simply clear the content container, leaving sidebar untouched
       targetContainer.innerHTML = '';
-      Logger.debug('🧹 Content container limpiado, sidebar intacto');
+      window.Logger.debug('🧹 Content container limpiado, sidebar intacto');
     } else {
-      Logger.warn('⚠️ No se encontró content-container, creando uno nuevo');
+      window.Logger.warn('⚠️ No se encontró content-container, creando uno nuevo');
       // Find the content-container-flex to maintain proper structure
       const flexContainer = document.querySelector('.content-container-flex');
       if (flexContainer) {
@@ -1211,9 +1211,9 @@ const ProductRenderer = {
         } else {
           flexContainer.appendChild(targetContainer);
         }
-        Logger.debug('🆕 Content container creado en estructura flex');
+        window.Logger.debug('🆕 Content container creado en estructura flex');
       } else {
-        Logger.error('❌ No se encontró content-container-flex, estructura DOM comprometida');
+        window.Logger.error('❌ No se encontró content-container-flex, estructura DOM comprometida');
         return;
       }
     }
@@ -1284,7 +1284,7 @@ const ProductRenderer = {
       const afterContentContainer = document.getElementById('content-container');
       const afterOrdersBox = document.getElementById('orders-box');
       
-      Logger.debug('📊 Estado DOM después de renderizar subcategoría:', {
+      window.Logger.debug('📊 Estado DOM después de renderizar subcategoría:', {
         category: category,
         mainScreen: !!afterMainScreen,
         contentContainer: !!afterContentContainer,
@@ -1293,7 +1293,7 @@ const ProductRenderer = {
         mainScreenClasses: afterMainScreen ? Array.from(afterMainScreen.classList) : []
       });
       
-      Logger.info(`✅ Subcategoría ${category} renderizada completamente`);
+      window.Logger.info(`✅ Subcategoría ${category} renderizada completamente`);
     }, 100);
   },
 

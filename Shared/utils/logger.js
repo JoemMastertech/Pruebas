@@ -27,4 +27,8 @@ class Logger {
   }
 }
 
+// Expose Logger globally
+window.Logger = Logger;
+
+// Also export for ES6 compatibility
 export default Logger;

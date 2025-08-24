@@ -9,7 +9,7 @@ const enhancedModalsCache = new Set();
 
 export function setSafeInnerHTML(element, html) {
   if (!element || typeof element.innerHTML === 'undefined') {
-    Logger.error('setSafeInnerHTML: Invalid element provided');
+    window.Logger.error('setSafeInnerHTML: Invalid element provided');
     return false;
   }
   
@@ -78,7 +78,7 @@ export function enhanceModal(modal) {
 export function getElementSafely(elementId, required = false) {
   const element = document.getElementById(elementId);
   if (!element && required) {
-    Logger.error(`Required element with ID '${elementId}' not found.`);
+    window.Logger.error(`Required element with ID '${elementId}' not found.`);
   }
   return element;
 }
