@@ -59,13 +59,13 @@
     <nav id="top-nav" class="top-nav" aria-label="Barra de navegación principal">
       <div class="nav-left">
         <button id="top-hamburger-btn" class="top-nav-btn" aria-label="Abrir menú lateral">☰</button>
-        <button id="top-back-btn" class="top-nav-btn" aria-label="Volver a Licores" style="display: none;">←</button>
+        <button id="top-back-btn" class="top-nav-btn top-nav-btn--hidden" aria-label="Volver a Licores">←</button>
       </div>
       <div class="nav-center">
         <span id="nav-title"></span>
       </div>
       <div class="nav-right">
-        <button id="top-view-toggle-btn" class="top-nav-btn" aria-label="Cambiar a vista de cuadrícula" style="display: none;">🔲</button>
+        <button id="top-view-toggle-btn" class="top-nav-btn top-nav-btn--hidden" aria-label="Cambiar a vista de cuadrícula">🔲</button>
       </div>
     </nav>
     
@@ -188,6 +188,8 @@
   <script type="module" src="./Interfaces/web/ui-adapters/screens/screen-manager.js"></script>
   <!-- Load order system -->
   <script type="module" src="./Interfaces/web/ui-adapters/components/order-system.js"></script>
+  <!-- Load CSS Class Manager first -->
+  <script type="module" src="./Shared/js/CSSClassManager.js"></script>
   <!-- Load independent top navigation system -->
   <script src="./Shared/js/top-nav-independent.js"></script>
   <!-- Initialize app -->

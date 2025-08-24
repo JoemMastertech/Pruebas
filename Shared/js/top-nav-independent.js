@@ -286,7 +286,7 @@ class IndependentTopNavManager {
       this.elements.viewToggleBtn.classList.toggle('active', this.state.viewMode === 'grid');
       
       // Siempre visible
-      this.elements.viewToggleBtn.style.display = 'flex';
+      window.cssClassManager.removeClass(this.elements.viewToggleBtn, 'top-nav-btn--hidden');
     }
   }
 
@@ -322,14 +322,14 @@ class IndependentTopNavManager {
 
   showBackButton() {
     if (this.elements.backBtn) {
-      this.elements.backBtn.style.display = 'flex';
+      window.cssClassManager.removeClass(this.elements.backBtn, 'top-nav-btn--hidden');
       console.log('IndependentTopNavManager: Back button shown');
     }
   }
 
   hideBackButton() {
     if (this.elements.backBtn) {
-      this.elements.backBtn.style.display = 'none';
+      window.cssClassManager.addClass(this.elements.backBtn, 'top-nav-btn--hidden');
       console.log('IndependentTopNavManager: Back button hidden');
     }
   }

@@ -114,6 +114,11 @@
   transform: scale(0.95);
 }
 
+/* BEM Modifier for hidden state */
+.top-nav-btn--hidden {
+  display: none;
+}
+
 /* Ajustes para el contenido principal */
 body {
   padding-top: 0;

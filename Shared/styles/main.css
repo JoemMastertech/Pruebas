@@ -2777,6 +2777,11 @@ body.order-mode-active #app {
   display: none;
 }
 
+/* Generic hidden utility */
+.hidden {
+  display: none;
+}
+
 /* Opacity utilities */
 .opacity-0 {
   opacity: 0;
