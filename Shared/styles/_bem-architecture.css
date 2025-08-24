@@ -492,6 +492,58 @@
 }
 
 /* =================================================================
+   GRID SYSTEM - Tipos dinámicos aplicados por JavaScript
+   ================================================================= */
+
+/* GRID TYPE 1 - Grid estándar para productos (3 columnas desktop, 2 tablet, 1-2 mobile) */
+.grid-type-1,
+.product-grid.grid-type-1 {
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: clamp(15px, 2.5vw, 25px);
+  padding: clamp(15px, 2.5vw, 25px);
+}
+
+/* GRID TYPE 2 - Grid compacto para bebidas sin ingredientes (refrescos, cervezas) */
+.grid-type-2,
+.product-grid.grid-type-2 {
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: clamp(10px, 2vw, 20px);
+  padding: clamp(10px, 2vw, 20px);
+}
+
+.grid-type-2 .product-card {
+  min-height: 180px; /* Más compacto para bebidas */
+}
+
+/* GRID TYPE 3 - Grid para categorías especiales */
+.grid-type-3,
+.category-grid.grid-type-3 {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(12px, 2.2vw, 22px);
+  padding: clamp(12px, 2.2vw, 22px);
+}
+
+/* GRID TYPE 4 - Grid para categorías de licores (5 columnas desktop) */
+.grid-type-4,
+.category-grid.grid-type-4 {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 1024px) {
+  .grid-type-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-type-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =================================================================
    COMPATIBILIDAD Y TRANSICIÓN
    ================================================================= */
 
